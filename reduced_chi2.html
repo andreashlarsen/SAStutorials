@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Reduced chi-square</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h1>Reduced &chi;<sup>2</sup></h1>
+<p>&chi;<sup>2</sup> is the sum of the normalized and squared residuals:</p>
+<p>&chi;<sup>2</sup> = &Sigma;<sub>i</sub>((I<sub>model,i</sub>-I<sub>experiment,i</sub>)/&sigma;<sub>i</sub>)<sup>2</sup></p>
+<p>And the reduced &chi;<sup>2</sup> is &chi;<sup>2</sup> divided by the number of degrees of freedom (DoF). In most cases, DoF = N-K, where N is the number of data points and K is the number of fitted parameters in the model:</p>
+<p>Reduced &chi;<sup>2</sup>  = &chi;<sup>2</sup>/(N-K).</p>
+<p>It is always the reduced &chi;<sup>2</sup> that is reported in fitting programs (not &chi;<sup>2</sup>), and usually just denoted &chi;<sup>2</sup> ("reduced" is implicitely assumed)... This is also the case in SasView. So when you see &chi;<sup>2</sup>, it is usually the reduced &chi;<sup>2</sup>.</p>
+<p>When fitting a model, &chi;<sup>2</sup> is minimized. For a perfect model, one would expect to get a reduced &chi;<sup>2</sup> ~ 1, as the difference between model and data is typically about the same size as the experimental errors.</p>
+<ul>Rule of thumb:
+<li>If you get a reduced &chi;<sup>2</sup> much larger than unity, then the model is not perfect. May need to be improved (depending on the scientific question).</li>
+<li>If you get a reduced &chi;<sup>2</sup> much smaller than unity, then the model has too much freedom (too many parameters) or the errrors (&sigma;<sub>i</sub>) of the data may be overestimated.</li>
+</ul>
+<ul>More thorough and precise introductions can be found elsewhere:
+<li>General introduction on <a href="https://en.wikipedia.org/wiki/Reduced_chi-squared_statistic" target="_blank">Wikipedia</a>. </li> 
+<li>Specific for small-angle scattering (SAXS and SANS): <a href="https://doi.org/10.1107/S1600576721006877" target="_blank">Larsen and Pedersen 2021</a></li>
+</ul>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->´
+</div>
+
+<!-- end wrapper -->´
+</div>
+	
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+</body>	
+</html>
