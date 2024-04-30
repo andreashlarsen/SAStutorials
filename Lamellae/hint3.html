@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Hint</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h4><a href="Lamellae.html">Back</a></h4>
+<h1>Hint</h1>
+<p>The scattering is given by difference in scattering length densities, between SLD of each component (e.g. lipid head or lipid tail) and the SLD of the solvent, e.g.: &Delta;SLD<sub>head</sub> = SLD<sub>head</sub>-SLD<sub>H2O</sub>.</p>
+<p>So effectively you only have 2 SLD "degrees of freedom" (independent parameters) in the model: &Delta;SLD head and &Delta;SLD tail, that you fit with three SLD parameters. </p> 
+<p>In other words, the three SLD parameters are correlated, since you can get the same &Delta;SLD values with different SLD values, so the uncertainty on the derived parameter becomes infinite.</p>
+<p>Therefore: keep SLD<sub>H2O</sub> fixed and only fit the two other SLD values.</p>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->´
+</div>
+
+<!-- end wrapper -->´
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>	
+</html>
