@@ -1,7 +1,7 @@
 # SASTutorials
 Code for website containing Tutorials on Small-Angle Scattering:
 
-https://andreashlarsen.github.io/test/
+sastutorials.org
 
 # Contribute
 - Please edit/improve/extend tuturials.    
