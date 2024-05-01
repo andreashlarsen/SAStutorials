@@ -2,7 +2,7 @@
 Source code for the small-angle scattering tutorials website:
 [sastutorials.org](http://sastutorials.org/) 
 
-### Please contribute
+## Please contribute
 The code is 100% open souce and everyone are welcome to edit and contribute!    
 We (the developer team) especially encourage tutorials with walk-through of analysis done on actual data.   
 
@@ -20,7 +20,10 @@ level 3: You can  add a new tutorial in a few simple steps:
 
 level 4: Join the development team. We are happy to welcome members in the development team.    
 
-# The SAStutorial developer team
+## The SAStutorial Developer Team
 Andreas Haahr Larsen (Department of Neuroscience, University of Copenhagen)    
 Martin Cramer Pedersen (Niels Bohr Institute, University of Copenhagen)    
 Jacob Judas Kain Kirkensgaard (Niels Bohr Institute and Food Science, University of Copenhagen)    
+
+#### contact
+Request should be given via the GitHub "Issues" tab
