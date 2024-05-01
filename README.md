@@ -1,6 +1,5 @@
 # SASTutorials
-Code for website containing Tutorials on Small-Angle Scattering:
-
+Source code for the small-angle scattering tutorials website:
 [sastutorials.org](http://sastutorials.org/) 
 
 # Contribute
