@@ -1,6 +1,6 @@
 # SASTutorials
 Source code for the small-angle scattering tutorials website:
-[sastutorials.org](http://sastutorials.org/) 
+[sastutorials.org](https://sastutorials.org/) 
 
 ## Please contribute
 The code is 100% open souce and everyone are welcome to edit and contribute!    
