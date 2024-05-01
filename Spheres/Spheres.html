@@ -19,7 +19,7 @@
 <div class="inner">
 
 <h4><a href="../index.html">Home</a></h4>
-<h1>Tutotial: Spheres</h1>
+<h1>Tutorial: Spheres</h1>
 <p> Tutorial contributors: Andreas Haahr Larsen, Martin Cramer Pedersen, Jacob Kirkensgaard, Viktor Holm-Janas.</p>
 	
 <h4>Before you start</h4>
@@ -32,7 +32,7 @@
 	<li>Simulate SAS data of spherical particles, and determine which sample contains the larger particles, by visually comparing the curves.</li>
 	<li>Describe the difference between the scattering from spheres and ellipsoids.</li>
 	<li>Recognize interparticle interaction in a small-angle scattering experiment and know under what conditions this may happen.</li>
-	<li>Descriminate a sample of polydisperse spheres from a sample of monodisperse spheres.</li>
+	<li>Dscriminate a sample of polydisperse spheres from a sample of monodisperse spheres.</li>
 	<li>Be able to fit a sphere in SasView and determine its size, and size distribution if it is polydisperse.</li>
 	<li>Using the above, be able to analyze structural changes in samples, based on SAS data measured at different conditions.</li>
 	</ul>
@@ -55,7 +55,7 @@
 		<li>Choose model category "sphere" from the first drop-down menu. There are many different sphere-like models, choose "sphere" under model name (second drop-down menu).</li>
 		<li>Now you have some model parameters. You can click/select those you want to fit.</li>
 		<li>Compute/plot give you the model scattering with the default values - this shows data (blue) and model (orange) together. The residuals plot (difference between model and data) is also shown. </li>
-		<li>You can try to adjust some parameters manually, and pres compute again. Try to manually find some resonable values for scaling, background and radius.</li>
+		<li>You can try to adjust some parameters manually, and press compute again. Try to manually find some resonable values for scaling, background and radius.</li>
 		<li>Try changing the value of the radius to see what happens - notice the inverse relation: larger radius moves all the features to smaller q values.</li>
 		<li>Try to fit: check the boxes: scale, background and radius, and press "Fit".</li>
 		<li>A convergence plot is shown along with the previous windows - this just shows that the fitting algoritm has converged, and you can ignore that.</li>
@@ -82,7 +82,7 @@
 		<li>click the (now active) "polydispersity" tab in the Fit Panel. check the box "Distribution of radius". Give a non-zero number as default for PD (stands for polydispersity).</li>
 		<li>on the right side, it says that it is assuming a Gaussian distribution (a normal distribution). This is fine, but other distributions can be chosen.</li>
 		<li>press fit</li>
-		<li>besides from fit, residuals and convergence, you also get a window with the fitted distibution of radii of spheres in the sample. By default it plots on log-log. If you right-click, choose change scale to x and y (instead of logarithmic), you will recognise that the a <a href="https://en.wikipedia.org/wiki/Normal_distribution" target="_blank">normal distribution</a> in the radius. </li>
+		<li>besides from fit, residuals and convergence, you also get a window with the fitted distribution of radii of spheres in the sample. By default it plots on log-log. If you right-click, choose change scale to x and y (instead of logarithmic), you will recognise that the a <a href="https://en.wikipedia.org/wiki/Normal_distribution" target="_blank">normal distribution</a> in the radius. </li>
 	</ol>
 	The output distribution may look like this:<br>
 	<img src="PolyDistr.png" style="width:500px"/></p>
@@ -104,7 +104,7 @@
 
 <h4>Part 4: Spheres with a fraction of aggregated spheres (fractal structure factor)</h4>
     <p>Some particles have a tendency to aggregate (be "sticky"). This may be proteins or nanoparticles. If a part of the sample aggregates, the scattering will be a sum of the scattering from the aggregate and that from the non-aggregated particles.<br>
-	Aggregates may also be described by a structure factor (although very different from the hard-sphere structure facotor), and as we shall see, having the opposite effect.<br>
+	Aggregates may also be described by a structure factor (although very different from the hard-sphere structure factor), and as we shall see, having the opposite effect.<br>
 	Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius of 50 Å and aggregate structure factor with fraction of 0.01 (i.e. 1% of the particles are in an aggregate), effective radius of 50 Å, and 80 particles per aggregate as Model 2.<br>
 	Model 1 corresponds to a sample without aggregation, and Model 2 corresponds to a sample, where 1% of the spheres are in aggregated form, with 80 spheres per aggregate. The resulting scattering may look like this (note: the aggregation is not included in the p(r)):
 	<img src="Shape2SAS_Fractal.png" style="width:1000px"/>	<br>
@@ -116,8 +116,8 @@
 	<ol>
 		<li>Spherical nanoparticles were measured at high concentration (<a href="SAXS_high_conc.dat">high conc data</a>) and low concentration (<a href="SAXS_low_conc.dat">low conc data</a>). What are their shape and size (distribution)?<br>
 		Tip: to compare data in sasview, Load data, select the data and under plot press "Create new"</li>
-		<li>A sample of discoidal particles (diameter ca 5 nm, as estimated from <a href="https://www.urmc.rochester.edu/research/electron-microscope/services/protocols-techniques/negative-staining-electron-microscopy.aspx" target="_blank">negative stain electron microscopy</a>) was measured in SAXS at neutral pH (<a href="SAXS_neutral_pH.dat">neutral pH data</a>) and pH 5.0 (<a href="SAXS_low_pH.dat">low pH data</a>). What happens?</li>
-		<!--<li>A sample of spherical gold particles in water were measured in SAXS. Is the sample monodisperse? And does the sample contain more than one size? What happens?</li>-->
+		<li>A sample of discoidal particles (diameter ca 5 nm, as estimated from <a href="https://www.urmc.rochester.edu/research/electron-microscope/services/protocols-techniques/negative-staining-electron-microscopy.aspx" target="_blank">negative stain electron microscopy</a>) was measured in SAXS at neutral pH (<a href="SAXS_neutral_pH.dat">neutral pH data</a>) and pH 5.0 (<a href="SAXS_low_pH.dat">low pH data</a>). What effect does the pH change have on the particles and their interaction?</li>
+		<!--<li>A sample of spherical gold particles in water were measured in SAXS. Is the sample monodisperse? And does the sample contain more than one size?</li>-->
 	</ol>
 
 <h4>Feedback</h4>
