@@ -26,4 +26,4 @@ Martin Cramer Pedersen (Niels Bohr Institute, University of Copenhagen)
 Jacob Judas Kain Kirkensgaard (Niels Bohr Institute and Food Science, University of Copenhagen)    
 
 #### contact
-Via the GitHub "Issues" tab
+Via the "Issues" https://github.com/andreashlarsen/SAStutorials/issues 
