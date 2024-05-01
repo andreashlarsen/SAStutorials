@@ -25,5 +25,5 @@ Andreas Haahr Larsen (Department of Neuroscience, University of Copenhagen)
 Martin Cramer Pedersen (Niels Bohr Institute, University of Copenhagen)    
 Jacob Judas Kain Kirkensgaard (Niels Bohr Institute and Food Science, University of Copenhagen)    
 
-#### contact
+#### Contact
 Via the "Issues" https://github.com/andreashlarsen/SAStutorials/issues 
