@@ -20,8 +20,11 @@
 
 <h4><a href="../index.html">Home</a></h4>
 <h1>Tutorial: Model Free Analysis</h1>
-<p> Tutorial contributors: Andreas Haahr Larsen.</p>
-
+<p>Tutorial contributors: Andreas Haahr Larsen</p>
+<p>
+<img src="Balu2016.jpeg" style="width:600px"/> <br> 
+Cover image adapted from <a href="https://pubs.acs.org/doi/10.1021/acs.jpcb.6b02475" target="_blank">Balu et al. 2016, J. Phys. Chem. B 120: 6490-6503</a> with <a href="Permission_Balu2016.pdf" target="_blank">permission</a>.
+</p>
 <h4>Before you start</h4>
 	<ul>
 	<li>Python or similar for importing and plotting data (including numpy, scipy and matplotlib).</li>
@@ -31,33 +34,15 @@
 Overall learning outcome is to be able to retrieve strucutural information from a SAXS or SANS dataset before doing more detailed modelling, e.g. with form factors. Subgoals include:
 	<ul>
 	<li>Learn to do a Guinier analysis and retrieve the radius of gyration.</li>
-	<li>Be able to create a Porod plot and understand its interpretation.</li>
 	<li>Use Kratky plot to assess the whether a particle is compact/well-folded or disordered/unfolded.</li>
-	<!--<li>For protein, estimate the oligomeric state by determining the molecular weight, M<sub></sub></li>-->
 	<li>Do an indirect Fourier transformation and retrieve structural parameters, R<sub>g</sub> and d<sub>max</sub>.</li>
 	<li>Estimate particle shape using the pair distance distribution (obtained via indirect Fourier transformation).</li>
-	<li>Be familiar with ab initio modelling, including possibilities and limitations.</li>
 	</ul>
-
-<h4>Challenges</h4>
-If you can solve these challenges, you have (probably) learned the above. <br>
-By following the tutorials below the challenges (Part 1-5), you will acquire skills and knowledge that can be applied to solve the challenges. 
-<ul>
-	<li>Challenge 1: You have measured a sample of RNase A in D<sub>2</sub>O with SANS (<a href="RNAseA.dat" target="_blank">download SANS data</a>). What is the overall size and shape of this protein?</li>
-	<li>Challenge 2: You have measured the <a href="https://en.wikipedia.org/wiki/AMPA_receptor" target="_blank"> AMPA receptor</a> (a membrane protein involved in neuronal signalling) D<sub>2</sub>O with SANS contrast variation (to avoid detergent signal, see also the <a href="../ContrastVariation/ContrastVariation.html" target="_blank">Contrast variation tutorial</a>). The protein was measured in the apo state, i.e. without any ligands bound (<a href="GluA2_apo.dat" target="_blank">download SANS data</a>). <br> 
-		You would like to find out if the overall size of the solution structure (as measued in SANS) is different from the crystal structure (measured with x-ray crystallography) - is this the case? The theoretical radius of gyration was calculated from the crystal structure to be ca 57 Å. <br>
-		You also measured GluA2 in the presense of AMPA, which is an agonist (an activating molecule) for GluA2, (<a href="GluA2_ampa.dat" target="_blank">download SANS data</a>) - does this induce a structural change compared to the apo state? 
-	</li>
-	<li>Challenge 3: You have measured the microtubule-associated protein 2 (MAP2) in SAXS (<a href="map2.dat" target="_blank">download SAXS data</a>). Is it folded or unfolded under the conditions you measured it?</li>
-	<li>Challenge 4: This challenge is also part of the <a href="../Spheres/Spheres.html" target="_blank">Sphere tutorial</a>. But what can you tell without any modelling with form factors? Here comes the challenge: <br> 
-		A sample of discoidal particles (i.e. shaped like disc/short cylinders) was measured in SAXS at neutral pH (<a href="../Spheres/SAXS_neutral_pH.dat" target="_blank">download neutral pH data</a>) and pH 5.0 (<a href="../Spheres/SAXS_low_pH.dat" target="_blank">download low pH data</a>). What effect does the pH change have on the particles and their interaction?</li>
-	<li>Challenge 5: You have measured a sample of mixture of <a href="https://en.wikipedia.org/wiki/Polysorbate_80" target="_blank">Polysorbate 80</a> and <a href="https://en.wikipedia.org/wiki/Myristic_acid" target="_blank">Myristic acid</a> in SAXS (<a href="polysorbate80_MA_SAXS.dat" target="_blank">download SAXS data</a>). What can you tell about the stucture these molecules form?</li>
-</ul>
 
 <h4>Part 1: Guinier plot and Guinier analysis for R<sub>g</sub> determination</h4>
 	<p>
-	The <a href="https://bioxtas-raw.readthedocs.io/en/latest/saxs/saxs_guinier.html" target="_blank">Guinier approximation</a> is valid at low values of q. From a Guinier analysis you can derive the (contrast-weighted) radius of gyration, R<sub>g</sub> of the particles. I.e. it gives an idea about the size of the particles. <br>
-	Since R<sub>g</sub> also depends on the shape (more extended particles have larger R<sub>g</sub>), it gives a hint about the particle shape as well.<br>
+	The <a href="https://bioxtas-raw.readthedocs.io/en/latest/saxs/saxs_guinier.html" target="_blank">Guinier approximation</a> is valid at low values of q. From a Guinier analysis you can derive the (contrast-weighted) radius of gyration, R<sub>g</sub> of the particles, i.e., a Guinier analysis gives provides the overall size of the measured particles. <br>
+	Since $R_g$ also depends on the shape (more extended particles have larger R<sub>g</sub>), it gives a hint about the particle shape as well.<br>
 	<img src="Guinier.jpg" style="width:600px"/><br>
 	There are tools for automatic Guinier analysis, including <a href="https://www.embl-hamburg.de/biosaxs/manuals/autorg.html" target="_blank">ATSAS autorg</a> and <a href="https://bioxtas-raw.readthedocs.io/en/latest/" target="_blank">bioxtas RAW auto Guinier</a>, but here, you will learn to do it manually:
 	<ul>
@@ -80,18 +65,7 @@ By following the tutorials below the challenges (Part 1-5), you will acquire ski
 	Note that if the sample is too large, compared to the minimum q value, there is no Guinier region (or rather, the Guinier region is at lower values of q than those measured). 
 	</p>
 
-<h4>Part 2: Porod Analysis</h4>
-	<p>
-	The Porod approximation is valid at large values of q. It states that the intensity is proportional to q<sup>-4</sup> at large values of q.<br>
-	Using the lysozyme SAXS data again, plot the data as Iq<sup>4</sup> vs q, on a log-log scale. You may use one of the previous scripts as template. <br>
-	Try to determine the Porod region for this data - i.e. where is Iq<sup>4</sup> vs q approximately constant (it may fluctuate around a constant value due to noise in data)<br>
-	If the slope of the Porod plot at large q values is different from q<sup>-4</sup>, this can be due to surface roughness, and a Porod analysis is an estimate of the surface roughness of a material from the slope in a Porod plot: <br>
-		<img src="Porod.png" style="width:600px"/></li>
-	The Porod region is also sensitive to background subtraction, as can be seen by adding a constant background to the intensity and doing the Porod plot. Your may use <a href="Porod_plot_lyz.py" target="_blank">this script</a> to see the effect of that. In that script, a background of 1 was added to the intensity.<br>
-	This background sensitivity means that the Porod plot is a good tool for determining the correct level of constant background subtraction, which stem from incoherent scattering.
-	</p>
-
-<h4>Part 3: Kratky plot</h4>
+<h4>Part 2: Kratky plot</h4>
 	<p>
 	The Kratky plot (Iq<sup>2</sup> vs q) carries information about the structural flexibility of a particle:<br>
 	<img src="Kratky.jpg" style="width:600px"/><br>
@@ -101,7 +75,7 @@ By following the tutorials below the challenges (Part 1-5), you will acquire ski
 	Lysozyme measured under these conditions is (predominantly) folded - you can see that from the Kratky plot by comparing with idealized Kratky plots. 
 	</p>
 
-<h4>Part 4: Indirect Fourier Transformation</h4>
+<h4>Part 3: Indirect Fourier Transformation</h4>
     <p>
 		As the coherent scattering can be calculated by a Fourier transformation of the particle, then an inverse Fourier transformation of the data should give back the structure. Unfortunately this is not the case for small-angle scattering, because:
 		<ul>
@@ -147,26 +121,14 @@ By following the tutorials below the challenges (Part 1-5), you will acquire ski
 		</ul>
 	</p>
 
-<h4>Part 5: Ab initio modelling</h4>
-	<p>
-		If you know your measured particles are identical and homogeneous, then there are algorithms, that can estimate the 3D shape of you particle. The most commonly used is <a href="https://www.embl-hamburg.de/biosaxs/dammif.html" target="_blank">DAMMIF</a>. <br>
-		DAMMIF (and similar bead models) moves around dummy atoms and calculates the scattering from these, using the Debye equation, until the calculated scattering matches the experimental scattering <br>
-		<img src="dammif.png" style="width:400px"/><br>
-		Note that "s" on the x-axis is the same as q.  
-		There are thousands of bead models that equally well fits with the data (i.e., it is an <a href="https://en.wikipedia.org/wiki/Well-posed_problem" target="_blank">ill-posed</a>). Therefore, the algorithm apply constraints, e.g., that the 3D model should be compact (see a description in the <a href="https://doi.org/10.1107/S0021889809000338" target="_blank">DAMMIF paper</a>). Moreover, the algorithm is typically run multiple times and the refined structure is then an average of the possible solutions.<br>
-		Even with these constraints, the resulting structures should be interpreted with care due to the highly ill-posed nature of the problem. That said, ab initio modelling is very useful and widely applied, especially for protein structure determination..<br>
-		<ul>You can try to do ab initio modelling of the lysozome data by following these steps
-			<li>Go to the <a href="https://www.embl-hamburg.de/biosaxs/atsas-online/login.php?location=dammif.phponline" target="_blank"> online version of DAMMIF</a>, which is part of the ATSAS software.</li>
-			<li>Make a user and sign in.</li>
-			<li>The program asks for a "GNOM file". GNOM is a program like BayesApp, that calculates the p(r). GNOM is also part of the ATSAS package. You can use <a href="SASDMF2.out" target="_blank">this GNOM file</a>. </li>
-			<li>Use these settings: Angular units (of q): 1/Å; Symmetry: P1 (no symmetry); Anisometry: Unknown; Mode: Fast: Run DAMMIF 3 times.</li>
-			<li>Press SUBMIT</li>
-			<li>You are notified by email when your result is ready (probably after 5 min)</li>
-		</ul>
-		Does the result (qualitatively) compare with the lysozyme structure (try to google "lysozyme PDB" or scroll down <a href="https://www.uniprot.org/uniprotkb/P61626/entry" target="_blank">the UniProtID page for lysozyme</a> to find a 3D structure to compare with). <br>
-		The obtained 3D structure could be refined by running more instances, taking the average of these and run in the slow mode.<br>
-		Note that this ab initio modelling assumes particles with homogeneous contrast. There are, however, ab initio algorithms that allow multiple contrasts, e.g. <a href="https://denss.ccr.buffalo.edu/" target="_blank">DENSS</a>. However, this makes the problem even more <a href="https://en.wikipedia.org/wiki/Well-posed_problem" target="_blank">ill-posed</a>, i.e., more possible solutions can fit the data. So the structures should be interpreted with care.
-	</p>
+<h4>Challenges</h4>
+<ul>
+	<li>Challenge 1: You have measured a sample of RNase A in D<sub>2</sub>O with SANS (<a href="RNAseA.dat" target="_blank">download SANS data</a>). What is the overall size of this protein?</li>
+	<li>Challenge 2: You have measured the microtubule-associated protein 2 (MAP2) in SAXS (<a href="map2.dat" target="_blank">download SAXS data</a>). Is it folded or unfolded under the conditions you measured it?</li>
+	<li>Challenge 3: This challenge is also part of the <a href="../Spheres/Spheres.html" target="_blank">Sphere tutorial</a>. But what can you tell without any modelling with form factors? Here comes the challenge: <br> 
+		A sample of discoidal particles (i.e. shaped like discs/short cylinders) was measured in SAXS at neutral pH (<a href="../Spheres/SAXS_neutral_pH.dat" target="_blank">download neutral pH SAXS data</a>) and pH 5.0 (<a href="../Spheres/SAXS_low_pH.dat" target="_blank">download low pH SAXS data</a>). What effect does the pH change have on the particles and their interaction?</li>
+	<li>Challenge 4: You have measured a sample of mixture of <a href="https://en.wikipedia.org/wiki/Polysorbate_80" target="_blank">Polysorbate 80</a> and <a href="https://en.wikipedia.org/wiki/Myristic_acid" target="_blank">Myristic acid</a> in SAXS (<a href="polysorbate80_MA_SAXS.dat" target="_blank">download SAXS data</a>). What can you tell about the stucture these molecules form together?</li>
+</ul>
 
 <h4>Feedback</h4>
 	<p>By filling this <a href="https://forms.gle/cxCDumAUq21RbjxS8" target="_blank">feedback form</a> you can help us improve the tutorials (it takes 2 min).</p>
@@ -188,5 +150,10 @@ By following the tutorials below the challenges (Part 1-5), you will acquire ski
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
 <script src="../assets/js/main.js"></script>
+
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </body>	
 </html>
