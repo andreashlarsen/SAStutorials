@@ -3,7 +3,7 @@
 <html>
 	
 <head>
-<title>Tutorial Lamella</title>
+<title>Tutorial Lamellar structures</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
@@ -19,9 +19,13 @@
 <div class="inner">
 
 <h4><a href="../index.html">Home</a></h4>
-<h1>Tutorial: Lamellar structures</h1>
+<h1>Tutorial: Lamellar Structures</h1>
 <p> Tutorial contributors: Andreas Haahr Larsen, Jacob Judas Kain Kirkensgaard.</p>
-<p> Frontpage image from <a href="https://doi.org/10.3390/biomimetics6010003" target="_blank">Luchini and Vitiallo 2021</a></p>
+
+<p> 
+	<img src="Lamellae.png" style="width:400px"/><br> 	
+	<em>Multilamellar lipid vesicle. Adapted from <a href="https://doi.org/10.3390/biomimetics6010003" target="_blank">Luchini and Vitiello, 2021, Biomimetics 6: 3</a>, with permission.</em>
+</p>
 
 <h4>Before you start</h4>
 	<ul>
@@ -29,66 +33,80 @@
 	</ul>
 	
 <h4>Learning outcomes</h4>
+	The overall learning outcome is to understand the effect of formfactors vs structure factors on lamellar structures.
 	<ul>
-	<li>Understand how the scattering from <a href="https://en.wikipedia.org/wiki/Lamella_(cell_biology)" target="_blank">lamellar</a> structures looks (unilammellar vesicles, multilamellar vesicles).</li>
-	<li>Calculate SLDs and fit SAXS data of lamellar structures using SasView.</li>	
+	<li>Understand how the scattering from <a href="https://en.wikipedia.org/wiki/Lamella_(cell_biology)" target="_blank">lamellar</a> structures looks (unilamellar vesicles, multilamellar vesicles).</li>
+	<li>Recognize scattering patterns with Bragg peaks from multilamellar structures.</li>
+	<li>Calculate SLDs and fit SAXS data of unilamellar and multilamellar structures using SasView.</li>	
+	
 	</ul>
 	
 <h4>Part 1: Visual inspection of data</h4>
+	<p>
 	<ul>You have measured two SAXS datasets: 
 	<li><a href="Sample1.dat">Sample1_clean.dat</a>: <a href="https://en.wikipedia.org/wiki/Dipalmitoylphosphatidylcholine" target="_blank">DPPC</a> in H<sub>2</sub>O</li> 
 	<li><a href="Sample2.dat">Sample2_clean.dat</a>: <a href="https://en.wikipedia.org/wiki/Lecithin" target="_blank">lecithin extract</a> of unknown composition, but expected to contain much DPPC, also in H<sub>2</sub>O.</li>
 	</ul>
-	<p>The scientific question is: what structure do of the different lipids form? The samples are either unilamellar vesicles or multilamellar vesicles:</p>
-	<img src="Luchini2021_Figure2a.png" style="width:500px"/>
-	<p>Figure from <a href="https://doi.org/10.3390/biomimetics6010003" target="_blank">Luchini and Vitiallo 2021</a> (reprinted with permission). Load the data into SasView and create a new plot:</p>
-	<img src="SasView_VisualInspection.png" style="width:1000px"/>
-	<p>Comment on the differences. Which is which? What do the the peaks of Sample1.dat represent and can you derive any structural info from their position (q-value)? (<a href="hint1.html" target="_blank">Hint</a>)</p>
+	The scientific question is: what structure do the different lipids form? The samples are either unilamellar or multilamellar vesicles:<br>
+	<img src="Luchini2021_Figure2a.png" style="width:500px"/><br>
+	Figure from <a href="https://doi.org/10.3390/biomimetics6010003" target="_blank">Luchini and Vitiallo 2021</a> (reprinted with permission). Load the data into SasView and create a new plot:<br>
+	<img src="SasView_VisualInspection.png" style="width:1000px"/><br>
+	Comment on the differences. Which is which? What do the peaks of Sample1.dat represent? <br>
+	Derive the layer distance the position of the Bragg peaks ($q$-value)? (<a href="hint1.html" target="_blank">Hint</a>)
+	</p>
 
 <h4>Part 2: Pair distance distribution (this part can be skipped)</h4>
-    <p>A measured SAXS signal is, basically, a Fourier transformation of the irradiated sample. Therefore one can try to Fourier tranform the data back, to get structural information (without having to do any fitting).</p>
-    <p>Note: there is a separate tutorial on <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Fourier tranformation of small-angle scattering data, and the pair distance ditribution</a>.</p>
-	<p>Go to: <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>, which is a web applicatioin for doing <a href="https://en.wikipedia.org/wiki/Indirect_Fourier_transform" target="_blank">indirect Fourier transformation</a> of small-angle scattering data.</p>
-	<p>Upload the Sample2.dat datafile to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>, choose Transformation: Negative (to allow for negative values of the pair distance distribution). Give an estimate for the maximum distance, e.g. 500 Å, set qmax to 0.5 Å<sup>-1</sup>, and press Submit:</p>
-	<img src="BayesApp_Sample2.png" style="width:1000px"/>
-	<p>For Sample1.dat, you need to increase the number of points in p(r) from the default 70 to, e.g., 200 (under Advanced options). This makes BayesApp slower, but allows it to better fit the Bragg peaks. Also, provide a larger estimate of the maximum distance, e.g. 800 Å. Press submit: </p>
-	<img src="BayesApp_Sample1.png" style="width:1000px"/>
-	<p>Comment on the result. If you are not familiar with pair distributions, you can take the tutorial on that subject: <a href="../PairDistanceDistribution.html" target="_blank">Pair distance distribution</a>.</p>
-	<p>Note: BayesApp also assesses the error bars in data, and if it assess them to be over- or underestimated, it provides a rescaled dataset (<a href="https://doi.org/10.1107/S1600576721006877" target="_blank">Larsen and Pedersen 2021</a>). Albeit useful, you can ignore that for now.</p>
+    <p>
+	A measured SAXS signal is a Fourier transformation of the irradiated sample. Therefore one can try to Fourier tranform the data back, to get structural information, without having to do any fitting (for more information, see the tutorial <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution</a>).<br>
+	Go to: <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>, which is a web application for doing <a href="https://en.wikipedia.org/wiki/Indirect_Fourier_transform" target="_blank">indirect Fourier transformation</a> of small-angle scattering data. Upload the Sample2.dat datafile to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>, choose Transformation: Negative (to allow for negative values of the pair distance distribution). Give an estimate for the maximum distance, e.g. 500 Å, set qmax to 0.5 Å<sup>-1</sup>, and press Submit:<br>
+	<img src="BayesApp_Sample2.png" style="width:1000px"/><br>
+	The $p(r)$ display negative and positive parts. This is a sign of oscillations in electron density of the sample. That stems from the low density (relative to water) of the lipid tail groups and the high density (again, relative to water) of the lipid head
+	groups. The first part of the $p(r)$, from 0 to ca 50 Å, corresponds to a bilayer, and the larger distances corresponds to the rest of the vesicle. <br>
+	For Sample1.dat, you need to increase the number of points in $p(r)$ from the default 70 to, e.g., 200 (under Advanced options). This makes BayesApp slower, but allows it to better fit the Bragg peaks. Also, provide a larger estimate of the maximum distance, e.g. 800 Å. Press submit: <br>
+	<img src="BayesApp_Sample1.png" style="width:1000px"/><br>
+	For Sample1.dat you will get a lot of oscillations. This corresponds to the many layers with positive and negative SLDs (positive: higher electron density than water, negative: lower electron density than water). 
+	</p>
 
 <h4>Part 3: Fit the data with an analytical model</h4>
-	<p>Before we fit the data, we need to consider all prior knowledge. This is critical because fitting SAS data is an ambiguous <a href="https://en.wikipedia.org/wiki/Inverse_problem" target="_blank">inverse problem</a>, i.e. there are several models that can fit the data. First and foremost, we must estimate the scattering length densities (SLD) and excess scattering length density (&Delta;SLD = SLD - SLD<sub>H2O</sub>) of DPPC head and tail groups.</p>
-	<p>The molecular volumes can be determined experimentally and are 30 Å<sup>3</sup> for H<sub>2</sub>O, 325 Å<sup>3</sup> for DPPC head grops and 969 Å<sup>3</sup> for DPPC tail groups. Use SasView Density/Volume calculator (Tool -> Density/Volume calculator) to get the mass densities. You need to type in the chemical formula and molar volume - be aware of unit conversion <a href="hint2.html" target="_blank">(Hint)</a>.</p>
-	<img src="SasView_DensityVolumeCalculator.png" style="width:250px"/>
-	<p>Then use SasView SLD calculator to get the SLD values for solvent, head and tail group <a href="SLD_SasView.xlsx">(Solution)</a>.</p>
-	<p>Use the SasView models <a href="https://www.sasview.org/docs/user/models/lamellar_hg.html" target="_blank">lamellar_hg</a> (unilamellar vesicles) or <a href="https://www.sasview.org/docs/user/models/lamellar_hg_stack_caille.html" target="_blank">lamellar_hg_stack_caille</a> (multilamellar vesiceles) to fit the data. Start with Sample2.dat, is this has the least features (see Part 1). </p>
-	<p>Select the dataset, press "Send data to" and select "Fitting" in the menu. Choose one of the models (under the category: Lamellae). Always start with the simplest (in this case, that is <a href="https://www.sasview.org/docs/user/models/lamellar_hg.html" target="_blank">lamellar_hg</a>, unilamellar vesicles). You can add complexity if the simpler model does not fit data.</p>
-	<p>Before you fit the data, type in reasonable values for all parameters. DPPC has a tail length of 10-15 Å and a head length of 2-5 Å.</p>
-	<p>When fitting a model to SAXS data, you would often not fit all parameters at once, you may follow this "protocol":</p>
-	<ul>
+	<p>
+	Before we fit the data, we need to consider all prior knowledge. This is critical because fitting SAS data is an ambiguous <a href="https://en.wikipedia.org/wiki/Inverse_problem" target="_blank">inverse problem</a>, i.e. there are several models that can fit the data. First and foremost, we must estimate the scattering length densities (SLD) and excess scattering length density (&Delta;SLD = SLD - SLD<sub>H2O</sub>) of DPPC head and tail groups.
+	The molecular volumes can be determined experimentally and are 30 Å<sup>3</sup> for H<sub>2</sub>O, 325 Å<sup>3</sup> for DPPC head groups and 969 Å<sup>3</sup> for DPPC tail groups. Use SasView's <em>Density/Volume calculator</em> (Tool -> Density/Volume calculator) to get the mass densities. You need to type in the chemical formula and molar volume. Be aware of unit conversion <a href="hint2.html" target="_blank">(Hint)</a>.<br>
+	<img src="SasView_DensityVolumeCalculator.png" style="width:250px"/><br>
+	Then use SasView's <em>SLD calculator</em> to get the SLD values for solvent, head and tail group <a href="SLD_SasView.xlsx">(solution)</a>.<br>
+	Use the SasView models <a href="https://www.sasview.org/docs/user/models/lamellar_hg.html" target="_blank">lamellar_hg</a> (unilamellar vesicles) or <a href="https://www.sasview.org/docs/user/models/lamellar_hg_stack_caille.html" target="_blank">lamellar_hg_stack_caille</a> (multilamellar vesiceles) to fit the data. Start with Sample2.dat, as this data has the least features and therefore, most likely can be fitted easier. <br>
+	Select the dataset, press "Send data to" and select "Fitting" in the menu. Choose one of the models (under the category: Lamellae). Always start with the simplest model (in this case, that is <a href="https://www.sasview.org/docs/user/models/lamellar_hg.html" target="_blank">lamellar_hg</a>, unilamellar vesicles). You can add complexity if the simpler model does not fit data.<br>
+	Before you fit the data, type in reasonable values for all parameters. DPPC has a tail length of 10-15 Å and a head length of 2-5 Å.<br>
+	When fitting a model to SAXS data, you would often not fit all parameters at once, you may follow this "protocol":
+	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Protocol for fitting - simpler case of unilamellar vesicles</b>
 	<li>Calculate the scattering from the model (no fitting yet) by pressing "Compute/Plot". </li>
 	<li>Ignore the first point, by setting qmin to 0.01 (under Fit Options). Ignore the last points by setting qmax=0.5</li>
-	<li>Fit scale and backbround (set a check-mark there and press "Fit"). Keep other parameters fixed</li>
+	<li>Fit scale and backbround (set a check-mark there and press "Fit"). Keep the other parameters fixed.</li>
 	<li>You may try to vary the parameters one at a time and press "Compute/Plot" to investigate what effect it has on the calculated scattering.</li>
 	<li>Now, try to fit the length_tail and length_head (together with scale and background). This should give a reasonable fit. You may have to fix length_tail or set an upper limit, as, for some reason, a good fit can be achieved for Sample2 with length_tail of around 15, which is unrealistic. </li>
-	<li>In the end, you may try to refine the scattering lengths densities, that you calculated. They should not be too different from the calculated values. If you fit all SLDs (also solvent SLD), then you get "nan" as error-estimate on that parameter - why? (<a href="hint3.html" target="_blank">Hint</a>)</li>
+	<li>In the end, you may try to refine the scattering length densities, that you calculated. They should not be too different from the calculated values. If you fit all SLDs (also solvent SLD), then you get "nan" as error-estimate on that parameter - why? (<a href="hint3.html" target="_blank">Hint</a>)</li>
     </ul>
+	</pr>
 
 	<p>For the model <a href="https://www.sasview.org/docs/user/models/lamellar_hg_stack_caille.html" target="_blank">lamellar_hg_stack_caille</a> (multilamellar vesiceles), there are some additional steps in the fitting protocol:
-	<ul>
-	<li>Before fitting, estimate a good initial value for d (see Part 2) and Nlayers (see Part 3).</li>
-	<li>Ignore the first point, by setting qmin to 0.01 (under Fit Options). Ignore the last points by setting qmax=0.5</li>
-	<li>Try to estimate d_spacing, by fitting this parameter together with scale and background and Caille_parameter.</li>
-	<li>(OBS: the model <a href="https://www.sasview.org/docs/user/models/lamellar_hg_stack_caille.html" target="_blank">lamellar_hg_stack_caille</a> has a bug, so Nlayers cannot be fitted - try to vary it manually instead.)</li>
-    <li>Then fit the length_tail and length_head. Are the values reasonable? else, try to fix one or set min/max values.</li>
-	<li>In the end, refine the scattering lengths densities. They should not be too different from the calculated values.</li>
+	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Protocol for fitting - more complex case of multilamellar vesicles</b>
+	<li>Before fitting, estimate a good initial value for the distance between layers, <em>d_spacing</em>, (see Part 1) and for the number of layers , <em>Nlayers</em> (see Part 2).</li>
+	<li>Ignore the first point, by setting $q_\mathrm{min}=0.01$ (under Fit Options). Ignore the last points by setting $q_\mathrm{max}=0.5$</li>
+	<li>Try to refine <em>d_spacing</em> by fitting this parameter together with scale, background and Caille_parameter.</li>
+	<li>(OBS: the model <a href="https://www.sasview.org/docs/user/models/lamellar_hg_stack_caille.html" target="_blank">lamellar_hg_stack_caille</a> has a bug, so <em>Nlayers</em> cannot be fitted - try to vary it manually instead.)</li>
+    <li>Then fit the <em>length_tail</em> and <em>length_head</em>. Are the values reasonable? else, try to fix one or set min/max values.</li>
+	<li>In the end, refine the scattering length densities. They should not be too different from the calculated values.</li>
     </ul>
 	<p>The fit may look like this for Sample2:</p>
 	<img src="SasView_unilamellar.png" style="width:1300px"/>
 	<p>And like this for Sample1:</p>
 	<img src="SasView_multilamellar.png" style="width:1300px"/>
-	<p>Comments on the results. You may not get perfect fits (<a href="../reduced_chi2.html" target="_blank">reduced &chi; <sup>2</sup></a> are not unity) - this is ok. This means that the models are not perfect - how could the models be improved? (<a href="hint4.html" target="_blank">Hint</a>) </p>
-	<p>The goal was not to obtain perfect fits, but to answer relevant scientific questions: what phase does the two lipid mixtures form? - the models are sufficently good to answer that question. And to answer other questions, e.g., how does the structure change if we change temperature, lipid composition (e.g., a more biologically relevant compositions), concenttration, etc</p>
+	<p>Comments on the results. You may not get perfect fits (<a href="../reduced_chi2.html" target="_blank">reduced $\chi^2$</a> are not unity) - this is ok. This means that the models are not perfect - how could the models be improved? (<a href="hint4.html" target="_blank">Hint</a>) </p>
+	<p>The goal was not to obtain perfect fits, but to answer relevant scientific questions: what phase does the two lipid mixtures form? - the models are sufficently good to answer that question. And to answer other questions, e.g., how does the structure change if we change temperature, lipid composition (e.g., a more biologically relevant composition), concenttration, etc</p>
+
+<h4>Challenges</h4>
+<ol>
+	<li>To-come, not made yet.</li>
+</ol>
 
 <h4><a href="../index.html">Home</a></h4>
 
@@ -107,5 +125,9 @@
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
 <script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 </body>	
 </html>

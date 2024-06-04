@@ -20,10 +20,15 @@
 
 <h4><a href="Lamellae.html">Back</a></h4>
 <h1>Hint</h1>
-<p><a href="https://en.wikipedia.org/wiki/Bragg%27s_law" target="_blank">Bragg's law</a> states that n&lambda; = 2d sin(&theta;), where d is the lattice distance</p>
-<p>the momentum transfer is given by q = 4 &pi; sin(&theta;)/&lambda;.</p>
-<p>now, set n = 1 to get the characteristic distance: d = 2&pi;/q<sub>first-peak</sub></p>
-<p>if there is only one characteristic distance (Bragg reflection), then the same distance is obtained by setting n=2 and using the second peak: d = 4&pi;/q<sub>second-peak</sub></p>
+<p>
+<a href="https://en.wikipedia.org/wiki/Bragg%27s_law" target="_blank">Bragg's law</a> states that 
+$$n\lambda = 2d \sin(\theta),$$ 
+where $d$ is the lattice distance, and $q = 4\pi\sin(\theta)/\lambda$ is the momentum transfer, $2\theta$ is the scattering angle and $\lambda$ is the wavelength of the incoming X-ray beam.</p>
+$n$ can be any integer, but set $n = 1$ to get the characteristic distance:
+$$d = \frac{2\pi}{q_\mathrm{first\ peak}}$$
+If there is only one characteristic distance (Bragg reflection), then the same distance is obtained by setting $n=2$ and using the second peak:
+$$d = \frac{4\pi}{q_\mathrm{second\ peak}}$$
+</p>
 
 <!-- end inner -->
 </div>
@@ -40,5 +45,9 @@
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
 <script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 </body>	
 </html>
