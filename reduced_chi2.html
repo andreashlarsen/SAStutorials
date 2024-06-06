@@ -18,18 +18,19 @@
 
 <div class="inner">
 
-<h1>Reduced &chi;<sup>2</sup></h1>
-<p>&chi;<sup>2</sup> is the sum of the normalized and squared residuals:</p>
-<p>&chi;<sup>2</sup> = &Sigma;<sub>i</sub>((I<sub>model,i</sub>-I<sub>experiment,i</sub>)/&sigma;<sub>i</sub>)<sup>2</sup></p>
-<p>And the reduced &chi;<sup>2</sup> is calculated by dividing &chi;<sup>2</sup> by the number of degrees of freedom (DoF). In most cases, DoF = N-K, where N is the number of data points and K is the number of fitted parameters in the model:</p>
-<p>Reduced &chi;<sup>2</sup>  = &chi;<sup>2</sup>/(N-K).</p>
-<p>Fitting programs report the reduced &chi;<sup>2</sup>, donoting it simply as &chi;<sup>2</sup> ("reduced" is implicitely assumed for simplicity). This is also the case in SasView. So when you see &chi;<sup>2</sup>, it is usually the reduced &chi;<sup>2</sup>.</p>
-<p>When fitting a model, &chi;<sup>2</sup> is minimized. For a perfect model, one would expect to get a reduced &chi;<sup>2</sup> ~ 1, as the difference between model and data is typically about the same size as the experimental errors.</p>
-<ul>Rule of thumb:
-<li>If you get a reduced &chi;<sup>2</sup> much larger than unity, then the model is not perfect. May need to be improved (depending on the scientific question).</li>
-<li>If you get a reduced &chi;<sup>2</sup> much smaller than unity, then the model may have too much freedom (too many parameters) or the errors (&sigma;<sub>i</sub>) of the data may be overestimated.</li>
+<h1>Reduced $\chi^2$</h1>
+<p>
+$\chi^2$ is the sum of the normalized and squared residuals:
+$$\chi^2 = \sum_i{\left(\frac{I_\mathrm{model,i}-I_\mathrm{experiment,i}}{\sigma_i}\right)^2}$$
+The <em>reduced</em> $\chi^2$ is calculated by dividing $\chi^2$ by the number of degrees of freedom ($DoF$). In most cases, $DoF = N-K$, where $N$ is the number of data points and $K$ is the number of fitted parameters in the model:
+$$\chi^2_\mathrm{reduced}  = \chi^2/(N-K).$$
+Fitting programs always report the reduced $\chi^2$, donoting it simply as $\chi^2$ ("reduced" is implicitely assumed). This is also the case in SasView. So when you see $\chi^2$, it is usually the <em>reduced</em> $\chi^2$.
+When fitting a model, $\chi^2$ is minimized. For a perfect model, one would expect to get a reduced $\chi^2\sim 1$, as the difference between model and data is typically about the same size as the experimental errors.<br>
+<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Rule of thumb for $\chi^2$</b>
+<li>If you get a reduced $\chi^2$ much larger than unity, then the model is not perfect and can be improved. However, depending on the scientific question, an approximate model may be fine.</li>
+<li>If you get a reduced $\chi^2$ much smaller than unity, then the model may have too much freedom (too many parameters) or the errors ($\sigma_i$) of the data may be overestimated.</li>
 </ul>
-<ul>More thorough and precise introductions can be found elsewhere, <e class="g"></e>:
+<ul><b>Further reading:</b>
 <li>General introduction on <a href="https://en.wikipedia.org/wiki/Reduced_chi-squared_statistic" target="_blank">Wikipedia</a>. </li> 
 <li>Specific for small-angle scattering (SAXS and SANS): <a href="https://doi.org/10.1107/S1600576721006877" target="_blank">Larsen and Pedersen, 2021</a></li>
 </ul>
@@ -49,5 +50,9 @@
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 </body>	
 </html>
