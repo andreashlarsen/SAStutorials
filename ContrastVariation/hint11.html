@@ -21,10 +21,13 @@
 <h4><a href="ContrastVariation.html">Back</a></h4>
 <h1>Hint</h1>
 <p>
-I(0) is proportional to &Sigma;(<sub>i</sub>&Delta;SLD<sub>i</sub> V<sub>i</sub>)<sup>2</sup>,<br>
-where &Delta;SLD<sub>i</sub> = SLD<sub>i</sub> - SLD<sub>solvent</sub> is the contrast (or excess scattering length density) of subunit i, and V<sub>i</sub> is the volume of subunit i (the subunits of a core-shell particles are the the core and the shell).<br>
-In this problem, &Delta;SLD<sub>core</sub> = -&Delta;SLD<sub>shell</sub>, so the volumes of the core and shell must be equal to get I(0)=0. Volume of the shell: 4&pi;(R<sub>outer</sub><sup>3</sup>-R<sub>core</sub><sup>3</sup>)/3<br>
-Set this equal to the volume of the core, 4&pi;R<sub>core</sub><sup>3</sup>/3, and find a relation between the radii, i.e. determine the ratio = R<sub>outer</sub>/R<sub>core</sub>=? 
+The forward scatting is proportional to the contrast:
+$$I(0)\propto\Sigma_i(\Delta\mathrm{SLD}_i V_i)^2$$
+where $\Delta\mathrm{SLD}_i = \mathrm{SLD}_i - \mathrm{SLD}_\mathrm{solvent}$ is the contrast (or excess scattering length density) of subunit $i$, and $V_i$ is the volume of that subuni. A core-shell particle consists of two subunits, core and the shell.<br>
+</p>
+<p>
+In this problem, $\Delta\mathrm{SLD}_\mathrm{core} = -\Delta\mathrm{SLD}_\mathrm{shell}$, so the volumes of the core and shell must be equal to get $I(0)=0$. <br>
+The volume of the core is $V_\mathrm{core} = \frac{4\pi}{3}R_\mathrm{core}^3$, and the shell volume is $V_\mathrm{shell} = \frac{4\pi}{3}R_\mathrm{outer}^3- V_\mathrm{core}$. 
 </p>
 
 <!-- end inner -->
@@ -42,5 +45,9 @@ Set this equal to the volume of the core, 4&pi;R<sub>core</sub><sup>3</sup>/3, a
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
 <script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 </body>	
 </html>
