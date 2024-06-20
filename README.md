@@ -11,12 +11,8 @@ Level 1: Each tutorial has a feedback form, all feedback is valuble!
 
 Level 2: You can edit/improve/extend existing tutorials using Github (see instructions here: https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project).    
 
-Level 3: You can  add a new tutorial in a few simple steps:    
-1) add an tutorial in index.html (e.g. use the section belonging to the tutotrial "Spheres" as template).     
-2) download an existing tutorial folder (e.g. Spheres/Spheres.html), and use as template for the new tutorial (NewTutorial/NewTutorial.html).        
-3) add an image (preferably square format) that will be the tuturial logo on the front page, and is references in index.html. 
-4) test if everything is looking right by opening NewTutorial.html in your browser.
-5) upload the new tutorial folder. The folder should contain everything related to that tutorial (extra html pages, images, files, etc).
+Level 3: You can  add a new tutorial, see the  [Template tutorial](https://sastutorials.org/Template) 
+in a few simple steps:    
 
 Level 4: Join the development team. We are happy to welcome members in the development team.    
 
@@ -26,4 +22,4 @@ Martin Cramer Pedersen (Niels Bohr Institute, University of Copenhagen)
 Jacob Judas Kain Kirkensgaard (Niels Bohr Institute and Food Science, University of Copenhagen)    
 
 #### Contact
-Via the "Issues" https://github.com/andreashlarsen/SAStutorials/issues 
+Via the "Issues" (report bugs, mistakes, typos, or technical issues) or "Discussions" (ideas, questions, suggestions) https://github.com/andreashlarsen/SAStutorials/discussions 
