@@ -51,7 +51,7 @@
 	<img src="Shape2SAS_sphere.png" style="width:1000px"/>
 	<p>Comment on the resulting scattering. Try to compare with a smaller or larger sphere (as Model 2), and with other shapes. Notice the inverse relation: larger particles have features at smaller $q$.</p>
 	<p>Download the data you just simulated: Isim.dat <a href="Isim.dat" target="_blank">(or use this example data)</a> (right click - save as...). Load the data into SasView and fit with an analytical <a href="https://www.sasview.org/docs/user/models/sphere.html" target="_blank">sphere model</a>
-	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Guide to basic fitting in Sasview:</b>
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9" > <b>Guide to basic fitting in Sasview:</b>
 		<li>Press "Load data" and select the data you simulated. Normally you would here choose experimentally measured SAXS or SANS data.</li>
 		<li>"Send data to" and choose "Fitting" in the drop-down menu.</li>
 		<li>Your data should appear in the Fit panel (a separate window).</li>
@@ -79,7 +79,7 @@
 	Try also to compare the scattering from polydisperse spheres with that of ellipsoid with semiaxes a = 50 Å, b = 40 Å, c = 60 Å.</p>
 	<p>Note: a Gaussian (normal) size distribution is used to simulate polydispersity in Shape2SAS, but many different size distributions are possible in real samples <a href="https://doi.org/10.1107/S0021889813001295" target="_blank">(Pauw et al 2013)</a>.</p>
 	<p>Load your data <a href="Isim_poly.dat" target="_blank">(or you can use this example data)</a> into SasView and model the polydispersity. You need some extra steps, besides those you did in Part I:</p>
-	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Adding polydispersity in SasView:</b>
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> <b>Adding polydispersity in SasView:</b>
 		<li>Load the data as before, and choose the sphere model. Try to fit the data with a monodisperse model first.</li>
 		<li>Click the "Polydispersity" option in the lower left corner of the Fit panel.</li>
 		<li>Click the (now active) "polydispersity" tab in the Fit Panel. Check the box "Distribution of radius". Give a non-zero number as default for PD (PD stands for polydispersity).</li>
@@ -96,7 +96,7 @@
 	<p>Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius of 50 Å and hard sphere structure factor with volume fraction 0.2 and hard-sphere interaction radius of 50 Å as Model 2.
 	<img src="Shape2SAS_HardSphere.png" style="width:1000px"/><br>	
 	Comment on the results. You will notice a "dip" at low $q$, which is characteristic. If an experimentalist is not interested in this effect, it may be removed by lowering the sample concentration. You may try to decrease the volume fraction in the simulations (i.e the concentration), to see the structure factor effect disappear. Fit the data is SasView.
-	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Adding a structure factor in SasView:</b>:
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> <b>Adding a structure factor in SasView:</b>:
 		<li>Download the simulated data for Model 2 (with hard-sphere structure factor and volume fraction 0.2) <a href="Isim_2.dat">(or use this example data)</a></li>
 		<li>Load the data into SasView and fit a <a href="https://www.sasview.org/docs/user/models/sphere.html" target="_blank"> sphere form factor</a> (no polydispersity) - observe how the model fit deviates from the data, due to interparticle interactions.</li>
 		<li>Add a <a href="https://www.sasview.org/docs/user/models/hardsphere.html" target="_blank">hard-sphere structure factor</a> to the fit. Structure factors are selected in the third drop-down menu in the Fit panel.</li>
@@ -146,7 +146,6 @@
 <script src="../assets/js/main.js"></script>
 <script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 </body>	
 </html>
