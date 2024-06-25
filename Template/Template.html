@@ -19,69 +19,102 @@
 <div class="inner">
 
 <h4><a href="../index.html">Home</a></h4>
-<h1>Tutorial: Template</h1>
-<p> Tutorial contributors: YOUR NAME(S).</p>
+<h1>Tutorial: How to make a tutorial (Template)</h1>
+<p> Tutorial contributors: INSERT YOUR NAME(S).</p>
 <p>
 <img src="Template.png" style="width:400px"/><br> 
-<em>An illustration that also goes to the front page. Square format. Please ensure that there are no copyright issues. This caption in italic.</em></a>
+<em>Insert an illustration that also goes here and to the front page. Square format. Please ensure that there are no copyright issues. This caption in italic.</em></a>
 </p>
 <h4>Before you start</h4>
+Each tutorial contains some paragraphs, the first being "Before you start"
 	<ul>
-	<li>List if any programs that should be installed, or name tuturials that should be completed first.</li>
+	<li>List if any programs that should be installed (if any), or name tuturials that are recommended to complete first.</li>
 	</ul>
 	
 <h4>Learning outcomes</h4>
-State a 1-sentence learning outcome for the tutorial. E.g. In this tutorial you will learn to make a tutorial for the website SAStutorials.org. 
-	<ul>
-	<li>Write 4-5 specific learning outcomes here for the tutorial, e.g.:</li>
-	<li>Learn about the different sections in a tutorial on sastutorials.org: "Before you start", "Learning outcomes", "Parts", and "Challenges". </li>
-	<li>Be able to generate math, external links and download links.</li>
-	<li>Understand the idea of the Challenges</li>
-	</ul>
+The next section in "Learning outcomes". Start by stating a 1-sentence learning outcome for the tutorial, E.g.: <br>
+In this tutorial you will learn to make a new tutorial for the website SAStutorials.org. 
+<ul>
+	Also provide 3-5 specific learning outcomes here for the tutorial, e.g.:	
+	<li>Get an overview of the structure and different sections in a tutorial on SAStutorials.org. </li>
+	<li>Be familiar with sufficiently html code to make a new totorial, including math and links.</li>
+	<li>Be able to design challenges, where the acquired skills are used.</li>
+</ul>
 
 <h4>Introductory remarks</h4>
-	<p>You may want to add some introductory remarks, e.g. a bit of context or key theory. However, these tutorials are not online textbooks, so be very consise.</p>
+	<p>
+		You may want to add some introductory remarks, e.g. a bit of context or key theory. However, these tutorials are not online textbooks, so be consise.
+	</p>
 
 <h4>Part 1: Generate links</h4>
 	<p>
-	Each part of the tutorial introduces a concept related to the learning outcomes, and useful for the challenges, E.g. how to make <a href="https://www.w3schools.com/html/html_links.asp"  target="_blank">external link</a> to webpages, or how to make links to <a href="example-file-for-template-tutorial.txt"  target="_blank">download a file</a> (right-click and press save as to download).<br>
+	Each part of the tutorial introduces a concept related to the learning outcomes, and which can help to solve the challenges. These parts includes some specific tasks to solve. Each tutorial should contain ca. 3-4 parts with walked-throug and explained analysis, providing files so the user can do the analysis themself.<br>
+	<ul>
+	E.g., in this Part 1, it is demonstrated how to make links, including how to:
+	<li>make an <a href="https://www.w3schools.com/html/html_links.asp" target="_blank">external link</a>:<br>
+	<code>  &lt;a href="https://www.w3schools.com/html/html_links.asp" target="_blank"&gt;external link&lt;/a&gt;</code><br>
+	</li>
+	<li>make an <a href="internal_link.html" target="_blank">internal link</a> (click on the link to see examples of what is may be used for)<br>
+	<code>  &lt;a href="interal_link.html" target="_blank">internal links, e.g. hints&lt;/a&gt;</code><br>
+	</li>
+	<li>make links to <a href="example-file-for-template-tutorial.txt"  target="_blank">download a file</a> (right-click and press save as to download):<br>
+	<code>  &lt;a href="example-file-for-template-tutorial.txt"  target="_blank"&gt;download a file&lt;/a&gt;</code><br>
+	</li>
+	</ul>
+	Try to <a href="Template.html"  target="_blank">download this file</a> (right-click > save file as), open in a texteditor and edit or add a links. Open in a browser to see the result.
 	</p>
 
 <h4>Part 2: Write math</h4>
 	<p>
-	Math can be written in-line, e.g. $E=mc^2$ or $a = \sqrt{(b^2+c^2)}$, or it can be written on a separate line, e.g. the definition of $q$:
-	$$q = \frac{4\pi}{\lambda} \sin(\theta)$$
-	where $2\theta$ is the scattering angle and $\lambda$ is the wavelength. 
+	Math can be written in-line, e.g. $E=mc^2$ (<code>&dollar;E=mc^2&dollar;</code>) or $a=\sqrt{(b^2+c^2)}$ (<code>&dollar;a=\sqrt{(b^2+c^2)}&dollar;</code>), or it can be written on a separate line by use of double dollor signs, e.g.:<br>
+	<code>&dollar;&dollar;q = \frac{9.2\pi}{\lambda} \sin(\theta)&dollar;&dollar;</code><br>
+	which renders as:
+	$$q = \frac{9.2\pi}{\lambda} \sin(\theta)$$	
+	Try to <a href="Template.html"  target="_blank">download this file</a> (right-click > save file as), and correct the mistake in the definition of $q$.
 	</p>
 
-<h4>Part 3: Insert images</h4>
+<h4>Part 3: Insert images (and make it square if used as main illustration)</h4>
 	<p>
-		Images can also be inserted in the tutorial <br>
-		<img src="Template.png" style="width:100px"><br> 
+		Images can be inserted in the tutorial <br>
+		<img src="Template.png" style="width:200px"><br> 
+		<code>&lt;img src="Template.png" style="width:150px"&gt;</code><br>
+		Images make the tutorials visually appealing and help explain key concepts and results.<br>
+		If you have a picture that you want to user as cover illustration for you tutorial (to appear at <a href="sastutorial.org"  target="_blank">sastutorial.org</a> front page), it should be square format. 
+		If it is not, you can, e.g., insert it in a <a href="Template.pptx" target="_blank">power point</a>, and adjust the size (Design -> Slide size), and export it as an image<br>
+		<img src="square_format.png" style="width:500px"><br> 
+		Try to <a href="Template.html" target="_blank">download this tutorial</a> (right-click > save file as), and change the cover photo (adjust dimensions of the new cover photo if necessary)<br>
 	</p>
 
 <h4>Part 4: Higlight with a box</h4>
     <p>
-	If you have something to highlight (a concept, a check list, a step-by-step guide), it can be framed. E.g.	
-	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> <b>How to design a new tutorial:</b>
+	If you have something to highlight (a concept, a check list, a step-by-step guide), it can be highlighted. E.g. this list <br>
+	<code>
+	&lt;ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"&gt; <br>
+	&lt;b&gt;How to design a new tutorial:&lt;/b&gt;<br>
+	&lt;li&gt;...&lt;\li&gt;<br>
+	&lt;ol&gt;
+	</code>
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+		<b>How to design a new tutorial:</b>
 		<li>Identify a subject that should be covered with a tutorial.</li>
-		<li>Consider learning outcomes.</li>
-		<li>Design 1-3 challenges that can be solved after requiring the skills of the tutorials. Preferably including analysis of real data.</li>
+		<li>Consider overall and specific learning outcomes.</li>
+		<li>Design 1-3 challenges that can be solved after requiring the skills of the tutorials. Preferably including analysis of real SAXS or SANS data.</li>
 		<li>Copy the <a href="https://github.com/andreashlarsen/SAStutorials" target="_blank">SASTutorial GitHub page</a> to your computer.</li>
 		<li>Copy the template folder and rename it.</li>
 		<li>To edit the html files, you must open them in a text editor, if you open them in a browser, you see the final result.</li>
-		<li>Make 2-4 parts in the tutorial with walk-through and explained analysis, providing files so the user can do the analysis themself. Explain rule-of-thumbs and pitfalls, og technical challenges. Use images for illustarations, e.g. screenshots from a software packaege that is used.</li>
+		<li>Make 2-4 parts in the tutorial with walk-through and explained analysis, providing files so the user can do the analysis themself. Explain rule-of-thumbs and pitfalls, og technical challenges. Use images for illustarations, e.g. screenshots from a software package that is demonstrated.</li>
 		<li>Find a representative image for the tutorial, make it square format and put in the folder.</li>
 		<li>Add your tutorial to the index file (copy one of the other entries and edit).</li>
 		<li>Check that everything is working. This can be done locally, in a browser.</li>
-		<li>Upload your new tutorial and the edited index file to the GitHub page (this will be checked by developers before being merged and thus be part of the webpage).</li>
+		<li>Upload your new tutorial and the edited index file to the GitHub page (this will be checked by developers before being merged and thus be part of the sastutorials.org website).</li>
 	</ol>
     </p>
 
 <h4>Challenges</h4>
-	<ol>The challenges are open tasks that can be solved using the parts above, e.g.:
-		<li>Streamline one of the existing tutorials to be more consistent with the other tutorials.</li>
-		<li>Add a tutorial to SASTutorials.org, on an aspect of SAXS/SANS analysis that is not yet covered.</li>
+	<ol>
+		The challenges are open tasks that can be solved using the parts above. E.g.:
+		<li>Download this tutorial and add a new part (Part 5) to the tutorial. To see the result, open in a browser, to edit files, open in a text editor.</li>
+		<li>Add a tutorial to SAStutorials.org, on an aspect of SAXS/SANS analysis that is not yet covered.</li>
 	</ol>
 
 <!--
