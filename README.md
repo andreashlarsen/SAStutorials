@@ -9,7 +9,8 @@ We (the developer team) especially encourage tutorials with walk-through of anal
 #### How to contribute?
 Level 1: Each tutorial has a feedback form, all feedback is valuble!    
 
-Level 2: You can edit/improve/extend existing tutorials using Github (see instructions here: https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project).    
+Level 2: You can edit/improve/extend existing tutorials using Github    
+(general GitHub instructions: https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project).    
 
 Level 3: You can  add a new tutorial, see the  [Template tutorial](https://sastutorials.org/Template).    
 
