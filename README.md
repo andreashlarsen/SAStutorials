@@ -16,7 +16,7 @@ Level 3: You can  add a new tutorial, see the  [Template tutorial](https://sastu
 
 Level 4: Join the development team. We are happy to welcome members in the development team.    
 
-## The SAStutorials Developer Team
+## The SAStutorials developer team
 Andreas Haahr Larsen (Department of Neuroscience, University of Copenhagen)    
 Martin Cramer Pedersen (Niels Bohr Institute, University of Copenhagen)    
 Jacob Judas Kain Kirkensgaard (Niels Bohr Institute and Food Science, University of Copenhagen)    
