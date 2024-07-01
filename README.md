@@ -3,7 +3,7 @@ Source code for the small-angle scattering tutorials website:
 [sastutorials.org](https://sastutorials.org/) 
 
 ## Please contribute
-The code is 100% open souce and everyone are welcome to edit and contribute!    
+The code is open souce and everyone are welcome to edit and contribute!    
 We (the developer team) especially encourage tutorials with walk-through of analysis done on actual data.   
 
 #### How to contribute?
