@@ -4,7 +4,7 @@ Source code for the small-angle scattering tutorials website:
 
 ## Please contribute
 The code is open souce and everyone are welcome to edit and contribute!    
-We (the developer team) especially encourage tutorials with walk-through of analysis done on actual data.   
+We (the developer team) especially encourage tutorials with walk-through of analysis on actual data.   
 
 #### How to contribute?
 Level 1: Each tutorial has a feedback form, all feedback is valuble!    
