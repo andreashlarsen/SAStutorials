@@ -40,70 +40,85 @@
 		<li>Be able to fit a sphere in SasView and determine its size, and size distribution if it is polydisperse.</li>
 	</ul>
 	
-<h4>Part 1: Monodisperse spheres</h4>
-	<p>Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a 40 Å radius. You may have to click on the three lines in the top-left of the window, then "Calculations". Set parameters.<br>
-	<img src="Shape2SAS_sphere_40.png" style="width:1000px"<br>
-	<ol> Press Submit. Shape2SAS generates three plots (besides from visualization of the particle):
+<h4>Part I: Monodisperse spheres</h4>
+	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a 40 Å radius. You may have to click on the three lines in the top-left of the window, then "Calculations". Set parameters.<br>
+	<img src="Shape2SAS_sphere_40.png" style="width:1000px"><br>
+	Press Submit. Shape2SAS generates three plots (besides from visualization of the particle):
+	<ol> 
 		<li>A pair distance distribution. This is a useful tool in SAXS and SANS analysis, but will not be used in this tutorial. See tutorial <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution, p(r)</a>.</li>
 		<li>Calculated scattering, normalized. This is the form factor, $P(q)$. It contains information about the size and shape of the particle.</li>
 		<li>Simulated scattering, showing what real SAXS or SANS data for that sample may look like, if actually measured.</li>
 	</ol>
-	<img src="Shape2SAS_sphere.png" style="width:1000px"/>
-	<p>Comment on the resulting scattering. Try to compare with a smaller or larger sphere (as Model 2), and with other shapes. Notice the inverse relation: larger particles have features at smaller $q$.</p>
-	<p>Download the data you just simulated: Isim.dat <a href="Isim.dat" target="_blank">(or use this example data)</a> (right click - save as...). Load the data into SasView and fit with an analytical <a href="https://www.sasview.org/docs/user/models/sphere.html" target="_blank">sphere model</a>
-	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9" > <b>Guide to basic fitting in Sasview:</b>
-		<li>Press "Load data" and select the data you simulated. Normally you would here choose experimentally measured SAXS or SANS data.</li>
+	<img src="Shape2SAS_sphere.png" style="width:1000px"/><br>
+	Try to compare with a smaller or larger sphere (as Model 2 in <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>). Notice the important <em>inverse relation</em>: larger particles have features at smaller $q$, and vice versa.<br>
+	Download the data you just simulated: Isim.dat <a href="Isim.dat" target="_blank">(or use this example data)</a> (right click - save as...). Load the data into SasView and fit with an analytical <a href="https://www.sasview.org/docs/user/models/sphere.html" target="_blank">sphere model</a>
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Guide to basic fitting in Sasview:</b>
+		<li>Press "Load data" and select your data.</li>
 		<li>"Send data to" and choose "Fitting" in the drop-down menu.</li>
 		<li>Your data should appear in the Fit panel (a separate window).</li>
 		<li>Choose model category "sphere" from the first drop-down menu. There are many different sphere-like models, choose "sphere" under model name (second drop-down menu).</li>
 		<li>Now you have some model parameters. You can click/select those you want to fit.</li>
-		<li>Compute/plot give you the model scattering with the default values - this shows data (blue) and model (orange) together. The residuals plot (difference between model and data) is also shown. </li>
-		<li>You can try to adjust some parameters manually, and press compute again. Try to manually find some resonable values for scaling, background and radius.</li>
-		<li>Try changing the value of the radius to see what happens - notice the inverse relation: larger radius moves all the features to smaller q values.</li>
-		<li>Try to fit: check the boxes: scale, background and radius, and press "Fit".</li>
-		<li>A convergence plot is shown along with the previous windows - this just shows that the fitting algoritm has converged, and you can ignore that.</li>
+		<li>Compute/plot gives the model scattering with the default values and without fitting: a plot with data (blue) and model (orange) is shown. The residuals (difference between model and data) are also shown in a separate window.</li>
+		<li>Adjust some parameters manually, and press compute again. Try to manually find resonable values for scaling, background and radius.</li>
+		<li>Try changing the value of the radius and notice the important inverse relation: larger radius moves all the features to smaller q values.</li>
+		<li>Try to fit the data: check the parameters <em>scale</em>, <em>background</em> and <em>radius</em>, and press "Fit".</li>
+		<li>A convergence plot is shown along with the other windows - this shows that the fitting algoritm has converged -  you can ignore that.</li>
 	</ol>
-	</p>
-	<p>Shown below is an example of a fit to samples of 50 Å spheres - how does it compare to your results?:<br>
+	Shown below is an example of a fit to samples of 50 Å spheres - how does it compare to your results?:<br>
 	<img src="SasView_sphere50.png" style="width:1000px"/><br>
-	Does the fitted radius match the input for your simulations (40 Å)? Is the fit "good" - as assesed by visual inspection and the <a href="../reduced_chi2.html" target="_blank">reduced $\chi^2$</a>. This value is displayed in the Fit panel.</p>
-	<p>Try doing the same for elipsoids. In SasView, these can be modelled with an <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> (two radii are the same, one different), or a <a href="https://www.sasview.org/docs/user/models/triaxial_ellipsoid.html" target="_blank"> tri-axial ellipsoid</a> (all radii are different). Note: for the <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> model in SasView, ensure that you to use the right values for "R_e" (the two identical equitorial radii) and "R_p" (the polar radius).</p>
-	<p>Try also to simulate and fit a <a href="https://www.sasview.org/docs/user/models/cylinder.html" target="_blank">cylinder</a>.</p>
+	Does the fitted radius match the input for your simulations (40 Å)? Is the fit "good" - as assesed by visual inspection and the <a href="../reduced_chi2.html" target="_blank">reduced $\chi^2$</a>. This value is displayed in the Fit panel.<br>
+	Check for correlated parameters	
+	<ul  style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Correlated parameters:</b>
+		<li>Two parameters are (partly) <a href="https://en.wikipedia.org/wiki/Correlation" target="_blank">correlated</a> if a change of the scattering curve induced by changing one of these parameters can be (partly) cancelled by changing the value of the other parameter. </li>
+		<li>If you fit correlated parameters simultanaously, you will observe high uncertainties on the parameters values.</li>
+		<li>The SLD values are correlated (due to <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle" target="_blank">Babinet's prinicle</a>). That is, you can fit the data equally well with different combinations of <em>sld</em> and <em>sld_solvent</em> - as long as the contrasts is unchanged. The SLD values are also correlated with the scaling parameter.</li>
+		<li>Consequently, if you fit multiple SLD values (and scaling), you will observe large uncertainties on these parameters (<a href="../ContrastVariation/SasView_CoreShell.png" target="_blank">example</a>).</li>
+		<li>To prevent correlation, you can restrict the fit by <em>fixing parameters</em>. For this reason, <em>sld_solvent</em> is usually fixed, and in this example, you should also fix <em>sld</em> if scaling is fitted.</li>
+	</ul>
+	Other shapes:
+	<ul>
+		<li>Try to simulate and fit scattering from a sample of elipsoids. In SasView, these can be modelled with an <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> (two radii are the same, one different), or a <a href="https://www.sasview.org/docs/user/models/triaxial_ellipsoid.html" target="_blank"> tri-axial ellipsoid</a> (all radii are different). Note: for the <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> model in SasView, ensure that you to use the right values for <em>R_e</em> (the two identical equitorial radii) and <em>R_p</em> (the polar radius).</li>
+		<li>Try also to simulate and fit scattering from a sample of <a href="https://www.sasview.org/docs/user/models/cylinder.html" target="_blank">cylinder</a> particles.</li>
+	</ul>
 
-<h4>Part 2: Polydisperse spheres</h4>
-	<p>Polydispersity means that there are particles with different shapes or sizes in the sample, following some size distribution. That could be spherical nanoparticles with variation in their radius. </p>
-	<p>Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 (monodisperse sample) and a sphere with radius of 50 Å and relative polydispersity of 0.1 as Model 2 (polydisperse sample).
-	The simulated data may look like this:<br>
+<h4>Part II: Polydisperse spheres</h4>
+	Polydispersity means that there are particles with different shapes or sizes in the sample, following some size distribution. That could be spherical nanoparticles with variation in their radius. <br>
+	<img src="Silica_polydisperse_pauw2023.png" style="width:300px"/><br>
+	<em>Polydispers silica nanoparticles (NP). Reprinted from <a href="https://doi.org/10.1107/S1600576723008324" target="_blank">Pauw et al., 2023</a>, with <a href="pauw2023_permission.pdf" target="_blank">permission.</a></em><br><br>
+	To see the effect of polydispersity, go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 (monodisperse sample) and a sphere with radius of 50 Å and relative polydispersity of 0.1 as Model 2 (polydisperse sample).<br>
 	<img src="Shape2SAS_polydisperse.png" style="width:1000px"/><br>
-	Comment on the results. Why is the features "smeared out" in the polydisperse sample? Try to vary the degree of polydispersity. <br> 
-	Try also to compare the scattering from polydisperse spheres with that of ellipsoid with semiaxes a = 50 Å, b = 40 Å, c = 60 Å.</p>
-	<p>Note: a Gaussian (normal) size distribution is used to simulate polydispersity in Shape2SAS, but many different size distributions are possible in real samples <a href="https://doi.org/10.1107/S0021889813001295" target="_blank">(Pauw et al 2013)</a>.</p>
-	<p>Load your data <a href="Isim_poly.dat" target="_blank">(or you can use this example data)</a> into SasView and model the polydispersity. You need some extra steps, besides those you did in Part I:</p>
-	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> <b>Adding polydispersity in SasView:</b>
-		<li>Load the data as before, and choose the sphere model. Try to fit the data with a monodisperse model first.</li>
+	Notice that the features (minima, oscillations) are "smeared out" in the polydisperse sample. This is because we see the sum of scattering comtirbutions from spheres having slightly different size, and therefore different positions of the minima. Note that larger polydispersity gives more smaring.<br> 
+	Try also to compare the scattering from polydisperse spheres with that of ellipsoid with semiaxes a = 50 Å, b = 40 Å, c = 60 Å, notice that the ellipsoidality also smears the scattering features, as the ellipsoid looks different from various angles (in contrast to a perfect sphere).<br>
+	A Gaussian (normal) size distribution is used to simulate polydispersity in Shape2SAS, but many different size distributions are possible in real samples <a href="https://doi.org/10.1107/S0021889813001295" target="_blank">(Pauw et al., 2013)</a>.<br>
+	Now, try to fit the data. Load your data <a href="Isim_poly.dat" target="_blank">(or this example data)</a> into SasView and model the polydispersity. You need some extra steps, besides those you did in Part I</p>
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Adding polydispersity in SasView</b>
+		<li>Load the data as before, and choose the sphere model. Try to fit the data with a monodisperse sphere model first.</li>
 		<li>Click the "Polydispersity" option in the lower left corner of the Fit panel.</li>
-		<li>Click the (now active) "polydispersity" tab in the Fit Panel. Check the box "Distribution of radius". Give a non-zero number as default for PD (PD stands for polydispersity).</li>
-		<li>Choose distribution, on the right side. Defeault is Gaussian (a normal distribution), which is fine for this example, but other distributions can be chosen.</li>
+		<li>Click the (now active) "polydispersity" tab in the Fit Panel. Check the box "Distribution of radius". Give a non-zero number as default for the polydispersity (PD).</li>
+		<li>Choose distribution on the right side. Default is Gaussian (a normal distribution), which is fine for this example, but other distributions can be chosen.</li>
 		<li>Press fit</li>
-		<li>Besides from the fit to data, residuals, and convergence, you also get a window with the fitted distribution of radii of spheres in the sample. By default it plots on log-log. If you right-click, choose and change scale to x and y (instead of logarithmic), you may recognise a <a href="https://en.wikipedia.org/wiki/Normal_distribution" target="_blank">normal distribution</a> for the radius.</li>
+		<li>Besides from the fit to data, residuals, and convergence, you also get a window with the fitted distribution of radii of spheres in the sample. By default it plots on log-log. If you right-click, choose and change scale to x and y (instead of logarithmic), you may recognise a <a href="https://en.wikipedia.org/wiki/Normal_distribution" target="_blank">normal distribution</a> for the radius <a href="PolyDistr.png" target="_blank">(example of output distribution)</a>.</li>
 	</ol>
-	The output distribution may look like this:<br>
-	<img src="PolyDistr.png" style="width:500px"/></p>
+	<!-- The output distribution may look like this:<br> -->
+	<!-- <img src="PolyDistr.png" style="width:500px"/></p> -->
 
-<h4>Part 3: Spheres with interparticle repulsion (hard-sphere structure factor)</h4>
-	<p>If the concentration of particles in as sample is high, they may frequently "bump into each other". This will give rise to some characteristic distances (2 times the radius), which gives rise to change of the scattering.
-	<br>The additional scattering can (for some samples) be described by a so-called hard-sphere structure factor.</p>
-	<p>Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius of 50 Å and hard sphere structure factor with volume fraction 0.2 and hard-sphere interaction radius of 50 Å as Model 2.
+<h4>Part III: Spheres with interparticle repulsion (hard-sphere structure factor)</h4>
+	If the concentration of particles in as sample is high, they may frequently "bump into each other". This will give rise to some characteristic distances (2 times the radius), which gives rise to change of the scattering.<br>
+	The additional scattering can (for some samples) be described by a so-called hard-sphere structure factor.
+	<img src="hard_sphere_illustration.png" style="width:800px"/><br>
+	<em>Illustration of a hard-sphere structure factor for a highly concentrated sample of spheres, giving rise to a characteristic distance. The scattering is the product of the form factor, $P(q)$), and the structure factor, $S(q)$.</em><br><br>
+	To see the effect of inpterparticle interactions, go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius of 50 Å and hard sphere structure factor with volume fraction 0.2 and hard-sphere interaction radius of 50 Å as Model 2.
 	<img src="Shape2SAS_HardSphere.png" style="width:1000px"/><br>	
-	Comment on the results. You will notice a "dip" at low $q$, which is characteristic. If an experimentalist is not interested in this effect, it may be removed by lowering the sample concentration. You may try to decrease the volume fraction in the simulations (i.e the concentration), to see the structure factor effect disappear. Fit the data is SasView.
-	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> <b>Adding a structure factor in SasView:</b>:
-		<li>Download the simulated data for Model 2 (with hard-sphere structure factor and volume fraction 0.2) <a href="Isim_2.dat">(or use this example data)</a></li>
+	You will notice a "dip" at low $q$, which is characteristic for the hard-sphere structure factor. If an experimentalist is not interested in this effect, it may be removed by lowering the sample concentration. Try to simulate this by decreasing the volume fraction in the simulations (i.e the concentration), to see the structure factor effect gradually disappearing. <br>
+	Try also to fit the data is SasView.
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Including a structure factor in SasView</b>:
+		<li>Download the simulated data for spheres with hard-sphere structure factor and volume fraction 0.2 <a href="Isim_2.dat">(or use this example data)</a></li>
 		<li>Load the data into SasView and fit a <a href="https://www.sasview.org/docs/user/models/sphere.html" target="_blank"> sphere form factor</a> (no polydispersity) - observe how the model fit deviates from the data, due to interparticle interactions.</li>
 		<li>Add a <a href="https://www.sasview.org/docs/user/models/hardsphere.html" target="_blank">hard-sphere structure factor</a> to the fit. Structure factors are selected in the third drop-down menu in the Fit panel.</li>
 	</ol>
 	The result may look like this:<br>
 	<img src="SasView_HardSphere.png" style="width:1000px"/><br>
-	Does the fitted values match the input values for the simulations?</p>
+	Does the fitted values match the input values for the simulations?<br><br>
 
 	<!--
 <h4>Part 4: Spheres with a fraction of aggregated spheres (fractal structure factor)</h4>
@@ -121,6 +136,7 @@
 		<li>Spherical nanoparticles were measured at high concentration (<a href="SAXS_high_conc.dat">high conc data</a>) and low concentration (<a href="SAXS_low_conc.dat">low conc data</a>). What are their shape and size (distribution)?<br>
 		<em>Tip: always inspect and compare data before you do any modelling</em>. To do this in SasView, load the data, select the data, and under "Plot" press "Create new".</li>
 		<li>A sample of discoidal particles (diameter ca 5 nm, as estimated from <a href="https://www.urmc.rochester.edu/research/electron-microscope/services/protocols-techniques/negative-staining-electron-microscopy.aspx" target="_blank">negative stain electron microscopy</a>) was measured in SAXS at neutral pH (<a href="SAXS_neutral_pH.dat">neutral pH data</a>) and pH 5.0 (<a href="SAXS_low_pH.dat">low pH data</a>). What effect does the pH change have on the particles and their interaction?</li>
+		<li>You have measured a sample of spherical silica nanoparticles (<a href="dataset_2.dat" target="_blank">SAXS data</a>). Estimate their appriximate size (do not expect to get a very accurate fit, especially at high values of $q$. For more detailed analysis consult, see the <a href="../Polydispersity/Polydispersity.html" target="_blank">Polydispersity tutorial</a>).</li>
 		<!--<li>A sample of spherical gold particles in water were measured in SAXS. Is the sample monodisperse? And does the sample contain more than one size?</li>-->
 	</ol>
 
