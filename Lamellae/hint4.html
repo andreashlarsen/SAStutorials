@@ -3,7 +3,7 @@
 <html>
 	
 <head>
-<title>Hint</title>
+<title>Improving the fit</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
@@ -19,15 +19,18 @@
 <div class="inner">
 
 <h4><a href="Lamellae.html">Back</a></h4>
-<h1>Hint</h1>
+<h1>Improving the fit</h1>
+<b>Ideas for complementary experiments</b>
 <ul>
     <li>The vesicles could be imaged, e.g. with electron microscopy, to get an independent estimation of its structure, number of layers, polydispersity etc.</li>
-    <li>Chemical assays could be used to determine the lipid content.
-    <ul>Some ideas for improving the models:
-        <li>The model contains no information about the shape of the vesicle, it only assumes that is contains one (unilamellar) many layers (multilamellar), and assumes that the vesicles are infinitely large (radius->inf) - maybe a finite vesicle radius could be built into the model?</li>
-        <li>The overall size may be determined with, e.g. dynamic light scattering or other biophysical techniques.</li>
-        <li>There may be a layer of water around the lipids with a slightly different density than bulk water - this could be built into the model.</li> 
-        <li>There may be polydispersity (not all particles are the same) in the multipamellar model (<a href="https://www.sasview.org/docs/user/models/lamellar_hg_stack_caille.html" target="_blank">lamellar_hg_stack_caille</a>),  e.g., they may contain different number of layers (polydispersity in the parameter <em>Nlayers</em>)</li>
+    <li>Chemical assays could be used to determine the lipid content.</li>
+    <li>The overall vesicle size may be determined with dynamic light scattering.</li>
+</ul>
+<b>Ideas for improving the model</b>
+    <ul>
+        <li>The model contains no information about the shape of the vesicle, but instead assumes that the vesicles are infinitely large (radius->inf) - maybe a finite vesicle radius could be built into the model?</li>
+        <!-- <li>There may be a layer of water around the lipids with a slightly different density than bulk water - this could be built into the model.</li>  -->
+        <li>There may be polydispersity (not all particles are the same) in the multilamellar model (<a href="https://www.sasview.org/docs/user/models/lamellar_hg_stack_caille.html" target="_blank">lamellar_hg_stack_caille</a>), e.g., the vesicles may contain different number of layers (polydispersity in the parameter <em>Nlayers</em>)</li>
     </ul>
     </li>
 </ul>
