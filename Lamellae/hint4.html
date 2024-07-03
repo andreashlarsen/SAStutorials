@@ -29,6 +29,7 @@
 <b>Ideas for improving the model</b>
     <ul>
         <li>The model contains no information about the shape of the vesicle, but instead assumes that the vesicles are infinitely large (radius->inf) - maybe a finite vesicle radius could be built into the model?</li>
+        <li>Use Gassian smearing of edges/interfaces instead of uniform SLD profiles (<a href="https://doi.org/10.1021/acs.molpharmaceut.3c00396" target="_blank">Li et al, 2023</a>).</li>
         <!-- <li>There may be a layer of water around the lipids with a slightly different density than bulk water - this could be built into the model.</li>  -->
         <li>There may be polydispersity (not all particles are the same) in the multilamellar model (<a href="https://www.sasview.org/docs/user/models/lamellar_hg_stack_caille.html" target="_blank">lamellar_hg_stack_caille</a>), e.g., the vesicles may contain different number of layers (polydispersity in the parameter <em>Nlayers</em>)</li>
     </ul>
