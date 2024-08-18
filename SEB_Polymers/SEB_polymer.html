@@ -20,7 +20,7 @@
 
 <h4><a href="../index.html">Home</a></h4>
 <h1>Tutorial: Solutions of polymers with SEB</h1>
-<p> Tutorial contributors: Lau Blom Grøndahl & Carsten Svaneborg (FKF SDU).</p>
+<p> Contributors: Lau Blom Grøndahl & Carsten Svaneborg (<a href="https://www.sdu.dk/en/om-sdu/institutter-centre/fysik_kemi_og_farmaci" target="_blank">FKF SDU</a>).</p>
 <p>
 <img src="polymer.png" style="width:400px"/><br> 
 <em>Illustration of a Gaussian chain model of a single flexible polymer molecule.</em></a>
@@ -28,8 +28,8 @@
 <h4>Before you start</h4>
 
 	<ul>
-	<li><a href="https://github.com/Tobionecenobi/SEB">Download and install Scattering Equation Builder (SEB)</a></li>
-	<li>Complete the sphere tutorial to understand interference between scatterers.</li>
+	<li><a href="https://github.com/Tobionecenobi/SEB" target="_blank">Download and install Scattering Equation Builder (SEB)</a></li>
+	<li>Complete the <a href=".../Spheres/Spheres.html" target="_blank">Spheres tutorial</a> to understand interference between scatterers.</li>
 	</ul>
 	
 <h4>Learning outcomes</h4>
@@ -114,13 +114,13 @@ In this tutorial you will learn about flexible polymers, and their form factor, 
         <p>$$ F(q) = \int_0^N \frac{dn_1}{N} \int_0^N \frac{dn_2}{N} \int_0^\infty dr 4\pi r^2  \left(\frac{3}{2\pi b^2 |n_1-n_2|}\right)^{3/2} \exp\left(- \frac{3 r^2}{2 b^2 |n_1-n_2|} \right) \frac{\sin(q r)}{qr},$$
         
         <p>after quite a bit of paper-and-pencil work (left as an exercise), the result is becomes the nice short expression $$ F(q) = \frac{2(\exp(-x)-1+x)}{x^2}, $$ with $x=q^2 R_g^2$ and $R_g^2=\langle R^2\rangle/6=b^2 N/6$ is the radius of gyration of the polymer molecule. This describes the typical spatial extend of the molecule. Note that because all the three distributions that went into the integrals were normalized, then the form factor is also normalized such that $F(0)=1$.
-         This result was first derived by P. Debye (P. Debye, J. Phys. Coll. Chem 51, 18–32 (1947)).</p>
+         This result was first derived by P. Debye <a href="10.1021/j150451a002" target="_blank">(P. Debye, J. Phys. Coll. Chem 51, 18–32 (1947))</a>.</p>
 
 <h4>Scattering Equation Builder (SEB)</h4>
 
-	<p><a href="https://doi.org/10.1107/S1600576724001729">Scattering Equation Builder</a> (SEB) is a C++ library for analytical derivation of form factors of complex structures. The structures are build out of basic building blocks called sub-units. Polymers and rods are two of the sub-units supported by SEB.</p>
+	<p><a href="https://doi.org/10.1107/S1600576724001729" target="_blank">Scattering Equation Builder</a> (SEB) is a C++ library for analytical derivation of form factors of complex structures. The structures are build out of basic building blocks called sub-units. Polymers and rods are two of the sub-units supported by SEB.</p>
 	
-	<p>Before you can use SEB you need to install a working C++ compiler, the GiNaC, GSL and CLN libraries, and the SEB source code itself. See <a href="https://github.com/Tobionecenobi/SEB">GitHub</a> for the details of how to install SEB on various operating system. Important you need to remember the folder, where you put the SEB source code. It has a subfolder "work" where you can save and compile your own programs.
+	<p>Before you can use SEB you need to install a working C++ compiler, the GiNaC, GSL and CLN libraries, and the SEB source code itself. See <a href="https://github.com/Tobionecenobi/SEB" target="_blank">GitHub</a> for the details of how to install SEB on various operating system. Importantly, you need to remember the folder, where you put the SEB source code. It has a subfolder "work" where you can save and compile your own programs.
 	</p>
 	
 <h4>Gaussian polymer with SEB</h4>	
@@ -174,11 +174,12 @@ int main()
         <em>Log-log plot of the form factor of a Gaussian polymer model with $Rg=1$ (black), $2$ (green), $0.5$ (red).</em>
 </p>
 
-       <p>Your plot should look similar to the plot above. Since the form factor only depends on $x=q^2 R_g^2$ changing $R_g$ corresponds to a horizontal shift of the curve. Remember that log-log representation is good for reading off powerlaws. For $qR_g \ll 1$ corresponding to large scales the form factor is essentially flat thus $F(q) ~ q^0$, whereas for scales smaller than the polymer size $qR_g \gg 1$ the form factor follows a powerlaw $F(q)\sim q^{-2}$. These exponents are in fact directly related to the fractal dimension of the polymer. Seen at large scales any finite sized object is a point with $0$ fractal dimension, whereas a random-walk has fractal dimension $2$. This is due to the $\langle R^2 \rangle \sim N$ relation.
+       <p>Your plot should look similar to the plot above. Since the form factor only depends on $x=q^2 R_g^2$, changing $R_g$ corresponds to a horizontal shift of the curve. Remember that log-log representation is good for reading off power laws. For $qR_g \ll 1$ corresponding to large scales the form factor is essentially flat thus $F(q) ~ q^0$, whereas for scales smaller than the polymer size $qR_g \gg 1$ the form factor follows a power law $F(q)\sim q^{-2}$. These exponents are in fact directly related to the fractal dimension of the polymer. Seen at large scales any finite sized object is a point with $0$ fractal dimension, whereas a random-walk has fractal dimension $2$. This is due to the $\langle R^2 \rangle \sim N$ relation.
        </p>
 
-	<p>A note on units: SEB does not have any specific choice of unit built in. The reason is that
-	scattering expressions (essentially being counts on a detector) only depend on dimensionless combinations such as $qR_g$. Thus if choose $m$, $\mu m$, $nm$, or $Å$ for the length scales, such as when you enter $R_g=1$, then you have chosen $m^{-1}$, $\mu m^{-1}$, $nm^{-1}$, or $Å^{-1}$ as the unit for the $q$. 	</p>
+	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b> A note on units in SEB </b><br>
+        SEB does not have any specific choice of unit built in. The reason is that scattering expressions (essentially being counts on a detector) only depend on dimensionless combinations such as $qR_g$. Thus, if choose $m$, $\mu m$, $nm$, or $Å$ for the length scales, such as when you enter $R_g=1$, then you have chosen $m^{-1}$, $\mu m^{-1}$, $nm^{-1}$, or $Å^{-1}$ as the unit for the $q$. 	
+        </p>
 
 <h4>Exercise 2</h4>	
 
