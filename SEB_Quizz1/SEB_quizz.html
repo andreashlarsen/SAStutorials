@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Solutions of polymers</title> 
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+<div id="wrapper">
+<div id="main">
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Quizz with SEB</h1>
+<p> Tutorial contributors: Carsten Svaneborg (FKF SDU).</p>
+<p>
+<img src="quizz1.png" style="width:800px"/><br> 
+<em>Illustration of the form factor of a mystery structure.</em></a>
+</p>
+<h4>Before you start</h4>
+
+	<ul>
+	<li><a href="https://github.com/Tobionecenobi/SEB">Download and install Scattering Equation Builder (SEB)</a></li>
+	<li>Complete the <a href="../SEB_Polymers/SEB_polymer.html">polymer tutorial</a> to understand the scattering from Gaussian polymers. Here you also learn how to run SEB and use it for calculating scattering profiles.</li>
+	<li>Complete the <a href="../SEB_Rods/SEB_rod.html">rod tutorial</a> to understand the scattering from thin stiff rods. Here you also learn how to use rods in SEB.</li>
+	<li>Complete the <a href="../SEB_RWTheory/SEB_rwtheory.html">chain of rods</a> tutorial to understand how to connect sub-units together to build structures, and how to use SEB to calculate the form factor of such structures.</li>
+	</ul>
+
+<h4>Learning outcomes</h4>
+In this tutorial you will learn about analyzing scattering data, in particular
+<ul>
+	<li>how different structures gives rise to different form factors.</li>
+</ul>
+
+<h4>Quizz</h4>
+
+	<p>Using SEB can you reproduce the form factor shown above? You can download the data <a href="formfactor_quizz1.q">here</a></p>
+
+
+
+<h4>Hints</h4>
+
+        <p>Hint 1: Looking at powerlaws can be useful.</p>
+
+        <p>Hint 2: Just as in the analysis of scattering experiment, we usually have an idea what units
+        are involved forming structures. Here we mixed samples that may include polymers (characterization: size $R_g=0.5$ AU, $\beta=0.8$) and/or rods (characterization: length $L=2$ AU, $\beta=0.5$).</p>
+        
+        <p>Hint 3: From the interactions involved, we do not expect that the observed structure contains more than two units.</p>
+
+        <p>Hint 4: Shown below are three possible ways of linking two polymers together. Rods has the same linkage options. "Contour" here means to average the scattering over a randomly chosen monomer along the polymer.</p>
+
+       <p>
+<img src="referencepoints.png" style="width:400px"/><br> 
+<em>Illustration of possible reference points  a) polymer with "end1", "end2" and "contour" as reference points, b) end1-end2 linked structure, c) an example of a end2-contour linked structure, d) an example of a contour-contour linked structure.</em></a>
+</p> 
+        
+        <p>
+        In SEB, "contour" is special compared to "end1" and "end". It has to be assigned an unique name when it is used. Thus you would write e.g. "A.contour#pt1" in the code, where "pt1" is the name of a randomly chosen point along the "contour" of the "A" unit.</p>
+        
+        <p>Here where we only have two units, this business of naming does not matter, because you never need to use it again. When linking several units to geometric reference points such as "end1" or "end2" of a polymer, we are never uncertain what the structure will be or what the scattering equation is. But when we start with randomly chosen points, we need to distinguish between linking several units to the <em>same</em> randomly chosen point, or to <em>independent</em> randomly chosen points, or to a combination of these two. These options gives rise to different structures, and the resulting equations are also different. When a random linking point has a name, we can link more units to the same random point.
+        </p>        
+
+<!--
+DO NOT CHANGE ANYTHING BELOW
+-->
+
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>

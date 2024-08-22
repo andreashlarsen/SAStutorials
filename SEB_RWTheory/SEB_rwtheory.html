@@ -80,7 +80,7 @@ In this tutorial you will learn how to calculate the scattering from semi-flexib
     which is the same as inserting $r=b$ in the Debye formula. The result is: 
    $$ \Psi(q) = \frac{\sin(x)}{x}.$$</p>
 
-   <p>To summarise: We can regard the form factor as the Fourier transform of the distance distribution between all pairs of scatterers, the form factor amplitude as the Fourier transform of the distance distribution between all scatterers and a specific reference point such as the end, and finally the phase factor as the fourier transform of the distance distribution between pairs of reference points such as the two ends of a rod. Since the probabilities are normalized, the three functions converge to $1$ for $q\rightarrow0$.</p>
+   <p>To summarise: The form factor as the Fourier transform of the distance distribution between all pairs of scatterers, the form factor amplitude is the Fourier transform of the distance distribution between all scatterers and a specific reference point such as the end, and finally the phase factor is the Fourier transform of the distance distribution between pairs of reference points such as the two ends of a rod. Since the probabilities are normalized, the three functions converge to $1$ for $q\rightarrow0$.</p>
 
 <h4>Form factor of a chain</h4>
 	
@@ -145,13 +145,13 @@ In this tutorial you will learn how to calculate the scattering from semi-flexib
         </p>
 
 
-<h4>Exercise 1</h4>
+<h4>Exercise 1 (theoretical)</h4>
 
 	<p>
 	 <ul>
-	   <li>1a: Write down $F_{chain}$ in the special case of a chain of two identical units ($N=2$). </li>
+	   <li>1a: Write down $F_{chain}$ in the special case of a chain of two identical units. (optional: do it for $N=3$ as well). </li>
 
-	   <li>1b: Draw a sketch an A-B structure of two different rods A-B. Skets the four ways you can distribute two scatterers. Based on the sketch, can you write down an expression for the form factor? (hint express it with the unknown functions $F_A,F_B,A_A,A_B$)  </li>
+	   <li>1b: Draw a sketch an A-B structure of two different rods A-B. Sketch the four ways you can distribute two scatterers. Based on the sketch, can you write down an expression for the form factor? (hint express it with the unknown functions $F_A,F_B,A_A,A_B$)  </li>
 
 	   <li>1c: Draw a sketch of with three connected rods A-B-C. Sketch the 9 ways you can distribute two scatterers. Can you write down an expression for the form factor? (hint express it with the unknown functions $F_A,F_B,F_C,A_A,A_B,A_C,\Psi_B$)  </li>
 	   
@@ -221,42 +221,55 @@ int main()
     // Create world of sub-units
     World w("World");
 
-    // Add a single rod named "A"
-    GraphID s = w.Add(new ThinRod(), "A");
+    // Add a single rod named "A", tag it "rod"
+    GraphID s = w.Add(new ThinRod(), "A", "rod");
 
-    // Add another rod named "B" and link its end1 to the end2 of A.
-    w.Link(new ThinRod(), "B.end1", "A.end2" );
+    // Add another rod named "B", link B.end1 to the A.end2, tag it "rod"
+    w.Link(new ThinRod(), "B.end1", "A.end2", "rod" );
 
-    // Wrap structure in a structure named Structure
+    // Wrap it a structure named Structure
     w.Add(s, "Structure");
     
-    // generic equation for the form factor
+    // FormFactorGeneric returns the FF of the structure, but
+    // without inserting expressions for the sub-units.
     ex F=w.FormFactorGeneric("Structure");
-    cout << "Form Factor= " << F << endl << endl; 
-
-    // form factor with rod expressions inserted
-    F=w.FormFactor("Structure");
     cout << "Form Factor= " << F << endl << endl; 
 }
 </pre>		
 	</ol>
 
-
+<p>
+<img src="AB.png" style="width:600px"/><br> 
+<em>Illustration of a the A-B structure and its linkage. Compare to the code above.</em></a>
+</p>
 
 	<p>
+	 Note:  SEB is very explicit about where the references goes e.g. $A_{B:end1}$ denotes the form factor amplitude of unit B relative to the reference point "end1", whereas $\psi_{B:end1,end2}$ denotes a phase factor between the ends. This level of detail is due to the fact that SEB does not assume that the units are symmetric wrt. the ends, or that different units could have the same scattering expressions. It also includes all the scattering lengths of the units in the structure.
 	 <ul>
-	   <li>2a: Run the program above. (see <a href="../SEB_Polymers/SEB_polymer.html#run">the polymer tutorial for how</a>) Does the generic expression for the form factor match the one you made in exercise 1b? SEB is very explicit about where the references goes e.g. $A_{B:end1}$ denotes the form factor amplitude of unit B relative to the reference point "end1", because it does not assume that the units are symmetric wrt. the ends. It also includes all the scattering lengths of the units. </li>
+	   <li>2a: Run the program above. (see <a href="../SEB_Polymers/SEB_polymer.html#run">the polymer tutorial for how</a>) Does the generic expression for the form factor match the one you made in exercise 1a?</li>
 
-	   <li>2b: Change the program by tagging both the A and B units with "rod". Rerun the program. What how did the generic expression for the form factor change? How did the expression with rod terms inserted change? Compare the form factor to your result of exercise 1a.</li>
+	   <li>2b: Remove the tag "rod" from the code above, such that you get the equations for arbitrary A and B units. Rerun the program. What how did the generic expression for the form factor change compared to 2a? Compare the form factor to your result of exercise 1b.</li>
 
 	   <li>2c: Change the program to build an A-B-C structure. Compare the form factor expression to your result from exercise 1c.</li>	   
 
-	   <li>2d: Optional: Change the program to calculate the form factor of a rod linked to a polymer. Evaluate the form factor when the rod and polymer has the same radius of gyration but varying the scattering lengths. (Hint look at the <a href="../SEB_Polymers/SEB_polymer.html#code">Polymer</a> and
-	<a href="../SEB_Rods/SEB_rod.html#code">Rod</a> tutorials for code for setting parameters
-	and evaluating equations)
+	 </ul>
+	</p>
+
+
+<h4>Exercise 3 (optional)</h4>
+
+	<p>
+	  In the following exercise, you will generate predictions for form factors of AB structures.
+	  You should already have done the <a href="../SEB_Polymers/SEB_polymer.html#code">Polymer</a> and
+	<a href="../SEB_Rods/SEB_rod.html#code">Rod</a> tutorials to see how to set parameters and
+	evaluate equations to produce files.<br>
+	
+	 <ul>
+	   <li>3a: Change the program to calculate the form factor of a rod linked to a polymer. Evaluate the form factor when the rod and polymer has the same radius of gyration but plot the form factor for different choices of the scattering lengths. 
 	  </li>
-	   <li>2e: Optional: Calculate the scattering from a chain of two polymers. What is the difference between one polymer with radius of gyration $R_g$ and a chain of two polymers of with radius of gyration $\sqrt(2)R_g$ each?  (Hint look at the <a href="../SEB_Polymers/SEB_polymer.html#code">Polymer</a> tutorial for code for setting parameters and evaluating equations)
-	  </li>
+<!--	   <li>3b: Calculate the scattering from a chain of two polymers. What is the difference between one polymer with radius of gyration $R_g$ and a chain of two polymers of with radius of gyration $R_g/\sqrt(2)$ each?  (Hint look at the <a href="../SEB_Polymers/SEB_polymer.html#code">Polymer</a> tutorial for code for setting parameters and evaluating equations)</li>
+-->
+	  
 	 </ul>
 	</p>
 

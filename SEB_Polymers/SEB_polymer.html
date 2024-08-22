@@ -11,11 +11,8 @@
 </head>
 
 <body class="is-preload">
-
 <div id="wrapper">
-
 <div id="main">
-
 <div class="inner">
 
 <h4><a href="../index.html">Home</a></h4>
@@ -72,27 +69,27 @@ In this tutorial you will learn about flexible polymers, and their form factor, 
         Some examples:
          <ul>
            <li>
-        The monomer of polyethylene (PE) is $H_2C$=$CH_2$ thus it has 2 carbon atoms. When the monomers are linked together, the double bonds are broken, and the chain is a sequence of carbon atoms with single bonds between them. PE is relatively stiff and has a Kuhn length of $b=15.40Å$. One random walk step contains $6$ monomers or $12$ $CH_2$ groups.</li>
+         Polyethylene is relatively stiff and has a Kuhn length of $b=15.40Å$. One random walk step contains $6$ monomers or $12$ $CH_2$ groups.</li>
         
-        <li>A much more flexible polymer is cis-polyisoprene (cis-PI) with $b=9.45Å$ and one step corresponds to just $1.89$ monomers.  </li>
+        <li>A much more flexible polymer is cis-polyisoprene (cis-PI) with $b=9.45Å$. One random walk step contains just $1.89$ monomers.  </li>
         
-        <li>We can also apply random walk models to DNA in which case $b=90nm$ and one step corresponds to $265$ base-pairs (depending on salt concentration).</li>
+        <li>We can also apply random walk models to DNA in which case $b=90nm$ and one step corresponds to $265$ base-pairs. Note these numbers depends on salt concentration and temperature.</li>
         
-        <li>Actin is a very stiff biopolymer with $b=35.6\mu m$. However, they never become so long as to show random walk polymer statistics.</li>
+        <li>Actin is a very stiff biopolymer with $b=35.6\mu m$ that is an essential mechanical component in our muscles. However, in biology actin never gets so long as to be a polymer that is $N<1$.</li>
        </ul>
        </p> 
 		
 <h4>Exercise 1</h4>	
 		
-	<p>A polymer molecule has a length $L$ and a characteristic spatial size $R=\sqrt{\langle R^2\rangle}$. Calculate
+	<p>A polymer molecule has a contour length $L$ and a characteristic spatial size known as the radius of gyration $R_g=\sqrt{\langle R^2\rangle/6}$. Using the random walk model above
 	  <ul>
-	    <li> Calculate $R$ and $L$ for a polyethylene molecule with $1.000$ monomers.</li>
-	    <li> Calculate $R$ and $L$ for a polyisoprene molecule with $1.000$ monomers.</li>
-	    <li> Calculate $R$ and $L$ for a DNA molecule with $10^7$ base-pairs (approximately one chromosome).</li>
+	    <li> 1a: calculate $N$, $R_g$ and $L$ for a polyethylene molecule with $1.000$ monomers.</li>
+	    <li> 1b: calculate $N$, $R_g$ and $L$ for a polyisoprene molecule with $1.000$ monomers.</li>
+	    <li> 1c: calculate $N$, $R_g$ and $L$ for a DNA molecule with $10^7$ base-pairs (approximately one chromosome).</li>
 	  </ul>
-	  The size of a human cell nucleus is $\sim 10\mu m$, however, DNA in the nucleus is densly packed and wrapped on chromatins forming fibers at larger scales. The characteristic size above is from a singles "denatured" DNA molecule in a solvent.
+	  The size of a human cell nucleus is $\sim 10\mu m$, how does that compare to the size of denatured chromosome DNA in solution?
 	</p>
-		
+
 <h4>Derivation of form factor of a single polymer</h4>
 
         <p>
@@ -123,7 +120,7 @@ In this tutorial you will learn about flexible polymers, and their form factor, 
 	<p>Before you can use SEB you need to install a working C++ compiler, the GiNaC, GSL and CLN libraries, and the SEB source code itself. See <a href="https://github.com/Tobionecenobi/SEB" target="_blank">GitHub</a> for the details of how to install SEB on various operating system. Importantly, you need to remember the folder, where you put the SEB source code. It has a subfolder "work" where you can save and compile your own programs.
 	</p>
 	
-<h4>Gaussian polymer with SEB</h4>	
+<h4>Exercise 2:	Gaussian polymer with SEB</h4><div id="exercise2">
 	
 	<p>To calculate the form factor of a Gaussian polymer, cut'n'paste the following C++ program into an text editor (e.g. notepad). Save it as "Polymer.cpp" in the work folder under the SEB installation.</p>
 	
@@ -156,35 +153,41 @@ int main()
     DoubleVector qvec=w.logspace(0.01, 10.0, 1000 );
 
     // Use Evaluate to save form factor data to a file
-    w.Evaluate( F, params, qvec, "formfactor_polymer.q", "Form factor of a polymer with beta=1 and Rg=1.");   
+    w.Evaluate( F, params, qvec, "formfactor_polymer.q", "Form factor of a polymer with beta=1 and Rg=1Å.");   
 }
 </pre>		
 	</ol>
 
-	<p><div id="run">In a terminal, navigate to the folder where you installed SEB (source/SEB in my case below). In that folder run "make". The first time you run make, it will compile the whole SEB library and your own source file. Next time it will only compile the source files you have changed. In my example below, it only compiles "work/Polymer.cpp". The resulting executable is "work/Polymer" (work/Polymer.exe on Windows). Run the executable by typing "work/Polymer". In the example below you see it prints out the equation for the Debye form factor. After it has run, it has created a file "formfactor_polymer.q" in the current folder. The file starts with some comments, and then has two columns of numbers: q and F(q). Try plotting the file.</p>
-
         <p>
-<img src="cmdline.png" style="width:1000px"/><br> 
+	<img src="cmdline.png" style="width:1000px"/><br> 
         <em>Commandline prompt on Linux showing how to compile and run the program, also shown is some
         of the content of the file "formfactor_polymer.q". </em>
         </p>
         
+	<p><div id="run">In a terminal, navigate to the folder where you installed SEB (source/SEB in my case above). In that folder run "make". The first time you run make, it will compile the whole SEB library and your own source file. Next time it will only compile the source files you have changed. In my example above, it only compiles "work/Polymer.cpp". The resulting executable is "work/Polymer" (work/Polymer.exe on Windows). Run the executable by typing "work/Polymer".</p>
+	
+	<p>In the example above you can see it prints out the equation for the Debye form factor. After it has run, it has created a file "formfactor_polymer.q" in the current folder. The file starts with some comments, and then has two columns of numbers: q and F(q). Try plotting the file in log-log representation.</p>
+
         <p>
 <img src="formfactor_polymer.png" style="width:1000px"/><br> 
-        <em>Log-log plot of the form factor of a Gaussian polymer model with $Rg=1$ (black), $2$ (green), $0.5$ (red).</em>
-</p>
+        <em>Log-log plot of the form factor of a Gaussian polymer model with $Rg=1$ AU (red), $2$ AU (green), $0.5$ AU (black), where AU is an arbitrary length unit.</em>
+	</p>
 
-       <p>Your plot should look similar to the plot above. Since the form factor only depends on $x=q^2 R_g^2$, changing $R_g$ corresponds to a horizontal shift of the curve. Remember that log-log representation is good for reading off power laws. For $qR_g \ll 1$ corresponding to large scales the form factor is essentially flat thus $F(q) ~ q^0$, whereas for scales smaller than the polymer size $qR_g \gg 1$ the form factor follows a power law $F(q)\sim q^{-2}$. These exponents are in fact directly related to the fractal dimension of the polymer. Seen at large scales any finite sized object is a point with $0$ fractal dimension, whereas a random-walk has fractal dimension $2$. This is due to the $\langle R^2 \rangle \sim N$ relation.
+       <p>Your plot should look similar to the plot above. Since the form factor only depends on $x=q^2 R_g^2$ changing $R_g$ corresponds to a horizontal shift of the curve. Remember that log-log representation is good for reading off powerlaws. For $qR_g \ll 1$ corresponding to large scales the form factor is essentially flat thus $F(q) ~ q^0$, whereas for scales smaller than the polymer size $qR_g \gg 1$ the form factor follows a powerlaw $F(q)\sim q^{-2}$. These exponents are in fact directly related to the fractal dimension of the polymer. Seen at large scales any finite sized object is a point with $0$ fractal dimension, whereas a random-walk has fractal dimension $2$. This is a reflection of the $\langle R^2 \rangle \sim L$ relation between spatial distances and contour distances.
        </p>
 
-	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b> A note on units in SEB </b><br>
-        SEB does not have any specific choice of unit built in. The reason is that scattering expressions (essentially being counts on a detector) only depend on dimensionless combinations such as $qR_g$. Thus, if choose $m$, $\mu m$, $nm$, or $Å$ for the length scales, such as when you enter $R_g=1$, then you have chosen $m^{-1}$, $\mu m^{-1}$, $nm^{-1}$, or $Å^{-1}$ as the unit for the $q$. 	
-        </p>
+	<p>A note on units: SEB does not have any specific choice of unit built in. The reason is that
+	scattering expressions only depend on dimensionless combinations such as $qR_g$. Thus if choose AU=$m$, $\mu m$, $nm$, or $Å$ when you specify the radius of gyration. That is in the code you write $R_g=1$ but with some unit $AU$, then you have chosen AU$^{-1}=$$m^{-1}$, $\mu m^{-1}$, $nm^{-1}$, or $Å^{-1}$ as the unit for the $q$.  In this case you would plot $q/AU^{-1}$ which is the same as $q AU$. </p>
 
-<h4>Exercise 2</h4>	
+<h4>Exercise 3</h4>	
+	<p>
+	   For the three polymers in Exercise 1 calculate the following:
+	 <ul>
+	   <li>If $R_g$ is the characteristic spatial scale of a polymer, what is the corresponding characteristic reciprocal length $q$ value?</li>
+	   <li>The step/Kuhn length $b$ sets a lower spatial length scale where Gaussian chain statistics applies. Calculate the corresponding $q_{max}$ up to which the Debye expression applies.</li>
+	   <li>Use SEB to calculate the form factors of the three polymers in relevant range of $q$ values. Sketch what you expect the log-log plot to look like. Then make the plot. Did you get what you expected?</li>
+	 </ul>
 
-	<p>Use SEB to calculate the form factors of the polymers in exercise 1.
-	Before making the plot, make a sketch on paper of what you expect the plot to look like.
 	</p>
 
 <!--

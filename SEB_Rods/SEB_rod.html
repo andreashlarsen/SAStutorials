@@ -102,7 +102,7 @@ int main()
     
     // To evaluate the equation, we need to define value of paramters
     ParameterList params;
-    w.setParameter(params,"<b>L_A</b>",1);       // Lengths of the "A" rod
+    w.setParameter(params,"<b>L_A</b>",<b>XXX</b>);     // Lengths of the "A" rod
     w.setParameter(params,"beta_A",1);    // Scattering length
     
     // Choose q values
@@ -115,17 +115,16 @@ int main()
 	</ol>
 
 
-<h4>Exercise compare the form factor of a rod and a polymer</h4>
+<h4>Exercise 1 compare the form factor of a rod and a polymer</h4>
 
 	<p>
-	Exercise 1:<br>
-	 <ul>
-	   <li>1a: <a href="../SEB_Polymers/SEB_polymer.html#run">Run</a> the <a href="../SEB_Polymers/SEB_polymer.html#code">Gaussian polymer</a> code to produce the a file with a polymer form factor.</li>
-	   
-	   <li>1b: The code above calculates the scattering from a rod. Bold face indicates the important changes made wrt. the polymer code. The radius of gyration of a rod is $R_g^2=L^2/12$. Change the length of the rod to match the radius of gyration you used for the polymer</li>
+	In <a href="../SEB_Polymers/SEB_polymer.html#exercise2">exercise 2</a> of the Gaussian Polymer you generated a file "formfactor_polymer.q" with the form factor of a polymer. For large $q$-values we observed $F(q)\sim q^{-2}$ where $2$ happens to be the fractal dimension of a random walk. <br>
+	 <ul>	   
+	   <li>1a: The code above calculates the form factor of a rod. Bold face indicates the important changes made wrt. the <a href="../SEB_Polymers/SEB_polymer.html#code">polymer code</a>. The radius of gyration of a rod is $R_g^2=b^2/12$, where $b$ is the length of the rod. Change the length of the rod indicated by $XXX$, such that the radius of gyration of the rod matches that of the polymer. <a href="../SEB_Polymers/SEB_polymer.html#run">Run the code as you did in the Polymer example</a></li>
 
-	   <li>1c: Run the code as you did in the polymer tutorial, and make a log-log plot comparing the two form factor. Before looking at the plot, try to make a sketch what you expect.</li>
-	   <li>1d: Did the result match the power-laws you expected?</li>
+	   <li>1b: 
+	   Sketch what you expect a log-log plot of the form factors of a rod and a polymer looks like for small and large $q$ values. (Hint: A rod has fractal dimension $1$.) Then make the plot of the files produced by SEB to see whether they agree with your sketch.</li>
+
 	 </ul>
 	</p>
 

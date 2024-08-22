@@ -1,9 +1,9 @@
 #File geneated by SEB
 #Form factor of a polymer with beta=1 and Rg=1.
-#Expression = 2*(-1+q^2*Rg_A^2+exp(-q^2*Rg_A^2))*q^(-4)*Rg_A^(-4)
+#Expression = 2*Rg_A^(-4)*(-1+Rg_A^2*q^2+exp(-Rg_A^2*q^2))*q^(-4)
 #Parameters:
-#	beta_A=1.0
 #	Rg_A=1.0
+#	beta_A=1.0
 0.01 0.999967
 0.0100694 0.999966
 0.0101393 0.999966
