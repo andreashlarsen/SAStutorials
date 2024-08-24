@@ -20,8 +20,15 @@
 
 <h4><a href="ContrastVariation.html">Back</a></h4>
 <h1>Hint</h1>
-<p>The shape of the scattering (the form factor) is determined only by the shape of the particle (for homogeneous particles). So the scattering will be the same no matter the contrast (unless the contrast is zero, then there will be no scattering)</p>
-<p>This is an example of <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle" target="_blank">Babinet's principle</a>.</p>
+<p>
+    The scattering from a homogeneous particle does not depend on the sign of the excess scattering length density or contrast (this is called <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle" target="_blank">Babinet's principle)</a><br>
+    The shape of the scattering pattern, i.e. the form factor $P(q)$, is determined by the particle size and shape, and the scattering is scaled by the number density $n$, the square of the particle volume $V$, and the square of the contrast $\Delta\mathrm{SLD}$: 
+    $$
+    I(q) = n (\Delta\mathrm{SLD})^2 V^2 P(q)
+    $$
+    So a larger contrast give more scattering, but the sign does not matter. The shape of the scattering pattern is not affected by the scattering length. Importantly, this is only true for homogeneous particles, i.e. particles with a uniform scattering length density profile.<br>
+    Another important note is that in the above, we assume no interparticle interaction, i.e. the structure factor is unity, $S(q)=1$ and can be ignored.
+</p>
 <!-- end inner -->
 </div>
 	

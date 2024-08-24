@@ -8,6 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
 <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
 </head>
 
 <body class="is-preload">
@@ -20,81 +22,46 @@
 
 <h4><a href="../index.html">Home</a></h4>
 <h1>Tutorial: Contrast Variation</h1>
-<p> Tutorial contributors: Andreas Haahr Larsen</p>
+<p> Contributors: Andreas Haahr Larsen (<a href="https://in.ku.dk/employees/?pure=en/persons/396198" target="_blank">Univ Cph</a>)</p>
 <p>
 	<img src="ContrastVariation.png" style="width:400px"/><br> 
 	<em>Partly deuterated detergent DDM, measured in SANS with various amoumts of D<sub>2</sub>O in the solvent. At 100 D<sub>2</sub>O, the DDM molecules are matched out. Adapted from <a href="https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.14345" target="_blank">Midgaard et al., 2018, FEBS J. 285: 357-371</a>, with <a href="Midtgaard2018_permission.pdf" target="_blank">permission</a>.</em>
 	</p>
 <h4>Before you start</h4>
 	<ul>
-	<li>Download and install <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first).</li>
-	<li>We recommend that you first complete the <a href="../Spheres/Spheres.html" target="_blank">Spheres</a> tutorial if you are not familiar with basic fitting in SasView.</li>
+	<li>We assume basic understanding of scattering length density and contrast in small-angle scattering</li>
 	</ul>
 	
 <h4>Learning outcomes</h4>
+	Be able to design a contrast-variation experiments in SANS for structure determination. Specifically, you will be able to: 
 	<ul> 
-		Be able to design a contrast-variation experiments in SANS for structure determination. Specifically, you will be able to: 
-		<li>Explain what contrast is in small-angle neutron scattering (SANS).</li>
 		<li>Explain the relationship between contrast and signal-over-noise in SANS data.</li>
 		<li>Tune contrasts of a particle such that the forward scattering is zero.</li>	
-		<li>Fit SANS data from multicontrast particles, and understand how to avoid parameter correlation.</li>
 		<li>Calculate scattering lenghts, scattering length densities and contrasts for a molecule, and use this to design a contrast-match experiment.</li>
 	</ul>
 	
 <h4>Part 1: Monodisperse spheres with various contrasts</h4>
 	<p>
-	Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a spheres with a radius of 50 Å and contrast (excess scattering length density, $\Delta\mathrm{SLD}$) of 1 as Model 1, and a sphere with contrast $\Delta\mathrm{SLD}-1$ as Model 2 (set parameters and press Submit):<br>
+	Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> and simulate a spheres with a radius of 50 Å and contrast (excess scattering length density, $\Delta\mathrm{SLD}$) of 1 as Model 1, and a sphere with contrast $\Delta\mathrm{SLD}-1$ as Model 2 (set parameters and press Submit):<br>
 	<img src="Shape2SAS_input.png" style="width:800px"/><br>
-	Comment on the resulting scattering. Why is the scattering the same despite that the $\Delta\mathrm{SLD}$ have opposite sign? (<a href="hint0.html" target="_blank">Hint</a>)<br>
-	Try to vary the contrast. How does a numerically larger &Delta;SLD affect the simulated scattering, and why? (<a href="hint1.html" target="_blank">Hint</a>)<br>
+	Why is the scattering the same despite that the $\Delta\mathrm{SLD}$ have opposite sign? (<a href="hint0.html" target="_blank">Hint</a>)<br>
+	Try to vary the contrast. How does a numerically larger $\Delta\mathrm{SLD}$ affect the simulated scattering, and why? (<a href="hint0.html" target="_blank">Hint</a>)<br>
 	<em>Take-home message</em>: higher contrast gives a larger signal-over-noise, and is therefore preferable.
 	</p>
 
-<h4>Part 2: Core-shell spheres</h4>
+<h4>Part II: Core-shell spheres</h4>
 	<p>
-	Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a spherical core-shell particle with inner radius of 30 Å and core $\Delta\mathrm{SLD}=-1$, and outer radius of 50 Å and shell $\Delta\mathrm{SLD}=1$. This can be done by combining two spheres as Model 1 (important: the smaller should be above the larger in the list, so the overlapping region is excluded from the larger sphere):<br>
+	Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a spherical core-shell particle with inner radius of 30 Å and core $\Delta\mathrm{SLD}=-1$, and outer radius of 50 Å and shell $\Delta\mathrm{SLD}=1$. This can be done by combining two spheres as Model 1 
+	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b> Note on order of subunites in Shape2SAS </b><br>
+		Overlapping points from different subunits are removed (by default). <br>
+		The points from the subunits that are lowest in the list are removed, whereas points from subunits higher in the list remain. <br>
+		So in the case of a cores-shell particle, the smaller sphere should be above the larger in the subunit list, so the overlapping points are excluded from the larger sphere.
+	</p>
 	<img src="Shape2SAS_CoreShell.png" style="width:800px"/><br>
-	Try to compare with spheres with radii 30 Å and 50 Å (as Model 2 and 3). What combination of radii of the core-shell (Model 1) would yield $I(0)$ of 0? (<a href="hint11.html" target="_blank">Hint</a>). Try to simulate this. Due to the stochastic nature of Shape2SAS, $I(0)$ may not be exactly 0, but will be small.<br>
-	Download the simulated data for the core-shell particle (Model 1): Isim.dat <a href="Isim.dat">(example data)</a>, load it into SasView and fit a <a href="https://www.sasview.org/docs/user/models/core_shell_sphere.html"target="_blank">core-shell sphere form factor</a>. Assess if it is good fit, and if paramters are correlated. <br>
-	
-	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Assessing if a fit is good:</b>
-		<li>Does the fit look resonable - i.e. does the fitted curve go through the data points, within the errors. Is the fit good in the whole $q$-range?</li>
-		<li>Is the <a href="../reduced_chi2.html"  target="_blank">$\chi^2$</a> close to unity? This is a measure for the goodness of fit.</li>
-		<li>Does the residuals look alright, or are there visible systematic deviations?</li>
-		<li>Are the fitted values in the expected range? The true values are not known in an experiment, but you will usually have some idea about what values are "reasonable".</li>
-	</ul>
-	
-	<ul  style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Correlated parameters:</b>
-		<li>Two parameters are (partly) <a href="https://en.wikipedia.org/wiki/Correlation" target="_blank">correlated</a> if a change of the scattering curved induced by changing one of these parameters can be (partly) cancelled by changing the value of the other parameter. </li>
-		<li>If you fit correlated parameters simultanaously, you will observe high uncertainties on the parameters values.</li>
-		<li>In this example, the SLD values are correlated (due to <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle" target="_blank">Babinet's prinicle</a>). That is, you can fit the data equally well with different combinations of SLD<sub>core</sub>, SLD<sub>shell</sub> and SLD<sub>solvent</sub> - as long as the contrasts are unchanged. The SLD values are also partly correlated with the scaling parameter.</li>
-		<li>Consequently, if you fit multiple SLD values (and scaling), you will observe large uncertainties on these parameters (<a href="SasView_CoreShell.png" target="_blank">example</a>).</li>
-		<li>To prevent correlation, you can restrict the fit by <em>fixing parameters</em>. For this reason, SLD<sub>solvent</sub> is usually fixed, and in this example, you should also fix either SLD<sub>core</sub> or SLD<sub>shell</sub> if scaling is fitted.</li>
-	</ul>
-	</p>
+	What combination of radii of the core-shell (Model 1) would yield $I(0)$ of 0? (<a href="hint11.html" target="_blank">Hint</a>). Try to simulate this. Due to the stochastic nature of Shape2SAS, $I(0)$ may not be exactly 0, but will be small.<br>	
+	<br>
 
-<!--
-<h4>Part 3: Virtual design of a contrast-variation experiment</h4>
-    <p>This part is inspired by <a href="https://doi.org/10.1111/febs.14345" target="_blank">Midtgaard et al 2018</a>, where the detergent DDM is matched-out in SANS to get the scattering from a membrane protein, which is solubilized in DDM, without getting the detergent signal.</p>
-    <p>Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a cylinder with radius 30 Å and length 90 Å and $\Delta\mathrm{SLD}$ of 2. This cylinder is our highly simplistic model of an integral membrane protein. The transmembrane part of the protein is hydrophobic (do not like water), and therefore needs to be solubilized.<br>
-	As Model 2, simulate a cylinder as surrounded by a ellipsoidal core-shell particle, which is a model for protein in a detergent micelle. To make this model in Shape2SAS, you can use these input parameters. Overlapping regions are excluded (by default), so if two shapes are overlapping, e.g. the cylinder and the first ellipsoid, then the top subunit in the list is prioritized, and overlapping points from the second subunit are not part of the Model:</p>
-    <img src="Shape2SAS_ProteinMicelle.png" style="width:900px"/><br>
-	The following is a schematic cross section of the simplified model of a membrane protein solubilized in a DDM micelle:<br>
-	<img src="Model_protein.png" style="width:300px"/><br>
-	The output should look more or less like the below. However, there is some random variation when building the models, so there may be small differences:
-	<img src="Shape2SAS_ProteinMicelle2.png" style="width:1000px"/><br>
-	We consider the situation, where the scientist is interested in finding the shape of the protein (here: the cylinder), and not the detergent micelle (here: the core-shell ellipsoid). The whole system (protein+micelle) can be fitted simultaneously (see, eg., <a href="https://onlinelibrary.wiley.com/iucr/doi/10.1107/S1399004714016678" target="_blank">Perez and Koutsioubas, 2015</a>), but the membrane protein structure can be determined more precisely, if the scattering signal from the micelle is removed.<br>
-	This can be achieved in SANS, by deuteration, following some steps: 
-	<ol>
-		<li>partly deuterate the detergents, so head and tailgroups have the same scattering, i.e. replace some H's by D's. Make a naive simulation of this by changing the $\Delta\mathrm{SLD}$ of the ellipsoid to the same value, e.g. 3.</li>
-		<li>match the $\Delta\mathrm{SLD}$ to the detergent, by mixing H<sub>2</sub>O and D<sub>2</sub>O. Simulate this by decreasing the $\Delta\mathrm{SLD}$ of all elements by 3, so the $\Delta\mathrm{SLD}$ of the ellipsoid is 0 and $\Delta\mathrm{SLD}$ of the cylinder is -1. Now compare with Model 1 (protein without detergent).</li>
-	</ol>
-	The structure of the membrane protein alone can now be determined by fitting the data. To do this, download the simulated data for Model 2 (cylinder "membrane protein" with contrast-matched DDM micelle): Isim_2.dat <a href="Isim_2.dat">(example data)</a>. Load into SASView and fit with a <a href="https://www.sasview.org/docs/user/models/cylinder.html" target="_blank">cylinder form factor</a>. The result may look like this:</li>
-		<img src="SasView_Cylinder.png" style="width:1300px"/><br>
-	OBS: the simulated data is made with a finite number of points and placed at random in the user-defined volume, so the the fits may not be perfect (not unlike a fit to experimental data).</p>
-	</p>
--->
-<h4>Part 3: Match-out DDM in 100% D<sub>2</sub>O</h4>
+<h4>Part III: Match-out DDM in 100% D<sub>2</sub>O</h4>
 	The goal of this subpart is to calculate how much to deuterate a <a href="https://avantilipids.com/product/850520" target="_blank">DDM detergent</a> in order to match it out in a SANS experiment at 100% D<sub>2</sub>O. This can be done by following these steps:
 	<ol> 
 		<li> Use the chemical formulas to calculate the neutron coherent scattering lenghts for heavy water (D<sub>2</sub>O), DDM headgroups (C<sub>12</sub>H<sub>21</sub>O<sub>11</sub>) and DDM tailgroups (C<sub>12</sub>H<sub>25</sub>), using <a href="https://www.ncnr.nist.gov/resources/n-lengths/" target="_blank">NIST tabular values</a> (<a href="step-by-step-d2o.html" target="_blank">step-by-step guide for calculating SL for D<sub>2</sub>O</a>).</li>
@@ -122,18 +89,18 @@
 
 <h4>Challenges</h4>
 	<ol>
-		<li>PEGylated spherical metallic nanoparticle were measured with small-angle scattering. The PEGylation is expected to form a shell around the nanoparticle. The sample was measured with two different contrasts: in SAXS where the core contrast is much larger than the PEG contrast <a href="SAXS/SAXS.dat" target="_blank">(SAXS data)</a>, and with SANS where the contrasts are more comparable <a href="SANS/SANS.dat" target="_blank">(SANS data)</a>. What is the structure of the particle (inner and outer radii).</li>
-		<li>You are interested in the structure of a polymer chain, inside a polymer melt. I.e. a melt consisting of a lot of the same polymer chains. However, when measuring, you just get a flat (constant) signal. How do you approach the problem? Hint: contrast variation may help.</li>
-		<li>You would like to contrast-match the phospholipid <a href="https://avantilipids.com/product/850335" target="_blank">DLPC</a> in D<sub>2</sub>O, in order to measure membrane proteins in an invisible lipid bilayer with SANS. Headgroup phospotidylcholine (PC) has the chemical formula C<sub>10</sub>H<sub>18</sub>NO<sub>8</sub>P (6 of these hydrogens are exchangable) and volume a of 319 Å<sup>3</sup>. The tail group dilauroyl (DL) has the chemical formula C<sub>22</sub>H<sub>46</sub> (no exchangable hydrogens) and a volume of 666 Å<sup>3</sup>. How many of the (non-exghangeable) hydrogens should be deuterated in, respectively, head and tail to match-out DLPC in a solvent of 100% D<sub>2</sub>O?</li>
+		<li>Challenge 1: You are interested in the structure of a polymer chain, inside a polymer melt. I.e. a melt consisting of a lot of the same polymer chains. However, when measuring, you just get a flat (constant) signal. How do you approach the problem? Hint: contrast variation may help.</li>
+		<li>Challenge 2: You would like to contrast-match the phospholipid <a href="https://avantilipids.com/product/850335" target="_blank">DLPC</a> in D<sub>2</sub>O, in order to measure membrane proteins in an invisible lipid bilayer with SANS. Headgroup phospotidylcholine (PC) has the chemical formula C<sub>10</sub>H<sub>18</sub>NO<sub>8</sub>P (6 of these hydrogens are exchangable) and volume a of 319 Å<sup>3</sup>. The tail group dilauroyl (DL) has the chemical formula C<sub>22</sub>H<sub>46</sub> (no exchangable hydrogens) and a volume of 666 Å<sup>3</sup>. How many of the (non-exghangeable) hydrogens should be deuterated in, respectively, head and tail to match-out DLPC in a solvent of 100% D<sub>2</sub>O?</li>
 	</ol>
 
 <h4>Feedback</h4>
-Help us improve the tutorials by 
-<ul>
-	<li>Reporting <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >issues/bugs</a> (including typos, dead links etc).</li>
-	<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
-	<li>Posting questions (or answer questions) in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
-</ul>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
 
 <h4><a href="../index.html">Home</a></h4>
 
