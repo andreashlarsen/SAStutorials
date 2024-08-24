@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Tutorial Contrast Variation</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Core-shell</h1>
+<p> Contributors: Andreas Haahr Larsen (<a href="https://in.ku.dk/employees/?pure=en/persons/396198" target="_blank">Univ Cph</a>)</p>
+<p>
+	<img src="CoreShell.png" style="width:400px"/><br> 
+	<em>Spherical core-shell particle. The scattering length density ($SLD$) of the core is different from the shell, and both are different from the solvent $SLD$. Many particles can be modelled as core-shell particles, including coated nanoparticles or self-assembled structures like surfactant micelles or  diblock copolymer micelles.</em>
+</p>
+
+<h4>Before you start</h4>
+	<ul>
+	<li>Download and install <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first).</li>
+	<li>We recommended that you complete the <a href="../Spheres/Spheres.html" target="_blank">Spheres</a> tutorial if you are not familiar with basic fitting in SasView.</li>
+	<li>We assume basic understanding of scattering length density and contrast in small-angle scattering</li>
+	</ul>
+	
+<h4>Learning outcomes</h4>
+	Be able to estimate the size of core-shell particles by fitting of SAXS or SANS data. To do this you should:
+	<ul> 
+		<li>Be able to fit SAXS or SANS data from multicontrast core-shell particles in SasView.</li>
+		<li>Understand how to avoid parameter correlation</li>
+		<li>Be able to assess if the fitted model parameters are resonable.</li>
+	</ul>
+	
+<h4>Part I: Simulate data from spherical core-shell particles </h4>
+	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a spherical core-shell particle with inner radius of 30 Å and core $\Delta\mathrm{SLD}=-1$, and outer radius of 50 Å and shell $\Delta\mathrm{SLD}=1$. This can be done by combining two spheres as Model 1 
+	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b> Note on order of subunites in Shape2SAS </b><br>
+		Overlapping points from different subunits are removed (by default). <br>
+		The points from the subunits that are lowest in the list are removed, whereas points from subunits higher in the list remain. <br>
+		So in the case of a cores-shell particle, the smaller sphere should be above the larger in the subunit list, so the overlapping points are excluded from the larger sphere.
+	Try to vary the size and contrasts of the core and shell (you can simulate several models and compare them in Shape2SAS by clicking the boxes <em>Calculate scattering for Model 2/3/4</em>).
+	</p>
+
+<h4>Part II: Fit simulated data</h4>
+	Download your simulated data for the spherical core-shell particle (<a href="Spherical_coreshell.dat">or you can use this data</a>), and load it into SasView and fit a <a href="https://www.sasview.org/docs/user/models/core_shell_sphere.html"target="_blank">core-shell sphere form factor</a>. <br>
+	Assess if it is good fit, and if any parameters are correlated - see the <a href="../fit_tips_and_tricks.html" target ="_blank">fitting tips and tricks</a> <br>
+	<br>
+
+<h4>Part III: Simulate and fit ellipsoidal core-shell particle</h4>
+Many core-shell particles are not perfectly round. This is often the case for micelles. Therefore, you may use core-shell ellipsoids as model instead. <br>
+In <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, simulate an elliptical core-shell particle (<a href="Elliptical_coreshell.dat">or you can use this data</a>). <br>
+For an ellipsoid in Shape2SAS, parameters a, b and c are the semi-axes (radii). Set a anb b to the same number, and c to a larger value. Smaller numbers should be used for the core, e.g.: <br>
+<img src="Shape2SAS_ellipsoid.png" style="width:800px"/><br> 
+Now, fit these data in SasView using the <a href="https://www.sasview.org/docs/user/models/core_shell_ellipsoid.html" target="_blank">core_shell_ellipsoid</a> model. You can find this model under the Ellipsoid category. (<a href="../fit_tips_and_tricks.html" target ="_blank">Fitting tips and tricks</a>). <br>
+<br>
+
+<!-- <h4>Part IV: Fit real data</h4> -->
+
+<h4>Challenges</h4>
+	<ol>
+		<li>Challenge 1: PEGylated spherical metallic nanoparticle were measured with small-angle scattering. The PEGylation is expected to form a shell around the nanoparticle. The sample was measured with two different contrasts: in SAXS where the core contrast is much larger than the PEG contrast <a href="SAXS/SAXS.dat" target="_blank">(SAXS data)</a>, and with SANS where the contrasts are more comparable <a href="SANS/SANS.dat" target="_blank">(SANS data)</a>. What is the structure of the particle (inner and outer radii). (<a href="hint0.html" target ="_blank">Hint</a>) </li>
+		<!-- <li>You have measured a surfactant micelles (<a href="SDS_25mM_clean.dat" target="_blank">SAXS data</a>) $\mathrm{SLD}$ of the tail (core) is estimated to be -7 and $\mathrm{SLD}$ of the head to be 10 and $\mathrm{SLD}$ of the solvent to be 9 (relative units). What is the size of the micelles?</li> -->
+		<li>Challenge 2: You have measured a sample of self-assembled emulsifier molecules, and you expect them to form micelles (<a href="polysorbate80_MA_SAXS_trunc.dat" target="_blank">download SAXS data</a>). You have calculated core $\Delta\mathrm{SLD}$ to be around -3 (arbitrary units) and the shell $\Delta\mathrm{SLD}$ to be approximately 6. Do they form micelles, and what size? Obs: this data has units 1/nm for $q$ instead of 1/Å - to fit parameters will also have these units.</li>
+	</ol>
+
+<h4>Feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</body>	
+</html>
