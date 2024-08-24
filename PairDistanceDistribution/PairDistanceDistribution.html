@@ -8,6 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
 <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
 </head>
 
 <body class="is-preload">
@@ -103,18 +105,6 @@ The ovall goal is to learn what a pair distance distribution is, and how is can 
 	Download this simulated data (or download this <a href="HS.dat">example data</a>) and generate the $p(r)$ using <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. Try with positive restraint (Transformation: Debye) or without (Transformation: Negative).<br>
 	</p>
 
-	<!--
-<h4>Part 5: Protein aggregation</h4>
-	<p>
-	Protein aggregation in a sample may be detected using p(r) - in reveals itself as a "tail" towards high values of r. In this case, the p(r) can be considered a linear combination of the p(r) of a non-agregated particle with a small $d_\matrhm{max}$, and the $p(r)$ of an aggregate with a large $d_\matrhm{max}$.
-	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a 50 Å sphere (or any other object) with aggregate structure factor (set fraction to 0.005, i.e. 0.5% of all particles are aggregated and particles per aggregate to 40).<br>
-	OBS: The p(r) shown in Shape2SAS is for the spheres without the structure factor, but the simulated data contains the structure factor.<br>
-	Download the data <a href="Isim_sphere_aggregate.dat">(example data)</a>, and calculate the $p(r)$ with <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. (The default number of points in $p(r)$ may need to be increased). Notice the "tail":
-	<img src="BayesApp_agg_pr.png" style="width:500px"/><br>
-	<img src="BayesApp_agg_Iq.png" style="width:00px"/>
-	 </p> 
-	 -->
-
 <h4>Challenges</h4>
 	<ol>
 		<li>The protein bovine serum albumin (BSA) was measured with SAXS. Data: <a href="bsa_hc_030.dat" target="_blank">bsa_hc_030.dat</a>. BSA is a common blood protein. The sample was measure with SAXS at relatively high concentration. Generate the $p(r)$ - what does it tell you about the shape of BSA?</li>
@@ -123,7 +113,13 @@ The ovall goal is to learn what a pair distance distribution is, and how is can 
 	</ol>
 	
 <h4>Feedback</h4>
-	<p>You can help us improve the tutorials by filling out this short <a href="https://forms.gle/zEKzW4sbuRiSa23c8" target="_blank">feedback form</a> (it takes 2 min).</p>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
 
 <h4><a href="../index.html">Home</a></h4>
 
