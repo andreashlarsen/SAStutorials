@@ -45,7 +45,7 @@ Be able to retrieve strucutural information from a SAXS or SANS dataset by prima
 	<li>Recognize the $p(r)$ from a sample of particles with positive and negative scatteirng internal contrasts.</li>
 	</ul>
 
-<h4>Part 1: Guinier plot and Guinier analysis for $R_g$ determination</h4>
+<h4>Part I: Guinier plot and Guinier analysis for $R_g$ determination</h4>
 	<p>
 	The <a href="https://bioxtas-raw.readthedocs.io/en/latest/saxs/saxs_guinier.html" target="_blank">Guinier approximation</a> is valid at low values of $q$:
 	$$I(q) \approx I(0)\exp(-q^2 R_g^2/3)$$
@@ -66,7 +66,7 @@ Be able to retrieve strucutural information from a SAXS or SANS dataset by prima
 	If a particle is too large, compared to the minimum $q$ value, there is no Guinier region (or rather, the Guinier region is at lower values of $q$ than those measured). Consequently, $R_g$ for that particle cannot be determined from Guinier analysis.
 	</p>
 
-<h4>Part 2: Kratky plot</h4>
+<h4>Part II: Kratky plot</h4>
 	<p>
 	The Kratky plot ($q^2I$ vs $q$) carries information about the structural flexibility of a particle. This is, e.g., used for studies of the foldedness of proteins:<br>
 	<img src="Kratky.jpg" style="width:600px"/><br>
@@ -75,7 +75,7 @@ Be able to retrieve strucutural information from a SAXS or SANS dataset by prima
 	Lysozyme measured under these conditions is (predominantly) folded - you can see that from the Kratky plot by comparing with the idealized Kratky plots. 
 	</p>
 
-<h4>Part 3: Indirect Fourier Transformation</h4>
+<h4>Part III: Indirect Fourier Transformation</h4>
     <p>
 		As the coherent scattering can be calculated by a Fourier transformation of the particle, then an inverse Fourier transformation of the data should give back the structure. Unfortunately this is not the case for small-angle scattering as structural information is lost.
 		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em;"> <b>There is loss of structural information in small-angle scattering due to:</b>
