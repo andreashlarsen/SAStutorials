@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Fitting tips and tricks</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h1>Tips and tricks in fitting</h1>
+<ul  style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Choosing a model</b>
+    <li>You know your sample and therefore what models may be appropriate. </li>
+    <li>Consult the fitting programs documentation carefully to check if the model is appropriate</li>
+    <li>Start by the simplest possible model, then increase complexity only if the simpler model cannot fit your data. E.g. if you can fit the data with a sphere, do not try a polydipserse core-shell particles with interparticle repulsion (this is called <em>overfitting</em> you data). Start simple, and increase complexity only if you need.</li>
+</ul>
+
+<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Before you press Fit</b>
+    <li>Start by plugging in resonable values for the parameter (if you have an idea)</li>
+    <li>You may get an idea about the size from <a href="PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">primary data analysis</a>.</li>
+    <li>If you do not know you $\mathrm{SLD}$ values, set the $\mathrm{SLD}$ of the solvent to 0, and the $\mathrm{SLD}$ of your sample to unity. Do not fit these if you fit an overall scaling.</li>
+    <li>If you have multiple $\mathrm{SLD}$ values in your particle, you need an estimate of these.</li>
+    <li>Compute (do not fit yet) your model and compare with your data.</li>
+    <li>Adjust scaling and background manually to reasonable values. </li>
+    <li>Adjust model parameters to reasonable values. As a rule of thumb, you can move can move features of the scattering patterin (such as characteristic minima) to lower $q$ by increasing the size of you particle, vice versa.</li>
+    <li>Consult the model documentation for understanding all the model parameters. If you do not know your model you may get unrealistic results (these may fit your data well, but are nonsense).</li>
+    <li>You should try to manually vary the parameters and compute the model to understand the effect on the scattering curve.</li>
+</ul>
+
+<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Fitting the data</b>
+    <li>When your calculated curve is not too far from the data, it is time to fit the data. </li>
+    <li>Try to fix most parameters to begin with and fit one or two at a time, then iteratively release more parameters. </li>
+    <li>In the end, you can release all <em>non-correlated</em> parameters (see below) and refine these. </li>
+</ul>
+
+<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Correlated parameters</b>
+    <li>Two parameters are (partly) <a href="https://en.wikipedia.org/wiki/Correlation" target="_blank">correlated</a> if a change of the scattering curve induced by changing one of these parameters can be (partly) cancelled by changing the value of the other parameter. </li>
+    <li>If you fit correlated parameters simultanaously, you will observe high uncertainties on the parameters values.</li>
+    <li>The $\mathrm{SLD}$ values are generally correlated (due to <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle" target="_blank">Babinet's prinicle</a>). That is, you can fit the data equally well with different combinations of $\mathrm{SLD}$ for the particle and $\mathrm{SLD}$ for the solvent - as long as the contrasts (differene) is unchanged. </li>
+    <li>The$\mathrm{SLD}$ values are also correlated with the scaling parameter (if used) - so generally you should not fit both (but you may fit the ratio between $\mathrm{SLD}$s in a sample with multiple $\mathrm{SLD}$ values, e.g. core-shell particles).</li>
+    <li>Consequently, if you fit multiple $\mathrm{SLD}$ values (and scaling), you will observe large uncertainties on these parameters (<a href="../ContrastVariation/SasView_CoreShell.png" target="_blank">example</a>).</li>
+    <li>To prevent correlation, you can restrict the fit by <em>fixing parameters</em> (not fitting them).</li>
+</ul>
+
+<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Assessing if a fit is good</b>
+    <li>Does the fit look resonable - i.e. does the fitted curve go through the data points, within the errors. Is the fit good in the whole $q$-range?</li>
+    <li>Is the <a href="../reduced_chi2.html"  target="_blank">$\chi^2$</a> close to unity? This is a measure for the goodness of fit.</li>
+    <li>Does the residuals look alright, or are there visible systematic deviations?</li>
+    <li>Are the fitted values in the expected range? For the simulated data you know the answer, but in an experiment these are not known. However, you will usually have some idea about what values are "reasonable".</li>
+</ul>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</body>	
+</html>
