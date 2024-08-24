@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Tutorial Micelle Form factor</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Core-shell Form factor</h1>
+<p> Contributors: Andreas Haahr Larsen.</p>
+<p>
+<img src="CoreShellFormFactor.png" style="width:400px"/><br> 
+<em>A form factor of a spherical core-shell particle (e.g. a micelle) can be build up as a combination of sphere form factor amplitudes. Micelle illustration from <a href="https://commons.wikimedia.org/wiki/File:Phospholipids_aqueous_solution_structures.svg?uselang=en#Licensing" target="_blank">Wikimedia Commons</a></em>.
+</p>
+<h4>Before you start</h4>
+	<ul>
+	<li>You will need pen and paper</li>
+	</ul>
+	
+<h4>Learning outcomes</h4>
+	Learn how to build up complex scattering form factors
+	<ul>
+		<li>Learn the steps of building up form factors</li>
+		<li>Be able to put together spherical form factor amplitudes to derive the form factor for a spherical core-shell particle</li>
+		<li>Be familiar with different notations and terminologies</li>
+	</ul>
+
+<h4>Introductory remarks</h4>
+	<p>
+	Form factors describe the scattering from a given particle, and depends on its shape and size. The form factors can be derived as an integral over the scattering length density over the particle volume. Luckily, this has been done for many particles already in the litterature (<a href="https://doi.org/10.1016/S0001-8686(97)00312-6" target="_blank" >Pedersen, 1997</a>). <br>
+	However, if the scattering from your particle of interest is not yet described, it is possible to build up new form factors from existing. In this tutorial, you will build up a (simple) micelle form factor.
+	</p>
+
+<h4>Part I: Determine the simplest possible geometric shape that represents the micelle</h4>
+	<p>	
+	A micelle is complex, composed of many lipids and or detergents. However, in small-angle scattering the important part is the scattering length density (relative to the solvent), $\Delta\rho$. For SAXS this is determined by the electron density. Lipids are caracterised by a headgroup, with a high electron density (containing heavy atoms), and a tail with low electron density (mostly CH<sub>2</sub>).<br>
+	Use this information to think of a simple shape that can represent a micelle. 
+	You can check you answer with <a href="hint1.html" target="_blank">this answer</a>.
+	</p>
+
+<h4>Part II: Find the relevant subunit and its form factor amplitude</h4>
+	<p>
+	A form factor can be built up of subunits with known form factor (amplitude). There are various sources for finding form factors (e.g. <a href="https://doi.org/10.1016/S0001-8686(97)00312-6" target="_blank" >Pedersen, 1997</a>).<br>
+	Find the form factor <em>amplitude</em> for a sphere in the Pedersen1997 paper (if you square the form factor amplitude, you get the form factor).<br>
+	You can check you answer with <a href="hint2.html" target="_blank">this answer</a>.
+	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>A note (warning) on notation</b>:
+		<li>Some authors use the form factor, $P(q)$, to denote the form factor amplitude, $F(q)$, and various letters are used for both, but most authors use $P(q)$ for the form factor.</li>
+		<li>Most authors normalize $P(q)$, such that it is unitless, and such that $P(q=0)=1$, but this is not always the case, so $P(q)$ sometimes has units.</li>
+		<li>The <em>atomic form factor</em> is an important example of not following the notation used in this tutorial. The atomic form factor, $f_a(q)$, conventionally denotes the <em>form factor amplitude</em> of an atom, e.g. carbon, $f_c(q)$. It is normalised, so $f_a(q=0)$ is equal to the number of electrons times the electron scattering length, $b_e$, e.g. $f_c(q=0)=6b_e$.</li>
+	</ul>
+	</p>
+
+<h4>Part III: Calculate the weighted average to get the micelle form factor amplitude</h4>
+	<p>
+		To get the form factor for the whole particle (core-shell micelle), you need to add the form factor amplitudes and take the absolute square. The terms needs to be weighted correctly, with the excess scattering length density, $\Delta SLD$ (also called <em>contrast</em>) and volume, $V$. For the volume see <a href="hint2.html">this hint</a>.<br>
+		Note that for the shell, you need to subtract the spherical core from a sphere to form a spherical shell. <br>
+		Generally, a weighted average of $a,b,c$ weithed with weights $w_a,w_b,w_c$ is: 
+		$$
+		\frac{w_a a + w_b b + w_c c}{w_a + w_b + w_c}
+		$$
+		Now, make the weighted average of the form factor amplitude of a micelle, $F(q,r,R,\Delta\rho_h,\Delta\rho)$, weithed with $\Delta\rho V$ to get the form factor amplitude of the micelle. 
+		You can check you answer with <a href="hint3.html" target="_blank">this answer</a>.
+	</p>
+
+<h4>Part 3: Calculate the form factor</h4>
+	<p>
+		This is by far the easiest part. When you have the form factor amplituede, you can calculate the form factor at the absolute square:
+		$$
+		P_\mathrm{coreshell}(q) = |F_\mathrm{coreshell}(q)|^2
+		$$
+		easy! 
+	</p>
+
+<h4>Part IV: Make a strategy for verifying the model</h4>
+    <p> 
+		One way to verify the model is to implement the model, e.g. in SasView. You can then fit against simulated data (where you know the true parameter values). See how this may be be done in the <a href="../CoreShell/CoreShell.html" target="_blank">core-shell tutorial</a>.<br>
+		Another important aspect is to check the normalization: is $I(q=0)=1$?
+	</p>
+
+<h4>Challenges</h4>
+	<ol>
+		<li>Challenge 1: Derive a form factor for a spherical shells with thickness $T$.</li>
+		<li>Challenge 2: Derive a form factor for a spherical core-shell particle with one core and two concentric shells.</li>
+	</ol>
+
+<h4>Feedback</h4>
+Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues or bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a> (including typos, dead links etc.), but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
