@@ -25,7 +25,7 @@
 <p> Tutorial contributors: Andreas Haahr Larsen.</p>
 <p>
 <img src="Polydispersity.png" style="width:400px"/><br> 
-<em>Polydispers silica nanoparticles (NP). Reprinted from <a href="https://doi.org/10.1107/S1600576723008324" target="_blank">Pauw et al., 2023</a>, with <a href="../Spheres/pauw2023_permission.pdf" target="_blank">permission.</a></em><br><br></p>
+<em>Polydisperse silica nanoparticles (NP). Reprinted from <a href="https://doi.org/10.1107/S1600576723008324" target="_blank">Pauw et al., 2023</a>, with <a href="pauw2023_permission.pdf" target="_blank">permission.</a></em><br><br></p>
 <h4>Before you start</h4>
 <ul>
 	<li>Download and install <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first).</li>
@@ -34,29 +34,45 @@
 </ul>
 	
 <h4>Learning outcomes</h4>
-Learn to analyse polydisperse samples with SAXS, including normal distributions, multimoldal size distributions, or free-form distributions.
+Learn to analyse polydisperse samples with SAXS, including normal distributions, multimodal size distributions, or free-form distributions.
 <ul>	
+	<li>Distinguish a sample of polydisperse spheres from a sample of monodisperse spheres.</li>
+	<li>Be able to fit a sphere in SasView and determine its size, and size distribution if it is polydisperse.</li>
 	<li>Model size distributions in SasView, including multimodal size distributions.</li>
 	<li>Model free-form size distribution in McSAS.</li>
 </ul>
 
 <h4>Introductory remarks</h4>
 	<p>
-		Many samples are highly polydisperse, i.e. they contain particles that vary in size. This distribution of sizes may be described by a size distribution in one or more structural. The simplest case is a sample of spheres, with a normal distributed polydispersity in their radius, as discussed in the <a href="../Spheres/Spheres.html" target="_blank">Spheres tutorial</a>. However, here you will deal with more complex size distributions, with focus on the use of <a href="https://github.com/BAMresearch/McSAS" target="_blank">McSAS</a>, a software package for extracting free-form size disriutions from SAXS (or SANS) data.
+	Many samples are highly polydisperse, meaning they contain particles that vary in size. This distribution of sizes may be described by a size distribution in one or more structural parameters. The simplest case is a sample of spheres, with a normally distributed radii. However, here you will also deal with more complex size distributions, including the use of <a href="https://github.com/BAMresearch/McSAS" target="_blank">McSAS</a>, a software package for extracting free-form size distributions from SAXS (or SANS) data.
 	</p>
 
-<h4>Part I: Polydispersity in SasView</h4>
-	coming august 2024... <br><br>
+<h4>Part I: Fit polydispere spheres in SasView</h4>
+	To see the effect of polydispersity, go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 (monodisperse sample) and a sphere with radius of 50 Å and relative polydispersity of 0.1 as Model 2 (polydisperse sample).<br>
+	<img src="Shape2SAS_polydisperse.png" style="width:1000px"/><br>
+	Notice that the features (minima, oscillations) are "smeared out" in the polydisperse sample. This is because we see the sum of scattering contributions from spheres having slightly different size, and therefore different positions of the minima. Note that larger polydispersity gives more smearing.<br> 
+	Try also to compare the scattering from polydisperse spheres with that of ellipsoid with semiaxes a = 50 Å, b = 40 Å, c = 60 Å, notice that the ellipsoidality also smears the scattering features, as the ellipsoid looks different from various angles (in contrast to a perfect sphere).<br>
+	A Gaussian (normal) size distribution is used to simulate polydispersity in Shape2SAS, but many different size distributions are possible in real samples <a href="https://doi.org/10.1107/S0021889813001295" target="_blank">(Pauw et al., 2013)</a>.<br>
+	Now, try to fit the data. Load your data <a href="Isim_poly.dat" target="_blank">(or this example data)</a> into SasView and model the polydispersity. You need some extra steps, besides those you did in Part I</p>
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Adding polydispersity in SasView</b>
+		<li>Load the data as described in the <a href="../Spheres/Spheres.html" target="_blank" >Spheres tutorial</a> and choose the sphere model. Try to fit the data with a monodisperse sphere model first.</li>
+		<li>Click the "Polydispersity" option in the lower left corner of the Fit panel.</li>
+		<li>Click the (now active) "polydispersity" tab in the Fit Panel. Check the box "Distribution of radius". Give a non-zero number as default for the polydispersity (PD).</li>
+		<li>Choose distribution on the right side. Default is Gaussian (a normal distribution), which is fine for this example, but other distributions can be chosen.</li>
+		<li>Press fit</li>
+		<li>Besides from the fit to data, residuals, and convergence, you also get a window with the fitted distribution of radii of spheres in the sample. By default it plots on log-log. If you right-click, choose and change scale to x and y (instead of logarithmic), you may recognize a <a href="https://en.wikipedia.org/wiki/Normal_distribution" target="_blank">normal distribution</a> for the radius <a href="PolyDistr.png" target="_blank">(example of output distribution)</a>.</li>
+	</ol>
 
 <h4>Part II: Free from size distribution (McSAS)</h4>
-	coming august 2024... <br><br>
+	coming autumn 2024... <br><br>
 
-<h4>Part 3: Multimodal size distribution (SasView/McSAS)</h4>
-	coming august 2024... <br><br>
+<h4>Part III: Multimodal size distribution (SasView/McSAS)</h4>
+	coming autumn 2024... <br><br>
 
 <h4>Challenges</h4>
 	<ol>
-		<li>coming...</li>
+		<li>Challenge 1: You have measured a sample of silver nanoparticles (<a href="silver_nano_sub.dat" target="_blank">SAXS data</a>). Estimate their approximate size (distribution).</li>
+		<li>Challenge 2: You have measured a sample of spherical silica nanoparticles (<a href="dataset_2.dat" target="_blank">SAXS data</a>). Estimate their approximate size (distribution).</li>
 	</ol>
 
 <h4>Feedback</h4>
