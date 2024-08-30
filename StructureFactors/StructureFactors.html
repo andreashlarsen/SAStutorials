@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Tutorial Structure Factors</title> 
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Structure Factors</h1>
+<p> Tutorial contributors: Andreas Haahr Larsen.</p>
+<p>
+<img src="StructureFactors.png" style="width:400px"/><br> 
+<em>If there are interparticle interactions, and if the particles are close enough that they have an effect, structure factors come into play in the analysis of small-angle scattering data.</em></p>
+<h4>Before you start</h4>
+<ul>
+	<li>Download and install <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first).</li>
+	<li>Basic knowledge of fitting in SasView is assumed, e.g. from the <a href="../Spheres/Spheres.html" target="_blank">Spheres tutorial</a>.</li>
+</ul>
+	
+<h4>Learning outcomes</h4>
+Learn to model interparticle interactions in small-angle scattering using structure factors
+<ul>	
+	<li>Identify the effects of hard-sphere interactions in densely packed samples.</li>
+	<li>Learn to include structure factors in model fitting in SasView.</li>
+</ul>
+
+<h4>Introductory remarks</h4>
+	<p>
+	The form factor describes the shape of particles (see the <a href="../Spheres/Spheres.html" target="_blank">Spheres tutorial</a>). But if there is correlation between where the particles are with respect to each other (i.e. they are not randomly distributed), i.e. if there is <em>interparticle interactions</em>, the form factor is not sufficient to describe the scattering.<br>
+	In that case, one needs to include a structure factor to describe these interactions. 
+	</p>
+
+<h4>Part I: Spheres with interparticle repulsion (hard-sphere structure factor)</h4>
+	If the concentration of particles in as sample is high, they may frequently "bump into each other". This will give rise to some characteristic distances (2 times the radius), which gives rise to change of the scattering.<br>
+	The additional scattering can (for some samples) be described by a so-called hard-sphere structure factor.
+	<img src="hard_sphere_illustration.png" style="width:800px"/><br>
+	<em>Illustration of a hard-sphere structure factor for a highly concentrated sample of spheres, giving rise to a characteristic distance. The scattering is the product of the form factor, $P(q)$), and the structure factor, $S(q)$.</em><br><br>
+	To see the effect of interparticle interactions, go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius of 50 Å and hard sphere structure factor with volume fraction 0.2 and hard-sphere interaction radius of 50 Å as Model 2.
+	<img src="Shape2SAS_HardSphere.png" style="width:1000px"/><br>	
+	You will notice a "dip" at low $q$, which is characteristic for the hard-sphere structure factor. If an experimentalist is not interested in this effect, it may be removed by lowering the sample concentration. Try to simulate this by decreasing the volume fraction in the simulations (i.e the concentration), to see the structure factor effect gradually disappearing. <br>
+	Try also to fit the data is SasView.
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Including a structure factor in SasView</b>:
+		<li>Download the simulated data for spheres with hard-sphere structure factor and volume fraction 0.2 <a href="Isim_2.dat" target="_blank">(or use this example data)</a></li>
+		<li>Load the data into SasView and fit a <a href="https://www.sasview.org/docs/user/models/sphere.html" target="_blank"> sphere form factor</a> (no polydispersity) - observe how the model fit deviates from the data, due to interparticle interactions.</li>
+		<li>Add a <a href="https://www.sasview.org/docs/user/models/hardsphere.html" target="_blank">hard-sphere structure factor</a> to the fit. Structure factors are selected in the third drop-down menu in the Fit panel.</li>
+	</ol>
+	The result may look like this:<br>
+	<img src="SasView_HardSphere.png" style="width:1000px"/><br>
+	Does the fitted values match the input values for the simulations?<br><br>
+
+<h4>Part II: Structure factors for aggregates</h4>
+	coming autumn 2024... <br><br>
+
+<h4>Challenges</h4>
+	<ol>
+		<li>Challenge 1: You have measured the protein <a href="https://en.wikipedia.org/wiki/Bovine_serum_albumin" target="_blank">bovine serum albumin (BSA)</a> and are interested in knowing if there is interparticle interactions at the measured salt conditions and concentration (<a href="bca_hc_030_rebin.dat" target="_blank">SAXS data</a>). Is that the case? (<a href="hint_challenge1.html" target="_blank">Hint</a>)</li>
+		<li>Challenge 2: Spherical nanoparticles were measured at high concentration (<a href="SAXS_high_conc.dat" target="_blank">high conc data</a>) and low concentration (<a href="SAXS_low_conc.dat" target="_blank">low conc data</a>). What are their shape and size (distribution)? (<a href="hint_challenge2.html" target="_blank">Hint</a>)</li>
+	</ol>
+
+<h4>Perspectives</h4>
+<ul>
+	<li>Repeated distances (as known from diffraction) leads to Bragg peaks, which may be included in the model as a structure factor, see the tutorials about <a href="../Liquid_crystals/Liquid_crystals.html" target="_blank">liquid crystals</a> and <a href="../Lamellae/Lamellae.html" target="_blank">lamellar structures</a>.</li>
+	<li>In some cases, only the structure factor (not the form factor) is of interest, and the form factor may not be fitted. This can be done in SasView, by choosing <em>Structure factors</em> under Category. In that case the form factor is set to unity, $P(q)=1$ (form factor for a point).</li>
+</ul>
+
+<h4>Feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
