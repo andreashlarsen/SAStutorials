@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<title>Tutorial Spheres</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+</head>
+
+<body class="is-preload">
+	
+<div id="wrapper">
+<div id="main">
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Spheres</h1>
+<p>Contributors: Andreas Haahr Larsen, Martin Cramer Pedersen, Jacob Kirkensgaard, Viktor Holm-Janas.</p>
+<p>
+<img src="Spheres.png" style="width:200px"/><br> 
+<em>The sphere is a basic shape and a good starting point for learning principles in small-angle scattering analysis.</em>
+</p>
+
+<h4>Before you start</h4>
+	<ul>
+	<li>Download and install <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first)</li>
+	</ul>
+	
+<h4>Learning outcomes</h4>
+	Learn how to fit a geometrical model to SAS data and apply this to answer structural questions about the sample.
+	<ul>
+		<li>Simulate SAS data of spherical particles, and determine which sample contains the larger particles, by visually comparing the curves.</li>
+		<li>Describe the difference between the scattering from spheres, ellipsoids and cylinders.</li>
+		<li>Fit basic form factors to samples of monodisperse particles.</li>
+	</ul>
+	
+<h4>Part I: Spheres</h4>
+	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a 40 Å radius. You may have to click on the three lines in the top-left of the window, then "Calculations". Set parameters.<br>
+	<img src="Shape2SAS_sphere_40.png" style="width:1000px"><br>
+	Press Submit. Shape2SAS generates three plots (besides from visualization of the particle):
+	<ol> 
+		<li>A pair distance distribution. This is a useful tool in SAXS and SANS analysis, but will not be used in this tutorial. See tutorial <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution, p(r)</a>.</li>
+		<li>Calculated scattering, normalized. This is the form factor, $P(q)$. It contains information about the size and shape of the particle.</li>
+		<li>Simulated scattering, showing what real SAXS or SANS data for that sample may look like, if actually measured.</li>
+	</ol>
+	<img src="Shape2SAS_sphere.png" style="width:1000px"/><br>
+	Try to compare with a smaller or larger sphere (as Model 2 in <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>). Notice the important <em>inverse relation</em>: larger particles have features at smaller $q$, and vice versa.<br>
+	Download the data you just simulated: Isim.dat <a href="Isim.dat" target="_blank">(or use this example data)</a> (right click - save as...). Load the data into SasView and fit with an analytical <a href="https://www.sasview.org/docs/user/models/sphere.html" target="_blank">sphere model</a>
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Guide to basic fitting in Sasview:</b>
+		<li>Press "Load data" and select your data.</li>
+		<li>"Send data to" and choose "Fitting" in the drop-down menu.</li>
+		<li>Your data should appear in the Fit panel (a separate window).</li>
+		<li>Choose model category "sphere" from the first drop-down menu. There are many different sphere-like models, choose "sphere" under model name (second drop-down menu).</li>
+		<li>Now you have some model parameters. You can click/select those you want to fit.</li>
+		<li>Compute/plot gives the model scattering with the default values and without fitting: a plot with data (blue) and model (orange) is shown. The residuals (difference between model and data) are also shown in a separate window.</li>
+		<li>Adjust some parameters manually, and press compute again. Try to manually find reasonable values for scaling, background and radius.</li>
+		<li>Try changing the value of the radius and notice the important inverse relation: larger radius moves all the features to smaller q values.</li>
+		<li>Try to fit the data: check the parameters <em>scale</em>, <em>background</em> and <em>radius</em>, and press "Fit".</li>
+		<li>A convergence plot is shown along with the other windows - this shows that the fitting algoritm has converged -  you can ignore that.</li>
+	</ol>
+	Shown below is an example of a fit to samples of 50 Å spheres - how does it compare to your results?:<br>
+	<img src="SasView_sphere50.png" style="width:1000px"/><br>
+	Does the fitted radius match the input for your simulations (40 Å)? Is the fit "good" - as assessed by visual inspection and the <a href="../reduced_chi2.html" target="_blank">reduced $\chi^2$</a>. This value is displayed in the Fit panel.<br>
+	Check for correlated parameters	
+	<ul  style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Correlated parameters:</b>
+		<li>Two parameters are (partly) <a href="https://en.wikipedia.org/wiki/Correlation" target="_blank">correlated</a> if a change of the scattering curve induced by changing one of these parameters can be (partly) cancelled by changing the value of the other parameter. </li>
+		<li>If you fit correlated parameters simultaneously, you will observe high uncertainties on the parameters values.</li>
+		<li>The SLD values are correlated (due to <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle" target="_blank">Babinet's prinicle</a>). That is, you can fit the data equally well with different combinations of <em>sld</em> and <em>sld_solvent</em> - as long as the contrast is unchanged. The SLD values are also correlated with the scaling parameter.</li>
+		<li>Consequently, if you fit multiple SLD values (and scaling), you will observe large uncertainties on these parameters (<a href="../ContrastVariation/SasView_CoreShell.png" target="_blank">example</a>).</li>
+		<li>To prevent correlation, you can restrict the fit by <em>fixing parameters</em>. For this reason, <em>sld_solvent</em> is usually fixed, and in this example, you should also fix <em>sld</em> if scaling is fitted.</li>
+	</ul>
+
+<h4>Part II: Ellipsoids</h4>
+	Simulate and fit scattering from a sample of monodisperse (all the same size) elipsoids. In SasView, these can be modelled with an <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> (two radii are the same, one different), or a <a href="https://www.sasview.org/docs/user/models/triaxial_ellipsoid.html" target="_blank"> tri-axial ellipsoid</a> (all radii are different). <br>
+	Note: for the <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> model in SasView, ensure that you to use the right values for <em>R_e</em> (the two identical equitorial radii) and <em>R_p</em> (the polar radius).<br>
+	<img src="ellipsoids.png" style="width:500px"/><br> 
+	<em>randomly oriented ellipsoids of revolution (radii 20,20,40). Figure generated with <a href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a></em><br>
+	<br>
+
+	<h5>Part III: Cylinders</h5>
+	Simulate and fit the scattering from a sample of sample of monodisperse <a href="https://www.sasview.org/docs/user/models/cylinder.html" target="_blank">cylinders</a>.<br><br>
+	<img src="cylinders.png" style="width:500px"/><br> 
+	<em>randomly oriented cylinder (length 100, radius 10). Figure generated with <a href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a></em><br>
+	<br>
+
+<h4>Challenges</h4>
+	<ol>
+		<li>Challenge 1: A sample of discoidal particles (diameter ca 5 nm, as estimated from <a href="https://www.urmc.rochester.edu/research/electron-microscope/services/protocols-techniques/negative-staining-electron-microscopy.aspx" target="_blank">negative stain electron microscopy</a>) was measured in SAXS at neutral pH (<a href="SAXS_neutral_pH.dat">neutral pH data</a>) and pH 5.0 (<a href="SAXS_low_pH.dat">low pH data</a>). What effect does the pH change have on the particles and their interaction?</li>
+		<em>Tip: always inspect and compare data before you do any modelling</em>. To do this in SasView, load the data, select the data, and under "Plot" press "Create new".</li>
+		<li>Challenge 2: You have measured a sample of nanoparticles (<a href="unknown.dat" >SAXS data</a>), what are their shape?</li>
+	</ol>
+
+<h4>Perspectives</h4>
+In this tutorial, all samples are perfectly monodisperse. The analysis often become more complex for actual samples due to various factors, including:
+<ul>
+	<li><a href="../Polydispersity/Polydispersity.html" target="_blank">Polydispersity</a> in the sample.</li>
+	<li>Multiple contrasts in the sample sample, e.g. <a href="../CoreShell/CoreShell.html" target="_blank">core-shell particles</a>.</li>
+	<li>Interparticle correlations leading to structure factors.</li>
+	<li>Aggregation.</li>
+	<li>Complex shapes that cannot be described by simple geometric models.</li>
+	<li>Mixtures of various conformations or oligomeric states.</li>
+	<li>Particle alignment (i.e. the particles are not randomly oriented anymore) leads to anisotropic scattering.</li>
+</ul>
+However, the overall strategy remains the same for more complex models: (1) hypothesise a structural model which is realistic based on what you know about your sample. (2) fit the model to data to check if it is consistent with data. (3) If not: adjust (or change) your model. <br>
+<br>
+
+<h4>Feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
