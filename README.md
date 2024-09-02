@@ -1,4 +1,4 @@
-# SASTutorials
+# SASTutorials.org
 Source code for the small-angle scattering tutorials website:
 [sastutorials.org](https://sastutorials.org/) 
 
@@ -7,7 +7,7 @@ The code is open souce and everyone are welcome to edit and contribute!
 We (the developer team) especially encourage tutorials with walk-through of analysis on actual data.   
 
 #### How to contribute?
-Level 1: Each tutorial has a feedback form, all feedback is valuble!    
+Level 1: Report bugs/typos/other using the [Issues tab](https://github.com/andreashlarsen/SAStutorials/issues), or join the [discussion](https://github.com/andreashlarsen/SAStutorials/discussions) - all feedback is valuble!    
 
 Level 2: You can edit/improve/extend existing tutorials using Github    
 (general GitHub instructions: https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project).    
