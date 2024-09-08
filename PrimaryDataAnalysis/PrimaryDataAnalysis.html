@@ -22,7 +22,7 @@
 
 <h4><a href="../index.html">Home</a></h4>
 <h1>Tutorial: Primary Data analysis</h1>
-<p>Tutorial contributors: Andreas Haahr Larsen, Martn Cramer Pedersen</p>
+<p>Tutorial contributors: Andreas Haahr Larsen, Martin Cramer Pedersen</p>
 <p>
 <img src="Balu2016.jpeg" style="width:600px"/> <br> 
 <em>Cover image adapted from <a href="https://pubs.acs.org/doi/10.1021/acs.jpcb.6b02475" target="_blank">Balu et al. 2016, J. Phys. Chem. B 120: 6490-6503</a> with <a href="Permission_Balu2016.pdf" target="_blank">permission</a>.</em>
@@ -31,18 +31,18 @@
 	<ul>
 	<li>No requirements, but for some of the tutorial parts you can opt for using: <br>
 		(1) Python (including numpy, scipy and matplotlib) or similar for importing and plotting data (free and open source software, installation required), or<br>
-		(2) <a href="https://www.embl-hamburg.de/biosaxs/download.html" target="_blank">ATSAS</a> (free sofware for academic users, installation required).<br>
+		(2) <a href="https://www.embl-hamburg.de/biosaxs/download.html" target="_blank">ATSAS</a> (free software for academic users, installation required).<br>
 	</li>
 	</ul>
 	
 <h4>Learning outcomes</h4>
-Be able to retrieve strucutural information from a SAXS or SANS dataset by primary data analysis, i.g., before doing detailed modelling, e.g. with form factors. This includes:
+Be able to retrieve structural information from a SAXS or SANS dataset by primary data analysis, scattering.g., before doing detailed modelling, e.g. with form factors. This includes:
 	<ul>
-	<li>Learn to do a Guinier analysis and retrieve the radius of gyration.</li>
+	<li>Learn how to do a Guinier analysis and retrieve the radius of gyration.</li>
 	<li>Use Kratky plot to assess the whether a particle is compact/well-folded or disordered/unfolded.</li>
 	<li>Generate a $p(r)$ to retrieve structural parameters, $R_g$ and $d_\mathrm{max}$.</li>
-	<li>Estimate particle shapes such as spheres and cylinders from looking at the $p(r)$.</li>
-	<li>Recognize the $p(r)$ from a sample of particles with positive and negative scatteirng internal contrasts.</li>
+	<li>Estimate particle shapes, such as spheres and cylinders from looking at the $p(r)$.</li>
+	<li>Recognize the $p(r)$ from a sample of particles with positive and negative scattering internal contrasts.</li>
 	</ul>
 
 <h4>Part I: Guinier plot and Guinier analysis for $R_g$ determination</h4>
@@ -50,18 +50,18 @@ Be able to retrieve strucutural information from a SAXS or SANS dataset by prima
 	The <a href="https://bioxtas-raw.readthedocs.io/en/latest/saxs/saxs_guinier.html" target="_blank">Guinier approximation</a> is valid at low values of $q$:
 	$$I(q) \approx I(0)\exp(-q^2 R_g^2/3)$$
 	From a Guinier analysis you can derive the (contrast-weighted) radius of gyration, $R_g$ of the particles, i.e., a Guinier analysis gives provides the overall <em>size</em> of the measured particles. Extended particles have larger $R_g$ than compact particles (with the same volume), so $R_g$ also contains <em>shape</em> information.<br>
-	The Guinier approximation can be expressed as a linear relaiton:
+	The Guinier approximation can be expressed as a linear relation:
 	$$\ln(I) = \ln(I_0) - (R_g^2/3)q^2$$
-	Therefore, a plot of $\ln(I)$ vs $q^2$ (for small values of $q$) is denoted a <em>Guinier plot</em>, and $R_g$ may be determed from the slope of this plot. This relation is only true for small values of $q$, which is the denoted the <em>Guinier region</em> of data. As a rule of thumb, the Guinier approximation is valid up to $qR_g = 1.3$ for globular particles (i.e. sphere-like particles), and up to $qR_g = 1.0$ for elongated particles (e.g., cylinders).<br>
+	Therefore, a plot of $\ln(I)$ vs $q^2$ (for small values of $q$) is denoted a <em>Guinier plot</em>, and $R_g$ may be determined from the slope of this plot. This relation is only true for small values of $q$, which is the denoted the <em>Guinier region</em> of data. As a rule of thumb, the Guinier approximation is valid up to $qR_g = 1.3$ for globular particles (i.e. sphere-like particles), and up to $qR_g = 1.0$ for elongated particles (e.g., cylinders).<br>
 	<img src="Guinier.jpg" style="width:600px"><br>
 	Try determining the radius of gyration for the protein <a href="https://www.sasbdb.org/data/SASDMF2/" target="_blank">lysozyme</a> from the small-angle scattering biological data bank (Download files > curve (dat)).<br>
-	We here provide guides to do it (1) <a href="Rg_python.html" target="_blank">manually</a> (python or similar required, good if you would like to train some data handling), (2) using <a href="Rg_BayesApp.html" target="_blank">BayesApp</a> (no installation required, fast and easy), (3) using <a href="Rg_Primus.html" target="_blank">AutoRg</a> (ATSAS software required, used a lot in the field of biological SAXS).<br>
-	Your estimation of $R_g$ should be consistent with the reported value in the <a href="https://www.sasbdb.org/data/SASDMF2/" target="_blank">SASBDB entry</a> (within +/- 1-2 Å). Sometimes, $R_g$ is, however, larger than expected.<br>
-	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em;"> <b>Large $R_g$ values may be a sign of:</b>
+	We here provide guides to do it (1) <a href="Rg_python.html" target="_blank">manually</a> (python or similar required, good if you would like to train some data handling), (2) using <a href="Rg_bayesApp.html" target="_blank">BayesApp</a> (no installation required, fast and easy), (3) using <a href="Rg_primus.html" target="_blank">AutoRg</a> (ATSAS software required, used a lot in the field of biological SAXS).<br>
+	Your estimation of $R_g$ should be consistent with the reported value in the <a href="https://www.sasbdb.org/data/SASDMF2/" target="_blank">SASBDB entry</a> (within +/- 1-2 Å). However, sometimes $R_g$ is larger than expected.<br>
+	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Large $R_g$ values may be a sign of:</b>
 		<li>Aggregation.</li>
 		<li>Oligomerization.</li>
 		<li>Change of shape (more elongated particles have larger $R_g$ than compact particles).</li>
-		Finally, interparticle interaction may lead to <em>lower</em> values of $R_g$.
+		Finally, interparticle interaction may leads to <em>lower</em> values of $R_g$.
 	</ul>
 	If a particle is too large, compared to the minimum $q$ value, there is no Guinier region (or rather, the Guinier region is at lower values of $q$ than those measured). Consequently, $R_g$ for that particle cannot be determined from Guinier analysis.
 	</p>
@@ -70,7 +70,7 @@ Be able to retrieve strucutural information from a SAXS or SANS dataset by prima
 	<p>
 	The Kratky plot ($q^2I$ vs $q$) carries information about the structural flexibility of a particle. This is, e.g., used for studies of the foldedness of proteins:<br>
 	<img src="Kratky.jpg" style="width:600px"/><br>
-	This interpretation assumes that the particle is homogeneous, i.e., the scattering length density is approximately the same throughout the particle, such as proteins. Micelles of detergents og block copolymers, are an examples of a particles that are not homogeneous.<br>
+	This interpretation assumes that the particle is homogeneous, meaning the scattering length density is approximately the same throughout the particle. Proteins is one example of an approximately homogeneous particle. Detergent micelles or block copolymer micelles are an examples of a particles that are not homogeneous.<br>
 	Make a Kratky plot for the SAXS lysozyme data. You may use <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> (enable Kratky plot by clicking the box) or <a href="Kratky_plot_lyz.py" target="_blank">this python script</a>. Either ways, you may need to adjust the background level. In BayesApp this is done by clicking Advanced options -> Subtract constant before...<br>
 	Lysozyme measured under these conditions is (predominantly) folded - you can see that from the Kratky plot by comparing with the idealized Kratky plots. 
 	</p>
@@ -78,7 +78,7 @@ Be able to retrieve strucutural information from a SAXS or SANS dataset by prima
 <h4>Part III: Indirect Fourier Transformation</h4>
     <p>
 		As the coherent scattering can be calculated by a Fourier transformation of the particle, then an inverse Fourier transformation of the data should give back the structure. Unfortunately this is not the case for small-angle scattering as structural information is lost.
-		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em;"> <b>There is loss of structural information in small-angle scattering due to:</b>
+		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>There is loss of structural information in small-angle scattering due to:</b>
 			<li>Random orientation of the sample (as opposed to aligned particles).</li>
 			<li><a href="https://en.wikipedia.org/wiki/Phase_problem" target="_blank">The phase problem</a>. The wave amplitude is measured by the detector, but the phase is not.</li>
 			<li>Noise in data.</li>
@@ -95,30 +95,30 @@ Be able to retrieve strucutural information from a SAXS or SANS dataset by prima
 			<li>$p(r)$ starts in zero and goes to zero at some value of $r$. The latter is the maximum distance between any pair in the particle and is denoted $d_\mathrm{max}$. For a sphere, $d_\mathrm{max}$ equals the diameter.</li>
 			<li>The most common distance between pairs of scatterers in a sphere is equal to its radius.</li>
 		</ul>
-		If you Fourier transform $p(r)$, you get the scattering. This is what the program <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> does.<br>
-		To see and compare the $p(r)$ from various paticles, go back to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> and click the box "Calculate scattering for Model 2" to choose another shape (e.g. a cylinder) or a larger/smaller sphere as Model 2. Press "Submit" <br>
+		If you Fourier transform $p(r)$, you get the calculated scattering. This is what the <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> program does.<br>
+		To see and compare the $p(r)$ from various particles, go back to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> and click the box "Calculate scattering for Model 2" to choose another shape (e.g. a cylinder) or a larger/smaller sphere as Model 2. Press "Submit" <br>
 	</p>
 	<p>
 		<b>$p(r)$ for non-homogeneous particles.</b><br>
 		If the particle is not homogeneous (the contrast is not approximately the same in the whole particle), then the $p(r)$ is harder to interpret.<br>
 		This is because $p(r)$ is a distance distribution weighted with the product of the excess scattering length (or contrast or $\Delta\mathrm{SL}$), i.e. the difference between the scattering lenght of a given scatterer and the scattering lenght of the solvent. This product is negative if one has negative and one has positive contrast. 
-		This will often lead to bumps or oscillations in the $p(r)$. In <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, simulate a spherical core-shell particle with negative core contrast ($\Delta\mathrm{SLD}=-1$) and and positive shell contrast ($\Delta\mathrm{SLD}=1$)<br>
+		This often leads to bumps or oscillations in the $p(r)$. In <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, simulate a spherical core-shell particle with negative core contrast ($\Delta\mathrm{SLD}=-1$) and and positive shell contrast ($\Delta\mathrm{SLD}=1$)<br>
 		<img src="Shape2SAS_CoreShell.png" style="width:900px"/><br>
-		In this case, you will get oscillations, and you may even get negative parts in the $p(r)$. The negative parts come if, at a given distance, there are most pairs having contrasts with opposing signs (i.e. one has positive and one has negative constrast.)
+		In this case, you will get oscillations, and you may even get negative parts in the $p(r)$. The negative parts come if, at a given distance, there are most pairs having contrasts with opposing signs (i.e. one has positive and one has negative contrast.)
 	</p>
 	<p>
 		<b>Generate a $p(r)$</b><br>
-		Try to do an indirect Fourier tranformation of the <a href="SASDMF2.dat" target="_blank">lysozome data</a>. This can be done in <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> (no installation required) or in many software packages, including ATSAS (<a href="pr_primus.html" target="_blank">guide for generating $p(r)$ in ATSAS</a>).
+		Try to do an indirect Fourier transformation of the <a href="SASDMF2.dat" target="_blank">lysozome data</a>. This can be done in <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> (no installation required) or in many software packages, including ATSAS (<a href="pr_primus.html" target="_blank">guide for generating $p(r)$ in ATSAS</a>).
 		You may give an estimate of the $d_\mathrm{max}$ (ca 50 Å, note that $d_\mathrm{max}$ is called "Rmax" in ATSAS). This may help the algorithms find a better solution faster. <br>
-		By comparing with the $p(r)$ from a sphere, you can see that lysozyme is globuler (i.e., spherical-ish), but not fully symmetric. More like an almost-spherical ellipsoid.</p>
+		By comparing with the $p(r)$ from a sphere, you can see that lysozyme is globuler (i.e., roughly spherical), but not fully symmetric. More like an almost-spherical ellipsoid.</p>
 		The radius of gyration can also be determined from $p(r)$, as $R_g$ is defined as:<br>
 		$$R_g^2 = \frac{1}{2}\frac{\int_0^{dmax} r^2 p(r)}{\int_0^{dmax} p(r)}$$
 		A good quality check of data is to compare the $R_g$ obtained from $p(r)$ with that obtainedb by Guinier analysis.
 	</p>
 	<p> For non-homogeneous particles, you may get negative contributions to $p(r)$. In that case, it is necessary to allow negative values in $p(r)$:
 		<ul>
-			<li>To see the effect of NOT doing this, try to run <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> on the simulated micelle data from <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, which had negative contrast in the core (<a href="core_shell_negative_positive.dat" target="_blank">Shape2SAS>or download this simulated dataset</a>). You may help the algoritm by providing an approximative value for the maximum distance, $d_\mathrm{max}$.</li>
-			<li>You will notice that the $p(r)$ does not look like the one you got in Shape2SAS.</li>
+			<li>To see the effect of NOT doing this, try to run <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> on the simulated micelle data from <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, which had negative contrast in the core (<a href="core_shell_negative_positive.dat" target="_blank">Shape2SAS>or download this simulated dataset</a>). You may help the algorithm by providing an approximative value for the maximum distance, $d_\mathrm{max}$.</li>
+			<li>You will notice that the $p(r)$ does not resemble the one you generated in Shape2SAS.</li>
 			<li>Now, allow BayesApp to use negative values in $p(r)$ by setting Transformation/Regularization to "Negative", and rerun.</li>
 		</ul>
 	</p>
@@ -128,7 +128,7 @@ Be able to retrieve strucutural information from a SAXS or SANS dataset by prima
 	<li>Challenge 1: You have measured a sample of RNase A in D<sub>2</sub>O with SANS (<a href="RNAseA.dat" target="_blank">download SANS data</a>). What is the overall radius of gyration of this protein?</li>
 	<li>Challenge 2: You have measured the microtubule-associated protein 2 (MAP2) in SAXS (<a href="map2.dat" target="_blank">download SAXS data</a>). Is it folded or unfolded?</li>
 	<li>Challenge 3: A sample of discoidal particles (i.e. shaped like discs/short cylinders) was measured in SAXS at neutral pH (<a href="../Spheres/SAXS_neutral_pH.dat" target="_blank">download neutral pH SAXS data</a>) and pH 5.0 (<a href="../Spheres/SAXS_low_pH.dat" target="_blank">download low pH SAXS data</a>). What effect does the pH change have on the particles and their interaction?</li>
-w</ul>
+</ul>
 
 <h4>Feedback</h4>
 	Help us improve the tutorials by 
