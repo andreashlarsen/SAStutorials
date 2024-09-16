@@ -63,8 +63,35 @@ Learn to analyse polydisperse samples with SAXS, including normal distributions,
 		<li>Besides from the fit to data, residuals, and convergence, you also get a window with the fitted distribution of radii of spheres in the sample. By default it plots on log-log. If you right-click, choose and change scale to x and y (instead of logarithmic), you may recognize a <a href="https://en.wikipedia.org/wiki/Normal_distribution" target="_blank">normal distribution</a> for the radius <a href="PolyDistr.png" target="_blank">(example of output distribution)</a>.</li>
 	</ol>
 
-<h4>Part II: Free from size distribution (McSAS)</h4>
-	coming autumn 2024... <br><br>
+<h4>Part II: Form-free size distribution (McSAS)</h4>
+<p>
+	Instead of defining a specific model for the polydispersity (such as Gaussian or lognormal) and optimizing its parameters, we can use a form-free size distribution. A form-free distribution is not constrained by any predefined mathematical function, allowing it to take any shape.
+	The program McSAS uses a <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method" target="_blank">Monte Carlo method</a> to extract a discrete size distribution from the SAS data. 
+</p>
+<p>
+	To use McSAS, you need to install it first. The easiest way to do this is to go to the <a href="https://github.com/BAMresearch/McSAS" target="_blank">McSAS Github page</a> and download the latest release for the either Windows, MacOs, or Linux. 
+	After downloading, unzip the folder and run the McSAS.exe file. You should see a small window like the one below on the left. As an example, use the Shape2SAS model 2 from Part 1 (50 Å spheres, 0.1 polydispersity).
+	Before pressing "start", make sure the "Sphere radius" under the "Model" tab is a reasonable interval. Don't press the "Activate" button. After pressing start, it should only take about a minute.
+
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Notes on using McSAS</b>
+		<li>McSAS can only accept data in $(q, I(q), \Delta I(q))$ format, this is the "with errors" format on Shape2SAS.</li>
+		<li>McSAS might indicate an incorrect number of data points; however, this can be safely ignored.</li>
+		<li>Note that McSAS uses $\text{nm}$ and $\text{nm}^{-1}$ units instead of $\text{Å}$ and $\text{Å}^{-1}$. This difference can be ignored. As long as the uploaded data is in $\text{Å}^{-1}$, the output distribution will be in $\text{Å}$.</li>
+	</ol>
+
+</p>
+
+<img src="mcsaspics/startandresult.png" style="width:1000px"/><br>
+<p>
+	After a run is finished you should see a window like the one above on the right. It shows the original $I(q)$ against the obtained fit. Additionally, it shows a size distribution. In this example, it shows the distribution of sphere radii.
+	<ul>
+		<li> Question: why is the distribution not "perfect" when the data was simulated?</li>
+	</ul>
+	Some data sets can take a very long time to fit. In the "optimization" tab, the desired <a href="../reduced_chi2.html" target="_blank">reduced chi-squared</a> value can be set as the "convergence criterion". The number of repetitions can also be set.
+</p>
+<p>
+	Importantly, McSAS will almost always produce a good fit to your data regardless of the model used. For this reason it is important to choose an appropriate model, and be extra critical of the output.
+</p>
 
 <h4>Part III: Multimodal size distribution (SasView/McSAS)</h4>
 	coming autumn 2024... <br><br>
@@ -72,7 +99,14 @@ Learn to analyse polydisperse samples with SAXS, including normal distributions,
 <h4>Challenges</h4>
 	<ol>
 		<li>Challenge 1: You have measured a sample of silver nanoparticles (<a href="silver_nano_sub.dat" target="_blank">SAXS data</a>). Estimate their approximate size (distribution).</li>
-		<li>Challenge 2: You have measured a sample of spherical silica nanoparticles (<a href="dataset_2.dat" target="_blank">SAXS data</a>). Estimate their approximate size (distribution).</li>
+		<li>Challenge 2: You have measured a sample of spherical silica nanoparticles (<a href="SilicaNPsRR.dat" target="_blank">SAXS data</a>). Estimate their approximate size (distribution).</li>
+		<li>Challenge 3: You have measured a sample of polydisperse gold particles (<a href="GoldNPsRR.dat" target="_blank">SAXS data</a>). 
+			<ul>
+				<li>Try to fit the data using Sasview. Use a spherical model with lognormal polydispersity. Is the fit good?</li>
+				<li>Now use McSAS to fit the same data. Set the model to "spheres" and the radius distribution to 0 - 100. Could you have captured this size distribution in Sasview?</li>
+			</ul>
+
+		</li>
 	</ol>
 
 <h4>Feedback</h4>
