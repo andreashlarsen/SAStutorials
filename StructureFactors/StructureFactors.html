@@ -4,6 +4,7 @@
 	
 <head>
 <title>Tutorial Structure Factors</title> 
+<link rel="icon" href="../favicon.png" type="image/x-icon" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
@@ -22,7 +23,7 @@
 
 <h4><a href="../index.html">Home</a></h4>
 <h1>Tutorial: Structure Factors</h1>
-<p> Tutorial contributors: Andreas Haahr Larsen.</p>
+<p> Contributors: Andreas Haahr Larsen, Jeppe Breum Jacobsen.</p>
 <p>
 <img src="StructureFactors.png" style="width:400px"/><br> 
 <em>If there are interparticle interactions, and if the particles are close enough that they have an effect, structure factors come into play in the analysis of small-angle scattering data.</em></p>
@@ -64,13 +65,20 @@ Learn to model interparticle interactions in small-angle scattering using struct
 	Does the fitted values match the input values for the simulations?<br><br>
 
 <h4>Part II: Structure factors for aggregates</h4>
-	coming autumn 2024... <br><br>
+    <p>Some particles have a tendency to aggregate (be "sticky"). This may be proteins or nanoparticles. If a part of the sample aggregates (sticks together), the scattering (i.e. $I(q)$) will be the sum of scattering from the aggregate and from the non-aggregated particles.<br>
+	Aggregates may also be described by structure factors (although very different from the hard-sphere structure factor), and as we shall see, having the opposite effect.<br>
+	Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius 50 Å and aggregate structure factor with fraction of 0.01 (i.e. 1% of the particles are in an aggregate), effective radius of 50 Å, and 80 particles per aggregate as Model 2.<br>
+	Model 1 corresponds to a sample without aggregation, and Model 2 corresponds to a sample, where 1% of the spheres are in aggregated form, with 80 spheres per aggregate. The resulting scattering may look like this (note: the aggregation is not included in the $p(r)$):
+	<img src="Shape2SAS_Fractal.png" style="width:1000px"/>	<br>
+	Comment the results. Try varying the fraction (i.e. degree of aggregation) and the number of particles per aggregate (the size of the aggregates). Notice how this results in an upturn at low-$q$ - i.e. opposite the dip at low-$q$ for the hard-sphere structure factor. <br>
+	Note on the aggregate model: a 2-dimensional fractal aggregate structure factor <a href="https://doi.org/10.1107/S1600576720006500" target="_blank">(Larsen, Pedersen and Arleth 2020)</a> was used to simulate aggregation in Shape2SAS, but many different aggregates are possible in a real sample.<br>
+	Currently, this structure factor is not implemented in SasView - <a href="https://www.sasview.org/contribute/" target="_blank">maybe this is a task for you?</a> </p>
 
 <h4>Challenges</h4>
-	<ol>
+	<ul>
 		<li>Challenge 1: You have measured the protein <a href="https://en.wikipedia.org/wiki/Bovine_serum_albumin" target="_blank">bovine serum albumin (BSA)</a> and are interested in knowing if there is interparticle interactions at the measured salt conditions and concentration (<a href="bca_hc_030_rebin.dat" target="_blank">SAXS data</a>). Is that the case? (<a href="hint_challenge1.html" target="_blank">Hint</a>)</li>
 		<li>Challenge 2: Spherical nanoparticles were measured at high concentration (<a href="SAXS_high_conc.dat" target="_blank">high conc data</a>) and low concentration (<a href="SAXS_low_conc.dat" target="_blank">low conc data</a>). What are their shape and size (distribution)? (<a href="hint_challenge2.html" target="_blank">Hint</a>)</li>
-	</ol>
+	</ul>
 
 <h4>Perspectives</h4>
 <ul>
