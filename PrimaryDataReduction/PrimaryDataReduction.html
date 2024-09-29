@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Primary Data Reduction - Primus</title> 
+<link rel="icon" href="../favicon.png" type="image/x-icon" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Primary Data Reduction with Primus</h1>
+<p>Contributors: Jeppe Breum Jacobsen</p>
+<p>
+<img src="PrimaryDataReductionTemp.png" style="width:400px"/><br> 
+
+<!--
+PLEASE CHANGE ICON
+-->
+
+<em>Data (blue) and buffer (green) prior to subtraction.</em></a>
+</p>
+<h4>Before you start</h4>
+<p>This tutorial relies on the program Primus, which can be downloaded from <a href="https://www.embl-hamburg.de/biosaxs/download.html" target="_blank">EMBL Hamburg</a> as a part of ATSAS.<br> </p>
+
+
+<h4>Learning Outcomes</h4>
+After completing this tutorial, you will be able to perform primary data reduction with Primus, including:
+<ul>
+	<li>Identifying and removing outliers in data sets.</li>
+	<li>Merging data files to obtain an average.</li>
+	<li>Performing background subtraction.</li>
+</ul>
+
+
+<h4>Part I: Identifying outliers</h4>
+	<p>In a SAS experiment, it is often preferable to perform multiple shorter measurements rather than a single prolonged one. 
+		If something goes wrong during the experiment (e.g., a bubble in the sample, malfunctioning cryostat, or a user error), it is easy to exclude the problematic measurement from the data set.
+		Sometimes the outliers are not as obvious, and it is necessary to use statistical methods to identify them.<br>
+
+		Download this <a href="PRIMUS-tutorial-data.zip"  target="_blank">zip-file</a> containing a series of data files. We are only concerned about the files in the <em>frames</em> folder. 
+		If ATSAS is installed, you should have a program titled "SAS Data Analysis" or "Primus" installed. Run the program and click on the "Open" button and select the 20 files that start with "img_0223_".<br>
+
+		<img src="PrimusDataLoad.png" style="width:800px"/><br>
+
+		After loading the data you should see a windows like the one above. The data is plotted in the left window, and the right window shows the data in a table format, where each data file can be selected/deselected.
+		To get the usual log-log plot, click on the "Plot" section and select "Double Logarithmic Scale" if you wish.
+		Try to identify the outliers by visual inspection. It will probably not be easy. To identify the outliers more easily, click the "Processing" section, and then the "Compare" button. 
+		This will open a new window like the one below.<br>
+
+		<img src="PrimusDataCompare.png" style="width:500px"/><br>
+
+		On the right side of the window, you can see how every data file compares to every other datafile. The rows and columns correspond to the data files (hence the diagonal line is just white since you are comparing a data file to itself).
+		A green box indicates that the two data files are similar, while a red box indicates that they are different. By clicking a red or green box you can see the two data files plotted against each other,
+		as well as their residuals. The table at the bottom shows how the two data files compare in three statistical tests. They are determined to be "different" (red) if the p-value in two of the tests are below a certain threshold.
+		Determine which data files are outliers and exclude them from the data set in the main window by "unchecking" them.<br>
+		
+		Part II will cover how to merge the data files to obtain an average and perform background subtraction. </p>
+
+<h4>Part II: Merging and background subtraction</h4>
+	<p>After identifying and deselecting the outliers go to the "Processing" section and click "Combine". This creates a new file called "avrg_001.dat". 
+		Primus automatically takes care of binning, averaging, and error estimation. When you have the averaged data, go to "file" and click "close all". <br>
+
+		In a SAS experiment, it is common to take a buffer (or background) measurement that can be subtracted from the sample measurement. 
+		By subtracting the buffer measurement, you remove the scattering contribution from the solvent and the container and other instrument specific contributions.
+		The <a href="PRIMUS-tutorial-data.zip"  target="_blank">zip-file</a> from Part I contains two series of buffer measurements (files starting with "img_0222_" and "img_0224_").
+		Load these files (simultaneously) into Primus and remove the outliers (if there are any?) as described in Part I. Next, combine them just like before. 
+		Now you can go to "file" and "close all". <br>
+
+		To subtract the buffer from the sample, load the two averaged files "avrg_001.dat" and "avrg_002.dat" into Primus. <b> Make sure that the sample average file is above the buffer file</b> in the list of loaded files.
+		Next in the "Processing" section click "Subtract". This creates a new file called "sub_001.dat". This file contains the background subtracted data.
+		
+		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+			<b>Inspecting the subtracted data</b>
+			<li>Deselect averaged data and buffer files, and select only the "sub_001.dat" file.</li>
+			<li>Navigate to the "Plot" section and select "Absolute scale" if it's not already selected.</li>
+			<li>Zoom in on the region with close to zero intensity.</li>
+			<li>The data points should not systematically be below 0 intensity. The highest $q$ region can be ignored.</li>
+			<li>If you accidentally subtracted the sample from the buffer, it should also be apparent here.</li>
+		</ul>
+
+		Congratulations! You have now performed primary data reduction on a series of SAXS data files. They are now ready for further analysis.
+		</p>
+
+<h4>Challenges</h4>
+	<ul>
+		<li>Challenge 1: Download this <a href="silver_nanoparticles.zip"  target="_blank">SAXS data form silver nanoparticles.</a> Data files are labeled as
+			<it> data </it> and buffer files are labeled as <it> bg </it>. Perform primary data reduction on the files using Primus. </li>
+
+		</it> </li>
+	</ul>
+
+
+
+<!--
+DO NOT CHANGE ANYTHING BELOW
+-->
+
+<h4>Feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+	
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
