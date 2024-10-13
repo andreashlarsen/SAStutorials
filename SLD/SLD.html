@@ -1,0 +1,356 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Scattering Length Density</title> 
+<link rel="icon" href="../favicon.png" type="image/x-icon" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+<style>
+    #hiddenText {
+        display: none;
+    }
+	.link-text {
+			color: inherit; /* Inherit the color of surrounding text */
+            text-decoration: underline; /* Underline text */
+            cursor: pointer; /* Show pointer on hover */
+        }
+	.link-text:hover {
+            color: #f2849e; /* Change to darker blue when hovered */
+        }
+</style>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Scattering Length Density</h1>
+<p>Contributors: Jeppe Breum Jacobsen, Arwen Tyler.</p>
+<p>
+<img src="SLD.png" style="width:400px"/><br> 
+
+<!--
+PLEASE CHANGE ICON
+-->
+
+<em>Scattering from SANS with solvent 100% D2O (top), 42 % D2O (middle) and from SAXS (bottom).</em></a>
+</p>
+<h4>Before you start</h4>
+<p>
+<ul>
+ 	<li>It's a good idea to have SASView installed for this tutorial. You can download it from <a href="https://www.sasview.org/", target="_blank">sasview.org</a>. </li>
+	<li>You will also need to make some calculations by hand, so pen, paper and calculator is also a good idea.</li>	
+</ul>
+</p>
+
+
+<h4>Learning Outcomes</h4>
+After completing this tutorial you will
+<ul>
+	<li>Understand the difference between scattering length densities for X-rays and neutrons.</li>
+	<li>Be able to calculate scattering length densities for both X-rays and neutrons.</li>
+	<li>Be able to calculate percentages of D$_2$O and H$_2$O to match out certain parts of a sample.</li>
+	<li>Decide on SANS/SAXS and solvent based on your specific sample.</li>
+</ul>
+
+
+<h4>Part I: Introduction</h4>
+	<p>
+		Scattering length density (SLD) is a measure of a material's ability to scatter. SLD varies greatly depending on wether X-rays (SAXS) or neutrons (SANS) are used.
+		This is because X-rays scatter from the electrons of a material, while neutrons scatter from the nucleus. In general, the SLD of a material can be calculated as:
+		\begin{equation}
+			\text{SLD} = \dfrac{\sum_{i=1}^n b_i}{V},
+		\end{equation}
+		Where $b_i$ is the (bound coherent) scattering length of atom $i$, and $V$ is the molecular volume of the material. For X-rays, the scattering length of an atom is roughly proportional to the atomic number $Z$ of that atom.
+		However for neutrons, the scattering lengths of atoms vary irregularly throughout the periodic table. This is illustrated in the figure below.<br><br>
+
+		<img src="SLDXN.png" style="width:800px"/><br><br>
+
+		For neutrons, it is common to list the scattering length of an atom in units of fm (femtometers, $10^{-15}$ m). For X-rays, the given quantity is often atomic scattering factor, $f_1$, which depends on the wavelength of the X-rays.
+		From this, the scattering length is calculated as: $b=r_e f_1$, where $r_e$ is the classical electron radius. <br><br>
+
+		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+			<b>Exercise: Calculate scattering length densities.</b>
+			<li>In this exercise we will calculate the scattering length densities the two most commonly used solvents in SAS experiments, H$_2$O and D$_2$O for both X-rays and neutrons.</li>
+			<li>For both substances use a molecular volume of $V=30 \text{ Å}$.</li>
+			<li>To find the atomic scattering factors ($f_1$) for X-rays, go to <a href="https://physics.nist.gov/PhysRefData/FFast/html/form.html", target="_blank">this database from NIST.</a> Assume the X-ray energy to be ~10 keV. Remember to multiply $f_1$ by the classical electron radius $r_e=2.82 \text{ fm}$. </li>
+			<li>For neutrons, use <a href="https://www.ncnr.nist.gov/resources/n-lengths/", target="_blank"> this database from NIST</a> to find the coherent scattering length ("coh b").</li>	
+			<li> Fill out the table below and give your answers in $10^{-6} \text{ Å}^{-2}$.</li>		
+			<li> 
+				<table>
+					<tr>
+						<td>SLD</td>
+						<td>X-rays ($10^{-6} \text{ Å}^{-2}$)</td>
+						<td>Neutrons ($10^{-6} \text{ Å}^{-2}$)</td>
+					</tr>
+					<tr>
+						<td>H$_2$O</td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<td>D$_2$O</td>
+						<td> </td>
+						<td> </td>
+					</tr>
+				</table>
+			</li>
+			<li>Comment on the results!</li>
+			
+		</ul>
+
+		In practice, one should use a SLD Calculator. In Sasview, the SLD Calculator can be found under "Tool". Alternatively one can use <a href="https://www.ncnr.nist.gov/resources/activation/", target="_blank">an online calculator from NIST.</a><br><br>
+
+		Most SAS experiments are performed in a solvent, which has a SLD of its own. If the SLD of the sample is similar to the solvent's SLD,
+		the scattering from the sample will be weak. We measure this difference as <i>excess scattering length density</i>,
+
+		\begin{equation}
+			\Delta \text{SLD} = \text{SLD}_{\text{sample}} - \text{SLD}_{\text{solvent}}.
+		\end{equation}
+
+		The intensity of scattering from the sample is proportional to the $\Delta \text{SLD}^2$. <br><br>
+
+		Sometimes however, we want to match the SLD of the sample to the solvent, to make the sample <i>invisible</i>.
+		This technique is called <i>contrast variation</i>. In the exercise below, you will learn how to match out a protein.<br><br>
+
+		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+			<b>Exercise: Match out a protein in SANS</b>
+			<li>Since there is only a difference in SLD between H$_2$O and D$_2$O for neutrons, this exercise only relies on SANS.</li>
+			<li>Assume that the SLD of a protein is $3.5 \times 10^{-6} \text{ Å}^{-2}$.</li>
+			<li>Calculate the percentages of H$_2$O and D$_2$O in your solvent in order to match out the protein ($\Delta \text{SLD}=0$). You can use the numbers you calculated in the previous exercise</li>
+
+
+			<li>
+				<span class="link-text" onclick="document.getElementById('hiddenText').style.display='block'">
+					Display hint
+				</span>
+			
+				<p id="hiddenText">To do this, you have to isolate x in the following equation
+					\begin{equation}
+						\Delta \text{SLD} = x \times \text{SLD}_{\text{H}_2\text{O}} + (1-x) \times \text{SLD}_{\text{D}_2\text{O}} - \text{SLD}_{\text{protein}} = 0,
+					\end{equation}
+					where $x$ is the percentage of H$_2$O in the solvent.
+				</p>
+			</li>
+			
+		</ul>
+	</p>
+
+<h4>Part II: Sodium dodecyl sulfate</h4>
+	<p>
+		This section focuses on the detergent <i>sodium dodecyl sulfate</i> (SDS), CH$_3$(CH)$_2$OSO$_3$Na. SDS is widely used in SAS experiments for its ability to solubilize proteins effectively.
+		As a first exercise, calculate the SLD of SDS for both X-rays and neutrons with <a href="https://www.ncnr.nist.gov/resources/activation/", target="_blank">the online calculator from NIST.</a>
+		For this you only need the molecular formula of SDS and <a href="https://en.wikipedia.org/wiki/Sodium_dodecyl_sulfate", target="_blank">the density which can be found on wikipedia</a>. 
+		For the X-ray source assume an energy of 10 keV. You should see a table like the one below. <br><br>
+
+		<img src="NISTCalculationSDS.png" style="width:800px"/><br><br>
+
+		Under "Scattering length density" is the SLD for neutrons as "real". The SLD for X-rays is given as "X-ray SLD" under "real". Both marked in red.<br><br>
+
+		Next, determine the percentage of H$_2$O and D$_2$O in your solvent in order to match out SDS in a SANS experiment.
+		(The answer to this question is given below the table as the "Contrast match point")<br><br>
+
+		In reality, the SLD of SDS varies between the head group and the tail group. In addition to this, SDS forms micelles in solution with 
+		aggregation number $N=66$. In the exercise below, we calculate the forward scattering ($I(q=0)$) of SDS micelles, which is given by
+
+		\begin{equation}
+			I(q=0) = n N^2 \left( \Delta SLD_{tail} V_{tail} +  \Delta SLD_{head} V_{head}\right)^2,
+		\end{equation}
+
+		where $n$ is the number density of the micelles.
+	
+		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+			<b>Exercise: SDS head and tail group</b>
+			<li>In the image below the head/tail structure of the SDS molecule can be seen,
+				as well as some SAXS data with a SDS concentration of 5 mg/mL. </li>
+			<li>Calculate the SLD for the headgroup (SO$_4$Na, $V=60.5 \text{ Å}^3$), and tailgroup (C$_{12}$H$_{25}$, $V=355 \text{ Å}^3$) for X-rays.</li>
+			<li>Calculate the number density $n$ of micelles. (Start by calculating the concentration in $\text{mol/cm}^3$).</li>
+			<li>Finally, calculate the forward scattering</li>
+			<li>How does it compare to the data in the graph?</li>
+			
+		</ul>
+
+
+		<img src="SDSdata.png" style="width:800px"/><br><br>
+
+	In some applications, it can be useful to <i>deuterate</i> the detergents. This is done by replacing the hydrogen in the detergent with deuterium.
+	Read more about this technique in the <a href="https://sastutorials.org/InvisibleDetergents/InvisibleDetergents.html", target="_blank">Tutorial on invisible detergents</a>.
+
+
+	</p> 
+
+<h4>Part III: Designing a neutron scattering experiment</h4>
+<p>
+	In this part, we will design a SANS experiment to study the size and polydispersity of SiO$_2$ nanoparticles.
+	Additionally, a cationic surfactant (CetylTrimethylAmmonium Bromide - CTAB) is added to the solution in a concentration 
+	close to the critical micelle concentration (CMC). The added CTAB is expected to form micelles around the nanoparticles with a thickness 2-3 nm. 
+	We will use the contrast match technique to study the layer of CTAB around the nanoparticles. First we would like to find all 
+	the relevant SLDs.<br>
+
+	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+		<b>Task 1: Find SLDs</b>
+		<li>Use your preferred tool to fill out the SLDs in the table below</li>
+		<table>
+			<tr>
+				<td>Material</td>
+				<td>Chemical formula</td>
+				<td>Density (g/cm$^3$)</td>
+				<td>Neutron SLD ($10^{-6} \text{ Å}^{-2}$)</td>
+				<td>X-ray SLD ($10^{-6} \text{ Å}^{-2}$)</td>
+			</tr>
+			<tr>
+				<td>Silica</td>
+				<td>SiO$_2$</td>
+				<td>2.2</td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td>CTAB</td>
+				<td>C$_{19}$H$_{42}$BrN</td>
+				<td>1.0</td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td>Water</td>
+				<td>H$_2$O</td>
+				<td>1.0</td>
+				<td>-0.561 </td>
+				<td>9.44 </td>
+			</tr>
+			<tr>
+				<td>Heavy water</td>
+				<td>D$_2$O</td>
+				<td>1.1</td>
+				<td> </td>
+				<td> </td>
+			</tr>
+
+		</table>
+		
+	</ul>
+
+	Next we want to calculate the $\Delta \text{SLD}$ between all the different substances. For better comparison, we will put $\Delta \text{SLD}^2$ in the table.
+	Additionally, the values above the diagonal should be the (square!) neutron contrast, while the values below the diagonal should be the (square!) X-ray contrast.
+	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+		<b>Task 2: Find contrasts</b>
+		<li>Fill out the table below with $\Delta \text{SLD}^2$. Neutrons above diagonal, X-rays below diagonal.</li>
+		<table>
+			<tr>
+				<td>Material</td>
+				<td>SiO$_2$</td>
+				<td>CTAB</td>
+				<td>Water</td>
+				<td>Heavy water</td>
+			</tr>
+			<tr>
+				<td>SiO$_2$</td>
+				<td> 0</td>
+				<td> </td>
+				<td> 16.3</td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td>CTAB</td>
+				<td> </td>
+				<td>0 </td>
+				<td> </td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td>Water</td>
+				<td> </td>
+				<td> </td>
+				<td>0 </td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td>Heavy water</td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> 0</td>
+			</tr>
+		</table>
+		<li>Which features will you expect to see with X-rays?</li>
+		<li>If you use normal/heavy water as your solvent, which features can you expect to see with neutrons?</li>
+	</ul>
+
+
+	Before we make a decision on what kind of experiment(s?) to perform, we should also consider incoherent scattering.
+	Incoherent scattering contributes $|Q|$-independent background to the scattering. This makes it difficult to see
+	features in the data, especially at low $Q$-values, where the signal is weaker. However, this is essentially only a problem for neutrons.
+	Go back to the SLD calculator, and find the incoherent scattering cross section for H$_2$O and D$_2$O for neutrons. <br><br>
+
+	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+		<b>Task 3: Decide on experiment</b>
+		<li>Given everything we now know from task 1 and 2, we should perform the following experiments:</li>
+		<li> 
+			<ol>
+				<li>X-ray scattering with water as solvent. From the table in task 2 we see, that the $\Delta \text{SLD}^2$ for silica in much higher than that of CTAB.
+					It is even better in heavy water, but this is such a small difference that it is not worth the cost of the D$_2$O. </li>
+				<li>Neutron scattering with heavy water as solvent. The $\Delta \text{SLD}^2$ for silica is ~$5.2$ times greater than that of CTAB. 
+					This isn't a huge difference, but we don't have to worry about the incoherent scattering from water.
+					Additionally, we could match out the silica by adding some amount of H$_2$O to the solvent. </li>
+				</li>
+			</ol>
+		</li>
+		<li>What should the percentages of H$_2$O and D$_2$O be in the neutron experiment to match out the silica?</li>
+	</ul>
+
+</p>
+
+<h4>Challenges</h4>
+	<ul>
+		<li>Coming soon...</li>
+	</ul>
+
+
+
+<!--
+DO NOT CHANGE ANYTHING BELOW
+-->
+
+<h4>Feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+	
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
