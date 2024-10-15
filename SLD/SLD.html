@@ -11,8 +11,21 @@
 <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
 <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+
+<script>
+	function showText() {
+	  var elements = document.getElementsByClassName('hiddenText2');
+	  for (var i = 0; i < elements.length; i++) {
+		elements[i].style.display = 'block'; // Show each element
+	  }
+	}
+  </script>
+
 <style>
     #hiddenText {
+        display: none;
+    }
+	.hiddenText2 {
         display: none;
     }
 	.link-text {
@@ -44,13 +57,13 @@
 PLEASE CHANGE ICON
 -->
 
-<em>Scattering from SANS with solvent 100% D2O (top), 42 % D2O (middle) and from SAXS (bottom).</em></a>
+<em>Contrast variation technique: a photosynthetic membrane in different concentrations of D$_2$O. The signal from lipid is masked out in 5-25% D$_2$O, and protein components in 40-45%. from <a href="https://www.frontiersin.org/journals/chemistry/articles/10.3389/fchem.2021.631370/full" target="_blank">Jakubauskas et al., 2021, Front. Chem. 9:631370. </a></em>
 </p>
 <h4>Before you start</h4>
 <p>
 <ul>
  	<li>It's a good idea to have SASView installed for this tutorial. You can download it from <a href="https://www.sasview.org/", target="_blank">sasview.org</a>. </li>
-	<li>You will also need to make some calculations by hand, so pen, paper and calculator is also a good idea.</li>	
+	<li>You will need to make calculations by hand. A spreadsheet and possibly pen and paper are recommended.</li>	
 </ul>
 </p>
 
@@ -77,15 +90,18 @@ After completing this tutorial you will
 
 		<img src="SLDXN.png" style="width:800px"/><br><br>
 
-		For neutrons, it is common to list the scattering length of an atom in units of fm (femtometers, $10^{-15}$ m). For X-rays, the given quantity is often atomic scattering factor, $f_1$, which depends on the wavelength of the X-rays.
-		From this, the scattering length is calculated as: $b=r_e f_1$, where $r_e$ is the classical electron radius. <br><br>
+		For neutrons, it is common to list the scattering length of an atom in units of fm (femtometers, $10^{-15}$ m). For our applications, the X-ray scattering length
+		of an atom is essentially given by $b=Zr_e$, where $r_e = 2.82 \text{ fm}$ is the classical electron radius.
+		This approximation holds because SAXS uses hard X-rays ($E>5-10 \text{ keV}$) with wavelengths dissimilar from those often absorbed by atoms in soft matter. <br><br>
 
 		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
 			<b>Exercise: Calculate scattering length densities.</b>
-			<li>In this exercise we will calculate the scattering length densities the two most commonly used solvents in SAS experiments, H$_2$O and D$_2$O for both X-rays and neutrons.</li>
-			<li>For both substances use a molecular volume of $V=30 \text{ Å}$.</li>
-			<li>To find the atomic scattering factors ($f_1$) for X-rays, go to <a href="https://physics.nist.gov/PhysRefData/FFast/html/form.html", target="_blank">this database from NIST.</a> Assume the X-ray energy to be ~10 keV. Remember to multiply $f_1$ by the classical electron radius $r_e=2.82 \text{ fm}$. </li>
+			<li>In this exercise we will calculate the scattering length densities for the two most commonly used solvents in SAS experiments, H$_2$O and D$_2$O for both X-rays and neutrons.</li>
+			<li>Calculate the volume of H$_2$O and D$_2$O from the density and molecular weight. They can be found on wikipedia: <a href="https://en.wikipedia.org/wiki/Water", target="_blank">water</a> 
+			and <a href="https://en.wikipedia.org/wiki/Heavy_water", target="_blank">heavy water</a> </li>
+			<li>Calculate the scattering lengths for X-rays using $b=Zr_e$.</li>
 			<li>For neutrons, use <a href="https://www.ncnr.nist.gov/resources/n-lengths/", target="_blank"> this database from NIST</a> to find the coherent scattering length ("coh b").</li>	
+			<li> Calculate the $\text{SLD}$ for both X-rays and neutrons using the formula above.</li>
 			<li> Fill out the table below and give your answers in $10^{-6} \text{ Å}^{-2}$.</li>		
 			<li> 
 				<table>
@@ -96,17 +112,20 @@ After completing this tutorial you will
 					</tr>
 					<tr>
 						<td>H$_2$O</td>
-						<td> </td>
-						<td> </td>
+						<td><p class="hiddenText2"> 9.45</p></td>
+						<td><p class="hiddenText2"> -0.56</p></td>
 					</tr>
 					<tr>
 						<td>D$_2$O</td>
-						<td> </td>
-						<td> </td>
+						<td><p class="hiddenText2"> 9.41</p></td>
+						<td><p class="hiddenText2"> 6.38</p></td>
 					</tr>
 				</table>
 			</li>
 			<li>Comment on the results!</li>
+			<li><span class="link-text" onclick="showText()">
+				Show answers
+			</span></li>
 			
 		</ul>
 
@@ -121,13 +140,13 @@ After completing this tutorial you will
 
 		The intensity of scattering from the sample is proportional to the $\Delta \text{SLD}^2$. <br><br>
 
-		Sometimes however, we want to match the SLD of the sample to the solvent, to make the sample <i>invisible</i>.
+		Sometimes however, we want to match the SLD of the sample to the solvent, to make the sample or a part of the sample <i>invisible</i>.
 		This technique is called <i>contrast variation</i>. In the exercise below, you will learn how to match out a protein.<br><br>
 
 		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
 			<b>Exercise: Match out a protein in SANS</b>
 			<li>Since there is only a difference in SLD between H$_2$O and D$_2$O for neutrons, this exercise only relies on SANS.</li>
-			<li>Assume that the SLD of a protein is $3.5 \times 10^{-6} \text{ Å}^{-2}$.</li>
+			<li>Assume that the SLD of a protein is $1.3 \times 10^{-6} \text{ Å}^{-2}$.</li>
 			<li>Calculate the percentages of H$_2$O and D$_2$O in your solvent in order to match out the protein ($\Delta \text{SLD}=0$). You can use the numbers you calculated in the previous exercise</li>
 
 
@@ -138,7 +157,7 @@ After completing this tutorial you will
 			
 				<p id="hiddenText">To do this, you have to isolate x in the following equation
 					\begin{equation}
-						\Delta \text{SLD} = x \times \text{SLD}_{\text{H}_2\text{O}} + (1-x) \times \text{SLD}_{\text{D}_2\text{O}} - \text{SLD}_{\text{protein}} = 0,
+						\Delta \text{SLD} =\text{SLD}_{\text{protein}} - x \times \text{SLD}_{\text{H}_2\text{O}} - (1-x) \times \text{SLD}_{\text{D}_2\text{O}} = 0,
 					\end{equation}
 					where $x$ is the percentage of H$_2$O in the solvent.
 				</p>
