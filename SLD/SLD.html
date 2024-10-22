@@ -25,6 +25,10 @@
     #hiddenText {
         display: none;
     }
+
+	#hiddenText3 {
+        display: none;
+    }
 	.hiddenText2 {
         display: none;
     }
@@ -88,7 +92,10 @@ After completing this tutorial you will
 		Where $b_i$ is the (bound coherent) scattering length of atom $i$, and $V$ is the molecular volume of the material. For X-rays, the scattering length of an atom is roughly proportional to the atomic number $Z$ of that atom.
 		However for neutrons, the scattering lengths of atoms vary irregularly throughout the periodic table. This is illustrated in the figure below.<br><br>
 
-		<img src="SLDXN.png" style="width:800px"/><br><br>
+		<img src="SLDXN2.png" style="width:800px"/>
+		<br>
+		<em>Comparison of coherent scattering lengths for Neutrons (red) and X-rays (Blue).</em>
+		<br><br>
 
 		For neutrons, it is common to list the scattering length of an atom in units of fm (femtometers, $10^{-15}$ m). For our applications, the X-ray scattering length
 		of an atom is essentially given by $b=Zr_e$, where $r_e = 2.82 \text{ fm}$ is the classical electron radius.
@@ -121,7 +128,6 @@ After completing this tutorial you will
 						<td><p class="hiddenText2"> 6.38</p></td>
 					</tr>
 				</table>
-			</li>
 			<li>Comment on the results!</li>
 			<li><span class="link-text" onclick="showText()">
 				Show answers
@@ -213,13 +219,14 @@ After completing this tutorial you will
 <p>
 	In this part, we will design a SANS experiment to study the size and polydispersity of SiO$_2$ nanoparticles.
 	Additionally, a cationic surfactant (CetylTrimethylAmmonium Bromide - CTAB) is added to the solution in a concentration 
-	close to the critical micelle concentration (CMC). The added CTAB is expected to form micelles around the nanoparticles with a thickness 2-3 nm. 
-	We will use the contrast match technique to study the layer of CTAB around the nanoparticles. First we would like to find all 
+	close to the <a href="https://en.wikipedia.org/wiki/Critical_micelle_concentration" target="_blank">critical micelle concentration</a> (CMC). The added CTAB is expected to form micelles around the nanoparticles with a thickness 2-3 nm.
+	The added CTAB prohibits aggregation of SiO$_2$ nanoparticles.
+	For our experiment we wish to gain information on both the SiO$_2$ nanoparticles and the CTAB coating. First we would like to find all 
 	the relevant SLDs.<br>
 
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
 		<b>Task 1: Find SLDs</b>
-		<li>Use your preferred tool to fill out the SLDs in the table below</li>
+		<li>Use your preferred tool to fill out the SLDs in the table below.</li>
 		<table>
 			<tr>
 				<td>Material</td>
@@ -262,7 +269,7 @@ After completing this tutorial you will
 	</ul>
 
 	Next we want to calculate the $\Delta \text{SLD}$ between all the different substances. For better comparison, we will put $\Delta \text{SLD}^2$ in the table.
-	Additionally, the values above the diagonal should be the (square!) neutron contrast, while the values below the diagonal should be the (square!) X-ray contrast.
+	Additionally, the values above the diagonal should be the (square!) neutron contrast, while the values below the diagonal should be the (square!) X-ray contrast.<br><br>
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
 		<b>Task 2: Find contrasts</b>
 		<li>Fill out the table below with $\Delta \text{SLD}^2$. Neutrons above diagonal, X-rays below diagonal.</li>
@@ -315,10 +322,14 @@ After completing this tutorial you will
 
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
 		<b>Task 3: Decide on experiment</b>
-		<li>Given everything we now know from task 1 and 2, we should perform the following experiments:</li>
-		<li> 
-			<ol>
-				<li>X-ray scattering with water as solvent. From the table in task 2 we see, that the $\Delta \text{SLD}^2$ for silica in much higher than that of CTAB.
+		<li>Given everything we now know from task 1 and 2 which experiments should we perform? 
+			<span class="link-text" onclick="document.getElementById('hiddenText3').style.display='block'">
+				Display answer
+			</span>
+		</li>
+		<li id="hiddenText3"> 
+			<ol> 
+				<li>X-ray scattering with water as solvent. From the table in task 2, we see that the $\Delta \text{SLD}^2$ for silica is much higher than that of CTAB.
 					It is even better in heavy water, but this is such a small difference that it is not worth the cost of the D$_2$O. </li>
 				<li>Neutron scattering with heavy water as solvent. The $\Delta \text{SLD}^2$ for silica is ~$5.2$ times greater than that of CTAB. 
 					This isn't a huge difference, but we don't have to worry about the incoherent scattering from water.
