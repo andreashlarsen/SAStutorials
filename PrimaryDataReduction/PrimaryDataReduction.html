@@ -23,7 +23,7 @@
 
 <h4><a href="../index.html">Home</a></h4>
 <h1>Tutorial: Primary Data Reduction with Primus</h1>
-<p>Contributors: Jeppe Breum Jacobsen</p>
+<p>Contributors: Jeppe Breum Jacobsen, Andreas Haahr Larsen</p>
 <p>
 <img src="PrimaryDataReductionTemp.png" style="width:400px"/><br> 
 
@@ -34,30 +34,28 @@ PLEASE CHANGE ICON
 <em>Sample (blue) and buffer (green) prior to subtraction.</em></a>
 </p>
 <h4>Before you start</h4>
-<p>This tutorial relies on the program Primus, which can be downloaded from <a href="https://www.embl-hamburg.de/biosaxs/download.html" target="_blank">EMBL Hamburg</a> as a part of ATSAS.<br> </p>
-
+<p>This tutorial relies on the program Primus, which can be downloaded from <a href="https://biosaxs.com/download.php" target="_blank">BioSAXS.com</a> as a part of ATSAS.<br> </p>
 
 <h4>Learning Outcomes</h4>
 After completing this tutorial, you will be able to perform primary data reduction with Primus, including:
 <ul>
-	<li>Identifying and removing outliers in data sets.</li>
+	<li>Identifying and removing outliers.</li>
 	<li>Merging data files to obtain an average.</li>
 	<li>Performing background subtraction.</li>
 </ul>
 
-
 <h4>Part I: Identifying outliers</h4>
-	<p>In a SAS experiment, it is often preferable to perform multiple shorter measurements rather than a single prolonged one. 
-		If something goes wrong during the experiment (e.g., a bubble in the sample, malfunctioning cryostat, or a user error), it is easy to exclude the problematic measurement from the data set.
-		Sometimes the outliers are not as obvious, and it is necessary to use statistical methods to identify them.<br><br>
+	<p>In a SAS experiment, it is often preferable to perform multiple measurements (frames) of the same sample with short exposure times rather than a single prolonged measurement. 
+		If the sample changes during the experiment (e.g., an air bubble in the sample, malfunctioning cryostat, beam damage or a user error), the problematic frames from the data set.
+		Sometimes the outliers are not obviously detected, and it is necessary to use statistical methods to identify them.<br><br>
 
-		Download this <a href="PRIMUS-tutorial-data.zip"  target="_blank">zip-file</a> containing a series of data files. We are only concerned about the files in the <em>frames</em> folder. 
-		If ATSAS is installed, you should have a program titled "SAS Data Analysis" or "Primus" installed. Run the program and click on the "Open" button and select the 20 files that start with "img_0223_".<br><br>
+		Download this <a href="PRIMUS-tutorial-data.zip"  target="_blank">zip-file</a> containing a series of data files (frames). 
+		If ATSAS is installed, you should have a program titled "SAS Data Analysis" or "Primus" installed. Run the program and click on the "Open" button and select the 20 sample files that start with "img_0223_" (the buffer files starts with either "img_0222_" or "img_0224_" - ignore these in this step).<br><br>
 
 		<img src="PrimusDataLoad.png" style="width:800px"/><br><br>
 
-		After loading the data you should see a windows like the one above. The data is plotted in the left window, and the right window shows the data in a table format, where each data file can be selected/deselected.
-		To get the usual log-log plot, click on the "Plot" section and select "Double Logarithmic Scale" if you wish.
+		After loading the data, you should see a window like the one above. The data are plotted in the left window, and the right window display the data files in a table format, where each data file can be selected/deselected.
+		To get log-log plot, click on the "Plot" section and select "Double Logarithmic Scale".
 		Try to identify the outliers by visual inspection. It will probably not be easy.<br>
 		To identify the outliers more easily, click the "Processing" section, and then the "Compare" button. 
 		This will open a new window like the one below.<br><br>
@@ -65,56 +63,66 @@ After completing this tutorial, you will be able to perform primary data reducti
 		<img src="PrimusDataCompare.png" style="width:500px"/><br><br>
 
 		On the right side of the window, you can see how every data file compares to every other datafile. The rows and columns correspond to the data files (hence the diagonal line is just white, since you are comparing a data file to itself).
-		A green box indicates that the two data files are similar, while a red box indicates that they are different. By clicking a red or green box you can see the two data files plotted against each other,
+		A green box indicates that the two data files are similar, while a red box indicates that they are different. By clicking a red or green box, you can see the two data files plotted against each other,
 		as well as their residuals.<br><br>
 		The table at the bottom shows how the two data files compare in three statistical tests. They are determined to be "different" (red) if the p-value in two of the tests are below a certain threshold.
-		Determine which data files are outliers and exclude them from the data set in the main window by "unchecking" them.<br>
+		Determine which data files are outliers and exclude them from the data set in the main window by "unchecking" them. (<a href="hint0.html" target="_blank">Hint</a>).
 		
 		Part II will cover how to merge the data files to obtain an average and perform background subtraction. </p>
 
 <h4>Part II: Merging and background subtraction</h4>
-	<p>After identifying and deselecting the outliers go to the "Processing" section and click "Combine". This creates a new file called "avrg_001.dat". 
-		Primus automatically takes care of binning, averaging, and error estimation. When you have the averaged data, go to "file" and click "close all". <br><br>
+	<p>After identifying and deselecting the outliers, go to the "Processing" section and click "Merge". This creates a new file called "merge_001.dat". 
+		Primus automatically takes care of error propagation. When you have generated the averaged data, go to "file" and click "close all". <br><br>
 
 		In a SAS experiment, it is common to take a <em>buffer</em> (or background) measurement that can be subtracted from the sample measurement. 
-		By subtracting the buffer measurement, you remove the scattering contribution from the solvent, container and instrument specific contributions.<br><br>
-		The <a href="PRIMUS-tutorial-data.zip"  target="_blank">zip-file</a> from Part I contains two series of buffer measurements (files starting with "img_0222_" and "img_0224_").
-		Load these files (simultaneously) into Primus and remove the outliers (if there are any?) as described in Part I. Next, combine them just like before. 
-		Now you can go to "file" and "close all". <br><br>
+		By subtracting the buffer measurement, you remove the scattering contribution from the solvent, sample container and other (non-accounte for) instrument specific contributions.<br><br>
+		The <a href="PRIMUS-tutorial-data.zip"  target="_blank">zip-file</a> from Part I contains two series of buffer measurements (files starting with "img_0222_" and "img_0224_"), measure before and after the sample measurement.
+		Load these files (both sets of buffer measuremtns) into Primus and remove the outliers (if there are any?) as described in Part I. Next, merge them just like before. 
+		Now you can go to "file" and "close all". The merged file is saved in the data folder.<br><br>
 
-		To subtract the buffer from the sample, load the two averaged files "avrg_001.dat" and "avrg_002.dat" into Primus. <b> Make sure that the sample average file is above the buffer file</b> in the list of loaded files.
-		Next in the "Processing" section click "Subtract". This creates a new file called "sub_001.dat". This file contains the background subtracted data.
+		To subtract the buffer from the sample, load the two merged files "merge_001.dat" and "merge_002.dat" into Primus. <b> Make sure that the sample average file is above the buffer file</b> in the list of loaded files (else, you can right click and press Move Up).
+		Next, in the "Processing" section click "Subtract" (do not normalize by concentration if opted for). This creates a new file called "sub_001.dat". This file contains the background-subtracted data.
+
+		
 		
 		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
 			<b>Inspecting the subtracted data</b>
 			<li>Deselect averaged data and buffer files, and select only the "sub_001.dat" file.</li>
 			<li>Navigate to the "Plot" section and select "Absolute scale" if it's not already selected.</li>
-			<li>Zoom in on the region with close to zero intensity.</li>
-			<li>The data points should not systematically be below 0 intensity. The highest $q$ region can be ignored.</li>
+			<li>Zoom in on the region with close to zero intensity. The data points should not systematically be below 0 intensity.</li>
 			<li>If you accidentally subtracted the sample from the buffer, it should also be apparent here.</li>
 		</ul>
+
+		Optionally, you may remove some of the points at high-$q$, as these are just fluctuations around 0, and do not contain structural information. This can speed up later processing. This can be done in PRIMUS by changing the number in the "To" column in the list of files (e.g. From 1 to 1000). Right-click on the data file name and press Save As, to save the truncated data file. 
 
 		Congratulations! You have now performed primary data reduction on a series of SAXS data files. They are now ready for further analysis.<br><br>
 		
 	
-	<h4>Part III: A more challenging dataset...</h4>
-	Coming soon...
+	<h4>Part III: Reducing data with instrumental artifacts and outliers</h4>
+	Download this <a href="silver_nanoparticles.zip"  target="_blank">SAXS data form silver nanoparticles</a>. Data files are labeled as <em>data</em> and buffer files are labeled as <em>bg</em>. Open the sample files as before (ensure that y-axis is logarithmic under Plot > (Double) Logarithmic Scale.)<br>
+	You can visually see that the data are not identical, and any statistical test can confirm this. Therefore, the two datasets should not be merged.<br>
+	Now, load in the two background measurements. <br>
+	
+	<img src="SilverNP_primus.png" style="width:1000px"/><br><br>
+
+	Notice, that features that are the same in sample and background are not due to the sample. Rather they come from the solvent, the sample holder or other instrumental artifacts. E.g., the incresed intensity at low values of $q$, as well as the "peak" at -2 on the q-axis, which is evident in the background labelled 33506_bg. <br>
+	
+	In this case, it is advicable to continue only with 33508_data for the sample and 33507_bg for the buffer. Unclick the other two, and subtract. 
+	
+	As the first points are affected by the beamstop, remove these by increasing the number in the "From" column of the subtracted data. It is easiest to determine how many points to remove in a double-logarithmic plot. As a rule of thumb, rather remove too many than too few points, as these points may lead to problems in later structural analysis.<br>
+	Also, remove some of the points and high values of $q$, where buffer and sample are identical (e.g. from 24 to 900). Right-click on the truncated and subtracted data and press Save As. Open this data to check that it is as expected. <br>
+	The data has an outlier (at intermediate $q$, around -1.1 on the q-axis). Manually, determine which point this is (e.g. using changing the "From" column). Remove this outlier from the data file, e.g. by opening it in a text editor and deleting the line. Reopen the file in PRIMUS to ensure that the outlier was successfully removed. <br>
+
+	<img src="SilverNP_primus_2.png" style="width:1000px"/><br><br>
 
 	</p>
 
+
 <h4>Challenges</h4>
 	<ul>
-		<li>Challenge 1: Download this <a href="silver_nanoparticles.zip"  target="_blank">SAXS data form silver nanoparticles.</a> Data files are labeled as
-			<it> data </it> and buffer files are labeled as <it> bg </it>. Perform primary data reduction on the files using Primus. </li>
-
-		</it> </li>
+		<li>Challenge 1: coming soon...</li>
+		<li>Challenge 2: coming soon...</li>
 	</ul>
-
-
-
-<!--
-DO NOT CHANGE ANYTHING BELOW
--->
 
 <h4>Feedback</h4>
 	Help us improve the tutorials by 
