@@ -22,18 +22,7 @@
 <div class="inner">
 
 <h4><a href="../index.html">Home</a></h4>
-<!--
-<h4>How to edit this tutorial <a href="https://youtu.be/CiGGkG4tWGc?si=AkuzJBoJrU42yAIR" target="_blank">(Video instructions)</a></h4>
-<ul>
-	<li>Download the repository from <a href="https://github.com/andreashlarsen/SAStutorials" target="_blank">GitHub</a>.</li>
-	<li>Copy Template.html and rename (e.g., MyTutorial.html). Place in a new folder with the same name (e.g. Mytoturial/). </li>
-	<li>Edit Template.html, with a text editor, e.g., <a href="https://code.visualstudio.com" target="_blank">Visual Studio Code</a>, which is free and available for Linux, MacOs and Windows.</li>
-	<li>View your changes by double-clicking Template.html (this will open it in a browser). If already open, refresh to see changes.</li>
-	<li>Add an entry in the index.html file correspoinding to the new tutorial (see instructions in the <a href="https://youtu.be/CiGGkG4tWGc?si=AkuzJBoJrU42yAIR" target="_blank">video.</li>
-	<li>Once you are happy with the new tutorial, sent it to andreas larsen (andreas.larsen (at) sund.ku.dk), who will test it and upload it to SAStutorials.org.</li>
-	<li>You may also push it to the repo (remember to pull latest version of repo immediately before pushing to avoid conflicts).</li>
-</ul>
--->
+
 <h1>Tutorial: SANS and contrast variation - simultaneous fitting</h1>
 <p>Contributors: Federica Sebastiani.</p>
 <p>
@@ -46,14 +35,13 @@
     <li>Download and install <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first)</li>
     <li>Complete tutorial on <a href="../SLD/SLD.html" target="_blank">SLD</a> 
     <li>Complete tutorial on <a href="../Spheres/Spheres.html" target="_blank">Spheres</a> 
-	<!--<li>Mandatory or recommended reading material/videos.</li> -->
 	</ul>
 	
 <h4>Learning outcomes</h4>
 Learn how to fit a geometrical model to a set of SANS data collected in different solvent contrasts.
 <ul>
 	<li>Calculate SLD for a molecule with known chemical formula and molecular volume.</li>
-	<li>Calculate SLD for solvents containing different percentage of $D_2O$.</li>
+	<li>Calculate SLD for solvents containing different percentage of D$_2$O.</li>
 	<li>Set fitting constraints to perform a simultaneous fit with SasView.</li>
     <li>Calculate the solvent content in the particle from the fitted SLD. </li>
 </ul>
@@ -66,13 +54,13 @@ Learn how to fit a geometrical model to a set of SANS data collected in differen
 <h4>Part I: Calculate SLD of the dendron</h4>
 	<p>
 	 The chemical formula for the dendron is C50H66F27N7O18.<br>
-     The molecular volume estimated by All-Atom <a href="https://en.wikipedia.org/wiki/Molecular_dynamics" target="_blank">Molecular Dynamics</a> (AAMD) simulation is 1387 Å$^3$.<br>
+     The molecular volume estimated by all-atom <a href="https://en.wikipedia.org/wiki/Molecular_dynamics" target="_blank">Molecular Dynamics</a> simulations (AAMD) is 1387 Å$^3$.<br>
 	<ul>
 
 	<li> to calculate SLD you can take the scattering length ($b_i$) for each atom <a href="https://www.ncnr.nist.gov/resources/n-lengths/" target="_blank">here</a> 
         and use the formula $\text{SLD} = \dfrac{\sum_{i=1}^n b_i}{V}$. <br> 
 	</li>
-	<li> Calculate the % of $D_2O$ in the solvent to <a href="matchout.html" target="_blank">match-out</a> the dendron. <br>
+	<li> Calculate the % of D$_2$O in the the solvent to <a href="matchout.html" target="_blank">match-out</a> the dendron. <br>
 	</p>
 </ul>
 
@@ -82,32 +70,32 @@ Learn how to fit a geometrical model to a set of SANS data collected in differen
 
 <h4>Part II: Dowload datasets and calculate SLd for solvent contrasts </h4>
 	<p>
-	Dowload <a href="Isim_D00.dat" target="_blank">dataset</a> at 0% $D_2O$ <br>
-    Dowload <a href="Isim_D20.dat" target="_blank" >dataset</a> at 20% $D_2O$ <br>
-    Dowload <a href="Isim_D50.dat" target="_blank" >dataset</a> at 50% $D_2O$ <br>
-    Dowload <a href="Isim_D75.dat" target="_blank" >dataset</a> at 75% $D_2O$ <br>
-    Dowload <a href="Isim_D100.dat" target="_blank" >dataset</a> at 100% $D_2O$ <br>
+	Dowload <a href="Isim_D00.dat" target="_blank">dataset</a> at 0% D$_2$O  <br>
+    Dowload <a href="Isim_D20.dat" target="_blank" >dataset</a> at 20% D$_2$O  <br>
+    Dowload <a href="Isim_D50.dat" target="_blank" >dataset</a> at 50% D$_2$O  <br>
+    Dowload <a href="Isim_D75.dat" target="_blank" >dataset</a> at 75% D$_2$O  <br>
+    Dowload <a href="Isim_D100.dat" target="_blank" >dataset</a> at 100% D$_2$O  <br>
     Calculate the SLD for the solvent contrasts. <br>
 	</p>
 
 <h4>Part III: Fit simultaneously SANS datasets measured with different solvent contrasts</h4>
 	<p>
-        Here you will find a step by step guide to set up the model and constraints in SasView.<br>
+        Here you will find a step-by-step guide to set up the model and constraints in SasView.<br>
         The datasets provided were simulated using a scale factor of 0.02 and <a href="https://sastutorials.org/Polydispersity/Polydispersity.html" target="_blank">polydispersity (PDI)</a> of 0.1, you will determine SLD and radius with the fitting.
         <ol type="1">
-            <li>Open sasview, load datasets, send data to fitting</li>
-            <img src="step_01.png" style="width: 500px"><br> 
+            <li>Open SasView, load in the datasets, send data to fitting</li>
+            <img src="step_01.png" style="width: 600px"><br> 
             <li>Select the model category and name: sphere</li>
             <li>Set the initial values for the parameters and set min and max values for the parameters that will be fitted (box ticked). <br>
-                N.B.: Scale factor should not be left variable if SLD is variable too, they are strongly correlated. Read more <a href="../Spheres/Spheres.html" target="_blank">here</a> <br>
+                N.B.: Scale factor should not be left variable if SLD is variable too, they are strongly correlated. Read more about correlated paramters in the <a href="../Spheres/Spheres.html" target="_blank">Sphere tutorial</a>.<br>
                 Background can be adjusted manually.<br>
                 SLD for the solvent is calculated and fixed. </li>
-            <img src="step_02.png" style="width: 500px"><br> 
+            <img src="step_02.png" style="width: 600px"><br> 
             <li>Press fit. <br>
-                You will see that the model has much sharper fringes than the experimental data, and that is because a PDI of 0.1 was used to simulate the data.</li>
+                You will see that the model has much sharper fringes than the data, and that is because a PDI of 0.1 was used to simulate the data.</li>
             <li>Repeat the fit after adding the PDI.</li>
-            <img src="step_03.png" style="width: 500px"><br> 
-            <img src="step_04.png" style="width: 500px"><br> 
+            <img src="step_03.png" style="width: 600px"><br> 
+            <img src="step_04.png" style="width: 600px"><br> 
             <li>You can go to FitPage2 and repeat the process from 2 to 5; 
                 or copy the parameters from FitPage1, 
                 change the SLD for the solvent and then fit again.<br>
@@ -117,8 +105,8 @@ Learn how to fit a geometrical model to a set of SANS data collected in differen
                 D50 may be difficult to fit, think about why!
                 </li>
             <li>Now you can set up the constraints to do the simultaneous fit of the datasets.<br>
-                Simultaneous fit means that the dataset collected in different solvent contrasts will be fitted to the same model, i.e. the radius will be constrained to be the same across solvents, since that should not depend on the $D_2O$ content.<br>
-                Go to: Fitting>Constrained or Simultaneous Fit <br>
+                Simultaneous fit means that the dataset collected in different solvent contrasts will be fitted to the same model, i.e. the radius will be constrained to be the same across solvents, since that should not depend on the D$_2$O content.<br>
+                Go to: <em>Fitting</em> > <em>Constrained or Simultaneous Fit</em> <br>
                 A new tab will appear. <br>
                 Press “Add constraints” <br>
                 Once all the radii are constrained to the same radius, you can check in the FitPages that the parameter name is in italic for all except the FitPage used as a constraint. <br>
@@ -131,61 +119,21 @@ Learn how to fit a geometrical model to a set of SANS data collected in differen
                 Since the radius is constrained, you will get a value that is common to all the FitPages, while the SLD for the sphere is different for each solvent contrast. 
                 </li>
                 <img src="step_08.png" style="width: 1000px"><br> 
-            <li>Plot SLD of the sphere vs SLD of the solvent and fit a line to the data. </li>
+            <li>Plot SLD of the sphere vs SLD of the solvent and fit a line to the data (e.g. in excel or python).</li>
             <li>From the slope and the intercept of the fitted line, you will be able to determine the hydration (i.e. solvent content, $vf_{solv}$) in the sphere and the SLD of the “dry sphere”.<br>
-                $SLD_{wet}=SLD_{dry}\cdot (1-vf_{solv})+SLD_{solv} \cdot vf_{solv}$
+                $\mathrm{SLD}_\mathrm{wet} = \mathrm{SLD}_\mathrm{dry}\cdot (1-vf_\mathrm{solv}) + \mathrm{SLD}_\mathrm{solv} \cdot vf_\mathrm{solv}$
                 </li>
         </ol>
-
-
-<!--
-		Images can be inserted in the tutorial <br>
-		<img src="Template.png" style="width:200px"><br> 
-		<code>&lt;img src="Template.png" style="width:150px"&gt;</code><br>
-		Images make the tutorials visually appealing and help explain key concepts and results.<br>
-		If you have a picture that you want to user as cover illustration for you tutorial (to appear at <a href="sastutorial.org"  target="_blank">sastutorial.org</a> front page), it should be square format. 
-		If it is not, you can, e.g., insert it in a <a href="Template.pptx" target="_blank">power point</a>, and adjust the size (Design -> Slide size), and export it as an image<br>
-		<img src="square_format.png" style="width:500px"><br> 
-		Try to <a href="Template.html" target="_blank">download this tutorial</a> (right-click > save file as), and change the cover photo (adjust dimensions of the new cover photo if necessary)<br>
-	</p>
-
-<h4>Part IV: Higlight with a box</h4>
-    <p>
-	If you have something to highlight (a concept, a check list, a step-by-step guide), it can be highlighted. E.g. this list <br>
-	<code>
-	&lt;ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"&gt; <br>
-	&lt;b&gt;How to design a new tutorial:&lt;/b&gt;<br>
-	&lt;li&gt;...&lt;\li&gt;<br>
-	&lt;ol&gt;
-	</code>
-	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
-		<b>How to design a new tutorial:</b>
-		<li>Identify a subject that should be covered with a tutorial.</li>
-		<li>Consider overall and specific learning outcomes.</li>
-		<li>Design 1-3 challenges that can be solved after requiring the skills of the tutorials. Preferably including analysis of real SAXS or SANS data.</li>
-		<li>Copy the <a href="https://github.com/andreashlarsen/SAStutorials" target="_blank">SASTutorial GitHub page</a> to your computer.</li>
-		<li>Copy the template folder and rename it.</li>
-		<li>To edit the html files, you must open them in a text editor, if you open them in a browser, you see the final result.</li>
-		<li>Make 2-4 parts in the tutorial with walk-through and explained analysis, providing files so the user can do the analysis themself. Explain rule-of-thumbs and pitfalls, og technical challenges. Use images for illustarations, e.g. screenshots from a software package that is demonstrated.</li>
-		<li>Find a representative image for the tutorial, make it square format and put in the folder.</li>
-		<li>Add your tutorial to the index file (copy one of the other entries and edit).</li>
-		<li>Check that everything is working. This can be done locally, in a browser.</li>
-		<li>Upload your new tutorial and the edited index file to the GitHub page (this will be checked by developers before being merged and thus be part of the sastutorials.org website).</li>
-	</ol>
-    </p>
--->
 
 <h4>Challenges</h4>
 	<ul>
 		<li> If you expect to have a core-shell sphere with distinct SLD for shell and core compartments, and you need to design a SANS experiment:<br>
              what is the minimum number of solvent contrasts to consider?<br>
-             what is the rationale to decide the % of $D_2O$ for the solvent contrasts?
+             what is the rationale to decide the % of D$_2$O for the solvent contrasts?
           </li>
-		<!-- <li>Challenge 2: </li>-->
 	</ul>
 
 <h4>Perspectives</h4>
-<p>
 	Examples of SANS and contrast variation in literature:
      <ul>
         <li><a href="https://www.pnas.org/doi/full/10.1073/pnas.1720542115" target="_blank"> 
@@ -195,7 +143,6 @@ Learn how to fit a geometrical model to a set of SANS data collected in differen
         <li><a href="https://pubs.acs.org/doi/10.1021/acsnano.0c10064" target="_blank">
             Apolipoprotein E Binding Drives Structural and Compositional Rearrangement of mRNA-Containing Lipid Nanoparticles</a></li>
      </ul>
-</p>
 
 <!--
 DO NOT CHANGE ANYTHING BELOW
