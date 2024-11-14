@@ -32,7 +32,7 @@
 	<ul>
 	<li>No installation or prior knowledge is required for this tutorial.</li>
 	</ul>
-	
+
 <h4>Learning outcomes</h4>
 	Learn how various shapes translate into SAS patterns.
 	<ul>
@@ -41,27 +41,44 @@
 		<li>Recognize shapes (e.g., spheres, cylinders, and discs) directly from SAXS data.</li>
 	</ul>
 	
-<h4>Part I: Varying the size and its effect on the SAS data</h4>
-	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, which can generate shapes and calculate the small-angle scattering from these shapes. Calculate the scattering from spheres of different sizes. 
+<h4>Introductory remarks</h4>
+	<p>
+		The basis for small-angle scattering is that nanoscale structures at can be investigated by sending a beam of x-rays or neutrons at the sample and measure how some of these are scattered by the sample. The measured scattering carry structural information, but one needs training to retrieve this information.<br>
+		This tutorials deals with samples that has no preferred orientation, so the scattering is the same in all directions (isotropic). If the sample is oriented, then the scattering will be anisotropic.
+		An isotropic scattering image measured on a detector can be reduced to a single curve with scattering intensity as function of the $q$, where $q$ is roughly the scattering angle ($2\theta$), normalized by the wavelength ($\lambda$) of the incoming x-rays or neutrons:
+		$$
+		q=4\pi \sin(\theta)/\lambda
+		$$
+		So higher $q$ means that the x-ray or neutron was scattered further away from the beam. In this tutorial, we will simulate such curves and retrieve structural information from them.<br>
+		Much structural information about particle size is found at (relative) low scattering angles, hence the names: small-angle x-ray scattering (SAXS) and small-angle neutron scattering (SANS).
+		<img src="SAS_setup.svg" style="width:900px"/><br>
+		<em>A scattering experiment. The incoming beam of x-rays or neutrons hits the sample of nanoparticles dispersed in solvent. A small fraction of the x-rays or neutrons scatter and are measured by a detector. The direct beam is blocked by a beam stop to prevent damage of the detector.</em>
+		<br>
+
+	</p>
+
+<h4>Part I: Scattering from spheres of different sizes </h4>
+	<a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> can generate shapes and calculate the scattering from these shapes. Use this program to calculate the scattering from spheres of different sizes: 
 	<ul> 
 		<li>If the <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> webpage is empty, click the three lines in the upper-left corner and press <em>Calculations</em>.</li>
 		<li>Click the boxes <em>Calculate scattering for Model 2/3/4</em>.</li>
 		<li>Select the subunit type (in this case use the default: spheres). Only use 1 subunit in each model for this exercise.</li>
 		<li>The parameters a,b,c are the particle dimensions, but for spheres, you only need to change a, which is the radius. Choose different radii for each of the four spheres.</li>
 		<li>Press "Submit" to see the scattering (and 3D illustrations and 2D projections) of each sphere.</li>
-		<li>The scattering can optionally be plotted on a log-lin scale instead of a log-log scale (under <em>Plotting options</em>).</li>
-		<li>Notice the inverse effect of particle size: <em>larger</em> radius shift the minima to <em>smaller</em> values of $q$, and vice versa.</li>
+		<li>The pattern is a "scattering fingerprint" for spheres. It is the same for all the spheres, but shifted in along $q$, depending on size.</li>
+		<!-- <li>The scattering can optionally be plotted on a log-lin scale instead of a log-log scale (under <em>Plotting options</em>).</li> -->
+		<li>There is an important inverse effect of particle size: <em>larger</em> radius shift the minima to <em>smaller</em> values of $q$, and vice versa.</li>
 	</ul>
 	Assuming you want to measure these particles, and would like to capture both the first flat part (which is denoted the Guinier region as described in the <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank" >Primary Data Analysis Tutorial</a>) and the first few minima; What is the optimal $q$ range for measuring the simulated spheres with different sizes (if you will test, you can change the q_min and q_max in the top boxes of Shape2SAS)?<br>
-	Changing the range of $q$ can be obtained by changing the instrument settings, i.e., changing sample-detector distance and/or wavelength. 
+	Changing the range of $q$ can be obtained by changing distance between the sample and the detector or by changing the wavelength of the incoming wave.
 	<br><br>
 
-<h4>Part II: Different shapes and their scattering patterns</h4>
-	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and try to generate the tutorial figure. 
+<h4>Part II: Different shapes and their characteristic scattering patterns</h4>
+	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and try to generate the tutorial figure in the top of the page. 
 	<ul> 
-		<li>Select the subunit type. The dumbbell is generated by combining 3 subunits: 2 spheres and 1 cylinder, whereas the sphere, cylinder and disc consist of a single subunit.</li>
+		<li>Select the subunit type. The dumbbell is generated by combining 3 subunits: 2 spheres and 1 cylinder, whereas the sphere, cylinder and disc consist of a single subunit each.</li>
 		<li>The parameters a,b,c are the particle dimensions, and the meaning depends on the subunit type - hover the mouse over the boxes to get explanations.</li>
-		<li>The parameters x_com,y_com,z_com translates the center-off-mass of a given subunit.</li>
+		<li>The parameters x_com,y_com,z_com translates the center-off-mass of a given subunit (necessary only for the dumbbell).</li>
 		<li>Press "Submit" to see the scattering (and 3D illustrations) of each model.</li>
 		<li>The scattering can optionally be plotted on a log-lin scale instead of a log-log scale (Plotting options). This was done in the figure above.</li>
 	</ul>
@@ -70,17 +87,24 @@
 <h4>Part III: Ambiguity. Different shapes, but similar SAS patterns.</h4>
 	Some shapes can result in rather similar SAS patterns. Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate 2 objects
 	<ol> 
-		<li>Model: cylinder with radius 1 Å (a=b=10) and length 100 Å (c=100).</li>
+		<li>Model: cylinder with radius 10 Å (a=b=10) and length 100 Å (c=100).</li>
 		<li>Model: an ellipsoid with axes 10, 10 and 70 (a=b=10 and c=70).</li>
 	</ol>
-	You may also compare a 50-Å sphere (a=50) with a 50-Å hollow sphere, with inner radius 20 Å (a=50,b=20).<br>
-	Therefore, visual inspection of data, and pattern recognition is only the first step in analysis of SAXS or SANS data. Usually, more models are tested against the data, and any prior knowledge about the data (e.g. from microscopy or knowledge from the manufacturer) is considered in the analysis.
+	You can also compare a 50-Å sphere (a=50) with a 50-Å hollow sphere, with inner radius 20 Å (a=50,b=20).<br>
+	Therefore, visual inspection of data, and pattern recognition is only the first step in analysis of scattering data. Usually, more models are tested against the data, and any prior knowledge about the data (e.g. from microscopy or knowledge from the manufacturer) is considered in the analysis.
 	<br><br>
 
 <h4>Challenges</h4>
 	<ol>
 		<li>Have a look at <a href="Challenge1/Challenge1.png" target="_blank" >these SAXS data</a>. What shapes could have been measured in each experiment, as assessed by the shape of the data? What shapes can be excluded with certainty?</li>
 	</ol>
+
+<h4>Perspectives</h4>
+	<ul>
+		<li>Structural information can be derived quantitatively using mathematical models, see the <a href="../Spheres/Spheres.html" target="_blank" >Spheres tutorial</a>.</li>
+		<li>The sample holder and solvent also give rise to scattering, therefore a background is subtracted, see the <a href="../PrimaryDataReduction/PrimaryDataReduction.html" target="_blank" >Data Reduction tutorial</a>.</li>
+		<li>As some structural information can be retrieved by image recognition, attempts have been made in using machine learning to retrieve structural information from scattering data (<a href="https://doi.org/10.1016/j.bpj.2018.04.018" target="_blank" >Franke et al., 2018</a>).</li>
+	</ul>
 
 <h4>Feedback</h4>
 	Help us improve the tutorials by 
