@@ -11,7 +11,6 @@
 <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
 <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
-
 <script>
 	function showText() {
 	  var elements = document.getElementsByClassName('hiddenText2');
@@ -20,12 +19,10 @@
 	  }
 	}
   </script>
-
 <style>
     #hiddenText {
         display: none;
     }
-
 	#hiddenText3 {
         display: none;
     }
@@ -66,11 +63,10 @@ PLEASE CHANGE ICON
 <h4>Before you start</h4>
 <p>
 <ul>
- 	<li>It's a good idea to have SasView installed for this tutorial. You can download it from <a href="https://www.sasview.org/", target="_blank">sasview.org</a>. </li>
+ 	<li>It is a good idea to have SasView installed for this tutorial. You can download it from <a href="https://www.sasview.org/", target="_blank">sasview.org</a>. </li>
 	<li>You will need to make calculations by hand. A spreadsheet and possibly pen and paper are recommended.</li>	
 </ul>
 </p>
-
 
 <h4>Learning Outcomes</h4>
 After completing this tutorial you will
@@ -80,7 +76,6 @@ After completing this tutorial you will
 	<li>Be able to calculate percentages of D$_2$O and H$_2$O to match out certain parts of a sample.</li>
 	<li>Decide on SANS/SAXS and solvent based on your specific sample.</li>
 </ul>
-
 
 <h4>Introduction</h4>
 	<p>
@@ -97,9 +92,8 @@ After completing this tutorial you will
 		<em>Comparison of coherent scattering cross sectioins (square of the coherents scattering lenghts) for neutrons (red) and X-rays (blue).</em>
 		<br><br>
 
-		For neutrons, it is common to list the scattering length of an atom in units of fm (femtometers, $10^{-15}$ m). For our applications, the X-ray scattering length
-		of an atom is essentially given by $b=Zr_e$, where $r_e = 2.82$ fm is the classical electron radius.
-		This approximation holds because SAXS uses hard X-rays ($E>5-10 \text{ keV}$) with wavelengths dissimilar from those often absorbed by atoms in soft matter. <br><br>
+		For neutrons, it is common to list the scattering length of an atom in units of fm (femtometers, $10^{-15}$ m). The X-ray scattering length of an atom is essentially given by $b=Zr_e$, where $r_e = 2.82$ fm is the classical electron radius.
+		<!-- This approximation holds because SAXS uses hard X-rays ($E>10 \text{ keV}$) with wavelengths dissimilar from those often absorbed by atoms in soft matter. <br><br> -->
 	</p>
 
 <h4>Part I: Calculate SLDs</h4>
@@ -139,12 +133,12 @@ In this exercise we will calculate the scattering length densities for the two m
 			
 		</ul>
 
-		In practice, one should use a SLD Calculator. In Sasview, the SLD Calculator can be found under "Tools". Alternatively one can use <a href="https://www.ncnr.nist.gov/resources/activation/", target="_blank">an online calculator from NIST.</a><br><br>
+		In practice, one should use a SLD Calculator. In SasView, the SLD Calculator can be found under "Tools". Alternatively one can use <a href="https://www.ncnr.nist.gov/resources/activation/", target="_blank">an online calculator from NIST.</a><br><br>
 
 		Most SAS experiments are performed in a solvent, which has a SLD of its own. If the SLD of the sample is similar to the solvent's SLD,
 		the scattering from the sample will be weak. This difference or <i>excess scattering length density</i> is
 		$$
-			\Delta \text{SLD} = \text{SLD}_{\text{sample}} - \text{SLD}_{\text{solvent}}.
+			\Delta \text{SLD} = \text{SLD}_{\text{sample}} - \text{SLD}_{\text{solvent}}
 		$$
 		The intensity of scattering from the sample is proportional to $\Delta \text{SLD}^2$, which we call <i>contrast</i>. <br><br>
 
@@ -175,8 +169,8 @@ In this exercise we will calculate the scattering length densities for the two m
 
 <h4>Part III: Sodium dodecyl sulfate</h4>
 	<p>
-		This section focuses on the detergent <i>sodium dodecyl sulfate</i> (SDS), CH$_3$(CH)$_2$OSO$_3$Na. SDS is widely used to solubilize membrane proteins in biophysical experiments, including SAXS and SANS.
-		As a first exercise, calculate the SLD of SDS for both X-rays and neutrons with <a href="https://www.ncnr.nist.gov/resources/activation/", target="_blank">the online calculator from NIST.</a>
+		This section focuses on the detergent <i>sodium dodecyl sulfate</i> (SDS), CH$_3$(CH)$_2$OSO$_3$Na, which is used to solubilize membrane proteins.
+		As a first exercise, calculate the SLD of SDS for both X-rays and neutrons with <a href="https://www.ncnr.nist.gov/resources/activation/", target="_blank">the online calculator from NIST</a>.
 		For this you only need the molecular formula of SDS and <a href="https://en.wikipedia.org/wiki/Sodium_dodecyl_sulfate", target="_blank">the density which can be found on wikipedia</a>. 
 		For the X-ray source, assume an energy of 10 keV. You should see a table like the one below. <br><br>
 
@@ -184,8 +178,7 @@ In this exercise we will calculate the scattering length densities for the two m
 
 		Under "Scattering length density" is the SLD for neutrons as "real". The SLD for X-rays is given as "X-ray SLD" under "real". Both marked in red.<br><br>
 
-		Next, determine the percentage of H$_2$O and D$_2$O in your solvent in order to match out SDS in a SANS experiment.
-		(The answer to this question is given below the table as the "Contrast match point")<br><br>
+		Next, determine the percentage of H$_2$O and D$_2$O in your solvent in order to match out SDS in a SANS experiment. This is the contrast match point, and is given below the table in the <a href="https://www.ncnr.nist.gov/resources/activation/", target="_blank">NIST SLD calculater</a><br><br>
 
 		In reality, the SLD of SDS varies between the hydrophilic head group and the hydrophibic tail group. In addition to this, SDS forms micelles in solution with 
 		aggregation number $N\sim66$. In the exercise below, we calculate the forward scattering ($I(q=0)$) of SDS micelles, which is given by
@@ -349,15 +342,17 @@ In this exercise we will calculate the scattering length densities for the two m
 
 <h4>Challenges</h4>
 	<ul>
-		<li>Coming soon...</li>
+		<li>Challenge 1: You wish to investigate the structure of <a href="https://avantiresearch.com/product/850345" target="_blank">DMPC</a> vesicles in SAXS. To do this, calculates its (x-ray) SLD. The volumes of head group (C$_{10}$H$_{18}$NO$_8$P) and tail group can be found in <a href="TableS1.pdf" target="_blank">Table S1</a> of <a href="https://doi.org/10.1021/acs.langmuir.8b02704" target="_blank">Mortensen et al., 2018</a>.</li>
+		<li>Challenge 2: In a next experiment, you wish to measure the time constant of lipid exchange in DMPC vesicles, using SANS. Therefore, you need to calculate neutron SLDs and its match point.</li>
+		<li>Challenge 3: You wish to do further structural analysis with SANS, therefore: calculate the match point of, respectively, head and tail groups of DMPC. What structures would you expect to observe if you did those SANS experiments?</li>
 	</ul>
 
-
-
-<!--
-DO NOT CHANGE ANYTHING BELOW
--->
-
+<h4>Perspectives</h4>
+	<ul>
+		<li>SLD is a necessary first step needed before more complex modelling can be performed, such as those demonstrated in the <a href="../Lamellae/Lamellae.html" target="_blank">Vesicle tutorial</a>.</li>
+		<li>Lipid exchange SANS experiments like those in challenge 2 have, e.g., been used to investigate lipid flipping rate and how these can be affected by peptides (<a href="https://doi.org/10.1063/4.0000045"  target="_blank">Nakao et al., 2021</a>).</li>
+	</ul>
+	
 <h4>Feedback</h4>
 	Help us improve the tutorials by 
 	<ul>
