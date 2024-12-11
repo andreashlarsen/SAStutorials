@@ -89,7 +89,7 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 			For this run only, set the "sample frequency" to 2 (and make sure to hit "enter"!). Then click the "start" button.</li>
 		<li>Command-line interface: <br> 
 			Move all files to the same directory, and launch a terminal from there. <br>
-			Then run the command: <code>em_fitter emd_24889.map SASDJG5.dat --frequency 2</code></li>
+			Then run the command: <code>em_fitter emd_24889.map SASDJG5.dat --frequency 2 --qmax 1</code></li>
 			<ul> When the program is done, run the following plotting command:
 				<li><i>Windows</i>: <code>./plotter.exe</code></li>
 				<li><i>Mac or Linux</i>: <code>python scripts/plot.py</code></li>
@@ -185,17 +185,15 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 		Since we are impatient and know there are no minima at $\sigma$ &lt; 6 anyway, let us skip these too by also modifying the minimum level. <br><br>
 		<img src="chi2_landscape_2.png" style="width:500px"/><br>
 
-		Looking at the new chi-square landscape, it appears as though our original bounds were fine. 
-		Let us now see what happens if we use <i>all</i> the map data, without discarding anything.
-		Set the sampling frequency to 1 and rerun the fit, making sure to use the new bounds. <br><br>
+		Looking at the new chi-square landscape, it appears as though our original bounds were fine.
+		Since there is a rather large amount of noise in the $\chi^2_r$ values, let us rerun the fit without discarding any data.
+		Set the sampling frequency to 1 and rerun the fit, making sure to use the new bounds.
 		Since we are only scanning relatively high alpha-levels, this shouldn't take too long. <br><br>
 		<img src="chi2_landscape_3.png" style="width:500px"/><br>
 
-		Curiously, this new chi-square landscape has a larger variation than the previous one.
-		The cause of this is not immediately clear, though one explanation can be given by comparing the "report.txt" files.
-		Here, the hydration shell scattering power parameter "cw" is significantly higher in the new fit, meaning the hydration
-		is more important now than before. This could thus indicate that the optimization is more difficult, thus leading to 
-		a larger variation in the fitted values. <br>
+		As we can see, this was only partially successful. The new chi-square landscape is still quite noisy, which is likely due to the hydration shell. 
+		When looking at the fitted parameters in the "report.txt" file, we see that the hydration shell scattering power parameter "cw" is significantly higher in the new fit, 
+		meaning the hydration is more important now than before. This would indicate the optimization is more difficult, and hence the larger variation in the fitted values. <br><br>
 
 		Regardless, we see that the minimum $\chi^2_r$-value around $\sigma$ = 7.5 is still the best, which roughly agrees with what we found previously. 
 		We can also confirm this value by looking at the "info.txt" file inside the "models" folder. <br><br>
