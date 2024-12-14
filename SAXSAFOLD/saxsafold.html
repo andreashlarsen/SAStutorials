@@ -32,14 +32,14 @@
         <div class="inner">
 
             <h1>SAXS-A-FOLD Tutorial</h1>
-            <p>Contributors: Emre Brookes</p>
+            <p>Contributors: Emre Brookes and Mattia Rocco</p>
             <p>
                 <img src="images/saxsafold_logo.png" style="width:400px"/><br>
             </p>
 
             <h4>Before You Start</h4>
             <ul style="margin-bottom: 25px">
-                <li>Register on the SAXS-A-FOLD website and verify your email.</li>
+                <li>Register on the <a href="http://saxsafold.genapp.rocks/" target="_blank">SAXS-A-FOLD website</a> and verify your email.</li>
                 <li>Prepare required files:
                     <ul>
                         <li><a href="data/SASDBP9_A.dat" target="_blank">Download SAXS I(q) file</a></li>
@@ -48,7 +48,7 @@
                 </li>
                 <li>Review SAXS analysis fundamentals and AlphaFold usage for structure retrieval.</li>
 				<li>Help for selected entries is provided through pop-ups that activate by moving the mouse cursor over the name or the associated field.</li>
-                <li>There is a "Docs" tab on the right of the page that include additional help and details.</li>
+                <li>There is a "Docs" tab on the right of the SAXS-A-FOLD website that includes additional help and details.</li>
             </ul>
 
             <h4>Learning Outcomes</h4>
@@ -57,10 +57,9 @@
                 <li>Define and manage projects in SAXS-A-FOLD.</li>
                 <li>Upload and process SAXS data.</li>
                 <li>Retrieve AlphaFold structures and perform SAXS calculations.</li>
-                <li>Analyze flexible regions in protein structures.</li>
-                <li>Run Monte Carlo simulations and refine structural models.</li>
-                <li>Evaluate results using NNLS fitting procedures.</li>
-                <li>Utilize WAXSiS to compute and compare I(q) profiles of selected models.</li>
+                <li>Set flexible regions in protein structures.</li>
+                <li>Run Monte Carlo simulations.</li>
+                <li>Utilize WAXSiS to compute I(q) profiles of selected models.</li>
             </ul>
 
             <h4>Introductory Remarks</h4>
@@ -77,13 +76,13 @@
                     future use.
                 </li>
                 <img src="images/define_project.png" alt="Define Project Screenshot" /><br><em>Define Project tab after submit</em>
-                <li>Once "Submit" has been successful a message will be shown in the bottom textarea, "Current project is Tutorial".</li>
+                <li>Once "Submit" has been successful, a message will be shown in the bottom textarea, "Current project is Tutorial".</li>
             </ol>
 
             <h4>Part II: Upload SAXS Data</h4>
             <ol>
                 <li>Navigate to the "Load SAXS" tab.</li>
-                <img src="images/upload_saxs.png" alt="Upload SAXS Data"/><br><em>Upload SAXS Data tab</em>
+                <img src="images/upload_saxs.png" alt="Upload SAXS Data"/><br><em>Load SAXS tab</em>
                 <li>In the "SAXS I(q) File" section:
                     <ul>
                         <li>Click "Browse Local Files" to upload the "SASDBP9_A.dat" file from your computer that was downloaded in the "Before You Start" section of this tutorial.
@@ -97,7 +96,7 @@
                     </ul>
                 </li>
                 <li>Press "Submit" to process the data and generate interactive plots of I(q) and P(r).</li>
-                <img src="images/saxs_data_plot.png" alt="SAXS Data Screenshot"/><br><em>Upload SAXS Data tab</em>
+                <img src="images/saxs_data_plot.png" alt="SAXS Data Screenshot"/><br><em>Load SAXS tab after submit</em>
             </ol>
 
             <h4>Part III: Retrieve AlphaFold Structures</h4>
@@ -120,7 +119,7 @@
             <h4>Part IV: Flexible Region Analysis</h4>
 
             <ol>
-                <li>Go to the "Structural Info / Flexible Regions" tab.</li>
+                <li>Navigate to the "Structural Info / Flexible Regions" tab.</li>
                 <img src="images/flexible_regions.png" alt="Flexible Regions Screenshot" /><br><em>Flexible Region Analysis tab</em>
                 <li>Scroll down to verify that the "Auto Compute Flexible regions from AlphaFold residue confidence" switch is enabled for automated analysis of AlphaFold-generated
                     structures.</li>
@@ -146,7 +145,7 @@
                 <li>Set "Stride" to "40".</li>
                 <li>Set "Offset" to "0".</li>
                 <li>Generate histograms of Rg values to evaluate the distribution of conformations by pressing the "Submit" button.</li>
-                <li>Once that is complete then select "Extract frames" switch and press "Submit" button. After that is complete, continue with the next section.</li>
+                <li>Once that is complete then select "Extract frames" switch and press "Submit" button. After that is complete, continue to the next section.</li>
                 <img src="images/mmc_results_enabled.png" alt="MMC Results Histogram" /><br><em>Histogram of MMC Results and Rg values</em>
             </ol>
 
@@ -156,7 +155,7 @@
                 <img src="images/nnls_fitting.png" alt="Compute and Fit I(q) Profiles Screenshot" /><br><em>Compute and Fit I(q) Profiles tab</em>
                 <li>Use the computation method: PEPSI-SAXS.</li>
                 <li>Enable "Perform a Second P(r) NNLS Fit" if additional fitting is required.</li>
-                <li>Submit to perform computations and view real-time progress. Once it is complete, continue with next section.</li>
+                <li>Submit to perform computations and view real-time progress. Once it is complete, continue to the next section.</li>
             </ol>
 
             <h4>Part VIII: Final Model Selection</h4>
@@ -176,10 +175,11 @@
             <ul style="margin-bottom: 25px">
                 <li>Go through the tutorial using the following files and values
                     <ul>
-                        <li><a href="data/SASDM77_A" target="_blank">Download SAXS I(q) file</a></li>
+                        <li><a href="data/SASDM77_A.dat" target="_blank">Download SAXS I(q) file</a></li>
                         <li><a href="data/SASDM77_Dmax170_gnom_bin1no0err.dat" target="_blank">Download SAXS P(r) file</a></li>
-                        <li>UniProt accession code "AF-Q16543"</li>
+                        <li>UniProt accession code "AF-Q9UKA9"</li>
                         <li>Flexible regions 1-54 and 273–336</li>
+                        <li>Hint: Adjust the structure alignment range.</li>
                     </ul>
                 </li>
             </ul>
