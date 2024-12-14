@@ -43,13 +43,12 @@
                 <li>Prepare required files:
                     <ul>
                         <li><a href="data/SASDBP9_A.dat" target="_blank">Download SAXS I(q) file</a></li>
-                        <li><a href="data/SASDBP9_Dmax170_gnom_bin1.dat" target="_blank">Download SAXS P(r) file</a>
-                            (generate using BayesApp if unavailable)
-                        </li>
+                        <li><a href="data/SASDBP9_Dmax170_gnom_bin1.dat" target="_blank">Download SAXS P(r) file</a></li>
                     </ul>
                 </li>
                 <li>Review SAXS analysis fundamentals and AlphaFold usage for structure retrieval.</li>
 				<li>Help for selected entries is provided through pop-ups that activate by moving the mouse cursor over the name or the associated field.</li>
+                <li>There is a "Docs" tab on the right of the page that include additional help and details.</li>
             </ul>
 
             <h4>Learning Outcomes</h4>
@@ -77,8 +76,8 @@
                 <li>Press "Submit" to save the project. The project will now be accessible from the dropdown menu for
                     future use.
                 </li>
-                <img src="images/define_project.png" alt="Define Project Screenshot" /><br><em>Define Project tab after submit.</em>
-                <li>Once "Submit" has been successful a message will be shown in the bottom textarea, "Current project is Tutorial"</li>
+                <img src="images/define_project.png" alt="Define Project Screenshot" /><br><em>Define Project tab after submit</em>
+                <li>Once "Submit" has been successful a message will be shown in the bottom textarea, "Current project is Tutorial".</li>
             </ol>
 
             <h4>Part II: Upload SAXS Data</h4>
@@ -109,7 +108,7 @@
                 <li>In the "Select Input Source" dropdown:
                     <ul>
                         <li>Choose "Get AlphaFold Structure" to access the AlphaFold database.</li>
-                        <li>Enter the UniProt accession code "AF-Q16543" in the provided field</li>
+                        <li>Enter the UniProt accession code "AF-Q16543" in the provided field.</li>
                     </ul>
                 </li>
                 <li>Press "Process" to perform SAXS calculations and generate P(r) and I(q) plots.</li>
@@ -148,14 +147,14 @@
                 <li>Set "Offset" to "0".</li>
                 <li>Generate histograms of Rg values to evaluate the distribution of conformations by pressing the "Submit" button.</li>
                 <li>Once that is complete then select "Extract frames" switch and press "Submit" button. After that is complete, continue with the next section.</li>
-                <img src="images/mmc_results_enabled.png" alt="MMC Results Histogram" /><br><em>Histogram of MMC Results and Rg values.</em>
+                <img src="images/mmc_results_enabled.png" alt="MMC Results Histogram" /><br><em>Histogram of MMC Results and Rg values</em>
             </ol>
 
             <h4>Part VII: Compute and Fit I(q) Profiles</h4>
             <ol>
                 <li>Go to the "Compute P(r) and I(q) / Preselect Models" tab.</li>
-                <img src="images/nnls_fitting.png" alt="Compute and Fit I(q) Profiles Screenshot" /><br><em>Screenshot of the Compute and Fit I(q) Profiles tab.</em>
-                <li>Use the computation method: PEPSI-SAXS</li>
+                <img src="images/nnls_fitting.png" alt="Compute and Fit I(q) Profiles Screenshot" /><br><em>Compute and Fit I(q) Profiles tab.</em>
+                <li>Use the computation method: PEPSI-SAXS.</li>
                 <li>Enable "Perform a Second P(r) NNLS Fit" if additional fitting is required.</li>
                 <li>Submit to perform computations and view real-time progress. Once it is complete, continue with next section.</li>
             </ol>
@@ -165,8 +164,12 @@
                 <li>Navigate to the "Final Models Selection Using WAXSiS" tab.</li>
                 <img src="images/final_models.png" alt="Final Model Selection Screenshot" /><br><em>Final Model Selection tab</em>
                 <li>Click "Submit"</li>
-                <li><img src="images/final_models_complete.png" alt="Final Models Selection" /><br><em>Final
-                    models with WAXSiS computations.</em></li>
+                <li>Review Models</li>
+                <img src="images/final_models_graphs.png" alt="Final Models Graphs" /><br><em>Final
+                    models with WAXSiS computations</em>
+                <li>Review structure</li>
+                <img src="images/final_models_structure.png" alt="Final Models Structure" /><br><em>Final
+                    structure with WAXSiS computations</em></li>
             </ol>
 
             <h4>Challenges</h4>
