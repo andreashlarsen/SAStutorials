@@ -32,7 +32,7 @@
         <div class="inner">
 
             <h1>SAXS-A-FOLD Tutorial</h1>
-            <p>Contributors: Emre Brookes and Mattia Rocco</p>
+            <p>Contributors: Emre Brookes, Mattia Rocco, and Aaron Householder</p>
             <p>
                 <img src="images/saxsafold_logo.png" style="width:400px"/><br>
             </p>
@@ -113,7 +113,7 @@
                 <li>Press "Process" to perform SAXS calculations and generate P(r) and I(q) plots.</li>
                 <li>Once it is complete, then scroll down to see generated P(r) and I(q) plots.</li>
                 <img src="images/alphafold_structure_process.png" alt="AlphaFold Structures Processed Screenshot"
-                /><br><em>AlphaFold Structure</em>
+                /><br><em>AlphaFold Structure: The completed plot for I(q), including the WAXSiS calculated curve, should be shown</em>
             </ol>
 
             <h4>Part IV: Flexible Region Analysis</h4>
@@ -124,9 +124,9 @@
                 <li>Scroll down to verify that the "Auto Compute Flexible regions from AlphaFold residue confidence" switch is enabled for automated analysis of AlphaFold-generated
                     structures.</li>
                 <img src="images/flexible_regions_switch.png" alt="Flexible Regions Switch Screenshot" /><br><em>Flexible Region Analysis switch</em>
-                <li>For "Number of flexible regions" field enter "2".</li>
-                <li>For "Flexible region start,end[1]" field enter "121,139".</li>
-                <li>For "Flexible region start,end[2]" field enter "343,378". Reference image "Flexible Region Analysis switch" for an example of fields populated.</li>
+                <li>For "Confidence threshold for Auto compute" field enter "60".</li>
+                <li>Press "Compute flexible regions" button.</li>
+                <li>Reference image "Flexible Region Analysis switch" for an example of calculated fields populated.</li>
                 <li>Submit to save and update the structure visualization. After submit the message "Flexible regions saved" should be displayed below the Submit button.</li>
                 <img src="images/flexible_regions_saved.png" alt="Flexible Regions Saved Screenshot" /><br><em>Flexible Region Analysis saved</em>
             </ol>
@@ -135,6 +135,23 @@
 			<ol>
                 <li>Open the "Run MMC" tab.</li>
                 <img src="images/mmc_simulation.png" alt="Monte Carlo Simulations Screenshot" /><br><em>Monte Carlo Simulations tab</em>
+                <li>Update the "number of trials attempts" field to "10000".
+                <li> Fields on this tab that are not editable include:
+                    <ul>
+                    <li>return to previous structure: set to "20"; after this number of failed steps attempts, the program will reset to the current coordinates.
+                    <li>temperature (K): set to 300 K.</li>
+                    <li>molecule type: set to "protein".</li>
+                    <li>number of flexible regions to vary: defined in the previous tab.</li>
+                    <li>residue range for each flexible region: defined in the previous tab.</li>
+                    <li>maximum angle(s): set to 30°, which is the maximum angle that each torsion in each of the flexible regions can sample in a single move.</li>
+                    </ul>
+                </li>
+                <li> Fields that can be edited include:
+                    <ul>
+                        <li>structure alignment range: this is the residue range used to spatially align all the MMC-generated models; it should be set to a non-flexible region).</li>
+                        <li>overlap basis: defined for the overlap checks used to reject structures with clashes. Default: "heavy atoms"; other options, accessible from a pull-down menu, are "all" atoms in case the structure also has H atoms defined, "backbone" atoms, or "enter atom name".</li>
+                    </ul>
+                </li>
                 <li>Scroll to the bottom and press "Submit" to run simulations and view progress in real-time. Once it is complete, continue with next section.</li>
             </ol>
 
@@ -142,7 +159,7 @@
             <ol>
                 <li>Access the "Retrieve MMC" tab.</li>
                 <img src="images/mmc_results.png" alt="Retrieve MMC Screenshot" /><br><em>Retrieve MMC tab</em>
-                <li>Set "Stride" to "40".</li>
+                <li>Set "Stride" to "10". This stride value is for reasonable compute times for tutorial purposes. In practice, a lower stride should be used.</li>
                 <li>Set "Offset" to "0".</li>
                 <li>Generate histograms of Rg values to evaluate the distribution of conformations by pressing the "Submit" button.</li>
                 <li>Once that is complete then select "Extract frames" switch and press "Submit" button. After that is complete, continue to the next section.</li>
@@ -152,7 +169,7 @@
             <h4>Part VII: Compute and Fit I(q) Profiles</h4>
             <ol>
                 <li>Go to the "Compute P(r) and I(q) / Preselect Models" tab.</li>
-                <img src="images/nnls_fitting.png" alt="Compute and Fit I(q) Profiles Screenshot" /><br><em>Compute and Fit I(q) Profiles tab</em>
+                <img src="images/nnls_fitting.png" alt="Compute and Fit I(q) Profiles Screenshot" /><br><em>Compute and scale I(q) and P(r) Profiles, Preselect Models </em>
                 <li>Use the computation method: PEPSI-SAXS.</li>
                 <li>Enable "Perform a Second P(r) NNLS Fit" if additional fitting is required.</li>
                 <li>Submit to perform computations and view real-time progress. Once it is complete, continue to the next section.</li>
