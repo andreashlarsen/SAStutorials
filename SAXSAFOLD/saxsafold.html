@@ -63,8 +63,9 @@
             </ul>
 
             <h4>Introductory Remarks</h4>
-            <p>SAXS-A-FOLD is a platform for SAXS data analysis and modeling. This tutorial guides you through core
-                features, including data uploading, structural modeling, refinement, and analysis.</p>
+            <p>SAXS-A-FOLD is a platform for analyzing and improving protein structural models, such as those
+                predicted by AlphaFold or derived from solved modules, against SAXS data . This tutorial guides
+                you through core features, including data uploading, structural modeling, refinement, and analysis.</p>
 
             <h4>Part I: Define a Project</h4>
             <ol>
@@ -159,20 +160,20 @@
             <ol>
                 <li>Access the "Retrieve MMC" tab.</li>
                 <img src="images/mmc_results.png" alt="Retrieve MMC Screenshot" /><br><em>Retrieve MMC tab</em>
-                <li>Set "Stride" to "10". This stride value is for reasonable compute times for tutorial purposes. In practice, a lower stride should be used.</li>
+                <li>Set "Stride" to "10". This stride value is for reasonable compute times for tutorial purposes. In practice, the stride should be selected based on the results of the Rg histograms.</li>
                 <li>Set "Offset" to "0".</li>
-                <li>Generate histograms of Rg values to evaluate the distribution of conformations by pressing the "Submit" button.</li>
+                <li>Generate histograms of Rg values to evaluate the distribution of conformations by pressing the "Submit" button. The goal is to have a reasonably similar Rg districution before and after the stride application.</li>
                 <li>Once that is complete then select "Extract frames" switch and press "Submit" button. After that is complete, continue to the next section.</li>
                 <img src="images/mmc_results_enabled.png" alt="MMC Results Histogram" /><br><em>Histogram of MMC Results and Rg values</em>
             </ol>
 
-            <h4>Part VII: Compute and Fit I(q) Profiles</h4>
+            <h4>Part VII: Compute I(q) and P(r) Profiles, pre-select structures best fitting the data</h4>
             <ol>
                 <li>Go to the "Compute P(r) and I(q) / Preselect Models" tab.</li>
                 <img src="images/nnls_fitting.png" alt="Compute and Fit I(q) Profiles Screenshot" /><br><em>Compute and scale I(q) and P(r) Profiles, Preselect Models </em>
                 <li>Use the computation method: PEPSI-SAXS.</li>
                 <li>Enable "Perform a Second P(r) NNLS Fit" if additional fitting is required.</li>
-                <li>Submit to perform computations and view real-time progress. Once it is complete, continue to the next section.</li>
+                <li>Submit to perform computations and view real-time progress. Once it is complete, continue to the next section. . Progress will show first advancements in the P(r) computations, then on the I(q) computations, both in blocks of 50 curves.</li>
             </ol>
 
             <h4>Part VIII: Final Model Selection</h4>
