@@ -4,6 +4,7 @@
 	
 <head>
 <title>Tutorial Comparing Electron Microscopy</title> 
+<link rel="icon" href="../favicon.png" type="image/x-icon" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="../assets/css/main.css" />
@@ -22,18 +23,20 @@
 
 <h4><a href="../index.html">Home</a></h4>
 <h1>Tutorial: Comparing with Electron Microscopy</h1>
-<p>Tutorial contributors: Kristian Lytje</p>
+<p>Contributors: Kristian Lytje, Jeppe Breum Jacobsen</p>
 <p>
-	<img src="SASDJG5_loglog.png" style="width:800px"/>
+	<img src="SASDJG5_loglog.png" style="width:800px"/><br>
+	<em>Black: SAXS data. Red: fit from EM map using AUSAXS. The grey shape is the optimized structure. The atomic structure is shown in orange. From: <a href="https://doi.org/10.1107/S2059798324005497" target="_blank">https://doi.org/10.1107/S2059798324005497</a></em>
 </p>
 <h4>Before you start</h4>
 <ul>
 	<li>Requirements: <br>
 		(1) The <a href="https://github.com/AUSAXS/AUSAXS" target="_blank">AUSAXS</a> software (free, no installation).<br>
 		(2) Python (including numpy, scipy, and matplotlib) to visualize the results.<br>
+		(3) A qualitative understanding of SAXS data is advantageous, but not required. See for example <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank"> Tutorial: Primary Data analysis.</a>
 	</li>
 	<li>Expectations: <br>
-		In this tutorial, we will compare small-angle X-ray scattering data with electron microscopy data.<br>
+		In this tutorial, we will compare small-angle X-ray scattering data with <a href="https://en.wikipedia.org/wiki/Electron_microscope" target="_blank">electron microscopy</a> data.<br>
 		These are very different techniques, with the former probing the electron density of the sample, and the latter probing the charge density.<br>
 		We are therefore not expecting perfect quantitative agreement, but will rather focus on comparing them qualitatively.<br>
 	</li>
@@ -85,13 +88,14 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 	<ul>
 		<li>Graphical interface: <br>
 			If you have moved the program from the downloaded folder, make sure to also move the plotting script to the same destination.<br>
-			Open the AUSAXS program <code>em_fitter_gui</code> and load the EM map and the SAXS data. <br>
-			For this run only, set the "sample frequency" to 2 (and make sure to hit "enter"!). Then click the "start" button.</li>
+			Open the AUSAXS program <code>em_fitter_gui.exe</code> and load the EM map and the SAXS data. <br>
+			For this run only, set the "sample frequency" to 2 (and make sure to hit "enter"!). Then click the "start" button. <br>
+			You might have to also run the <code>plot.exe</code> program to generate the plots.</li>
 		<li>Command-line interface: <br> 
 			Move all files to the same directory, and launch a terminal from there. <br>
 			Then run the command: <code>em_fitter emd_24889.map SASDJG5.dat --frequency 2 --qmax 1</code></li>
 			<ul> When the program is done, run the following plotting command:
-				<li><i>Windows</i>: <code>./plotter.exe</code></li>
+				<li><i>Windows</i>: <code>./plot.exe</code></li>
 				<li><i>Mac or Linux</i>: <code>python scripts/plot.py</code></li>
 			</ul>
 		</li>
@@ -101,7 +105,7 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 	<ol>
 		<li>A "report.txt" file</li>
 		<li>An "ausaxs.fit" file</li>
-		<li>Various plots</li>
+		<li>Various plots (if you don't see any plots, run the <code>plot.exe</code> program.)</li>
 		<li>Various "*.png.plot" files</li>
 		<li>A "models" folder</li>
 	</ol>
@@ -113,12 +117,12 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 	<p>
 		This file is just a copy of the terminal output. If you ran the fit using the terminal, the first line will also contain the command used to perform this fit.<br><br>
 		The first section is just the title, "FIT REPORT".<br><br>
-		The second section contains various statistical properties of the fit. Our primary interest here is the reduced chi-square value, listed as chi2/dof.
-		This value is equivalent to what is typically reported by other fitting programs such as the ATSAS package. 
+		The second section contains various statistical properties of the fit. Our primary interest here is the reduced <a href="../reduced_chi2.html" target="_blank">chi-square value</a>, listed as chi2/dof.
+		This value is equivalent to what is typically reported by other fitting programs such as the <a href="https://www.embl-hamburg.de/biosaxs/software.html" target="_blank">ATSAS program.</a> 
 		For a perfect fit this value should be close to unity. 
 		However, since we already know in advance we will not be getting a perfect fit due to us comparing two different experimental techniques, we will not put too much weight on its exact value.<br><br>
 		The third section contains the optimized parameter values. We are not too interested in these either. <br><br>
-		The fourth section is relevant if you want to visualize the optimal map structure using PyMOL. 
+		The fourth section is relevant if you want to visualize the optimal map structure using <a href="https://www.pymol.org/" target="_blank">PyMOL</a>. 
 		It contains the PyMOL alpha-level equivalent to the optimal cutoff threshold value. Simply input this value in the "level" field when loading the map, and select either "mesh" or "surface" to see the optimized map. 
 		This section also contains the mass of the optimized structure. However, this value is <i>very</i> approximative, and only serves as a quick guideline.
 	</p>
@@ -130,9 +134,12 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 	</p>
 
 	<h6>Understanding the plots</h6>
+
+	 
 	<p>
-		<ul>You will find a number of ".png" files in the directory.
-			<li><i>chi2_evaluated_points_limited.png</i>: This plot shows the relevant chi-square value for every threshold value sampled during the fit. 
+		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
+			You will find a number of ".png" files in the directory.
+			<li><i>chi2_evaluated_points_limited.png</i>: This plot shows the relevant <a href="../reduced_chi2.html" target="_blank">chi-square value</a> for every threshold value sampled during the fit. 
 				This is very useful for checking the convergence - if the lowest chi-square value is found at either edge of the x-axis, you should rerun the fit using larger bounds. 
 				The plot is also useful for seeing if there could be more than one optimal solution. These should already be marked by a blue point. We will return to these later.
 			</li>
