@@ -60,15 +60,15 @@
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>A note (warning) on notation</b>:
 		<li>Some authors use the form factor, $P(q)$, to denote the form factor amplitude, $F(q)$, and various letters are used for both, but most authors use $P(q)$ for the form factor.</li>
 		<li>Most authors normalize $P(q)$, such that it is unitless, and such that $P(q=0)=1$, but this is not always the case, so $P(q)$ sometimes has units.</li>
-		<li>The <em>atomic form factor</em> is an important example of not following the notation used in this tutorial. The atomic form factor, $f_a(q)$, conventionally denotes the <em>form factor amplitude</em> of an atom, e.g. carbon, $f_c(q)$. It is normalised, so $f_a(q=0)$ is equal to the number of electrons times the electron scattering length, $b_e$, e.g. $f_c(q=0)=6b_e$.</li>
+		<li>The <em>atomic form factor</em> is an important example of not following the notation used in this tutorial. The atomic form factor, $f_a(q)$, conventionally denotes the <em>form factor amplitude</em> of an atom, e.g. carbon, $f_c(q)$. It is normalized, so $f_a(q=0)$ is equal to the number of electrons times the electron scattering length, $b_e$, e.g. for carbon, $f_c(q=0)=6b_e$.</li>
 	</ul>
 	</p>
 
 <h4>Part III: Calculate the weighted average to get the micelle form factor amplitude</h4>
 	<p>
-		To get the form factor for the whole particle (core-shell micelle), you need to add the form factor amplitudes and take the absolute square. The terms needs to be weighted correctly, with the excess scattering length density, $\Delta SLD$ (also called <em>contrast</em>) and volume, $V$. For the volume see <a href="hint2.html">this hint</a>.<br>
+		To get the form factor for the whole particle (spherical core-shell micelle), you need to add the form factor amplitudes and take the absolute square. The terms needs to be weighted correctly, with the excess scattering length density, $\Delta SLD$ (also called <em>contrast</em>) and volume, $V$. If you do not remember the volume of a sphere by heart, see <a href="hint2.html" target="_blank">this hint</a>.<br>
 		Note that for the shell, you need to subtract the spherical core from a sphere to form a spherical shell. <br>
-		Generally, a weighted average of $a,b,c$ weithed with weights $w_a,w_b,w_c$ is: 
+		Generally, a weighted average of $a,b,c$ with weights $w_a,w_b,w_c$ is: 
 		$$
 		\frac{w_a a + w_b b + w_c c}{w_a + w_b + w_c}
 		$$
@@ -76,19 +76,20 @@
 		You can check you answer with <a href="hint3.html" target="_blank">this answer</a>.
 	</p>
 
-<h4>Part 3: Calculate the form factor</h4>
+<h4>Part IV: Calculate the form factor</h4>
 	<p>
-		This is by far the easiest part. When you have the form factor amplituede, you can calculate the form factor at the absolute square:
+		This is by far the easiest part. When you have the form factor amplitude, you can calculate the form factor as the absolute square:
 		$$
-		P_\mathrm{coreshell}(q) = |F_\mathrm{coreshell}(q)|^2
+		P_\mathrm{core-shell}(q) = |F_\mathrm{core-shell}(q)|^2
 		$$
-		easy! 
+		easy! <br>
+		Although this is an easy step, it is sometimes forgotten as the formfactor <em>amplitude</em> is sometimes denoted the formfactor (see the note on notation) - so do always check for this simple but important step (in your own code as well as in others').
 	</p>
 
-<h4>Part IV: Make a strategy for verifying the model</h4>
+<h4>Part V: Verify the model</h4>
     <p> 
 		One way to verify the model is to implement the model, e.g. in SasView. You can then fit against simulated data (where you know the true parameter values). See how this may be be done in the <a href="../CoreShell/CoreShell.html" target="_blank">core-shell tutorial</a>.<br>
-		Another important aspect is to check the normalization is correct: $P(q=0)=1$?
+		Another important aspect is to check that the normalization is correct: $P(q=0)=1$?
 	</p>
 
 <h4>Challenges</h4>
