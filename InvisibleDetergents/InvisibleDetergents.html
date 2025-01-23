@@ -64,7 +64,7 @@
 	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b> Note on order of subunites in Shape2SAS </b><br>
 		Overlapping points from different subunits are removed (by default). <br>
 		The points from the subunits that are lowest in the list are removed, whereas points from subunits higher in the list remain. <br>
-		So in the case of a cores-shell particle, the smaller sphere should be above the larger in the subunit list, so the overlapping points are excluded from the larger sphere.
+		So in the case of a core-shell particle, the smaller sphere should be above the larger in the subunit list, so the overlapping points are excluded from the larger sphere.
 	</p>
 	<img src="Shape2SAS_CoreShell.png" style="width:800px"/><br>
 	What combination of radii of the core-shell (Model 1) would yield $I(0)$ of 0? (<a href="hint11.html" target="_blank">Hint</a>). Try to simulate this. Due to the stochastic nature of Shape2SAS, $I(0)$ may not be exactly 0, but will be small.<br>	
@@ -91,9 +91,8 @@
 	</ol>
 	Once you are done, you may check with <a href="table_filled.xlsx" target="_blank"> this filled-out spreadsheet</a> (but try calculating everything before you look at the answer).
 	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"><b>Incoherent scattering in SANS</b><br>
-		Incoherent scattering contribute a constant scattering signal (i.e. the same in all directions). Therefore, it carries no structural information.<br>
-		Therfore, it is generally better to measure samples in D<sub>2</sub>O rather than in H<sub>2</sub>O in SANS, due to <a href="https://e-learning.pan-training.eu/wiki/index.php/Basics_of_neutron_scattering#Coherent_and_incoherent_scattering" target="_blank">incoherent scattering</a> from hydrogen, which result in a poor signal-to-noise ratio.<br>
-		If you want numerical values, you may follow the (<a href="step-by-step-d2o.html" target="_blank">step-by-step guide for calculating SL for D<sub>2</sub>O</a>), but use the inhoherent scattering lengths (Inc b) insted of the coherent scattering lengths (Coh b). Then you can calculate the total incoherent scatteirng lenght from the various components. 
+		Incoherent scattering contribute a constant scattering signal (i.e. the same in all directions), so it carries no structural information (<a href="https://e-learning.pan-training.eu/wiki/index.php/Basics_of_neutron_scattering#Coherent_and_incoherent_scattering" target="_blank">read more here</a>). Hydrogen is the main sorce of incoherent scattering in SANS. Therfore, it is generally better to measure samples in D<sub>2</sub>O rather than in H<sub>2</sub>O in SANS, to get the best signal-to-noise ratio.<br>
+		If you want numerical values, you may follow the (<a href="step-by-step-d2o.html" target="_blank">step-by-step guide for calculating SL for D<sub>2</sub>O</a>), but use the inhoherent scattering lengths (Inc b) instead of the coherent scattering lengths (Coh b). 
 	</p>
 
 <h4>Challenges</h4>
