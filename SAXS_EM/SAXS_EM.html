@@ -30,28 +30,28 @@
 </p>
 <h4>Before you start</h4>
 <ul>
-	<li>Requirements: <br>
-		(1) The <a href="https://github.com/AUSAXS/AUSAXS" target="_blank">AUSAXS</a> software (free, no installation).<br>
+	<li> Make sure you have the following free software installed: <br>
+		(1) The <a href="https://github.com/AUSAXS/AUSAXS" target="_blank">AUSAXS</a> software.<br>
 		(2) Python (including numpy, scipy, and matplotlib) to visualize the results.<br>
 		(3) A qualitative understanding of SAXS data is advantageous, but not required. See for example <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank"> Tutorial: Primary Data analysis.</a>
-	</li>
-	<li>Expectations: <br>
-		In this tutorial, we will compare small-angle X-ray scattering data with <a href="https://en.wikipedia.org/wiki/Electron_microscope" target="_blank">electron microscopy</a> data.<br>
-		These are very different techniques, with the former probing the electron density of the sample, and the latter probing the charge density.<br>
-		We are therefore not expecting perfect quantitative agreement, but will rather focus on comparing them qualitatively.<br>
 	</li>
 </ul>
 <h4>Learning outcomes</h4>
 In this tutorial you will learn how to use the EM validation program of the AUSAXS software to compare SAXS data with electron microscopy data.
 <ul>
 	<li>Be familiar with the AUSAXS software. </li>
-	<li>Be able to validate an electron microscopy map.</li>
-	<li>Be able to use the advanced options of the program.</li>
+	<li>Be able to validate an electron microscopy map against SAXS data.</li>
 </ul>
 <h4>Introductory remarks</h4>
-	<p>
-		This tutorial will only showcase how to <i>use</i> the method, and will not go into the details of the theory behind it.<br>
-		For more information on the theory, see the accompanying article at <a href="https://doi.org/10.1107/S2059798324005497" target="_blank">https://doi.org/10.1107/S2059798324005497</a>.
+	<p> 
+		<a href="https://en.wikipedia.org/wiki/Electron_microscope" target="_blank">Electron microscopy</a> has in recent years become a popular and powerful technique for studying the structure of biological macromolecules.
+		A primary issue with the technique is that it is not performed under native conditions, and the resulting maps may therefore not be representative of the solution structure.
+		Many validation techniques have therefore been developed to assess the quality of the maps, typically by comparing bond angles, bond lengths, and other geometric properties 
+		with known structures. AUSAXS is a new software package that can be validate the maps by comparing them against small-angle X-ray scattering (SAXS) data. <br><br>
+
+		In this tutorial, we will explain how to use AUSAXS to compare small-angle X-ray scattering data with EM data. 
+		Note that these are very different techniques, with the former probing the electron density of the sample, and the latter probing the charge density. 
+		We are therefore not expecting perfect quantitative agreement, but will rather focus on comparing the data qualitatively.
 	</p>
 
 <h4>Part I: Making AUSAXS run on your computer</h4>
