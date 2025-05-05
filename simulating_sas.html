@@ -24,14 +24,14 @@
 <h1>Calculating small-angle scattering of an object using randomly distributed points</h1>
 <p>
 SAXS and SANS data from a particle, e.g. a cylinder, can be simulated using various methods. One of them, used by <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, is to fill the cylinder volume by randomly distributed points (or small spheres). The scattering can then be calculated by the <a href="https://pythoninchemistry.org/sim_and_scat/calculating_scattering/debye_equation.html" target="_blank"> Debye equation</a>.<br>
-If enough points are fill into the volume, the scattering from these points corresponds to the scattering from the cylinder. It is a bit like pixels in an image: if the resolution is good enough (enough pixels), you do not see the pixels.<br>
-The $q$-value defined which size we probe: small $q$ are large distances, and large $q$ probe small distances. So the larger $q$, you would like to simulate, the more points you need to fill into the cylinder volume. 
+If enough points are filled into the volume, the scattering from these points corresponds to the scattering from the cylinder. Much like pixels in an image, when the resolution is sufficiently high, you do not see the individual pixels.<br>
+The $q$-value define which size we probe: small $q$ probe large distances, and vice versa. So the larger $q$, you would like to simulate (the higher resolution you want), the more points you need to fill into the cylinder volume. 
 
 A cylinder is in fact a poor example, as the scattering from a cylinder can be calculated <a href="https://www.sasview.org/docs/user/models/cylinder.html" target="_blank">analytically</a>, which is faster than than filling with points, but other shapes may not have an analytical expression. This could, e.g., be the envelope of a protein.
 
 <img src="cylinder_points.png" style="width:600px"/><br> 
 
-<ul><b>Programs using beads or points to calculate saxs/sans data:</b>
+<ul><b>Programs using beads or points to calculate saxs/sans data include:</b>
 <li>Shape2SAS (<a href="https://doi.org/10.1107/S1600576723005848" target="_blank">Larsen et al, 2023</a>).</li> 
 <li>CDEF (<a href="https://doi.org/10.1107/S160057672200499X" target="_blank">Deumer et al, 2022</a>).</li>
 <li>SPONGE (<a href="https://github.com/bamresearch/sponge" target="_blank">Pauw and Breßler, 2021</a>).</li>
