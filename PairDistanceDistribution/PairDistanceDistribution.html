@@ -52,9 +52,9 @@ The overall goal is to learn what a pair distance distribution is, and how is ca
 	<img src="Shape2SAS-spheres1.png" style="width:1000px"/><br>
 	Shape2SAS plots the $p(r)$ (left), the normalized scattering (middle panel) and simulated data (right panel):<br>
 	<img src="Shape2SAS-spheres2.png" style="width:1000px"/><br>
-	You can immediately see that the red $p(r)$ represents the larger sphere (largest distance, $d_\mathrm{max}=100$) and the blue $p(r)$ represents the smaller sphere ($d_\mathrm{max}=60$). For spheres the largest dimension, $d_\mathrm{max}$, is their diameter.<br>
-	For homogeneous particles (i.e., having the same contrast in the whole particle), $p(r)$ is the probability distribution of distances between pairs of scatterers in the particle. For spheres, the most frequent distance equals the radius. 
-	Try to guess how the $p(r)$ look for an ellipsoid and or for a cylinder or an a hollow sphere. Calculate the $p(r)$ for these and other shapes using <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>.
+	You can immediately see that the red $p(r)$ represents the larger sphere (largest distance, $d_\mathrm{max}=100$ Å) and the blue $p(r)$ represents the smaller sphere ($d_\mathrm{max}=60$ Å). For spheres, the largest dimension, $d_\mathrm{max}$, is their diameter.<br>
+	For homogeneous particles (i.e., having the same contrast throughout the particle), $p(r)$ is the probability distribution of distances between pairs of scatterers in the particle. For spheres, the most frequent distance equals the radius. 
+	Try to guess how the $p(r)$ look for an ellipsoid and or for a cylinder or a hollow sphere. Calculate the $p(r)$ for these using <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> to check your intuition.
 	</p>
 
 <h4>Part 2: Calculating the pair distribution from SAXS/SANS data</h4>
@@ -66,50 +66,47 @@ The overall goal is to learn what a pair distance distribution is, and how is ca
 	<img src="BayesApp_sphere_pr.png" style="width:500px"/>
 	<img src="BayesApp_sphere_Iq.png" style="width:500px"/><br>
     Go to the SAS biological data bank <a href="https://www.sasbdb.org" target="_blank">(SASBDB)</a>, which is a database for SAXS and SANS data. Download the SAXS data of the protein Xylanase <a href="https://www.sasbdb.org/data/SASDPS4/" target="_blank">(SASBDB entry: SASDPS4)</a>: <a href="SASDPS4.dat" target="_blank">SASDPS4.dat</a>.
-	Use <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> to calculate the p(r). To increase speed and robustness, provide a rough estimate of the maximum distance - it does not have to be precise. <br> 
+	Use <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> to calculate the $p(r)$. <br> 
 	Notice that the $p(r)$ looks like the $p(r)$ from a sphere, meaning the protein is globular (approximately spherical). See the actual shape of the protein in the <a href="https://www.sasbdb.org/data/SASDPS4/" target="_blank">SASBDB entry</a>.<br>
-	Now, do the same for an elongated protein, <a href="https://www.sasbdb.org/data/SASDTE2/" target="_blank">SASBDB entry: SASDTE2</a>. <br>
-	Notice how the $p$(r) is closer to that of a cylinder or elongated ellipsoid. This way, by looking at the $p(r)$, one can get an immediate idea of the shape of the particles without model fitting. 
+	Now, do the same for an elongated protein, <a href="https://www.sasbdb.org/data/SASDTE2/" target="_blank">SASBDB entry: SASDTE2</a> (download files (top right corner of the entry) > curve (dat)). <br>
+	Notice how the $p(r)$ is closer to that of a cylinder or elongated ellipsoid. This way, by looking at the $p(r)$, one can get an immediate idea of the shape of the particles without model fitting. 
 	</p>
 
 <h4>Part 3: Inhomogeneous particles</h4>
 	<p>
-	The p(r) is a contrast-weighted pair distribution (contrast = &Delta;SLD = excess scattering length density). I.e. each bin in the distribution is the weighted sum of all pairs with a given distance.
-	Therefore, if a pair of scatterers have contrasts with the same sign, then they contribute positively, but if the signs are opposite, then their contribution to the p(r) is negative. This means that the p(r) can have negative values.<br>
+	The $p(r)$ is a contrast-weighted pair distribution (contrast = &Delta;SLD = excess scattering length density). I.e., each bin in the distribution is the weighted sum of all pairs with a given distance.
+	Therefore, if a pair of scatterers have contrasts with the same sign, then they contribute positively, but if they have opposite signs (respectively, larger and smaller SLD than the solvent), then their contribution to the $p(r)$ is negative. This means that the $p(r)$ can have negative values.<br>
 	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a core-shell spherical particle with inner radius 30 Å and outer radius 40 Å and with core &Delta;SLD of -1 and shell &Delta;SLD of +1
 	<img src="SasView_CoreShell1.png" style="width:1000px"/><br>
 	<img src="SasView_CoreShell2.png" style="width:1000px"/><br>
 	<ol>Negative contribution comes from scattering pairs with &Delta;SLDs having opposite signs. Likewise, positive contributions comes from pair having the same sign (either both positive or both negative &Delta;SLD). Using this information, consider:
-		<li>What scattering pairs in the core-shell particle does the negative part of the p(r) represent?</li>
-		<li>Why are pair distributions (including this one) positive as small values of r?</li>
-		<li>Why is this $p(r)$ positive at larger $r$?</li>
+		<li>What scattering pairs in the core-shell particle does the negative part of the $p(r)$ represent?</li>
+		<li>Why are pair distributions (including this one) always positive as small values of $r$?</li>
+		<li>Why is this $p(r)$ positive at the large values of $r$, close to $d_{max}$?</li>
 	</ol><a href="answers.html"target="_blank">Answers</a>.
 	</p>
-	<!-- The forward scattering I(0) is about 0. How does that relate to the p(r)? (<a href="hint1.html"target="_blank">Hint</a>) -->
 	<p>
-	Download the simulated data <a href="Isim_coreshell.dat" target="_blank">(example data)</a> and upload it to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. Give an estimate of the maximum distance and press Submit.<br>
-	By default, the p(r) is constraint to be positive. (Transformation: Debye). Now, try to rerun with Tranform: Negative (i.e. p(r) can be negative.) Is the result better?
-	Compare with the true p(r), which was simulated in <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>.<br>
-	Note that inhomogeneous particles do not always give rise to p(r) with negative contribution. Try, for example, simulating a core-shell spherical particle with core radius of 20 and &Delta;SLD of -1 and shell radius of 40 and &Delta;SLD of +1.
+	Download the simulated data <a href="Isim_coreshell.dat" target="_blank">(example data)</a> and upload it to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>.<br>
+	Compare with the true $p(r)$, which was simulated in <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>.<br>
+	Note that inhomogeneous particles do not always give rise to $p(r)$ with negative contribution. Try, for example, simulating a core-shell spherical particle with core radius of 20 and &Delta;SLD of -1 and shell radius of 40 and &Delta;SLD of +1.
 	<img src="SasView_CoreShell3.png" style="width:1000px"/><br>
-	In this case, the negative contribution from core-shell scatterer pairs is cancelled out by positive contributions from shell-shell scatterer pairs having the same distance. 
+	In this case, the negative contributions from core-shell scatterer pairs are cancelled by positive contributions from shell-shell scatterer pairs having the same distance. 
 	</p>
 
 <h4>Part 4: Interparticle interactions</h4>
 	<p>
 	Negative contribution in the $p(r)$ may also stem from interparticle interactions. This can appear if the concentration is high. <br>
-	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate an ellipsoid with axes 40,40 and 60 Å. Add interparticle interaction, modelled with a hard-sphere structure factor with hard sphere radius of 50 and volume fraction 0.1. 
+	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate an ellipsoid with axes 40, 40 and 60 Å. Add interparticle interaction, modelled with a hard-sphere structure factor with hard sphere radius of 50 and volume fraction of 0.1. 
 	<img src="Shape2SAS_HS1.png" style="width:1000px"/><br>
 	<img src="Shape2SAS_HS2.png" style="width:1000px"/><br>
 	The $p(r)$ in Shape2SAS is calculated before the structure factor, therefore it contains no negative contribution.<br>
-	Download this simulated data (or download this <a href="HS.dat">example data</a>) and generate the $p(r)$ using <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. Try with positive restraint (Transformation: Debye) or without (Transformation: Negative).<br>
+	Download this simulated data (or download this <a href="HS.dat" target="_blank">example data</a>) and generate the $p(r)$ using <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. <br>
 	</p>
 
 <h4>Challenges</h4>
 	<ol>
 		<li>The protein bovine serum albumin (BSA) was measured with SAXS. Data: <a href="bsa_hc_030.dat" target="_blank">bsa_hc_030.dat</a>. BSA is a common blood protein. The sample was measure with SAXS at relatively high concentration. Generate the $p(r)$ - what does it tell you about the shape of BSA?</li>
-		<li>A sample of discoidal particles (diameter ca 5 nm, as estimated from <a href="https://www.urmc.rochester.edu/research/electron-microscope/services/protocols-techniques/negative-staining-electron-microscopy.aspx" target="_blank">negative stain electron microscopy</a>) was measured in SAXS at neutral pH (<a href="SAXS_neutral_pH.dat">neutral pH data</a>) and pH 5.0 (<a href="SAXS_low_pH.dat">low pH data</a>). Using the $p(r)$, describe the pH-induced structural change?</li>
-		<!-- <li>The protein <a href="https://www.rcsb.org/structure/4u2p" target="_blank">GluA2</a> (glutamine receptor - important for neuronal communication) was measured with SANS. Data: <a href="SASDD26.dat" target="_blank">SASDD26.dat</a>. You have calculated the theoretical d<sub>max</sub> to be around 200 Å. From the $p(r)$, what can you tell about the sample?</li> -->
+		<li>A sample of discoidal particles (diameter ca 5 nm, as estimated from <a href="https://www.urmc.rochester.edu/research/electron-microscope/services/protocols-techniques/negative-staining-electron-microscopy.aspx" target="_blank">negative stain electron microscopy</a>) was measured in SAXS at neutral pH (<a href="SAXS_neutral_pH.dat" target="_blank">neutral pH data</a>) and pH 5.0 (<a href="SAXS_low_pH.dat" target="_blank">low pH data</a>). Use the $p(r)$ functions to describe the pH-induced structural changes.</li>
 	</ol>
 	
 <h4>Help and feedback</h4>
