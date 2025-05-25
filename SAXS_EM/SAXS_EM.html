@@ -147,7 +147,7 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 		The ".png.plot" files are the instruction files for generating these plots using the custom plotting script. 
 		They have no real purpose now that the plots are complete, and can safely be deleted. <br><br>
 		<i>Advanced</i>: You can also modify these plotting instructions to customize the plots using a simple text editor.
-		The format is somewhat self-explanatory, though an extensive guide is available at <a href="https://github.com/AUSAXS/AUSAXS" target="_blank">https://github.com/AUSAXS/AUSAXS</a> should you need it.
+		The format is somewhat self-explanatory, though an extensive guide is available at <a href="https://github.com/AUSAXS/AUSAXS/wiki/Plotting-scripts" target="_blank">https://github.com/AUSAXS/AUSAXS/wiki/Plotting-scripts</a> should you need it.
 	</p>
 
 	<h6>The "models" folder</h6>
@@ -214,6 +214,18 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 			Compare the plots. What happens? Does it make sense why the mean $\chi^2$ value should be reported?
 		</li>
 	</ul>
+
+<h4>Challenges</h4>
+	As a practical example of how this program can be used, download the following three files. 
+	For the last two links, you will need to click the "Download raw file" button in the top right corner, underneath the "History" icon.
+	<ul>
+		<li><a href="https://ftp.ebi.ac.uk/pub/databases/emdb/structures/EMD-12747/map/emd_12747.map.gz" target="_blank">EMD-12747</a></li>
+		<li><a href="https://github.com/AUSAXS/AUSAXS/blob/master/tests/files/A2M_2020_Q4.ccp4" target="_blank">Harwood (hosted with permission)</a></li>
+		<li><a href="https://github.com/AUSAXS/AUSAXS/blob/master/tests/files/A2M_native.dat" target="_blank">SAXS data (hosted with permission)</a></li>
+	</ul>
+	The first two files are, respectively, a cryo-EM and negative-stain EM map of the same protein, but with different conformations. You can plot them in e.g. PyMOL to see the differences. 
+	The third file is in-house SAXS data measured for the same protein. 
+	Use the SAXS data to validate both maps, and compare the results. Which conformation does the SAXS data support?
 
 <!--
 DO NOT CHANGE ANYTHING BELOW
