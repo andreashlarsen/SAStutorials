@@ -59,8 +59,8 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 <h4>Part I: Performing a basic validation</h4>
 	Now we are ready to perform our first validation. Download the files:
 	<ul>
-		<li>The <a href="https://www.sasbdb.org/media/intensities_files/SASDJG5.dat" target="_blank">SAXS measurement</a></li>
-		<li>The <a href="https://ftp.ebi.ac.uk/pub/databases/emdb/structures/EMD-24889/map/emd_24889.map.gz" target="_blank">EM map file</a></li>
+		<li>The <a href="https://www.sasbdb.org/media/intensities_files/SASDJG5.dat" target="_blank">SASDJG5 SAXS measurement</a></li>
+		<li>The <a href="https://ftp.ebi.ac.uk/pub/databases/emdb/structures/EMD-24889/map/emd_24889.map.gz" target="_blank">EMD-24889 EM map file</a></li>
 		Remember to unpack the zipped map before continuing. 
 	</ul>
 
@@ -74,7 +74,7 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 			You may also have to run the <code>plot</code> program (or script) to generate the plots.</li>
 		<li>Command-line interface: <br> 
 			Move all files to the same directory, and launch a terminal from there. <br>
-			Then run the command: <code>em_fitter emd_24889.map SASDJG5.dat --frequency 2 --qmax 1</code></li>
+			Then run the command: <code>em_fitter emd_24889.map SASDJG5.dat em --frequency 2 saxs --qmax 1</code></li>
 			<ul> When the program is done, run the following plotting command:
 				<li><i>Windows</i>: <code>./plot.exe</code></li>
 				<li><i>Mac or Linux</i>: <code>python scripts/plot.py</code></li>
@@ -169,13 +169,19 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 		As per our previous discussion, we are looking for minima in this $\chi^2$ landscape plot. Based on this, it seems like a lower minima could potentially be hiding just out of sight, at $\sigma$ &gt; 10. 
 		To check this, we should rerun the fit and make sure to cover this area. <br><br>
 
-		Change the maximum $\alpha$-level to 15. 
-		Since we are impatient and know there are no minima at $\sigma$ &lt; 6 anyway, let us skip these too by also modifying the minimum level. <br><br>
+		Change the maximum $\alpha$-level to 15.<br>
+		<i>command: </i><code>em_fitter emd_24889.map SASDJG5.dat em --frequency 2 --levelmax 15 saxs --qmax 1</code><br>
+		Since we are impatient and know there are no minima at $\sigma$ &lt; 6 anyway, let us skip these too by also modifying the minimum level.<br>
+		<i>command: </i><code>em_fitter emd_24889.map SASDJG5.dat em --frequency 2 --levelmax 15 --levelmin 6 saxs --qmax 1</code>. <br><br>
 		<img src="chi2_landscape_2.png" style="width:500px"/><br>
 
+		Remember to re-run the <code>plot</code> command to refresh the plots. <br>
 		Looking at the new $\chi^2$ landscape, it appears as though our original bounds were fine.
 		Since there is a rather large amount of noise in the $\chi^2_r$ values, let us rerun the fit without discarding any data.
-		Set the sampling frequency to 1 and rerun the fit, making sure to use the new bounds.
+		We can do this by changing the sampling frequency parameter, which controls how often the EM map is sampled. 
+		A value of 2, as we used previously, means that every second voxel in each direction is sampled, thus effectively reducing the number of voxels by a factor of 8.
+		This is fine when we are looking at regions with a lot of data (i.e. low $\alpha$-levels, meaning high mass), but when we are looking at high $\alpha$-levels, a higher sampling frequency can lead to more noise in the $\chi^2$ landscape.
+		Set therefore now the sampling frequency to 1, and rerun the fit while making sure to use the new bounds. 
 		Since we are only scanning relatively high $\alpha$-levels, this shouldn't take too long. <br><br>
 		<img src="chi2_landscape_3.png" style="width:500px"/><br>
 
@@ -183,14 +189,14 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 		When looking at the fitted parameters in the "report.txt" file, we see that the hydration shell scattering power parameter "cw" is significantly higher in the new fit, 
 		meaning the hydration is more important now than before. This would indicate the optimization is more difficult, and hence the larger variation in the fitted values. <br><br>
 
-		Regardless, we see that the minimum $\chi^2_r$-value around $\sigma$ = 7.5 is still the best, which roughly agrees with what we found previously. 
+		Regardless, we see that the minimum $\chi^2_r$-value around $\sigma$ = 8.2 is still the best, which roughly agrees with what we found previously. 
 		We can also confirm this value by looking at the "info.txt" file inside the "models" folder. <br><br>
 	</p>
 
 <h6>And that's it!</h6>
 		<p>
 			You have now learned how to perform and understand a simple validation of an EM map. 
-			You can either repeat the above analysis using your own map, or you can try your hand at the challenges posed below. 
+			You can either repeat the above analysis using your own map, or you can try your hand at the excercises and challenges posed below. 
 		</p>
 
 <h4>Exercises</h4>
@@ -201,17 +207,18 @@ In this tutorial you will learn how to use the EM validation program of the AUSA
 		</li>
 		<li>
 			Exercise 2: Try fitting it again, but this time using the <a href="https://www.sasbdb.org/media/fitting_files/SASDJQ4_fit1.fit" target="_blank">SASDJQ4 data</a>. 
+			Note that you will have to rename the file extension to ".dat" for the AUSAXS software to accept it. 
 			How does the $\chi^2$ landscape look now?
 			This example illustrates that it is sometimes not enough to only judge the fit quantitatively, as large uncertainties in the data can lead to artifically small $\chi^2_r$-values.
 		</li>
-		<li>Exercise 3: Try visualizing both the dummy structure and the corresponding optimized map together in PyMOL. 
+		<li>Exercise 3: Try visualizing both the dummy structure and the corresponding optimized map together in e.g. PyMOL. 
 			Is the dummy structure a good approximation of the map?
 			You can also try comparing with the PDB structure associated with the SAXS data (<a href="https://www.sasbdb.org/media/pdb_file/SASDJG5_fit1_model1.pdb" target="_blank">download link</a>). 
 		</li>
 		<li>Exercise 4: Try running the fit again using a sampling frequency of 3 with the $\alpha$-level bounds 6, 15. 
 			Repeat the fit a few times, and shift the $\alpha$-level interval by 0.1 each time. 
 			Remember to save the plots - they can be found in the "output" folder. 
-			Compare the plots. What happens? Does it make sense why the mean $\chi^2$ value should be reported?
+			Compare the plots and the $\chi^2$ values. What happens? Does it make sense why the mean $\chi^2$ value should be reported?
 		</li>
 	</ul>
 
