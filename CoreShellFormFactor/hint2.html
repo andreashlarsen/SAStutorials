@@ -19,18 +19,24 @@
 
 <div class="inner">
 
-<h4><a href="MicelleFormfactor.html">Back</a></h4>
+<h4><a href="CoreShellFormFactor.html">Back</a></h4>
 <h1>Hint</h1>
-There are multiple phases present in the data. 
-The form factor amplitude of a sphere with radius $r$ is the subunit you should use. It is:
+To built up the spherical core-shell formfactor, you need to use the form factor amplitude of a sphere with radius $r$ as you subunit:
 $$
 F_{sph}(q,r) = 3\frac{\sin(qr)-qr\cos(qr)}{(qr)^3}
 $$
 If you take the absolute square of this, you get the form factor:
 $$
-P(q,r) = |F_sph(q,r)|^2
+P(q,r) = |F_{sph}(q,r)|^2
 $$
-For later steps, you will also need the volume of a sphere with radius $r$, $V_{sph}(r) = 4\pi r^3/3$.
+For later steps, you will also need the volume of a sphere with radius $r$:
+$$
+V_{sph}(r) = 4\pi r^3/3
+$$
+<br>
+
+<b>A note on normalization.</b> Formfactors are not consistently normalized in textbooks and computer programs. At SAStutorials.org, we normalize the formfactor, such that $P(q\rightarrow0)=1$. Consequently, the form factor amplitude has the same normalization. But in some textbooks, the form factor is normalized to the volume.
+
 <!-- end inner -->
 </div>
 	

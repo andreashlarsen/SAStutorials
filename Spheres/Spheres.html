@@ -30,6 +30,7 @@
 <h4>Before you start</h4>
 	<ul>
 	<li>Download and install <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first)</li>
+	<li>If you are new to small-angle scattering, we recommend that you do the <a href="../Shapes/Shapes.html" target="_blank">Shapes tutorial</a> first.</li>
 	</ul>
 	
 <h4>Learning outcomes</h4>
@@ -41,7 +42,7 @@
 	</ul>
 	
 <h4>Part I: Spheres</h4>
-	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a 40 Å radius. You may have to click on the three lines in the top-left of the window, then "Calculations". Set parameters.<br>
+	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and <a href=../simulating_sas.html target="_blank">simulate</a> a sphere with a 40 Å radius. You may have to click on the three lines in the top-left of the window, then "Calculations". Set parameters.<br>
 	<img src="Shape2SAS_sphere_40.png" style="width:1000px"><br>
 	Press Submit. Shape2SAS generates three plots (besides from visualization of the particle):
 	<ol> 
@@ -72,21 +73,21 @@
 		<li>Two parameters are (partly) <a href="https://en.wikipedia.org/wiki/Correlation" target="_blank">correlated</a> if a change of the scattering curve induced by changing one of these parameters can be (partly) cancelled by changing the value of the other parameter. </li>
 		<li>If you fit correlated parameters simultaneously, you will observe high uncertainties on the parameters values.</li>
 		<li>The SLD values are correlated (due to <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle" target="_blank">Babinet's principle</a>). That is, you can fit the data equally well with different combinations of <em>sld</em> and <em>sld_solvent</em> - as long as the contrast is unchanged. The SLD values are also correlated with the scaling parameter.</li>
-		<li>Consequently, if you fit multiple SLD values (and scaling), you will observe large uncertainties on these parameters (<a href="../ContrastVariation/SasView_CoreShell.png" target="_blank">example</a>).</li>
+		<li>Consequently, if you fit multiple SLD values (and scaling), you will observe large uncertainties on these parameters (<a href="../InvisibleDetergents/SasView_CoreShell.png" target="_blank">example</a>).</li>
 		<li>To prevent correlation, you can restrict the fit by <em>fixing parameters</em>. For this reason, <em>sld_solvent</em> is usually fixed, and in this example, you should also fix <em>sld</em> if scaling is fitted.</li>
 	</ul>
 
 <h4>Part II: Ellipsoids</h4>
-	Simulate and fit scattering from a sample of monodisperse (all the same size) elipsoids. In SasView, these can be modelled with an <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> (two radii are the same, one different), or a <a href="https://www.sasview.org/docs/user/models/triaxial_ellipsoid.html" target="_blank"> tri-axial ellipsoid</a> (all radii are different). <br>
-	Note: for the <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> model in SasView, ensure that you to use the right values for <em>R_e</em> (the two identical equitorial radii) and <em>R_p</em> (the polar radius).<br>
+	Simulate and fit scattering from a sample of monodisperse (all the same size) ellipsoids. In SasView, these can be modelled with an <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> (two radii are the same, one different), or a <a href="https://www.sasview.org/docs/user/models/triaxial_ellipsoid.html" target="_blank"> tri-axial ellipsoid</a> (all radii are different). <br>
+	Note: for the <a href="https://www.sasview.org/docs/user/models/ellipsoid.html" target="_blank">ellipsoid of revolution</a> model in SasView, ensure that you use the right values for <em>R_e</em> (the two identical equitorial radii) and <em>R_p</em> (the polar radius).<br>
 	<img src="ellipsoids.png" style="width:500px"/><br> 
-	<em>randomly oriented ellipsoids of revolution (radii 20,20,40). Figure generated with <a href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a></em><br>
+	<em>randomly oriented ellipsoids of revolution (radii 20,20,40). Figure generated with <a href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX.</a></em><br>
 	<br>
 
 	<h5>Part III: Cylinders</h5>
-	Simulate and fit the scattering from a sample of sample of monodisperse <a href="https://www.sasview.org/docs/user/models/cylinder.html" target="_blank">cylinders</a>.<br><br>
+	Simulate and fit the scattering from a sample of monodisperse <a href="https://www.sasview.org/docs/user/models/cylinder.html" target="_blank">cylinders</a>.<br><br>
 	<img src="cylinders.png" style="width:500px"/><br> 
-	<em>randomly oriented cylinder (length 100, radius 10). Figure generated with <a href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a></em><br>
+	<em>Randomly oriented cylinder (length 100, radius 10). Figure generated with <a href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX.</a></em><br>
 	<br>
 
 <h4>Challenges</h4>
@@ -105,7 +106,7 @@ In this tutorial, all samples are perfectly monodisperse. The analysis often bec
 	<li>Aggregation.</li>
 	<li>Complex shapes that cannot be described by simple geometric models.</li>
 	<li>Mixtures of various conformations or oligomeric states.</li>
-	<li>Particle alignment (i.e. the particles are not randomly oriented anymore) leads to anisotropic scattering.</li>
+	<li>Particle alignment (i.e. the particles are not randomly oriented anymore) leading to anisotropic scattering.</li>
 </ul>
 However, the overall strategy remains the same for more complex models: (1) hypothesise a structural model which is realistic based on what you know about your sample. (2) fit the model to data to check if it is consistent with data. (3) If not: adjust (or change) your model. <br>
 <br>
