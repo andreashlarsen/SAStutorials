@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>SAXS-A-FOLD Tutorial</title>
+    <link rel="icon" href="../favicon.png" type="image/x-icon"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="../assets/css/main.css"/>
+    <style>
+        ul {
+            margin: 0; /* Removes default margin around all <ul> elements */
+        }
+    </style>
+    <noscript>
+        <link rel="stylesheet" href="../assets/css/noscript.css"/>
+    </noscript>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+    <script> window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-1J6V1SM060');</script>
+</head>
+
+<body class="is-preload">
+<div id="wrapper">
+    <div id="main">
+        <div class="inner">
+
+            <h1>SAXS-A-FOLD Tutorial</h1>
+            <p>Contributors: Emre Brookes, Mattia Rocco, and Aaron Householder</p>
+            <p>
+                <img src="images/saxsafold_logo.png" style="width:400px"/><br>
+            </p>
+
+            <h4>Before You Start</h4>
+            <ul style="margin-bottom: 25px">
+                <li>Register on the <a href="http://saxsafold.genapp.rocks/" target="_blank">SAXS-A-FOLD website</a> and verify your email.</li>
+                <li>Prepare required files:
+                    <ul>
+                        <li><a href="data/SASDBP9_A.dat" target="_blank">Download SAXS I(q) file</a></li>
+                        <li><a href="data/SASDBP9_Dmax170_gnom_bin1.dat" target="_blank">Download SAXS P(r) file</a></li>
+                    </ul>
+                </li>
+                <li>Review SAXS analysis fundamentals and AlphaFold usage for structure retrieval.</li>
+				<li>Help for selected entries is provided through pop-ups that activate by moving the mouse cursor over the name or the associated field.</li>
+                <li>There is a "Docs" tab on the right of the SAXS-A-FOLD website that includes additional help and details.</li>
+            </ul>
+
+            <h4>Learning Outcomes</h4>
+            <p style="margin: 0">By completing this tutorial, you will:</p>
+            <ul style="margin-bottom: 25px">
+                <li>Define and manage projects in SAXS-A-FOLD.</li>
+                <li>Upload and process SAXS data.</li>
+                <li>Retrieve AlphaFold structures and perform SAXS calculations.</li>
+                <li>Set flexible regions in protein structures.</li>
+                <li>Run Monte Carlo simulations.</li>
+                <li>Utilize WAXSiS to compute I(q) profiles of selected models.</li>
+            </ul>
+
+            <h4>Introductory Remarks</h4>
+            <p>SAXS-A-FOLD is a platform for analyzing and improving protein structural models, such as those
+                predicted by AlphaFold or derived from solved modules, against SAXS data . This tutorial guides
+                you through core features, including data uploading, structural modeling, refinement, and analysis.</p>
+
+            <h4>Part I: Define a Project</h4>
+            <ol>
+                <li>Select the "Define Project" tab on SAXS-A-FOLD start page.</li>
+                <img src="images/start_page.png" alt="Start Screen" /><br><em>Starting Page</em>
+                <li>Enter "Tutorial" in the "Project Name" field.</li>
+                <li>Provide an optional description of "SAS Tutorial Example" in the "Description" field to summarize the project's purpose.</li>
+                <li>Press "Submit" to save the project. The project will now be accessible from the dropdown menu for
+                    future use.
+                </li>
+                <img src="images/define_project.png" alt="Define Project Screenshot" /><br><em>Define Project tab after submit</em>
+                <li>Once "Submit" has been successful, a message will be shown in the bottom textarea, "Current project is set to Tutorial".</li>
+            </ol>
+
+            <h4>Part II: Upload SAXS Data</h4>
+            <ol>
+                <li>Navigate to the "Load SAXS" tab.</li>
+                <img src="images/upload_saxs.png" alt="Upload SAXS Data"/><br><em>Load SAXS tab</em>
+                <li>In the "SAXS I(q) File" section:
+                    <ul>
+                        <li>Click "Browse Local Files" to upload the "SASDBP9_A.dat" file from your computer that was downloaded in the "Before You Start" section of this tutorial.
+                        </li>
+                    </ul>
+                </li>
+                <li>In the "SAXS P(r) File" section:
+                    <ul>
+                        <li>Click "Browse Local Files" to upload the "SSASDBP9_Dmax170_gnom_bin1.dat" file from your computer that was downloaded in the "Before You Start" section of this tutorial.
+                        </li>
+                    </ul>
+                </li>
+                <li>Press "Submit" to process the data and generate interactive plots of I(q) and P(r).</li>
+                <img src="images/saxs_data_plot.png" alt="SAXS Data Screenshot"/><br><em>Load SAXS tab after submit</em>
+            </ol>
+
+            <h4>Part III: Retrieve AlphaFold Structures</h4>
+            <ol>
+                <li>Select the "Load Structure" tab.</li>
+                <img src="images/alphafold_structure.png" alt="AlphaFold Structures Screenshot"
+                /><br><em>Retrieve AlphaFold on Load Structures tab</em>
+                <li>In the "Select Input Source" dropdown:
+                    <ul>
+                        <li>Choose "Get AlphaFold Structure" to access the AlphaFold database.</li>
+                        <li>Enter the UniProt accession code "AF-Q16543" in the provided field.</li>
+                    </ul>
+                </li>
+                <li>Press "Process" to perform SAXS calculations and generate P(r) and I(q) plots.</li>
+                <li>Once it is complete, then scroll down to see generated P(r) and I(q) plots.</li>
+                <img src="images/alphafold_structure_process.png" alt="AlphaFold Structures Processed Screenshot"
+                /><br><em>AlphaFold uploaded structure, with below the experimental I(q) and P(r) plots overlaid with the calculated curves.</em>
+            </ol>
+
+            <h4>Part IV: Flexible Region Analysis</h4>
+
+            <ol>
+                <li>Navigate to the "Structural Info / Flexible Regions" tab.</li>
+                <img src="images/flexible_regions.png" alt="Flexible Regions Screenshot" /><br><em>Flexible Region Analysis tab</em>
+                <li>Scroll down to verify that the "Auto Compute Flexible regions from AlphaFold residue confidence" switch is enabled for automated analysis of AlphaFold-generated
+                    structures.</li>
+                <img src="images/flexible_regions_switch.png" alt="Flexible Regions Switch Screenshot" /><br><em>Flexible Region Analysis switch</em>
+                <li>For "Confidence threshold for Auto compute" field enter "60".</li>
+                <li>Press "Compute flexible regions" button.</li>
+                <li>Reference image "Flexible Region Analysis switch" for an example of calculated fields populated.</li>
+                <li>Submit to save and update the structure visualization. After submit the message "Flexible regions saved" should be displayed below the Submit button.</li>
+                <img src="images/flexible_regions_saved.png" alt="Flexible Regions Saved Screenshot" /><br><em>Flexible Region Analysis saved</em>
+            </ol>
+
+            <h4>Part V: Monte Carlo Simulations</h4>
+			<ol>
+                <li>Open the "Run MMC" tab.</li>
+                <img src="images/mmc_simulation.png" alt="Monte Carlo Simulations Screenshot" /><br><em>Monte Carlo Simulations tab</em>
+                <li>Update the "number of trials attempts" field to "10000".
+                <li> Fields on this tab that are not editable include:
+                    <ul>
+                    <li>return to previous structure: set to "20"; after this number of failed steps attempts, the program will reset to the current coordinates.
+                    <li>temperature (K): set to 300 K.</li>
+                    <li>molecule type: set to "protein".</li>
+                    <li>number of flexible regions to vary: defined in the previous tab.</li>
+                    <li>residue range for each flexible region: defined in the previous tab.</li>
+                    <li>maximum angle(s): set to 30°, which is the maximum angle that each torsion in each of the flexible regions can sample in a single move.</li>
+                    </ul>
+                </li>
+                <li> Fields that can be edited include:
+                    <ul>
+                        <li>structure alignment range: this is the residue range used to spatially align all the MMC-generated models; it should be set to a non-flexible region).</li>
+                        <li>overlap basis: defined for the overlap checks used to reject structures with clashes. Default: "heavy atoms"; other options, accessible from a pull-down menu, are "all" atoms in case the structure also has H atoms defined, "backbone" atoms, or "enter atom name".</li>
+                    </ul>
+                </li>
+                <li>Scroll to the bottom and press "Submit" to run simulations and view progress in real-time. Once it is complete, continue with next section.</li>
+            </ol>
+
+            <h4>Part VI: Analyze MMC Results</h4>
+            <ol>
+                <li>Access the "Retrieve MMC" tab.</li>
+                <img src="images/mmc_results.png" alt="Retrieve MMC Screenshot" /><br><em>Retrieve MMC tab</em>
+                <li>Set "Stride" to "10". This stride value is for reasonable compute times for tutorial purposes. In practice, the stride should be selected based on the results of the Rg histograms.</li>
+                <li>Set "Offset" to "0".</li>
+                <li>Generate histograms of Rg values to evaluate the distribution of conformations by pressing the "Submit" button. The goal is to have a reasonably similar Rg distribution before and after the stride application.</li>
+                <li>Once that is complete then select "Extract frames" switch and press "Submit" button. After that is complete, continue to the next section.</li>
+                <img src="images/mmc_results_enabled.png" alt="MMC Results Histogram" /><br><em>Histogram of MMC Results and Rg values</em>
+            </ol>
+
+            <h4>Part VII: Compute I(q) and P(r) Profiles, pre-select structures best fitting the data</h4>
+            <ol>
+                <li>Go to the "Compute P(r) and I(q), Preselect models" tab.</li>
+                <img src="images/nnls_fitting.png" alt="Compute and Fit I(q) Profiles Screenshot" /><br><em>Compute and scale I(q) and P(r) Profiles, Preselect Models </em>
+                <li>Use the computation method: PEPSI-SAXS.</li>
+                <li>Enable "Perform a Second P(r) NNLS Fit" if additional fitting is required.</li>
+                <li>Submit to perform computations and view real-time progress. Once it is complete, continue to the next section. Progress will show first advancements in the P(r) computations, then on the I(q) computations, both in blocks of 50 curves.</li>
+                <li>Completed computations are shown in sections.</li>
+                <img src="images/nnls_fitting_pr_section.png" alt="Compute and Fit P(r)" /><br><em>P(r) results section</em></br>
+                <img src="images/nnls_fitting_iq_section.png" alt="Compute and Fit I(q)" /><br><em>I(q) PEPSI-SAXS results section </em>
+            </ol>
+
+            <h4>Part VIII: Final Model Selection</h4>
+            <ol>
+                <li>Navigate to the "Final Models Selection Using WAXSiS" tab.</li>
+                <img src="images/final_models.png" alt="Final Model Selection Screenshot" /><br><em>Final Model Selection tab</em>
+                <li>Select "Quick" for WAXSiS convergence mode.</li>
+                <li>Click "Submit". This process can take up to a day to complete.</li>
+                <li>Review Models.</li>
+                <img src="images/final_models_graphs.png" alt="Final Models Graphs" /><br><em>Final
+                    models with WAXSiS computations</em>
+                <li>Review structures</li>
+                <img src="images/final_models_structure.png" alt="Final Models Structure" /><br><em>Final
+                    structures with WAXSiS computations</em></li>
+            </ol>
+
+            <h4>Challenges</h4>
+            <ul style="margin-bottom: 25px">
+                <li>Go through the tutorial using the following files and values
+                    <ul>
+                        <li><a href="data/SASDM77_A.dat" target="_blank">Download SAXS I(q) file</a></li>
+                        <li><a href="data/SASDM77_Dmax170_gnom_bin1no0err.dat" target="_blank">Download SAXS P(r) file</a></li>
+                        <li>UniProt accession code "AF-Q9UKA9"</li>
+                        <li>Flexible regions 1-54 and 273–336</li>
+                        <li>Hint: Adjust the structure alignment range.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Perspectives</h4>
+            <p>SAXS-A-FOLD integrates SAXS data with AlphaFold predictions for advanced structural analysis. Its
+                comprehensive toolset aids in protein modeling and functional insights.</p>
+
+            <h4>Help and Feedback</h4>
+            <p>For questions or issues, visit the <a href="https://github.com/andreashlarsen/SAStutorials/issues"
+                                                     target="_blank">GitHub Issues page</a>.</p>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
