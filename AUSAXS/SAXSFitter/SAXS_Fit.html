@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Structural validation using AUSAXS</title> 
+<link rel="icon" href="../../favicon.png" type="image/x-icon" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h4><a href="../../index.html">Home</a></h4>
+<h1>Tutorial: Structural validation using AUSAXS</h1>
+<p>Contributors: Kristian Lytje, Jeppe Breum Jacobsen, Jan Skov Pedersen</p>
+<p>
+	<img src="header.png" style="width:800px"/><br>
+	<em>Black: SAXS data. Red: fit from hydrated atomic-resolution structure using AUSAXS. The atoms are shown in green, with the generated hydration shell shown in red. </em>
+</p>
+<h4>Before you start</h4>
+<ul>
+	<li> Make sure you have the following free software installed: <br>
+		(1) The <a href="https://github.com/AUSAXS/AUSAXS" target="_blank">AUSAXS</a> software.<br>
+		(2) Python (including numpy, scipy, and matplotlib) to visualize the results.<br>
+		(3) A qualitative understanding of SAXS data is advantageous, but not required. See for example <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank"> Tutorial: Primary Data analysis.</a>
+	</li>
+</ul>
+<h4>Learning outcomes</h4>
+In this tutorial you will learn how to use the structural validation program of the AUSAXS software to compare SAXS data with atomic-resolution structures.
+<ul>
+	<li>Be familiar with the AUSAXS software. </li>
+	<li>Be able to validate an electron microscopy map against SAXS data.</li>
+</ul>
+<h4>Introductory remarks</h4>
+	<p> 
+		<a href="https://en.wikipedia.org/wiki/Electron_microscope" target="_blank">Electron microscopy</a> has in recent years become a popular and powerful technique for studying the structure of biological macromolecules.
+		A primary issue with the technique is that it is not performed under native conditions, and the resulting maps may therefore not be representative of the solution structure.
+		Many validation techniques have therefore been developed to assess the quality of the maps, typically by comparing bond angles, bond lengths, and other geometric properties 
+		with known structures. AUSAXS is a new software package that can be validate the maps by comparing them against small-angle X-ray scattering (SAXS) data. <br><br>
+
+		In this tutorial, we will explain how to use AUSAXS to compare small-angle X-ray scattering data with EM data. 
+		Note that these are very different techniques, with the former probing the electron density of the sample, and the latter probing the charge density. 
+		We are therefore not expecting perfect quantitative agreement, but will rather focus on comparing the data qualitatively.
+
+		For more information on how the comparison is practically performed, please refer to the <a href="https://doi.org/10.1107/S2059798324005497" target="_blank">AUSAXS paper</a>.
+	</p>
+
+<h4>Part I: Performing a basic validation</h4>
+
+<h4>Part II: Analyzing the output</h4>
+
+<h4>Continuing the analysis</h4>
+
+<h4>Exercises</h4>
+
+<h4>Challenges</h4>
+
+<!--
+DO NOT CHANGE ANYTHING BELOW
+-->
+
+<h4>Feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+	
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/browser.min.js"></script>
+<script src="../../assets/js/breakpoints.min.js"></script>
+<script src="../../assets/js/util.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
