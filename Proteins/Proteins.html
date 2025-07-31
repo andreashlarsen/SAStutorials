@@ -50,20 +50,19 @@
 
 <h4>Part I: Check the oligomeric state of a protein</h4>
 	In this exercise, you have measured a <a href="part1/X4_Xyl-SS-Gt.dat" target="_blank">SAXS dataset</a> of the protein Xylanase and wish to find out if it is in its monomeric state. You know its molecular mass is approximately 21 kDa, as calculated from the chemical composition. <br>
-	You can test this by estimating the molecular weight from the data. There are several ways to do this (<a href="https://doi.org/10.1038/s41598-018-25355-2" target="_blank">Hajizadeh et al, 2018</a>), some of which require a reference sample and/or a good concentration estimate.<br>
-	Here, we will use the scattering invariant and the SAXSMoW empirical method (<a href=" https://doi.org/10.1002/pro.3528" target="_blank">Piiadov et al, 2018</a>) as implemented in <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. 
+	You can test this by estimating the molecular weight from the data. There are <a href="https://bioxtas-raw.readthedocs.io/en/v2.1.0/saxs/saxs_mw.html" target="_blank">several ways to do this</a>), some of which require a reference sample and/or a good concentration estimate.<br>
+	Here, we will use the scattering invariant combined with the SAXSMoW empirical method (<a href=" https://doi.org/10.1002/pro.3528" target="_blank">Piiadov et al, 2018</a>) as implemented in <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. 
 	<ul>
 		<li>Go to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> and upload the structure</li>
 		<li>Check the "Kratky Plot" box and select "Calculate Mw from the Kratky plot"</li>
 		<li>Press Submit</li>
 	</ul>
-	Under the Kratky plot you see that Mw is estimated to 26$\pm$3, so close, but slightly higher than the expected value of 21 kDa. This indicate that the protein is in its monomeric state, but may have a small contribution of higher oligomers, e.g. dimers. <br>
+	Under the Kratky plot you see that Mw is estimated to 26$\pm$3, so close, but slightly higher than the expected value of 21 kDa. This indicates that the protein is in its monomeric state, but may have a small contribution of higher oligomers, e.g. dimers. <br>
 
-	Looking at the pair distribution distribution (see tutorials: <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Primary Data Analysis</a> or <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution</a>), there is a shape characteristic for globular (near-spherical particle), and a small "tail", extending the dmax to approximately 50 Å, which is also a sign of minor dimer contribution.
+	Looking at the pair distribution distribution (see also the tutorials: <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Primary Data Analysis</a> and <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution</a>), there is a shape characteristic for globular (near-spherical particle), and a small "tail", extending the dmax to approximately 50 Å, which is a sign of minor dimer contribution.
 	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" ><b>Background matters!</b><br>
-	Note that Mw estimation using this method is highly sensitive to background subtraction. BayesApp attempts to estimate the correct background level, and therefore reach a reasonable value. <br>
-	But try the <a href="http://saxs.ifsc.usp.br/" target="_blank">SAXSMoW</a> web application, which does not estimate background. <br>
-	Here, you get a Mw of 15 kDa, as the data has a background that should be subtracted, resulting in too low Mw estimate. So do always check the background when estimating Mw using the scattering invariant.<br>
+	Note that Mw estimation using this method is sensitive to background subtraction. BayesApp attempts to estimate the background level, and therefore reach a reasonable value. <br>
+	But try the <a href="http://saxs.ifsc.usp.br/" target="_blank">SAXSMoW</a> web application, which trust the background subtraction without adjustments, gives a Mw of 15 kDa, which is similar to what you get in BayesApp, if the background is not fitted (try that, under Advanced options). So do always check the background subtraction carefully when estimating Mw using the scattering invariant.<br>
 	<!-- The Porod plot can sometimes be a help, as it should converge to a constant value at high values of $q$, but for this data, the highest $q$ -->
 	</p>
 
@@ -102,7 +101,7 @@
 		<li><b>Solvent density:</b> The electron density of the solvent vary with salt and sucrose content. This can be manually adjusted or fitted  and affects the scattering.</li>
 	</ol>
 	Different programs fit different parameters. Generally, it is favorable to fit as few parameters as possible, but this makes it more demanding that the model is accurate, which can make the program slower (although this is not always the case).
-	It vary from program to program how much each parameter is allowed to vary. Be especially catious with CRYSOL, that gives (too?) much freedom to the fitting parameters (with risk of overfitting).
+	It vary from program to program how much each parameter is allowed to vary. Be especially cautious with CRYSOL, that gives (too?) much freedom to the fitting parameters (with risk of overfitting).
 	<table>
   <tr>
     <th>Program</th>
