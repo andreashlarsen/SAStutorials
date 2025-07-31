@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<title>Tutorial Proteins</title>
+<link rel="icon" href="../favicon.png" type="image/x-icon" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+</head>
+
+<body class="is-preload">
+	
+<div id="wrapper">
+<div id="main">
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Proteins</h1>
+<p>Contributors: Andreas Haahr Larsen</p>
+<p>
+<img src="Proteins.png" style="width:400px"/><br> 
+<em>The atomic structure of Rnase A and the surrounding water density. Adapted from <a href="https://ar5iv.labs.arxiv.org/html/2204.04961" target="_blank">Chatzimagas and Hub, 2022</a>.  </em>
+</p>
+
+<h4>Before you start</h4>
+	<ul>
+	<li>You can complete the tutorial without any installation, but to get full learning experience you need to install the software packages that are listed in Part II.</li>
+	<li>If you are new to small-angle scattering, we recommend that you do the <a href="../Shapes/Shapes.html" target="_blank">Shapes tutorial</a> first.</li>
+	<li>It is also a good idea (but not required) to do the <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Primary Data Analysis tutorial</a>.</li>
+	</ul>
+	
+<h4>Learning outcomes</h4>
+	Learn how to verify the solution structure of proteins in solution.
+	<ul>
+		<li>Determine the oligomeric state of a protein with SAXS.</li>
+		<li>Understand how SAXS data can be used to determine the structure of a protein.</li>
+		<li>Explain what parameters are fitted in the process.</li>
+	</ul>
+
+<h4>Introductory remarks</h4>
+<p>
+	One of the main applications of SAXS is the determination of protein structures. SAXS can be used to test whether the <a href="https://www.creative-biostructure.com/protein-crystallography-452.htm" target="_blank">crystal structure</a> of a protein is also the solution structure, it can tell the oligomeric state of the protein, and it may even be used to determine the (low resolution) structure, if no high-resolution models are available.<br>
+	SAXS is also sensitive to the change in density of the water around the protein, so this should be included in the model, and SAXS can be used to examine water packing around macromolecules.
+</p>
+
+<h4>Part I: Check the oligomeric state of a protein</h4>
+	In this exercise, you have measured a <a href="part1/X4_Xyl-SS-Gt.dat" target="_blank">SAXS dataset</a> of the protein Xylanase and wish to find out if it is in its monomeric state. You know its molecular mass is approximately 21 kDa, as calculated from the chemical composition. <br>
+	You can test this by estimating the molecular weight from the data. There are several ways to do this (<a href="https://doi.org/10.1038/s41598-018-25355-2" target="_blank">Hajizadeh et al, 2018</a>), some of which require a reference sample and/or a good concentration estimate.<br>
+	Here, we will use the scattering invariant and the SAXSMoW empirical method (<a href=" https://doi.org/10.1002/pro.3528" target="_blank">Piiadov et al, 2018</a>) as implemented in <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. 
+	<ul>
+		<li>Go to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> and upload the structure</li>
+		<li>Check the "Kratky Plot" box and select "Calculate Mw from the Kratky plot"</li>
+		<li>Press Submit</li>
+	</ul>
+	Under the Kratky plot you see that Mw is estimated to 26$\pm$3, so close, but slightly higher than the expected value of 21 kDa. This indicate that the protein is in its monomeric state, but may have a small contribution of higher oligomers, e.g. dimers. <br>
+
+	Looking at the pair distribution distribution (see tutorials: <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Primary Data Analysis</a> or <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution</a>), there is a shape characteristic for globular (near-spherical particle), and a small "tail", extending the dmax to approximately 50 Å, which is also a sign of minor dimer contribution.
+	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" ><b>Background matters!</b><br>
+	Note that Mw estimation using this method is highly sensitive to background subtraction. BayesApp attempts to estimate the correct background level, and therefore reach a reasonable value. <br>
+	But try the <a href="http://saxs.ifsc.usp.br/" target="_blank">SAXSMoW</a> web application, which does not estimate background. <br>
+	Here, you get a Mw of 15 kDa, as the data has a background that should be subtracted, resulting in too low Mw estimate. So do always check the background when estimating Mw using the scattering invariant.<br>
+	<!-- The Porod plot can sometimes be a help, as it should converge to a constant value at high values of $q$, but for this data, the highest $q$ -->
+	</p>
+
+<h4>Part II: Calculate the scattering from a protein structure and compare with data</h4>
+
+	In this exercise, you have measured a <a href="part1/X4_Xyl-SS-Gt.dat" target="_blank">SAXS dataset</a> of the protein Xylanase and wish to find out if it matches with the <a href="part1/SASDUD4_fit4_model1.pdb" target="_blank">crystal structure</a> (<a href="https://www.rcsb.org/structure/2DFC" target="_blank">PDB 2DFC</a>). <br>  
+	To do this, you can use one of several programs, including (not a complete list): 
+	<ul>
+		<li><a href="https://team.inria.fr/nano-d/software/pepsi-saxs/" target="_blank">Pepsi-SAXS</a><sup>*</sup>, which can be <a href="https://team.inria.fr/nano-d/software/pepsi-sans/" target="_blank">installed and run locally</a> (in the terminal) or run through a <a href="https://pepsi.app.ill.fr/" target="_blank">web application</a>.</li>
+		<li><a href="https://www.embl-hamburg.de/biosaxs/manuals/crysol.html" target="_blank">CRYSOL</a><sup>*</sup>, which is available as part of the <a href="https://biosaxs.com/download.php" target="_blank">ATSAS program</a>, which you may install and run (<a href="crysol_guide.html" target="_blank">short guide</a>) or run through <a href="https://www.embl-hamburg.de/biosaxs/atsas-online/crysol.php" target="_blank">ATSAS online</a> (login required).</li>
+		<li><a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">PDB2SAS</a>, which is part of the <a href="https://tdgrant.com/" target="_blank">DENSS software package</a> can be run in the terminal by installing DENSS, or as a GUI in <a href="https://bioxtas-raw.readthedocs.io/en/latest/index.html" target="_blank">BioXTAS RAW</a> (<a href="https://bioxtas-raw.readthedocs.io/en/latest/tutorial/s2_pdb2sas.html" target="_blank">guide to run PDB2SAS in RAW</a>).</li>
+		<li><a href="https://github.com/AUSAXS/AUSAXS/wiki/SAXS-fitter" target="_blank">SAXS fitter</a>, which can be installed through the <a href="https://github.com/AUSAXS/AUSAXS?tab=readme-ov-file" target="_blank">AUSAXS software</a>.</li>
+		<li><a href="https://modbase.compbio.ucsf.edu/foxs/" target="_blank">FoXS</a>, which can be run <a href="https://modbase.compbio.ucsf.edu/foxs/" target="_blank">online</a>.</li>
+		<li><a href="https://waxsis.uni-saarland.de/" target="_blank">WAXSiS</a>, which can be run through the <a href="https://waxsis.uni-saarland.de/" target="_blank">WAXSiS</a> (accurate but slow! - could take 20 minutes or more).</li>
+	</ul>
+	<sup>*</sup>The sister programs <a href="https://team.inria.fr/nano-d/software/pepsi-sans/" target="_blank">Pepsi-SANS</a> and <a href="https://www.embl-hamburg.de/biosaxs/cryson.html" target="https://www.embl-hamburg.de/biosaxs/cryson.html">CRYSON</a> calculates the SANS curves from an atomic protein structures. <br>
+	
+	They all calculate the scattering from the PDB file, using different strategies, and can all fit this calculated scattering with a user-provided SAXS curve. <br>
+	Try one or more of these programs to calculate the scattering from the PDB file and compare it (fit to) your SAXS data. <br>
+	Does the atomic structure fit the data?<br><br>
+
+<h4>Part III: Assess your fit quality</h4>
+	To assess whether your fit is good, you should consider several aspects: 
+	<ul>
+		<li>does you fit look good, visually?</li>
+		<li>Some programs also display the residuals (difference between data and fit, usually normalized by the experimental errors, $\DeltaI/\sigma$). They highlight differences - do you see any systematic differences?</li>
+		<li>Is the <a href="../reduced_chi2.html" target="_blank" >$\chi^2$</a> close to 1?</li>
+		<li>Are the parameters reasonable (see parameter overview and table below). Should you opt for fitting more parameters, or maybe fix or limit some?</li>
+	</ul>
+
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Parameters fitted in programs for calculating SAXS from protein structures:</b>
+		<li><b>Scaling of I(0):</b> Depends on concentration, and oligomeric state. If the data is on absolute scale this could be disabled, but in practice, it is always fitted in these programs.</li>
+		<li><b>Constant background:</b> This accounts for small inaccuracies in background subtraction and a small incoherent self-term contribution which is not always taken into account in the models. Generally it is recommended to fit this parameter (<a href="https://doi.org/10.1107/S205225252400486X " target="_blank">Trewhella, Vachette and Larsen 2024</a>). In SANS, this effect is much larger due to incoherent scattering.</li>
+		<li><b>Hydration layer density:</b> The water closest the protein (the hydration shell) is more ordered than bulk water, and therefore more compact (higher electron density). This effect vary with the protein type due to factors like surface charge and foldednes, and is accounted for in all programs, but in different ways. It is usually adjusted by a fitting parameter, which is often denoted $\delta\rho$ (see, e.g., <a href="http://dx.doi.org/10.1016/j.bpj.2014.06.006" target="_blank">Chen and Hub 2014</a> or <a href="https://doi.org/10.1107/S205225252400486X " target="_blank">Trewhella, Vachette and Larsen 2024</a> or <a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen 2025</a> or <a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">Chamberlain, Moore and Grant 2023</a>).</li>
+		<li><b>Excluded volume</b>: The protein and its hydration shell take up some space that would otherwise be occupied by bulk water. This excluded volume is always accounted for and sometimes adjusted by a fitting parameters (see, e.g., <a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen 2025</a> or <a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">Chamberlain, Moore and Grant 2023</a>).</li>
+		<li><b>Solvent density:</b> The electron density of the solvent vary with salt and sucrose content. This can be manually adjusted or fitted  and affects the scattering.</li>
+	</ol>
+	Different programs fit different parameters. Generally, it is favorable to fit as few parameters as possible, but this makes it more demanding that the model is accurate, which can make the program slower (although this is not always the case).
+	It vary from program to program how much each parameter is allowed to vary. Be especially catious with CRYSOL, that gives (too?) much freedom to the fitting parameters (with risk of overfitting).
+	<table>
+  <tr>
+    <th>Program</th>
+    <th>I(0)</th>
+    <th>Background</th>
+	<th>Hydration layer density</th>
+	<th>Excluded volume</th>
+	<th>Solvent density</th>
+  </tr>
+  <tr>
+    <td>Pepsi-SAXS</td>
+    <td>yes</td>
+    <td>optional</td>
+	<td>yes</td>
+	<td>yes</td>
+	<td>no</td>
+  </tr>
+  <tr>
+    <td>CRYSOL (ATSAS)</td>
+    <td>yes</td>
+    <td>optional</td>
+	<td>yes</td>
+	<td>yes</td>
+	<td>no</td>
+  </tr>
+  <tr>
+	<td>PDB2SAS (DENSS)</td>
+	<td>yes</td>
+	<td>optional</td>
+	<td>yes</td>
+	<td>no</td>
+	<td>yes</td>
+  </tr>
+  <tr>
+	<td>SAXSfitter (AUSAXS)</td>
+	<td>yes</td>
+	<td>optional</td>
+	<td>yes</td>
+	<td>no<sup>*</sup></td>
+	<td>no</td>
+  </tr>
+  <tr>
+	<td>FoXS</td>
+	<td>yes</td>
+	<td>optional</td>
+	<td>yes</td>
+	<td>yes</td>
+	<td>no</td>
+  </tr>
+  <tr>
+	<td>WAXSiS</td>
+	<td>yes</td>
+	<td>yes</td>
+	<td>no</td>
+	<td>no</td>
+	<td>no</td>
+  </tr>
+  <tr>
+	<td colspan="6"><sup>*</sup>excluded volume can be calculated in different ways in SAXSfitter, and if opted for, it may be fitted (<a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen, 2025).</td>
+  </tr>
+</table></a>
+
+	Overall, the fits look great, but there are some "oscillations" in the residuals at low-q, indicating systematic errors in that area, e.g. from PDB2SAS fit in RAW or CRYSOL in PRIMUS (ATSAS): <br>
+	<img src="xyl_fit_pdb2sas.png" style="width:700px"/> <img src="xyl_fit_crysol.png" style="width:500px"/><br> <br>
+
+<h4>Challenges</h4>
+	<ol>
+		<li>Challenge 1: You have measured a sample of <a href="SASDA32.dat" target="_blank">Bovine Serum Albumin (BSA)</a> with SAXS. You know its Mw is approximately 66.5 kDA, and you have tried to purify the monomer - did you succeed? You may compare with the <a href="challenge2/3v03_monomer.pdb" target="_blank">monomer</a> and <a href="challenge2/3v03_dimer.pdb" target="_blank">dimer</a> structures.</li>
+		<li>Challenge 2: You have measured the protein Cupredoxin Plastocyanin (Pc) in SAXS in a <a href="challenge1/SASDND2_Pc_NaCl.dat" target="_blank">buffer with NaCl</a> and a buffer with <a href="challenge1/SASDNE2_Pc_ZnAcetate.dat" target="_blank">ZnAcetate</a> and suspect that the ion type affects Pc's oligomeric state. Use the following structures to test the hypothesis: <a href="challenge1/3cvc_monomer.pdb" target="_blank">monomer crystal structure</a>, <a href="challenge1/3cvc_dimer_side.pdb">side-by-side dimer</a>, <a href="challenge1/3cvc_dimer_top.pdb">top-by-top dimer</a>, <a href="challenge1/AF_trimer.cif">trimer</a> generated with the <a href="https://alphafoldserver.com/" target="_blank">AlphaFold server</a>.</li>
+	</ol>
+
+<h4>Perspectives</h4>
+	<ul>
+		<li>Traditionally, it has been very popular to attempt to get the structure directly from SAXS data (ab initio) - instead of having a protein structure and testing this against data. This can, e.g., be done with <a href="https://www.embl-hamburg.de/biosaxs/dammif.html" target="_blank">DAMMIF (ATSAS)</a> or <a href="https://tdgrant.com/" target="_blank">DENSS</a>, but with AlphaFold and advances in electron microscopy, this approach is less relevant today.</li>
+		<li>SAXS can also be used to verify/test EM maps directly, see the <a href="../SAXS_EM/SAXS_EM.html" target="_blank">tutorial</a> on that.</li>
+		<li>These methods cannot be applied to membrane proteins due to detergents, unless the detergents are <a href="../InvisibleDetergents/InvisibleDetergents.html" target="_blank">contrast matched in SANS</a>.</li>
+		<li>This tutorial dealt with soluble folded proteins. Other relevant classes of proteins are intrinsically disordered proteins, whose flexibility should be taken into account by modelling an ensemble instead of a single structure.</li>
+</ul>
+<br>
+
+<h4>Help and feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
