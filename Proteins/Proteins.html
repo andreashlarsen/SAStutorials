@@ -23,8 +23,8 @@
 <h1>Tutorial: Proteins</h1>
 <p>Contributors: Andreas Haahr Larsen</p>
 <p>
-<img src="Proteins.png" style="width:400px"/><br> 
-<em>The atomic structure of Rnase A and the surrounding water density. Adapted from <a href="https://ar5iv.labs.arxiv.org/html/2204.04961" target="_blank">Chatzimagas and Hub, 2022</a>.  </em>
+<img src="Proteins.png" style="width:400px"/><img src="crysol.png" style="width:400px"/><br> 
+<em>Left: the atomic structure of Rnase A and the surrounding water density, adapted from <a href="https://ar5iv.labs.arxiv.org/html/2204.04961" target="_blank">Chatzimagas and Hub, 2022</a>. <br>Right: schematic illustration of a hydration layer, adapted from <a href=" https://doi.org/10.1107/S0021889895007047" target="_blank">Svergun, Barberato and Koch, 1995</a></em>
 </p>
 
 <h4>Before you start</h4>
@@ -73,9 +73,9 @@
 	<ul>
 		<li><a href="https://team.inria.fr/nano-d/software/pepsi-saxs/" target="_blank">Pepsi-SAXS</a><sup>*</sup>, which can be <a href="https://team.inria.fr/nano-d/software/pepsi-sans/" target="_blank">installed and run locally</a> (in the terminal) or run through a <a href="https://pepsi.app.ill.fr/" target="_blank">web application</a>.</li>
 		<li><a href="https://www.embl-hamburg.de/biosaxs/manuals/crysol.html" target="_blank">CRYSOL</a><sup>*</sup>, which is available as part of the <a href="https://biosaxs.com/download.php" target="_blank">ATSAS program</a>, which you may install and run (<a href="crysol_guide.html" target="_blank">short guide</a>) or run through <a href="https://www.embl-hamburg.de/biosaxs/atsas-online/crysol.php" target="_blank">ATSAS online</a> (login required).</li>
+		<li><a href="https://modbase.compbio.ucsf.edu/foxs/" target="_blank">FoXS</a>, which can be run <a href="https://modbase.compbio.ucsf.edu/foxs/" target="_blank">online</a>.</li>
 		<li><a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">PDB2SAS</a>, which is part of the <a href="https://tdgrant.com/" target="_blank">DENSS software package</a> can be run in the terminal by installing DENSS, or as a GUI in <a href="https://bioxtas-raw.readthedocs.io/en/latest/index.html" target="_blank">BioXTAS RAW</a> (<a href="https://bioxtas-raw.readthedocs.io/en/latest/tutorial/s2_pdb2sas.html" target="_blank">guide to run PDB2SAS in RAW</a>).</li>
 		<li><a href="https://github.com/AUSAXS/AUSAXS/wiki/SAXS-fitter" target="_blank">SAXS fitter</a>, which can be installed through the <a href="https://github.com/AUSAXS/AUSAXS?tab=readme-ov-file" target="_blank">AUSAXS software</a>.</li>
-		<li><a href="https://modbase.compbio.ucsf.edu/foxs/" target="_blank">FoXS</a>, which can be run <a href="https://modbase.compbio.ucsf.edu/foxs/" target="_blank">online</a>.</li>
 		<li><a href="https://waxsis.uni-saarland.de/" target="_blank">WAXSiS</a>, which can be run through the <a href="https://waxsis.uni-saarland.de/" target="_blank">WAXSiS</a> (accurate but slow! - could take 20 minutes or more).</li>
 	</ul>
 	<sup>*</sup>The sister programs <a href="https://team.inria.fr/nano-d/software/pepsi-sans/" target="_blank">Pepsi-SANS</a> and <a href="https://www.embl-hamburg.de/biosaxs/cryson.html" target="https://www.embl-hamburg.de/biosaxs/cryson.html">CRYSON</a> calculates the SANS curves from an atomic protein structures. <br>
@@ -88,14 +88,14 @@
 	To assess whether your fit is good, you should consider several aspects: 
 	<ul>
 		<li>does you fit look good, visually?</li>
-		<li>Some programs also display the residuals (difference between data and fit, usually normalized by the experimental errors, $\DeltaI/\sigma$). They highlight differences - do you see any systematic differences?</li>
+		<li>Some programs also display the residuals, i.e., the difference between data and fit, usually normalized by the experimental errors, $\Delta I/\sigma$. The residuals highlight differences - do you see any systematic differences?</li>
 		<li>Is the <a href="../reduced_chi2.html" target="_blank" >$\chi^2$</a> close to 1?</li>
 		<li>Are the parameters reasonable (see parameter overview and table below). Should you opt for fitting more parameters, or maybe fix or limit some?</li>
 	</ul>
 
 	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Parameters fitted in programs for calculating SAXS from protein structures:</b>
 		<li><b>Scaling of I(0):</b> Depends on concentration, and oligomeric state. If the data is on absolute scale this could be disabled, but in practice, it is always fitted in these programs.</li>
-		<li><b>Constant background:</b> This accounts for small inaccuracies in background subtraction and a small incoherent self-term contribution which is not always taken into account in the models. Generally it is recommended to fit this parameter (<a href="https://doi.org/10.1107/S205225252400486X " target="_blank">Trewhella, Vachette and Larsen 2024</a>). In SANS, this effect is much larger due to incoherent scattering.</li>
+		<li><b>Constant background:</b> This accounts for small inaccuracies in background subtraction and a small incoherent self-term scattering contribution. Generally it is recommended to fit this parameter. In SANS, this effect is much larger due to incoherent scattering.</li>
 		<li><b>Hydration layer density:</b> The water closest the protein (the hydration shell) is more ordered than bulk water, and therefore more compact (higher electron density). This effect vary with the protein type due to factors like surface charge and foldednes, and is accounted for in all programs, but in different ways. It is usually adjusted by a fitting parameter, which is often denoted $\delta\rho$ (see, e.g., <a href="http://dx.doi.org/10.1016/j.bpj.2014.06.006" target="_blank">Chen and Hub 2014</a> or <a href="https://doi.org/10.1107/S205225252400486X " target="_blank">Trewhella, Vachette and Larsen 2024</a> or <a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen 2025</a> or <a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">Chamberlain, Moore and Grant 2023</a>).</li>
 		<li><b>Excluded volume</b>: The protein and its hydration shell take up some space that would otherwise be occupied by bulk water. This excluded volume is always accounted for and sometimes adjusted by a fitting parameters (see, e.g., <a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen 2025</a> or <a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">Chamberlain, Moore and Grant 2023</a>).</li>
 		<li><b>Solvent density:</b> The electron density of the solvent vary with salt and sucrose content. This can be manually adjusted or fitted  and affects the scattering.</li>
@@ -128,9 +128,17 @@
 	<td>no</td>
   </tr>
   <tr>
-	<td>PDB2SAS (DENSS)</td>
+	<td>FoXS</td>
 	<td>yes</td>
 	<td>optional</td>
+	<td>yes</td>
+	<td>yes</td>
+	<td>no</td>
+  </tr>
+  <tr>
+	<td>PDB2SAS (DENSS)</td>
+	<td>yes</td>
+	<td>no</td>
 	<td>yes</td>
 	<td>no</td>
 	<td>yes</td>
@@ -144,14 +152,6 @@
 	<td>no</td>
   </tr>
   <tr>
-	<td>FoXS</td>
-	<td>yes</td>
-	<td>optional</td>
-	<td>yes</td>
-	<td>yes</td>
-	<td>no</td>
-  </tr>
-  <tr>
 	<td>WAXSiS</td>
 	<td>yes</td>
 	<td>yes</td>
@@ -160,11 +160,20 @@
 	<td>no</td>
   </tr>
   <tr>
+	<td colspan="6"><b>Notes:</b></td>
+  </tr>
+  <tr>
 	<td colspan="6"><sup>*</sup>excluded volume can be calculated in different ways in SAXSfitter, and if opted for, it may be fitted (<a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen, 2025).</td>
+  </tr>
+  <tr>
+	<td colspan="6">Many programs have additional options, e.g, SAXSfitter (AUSAXS) can fit solvent density, and PDB2SAS (DENSS) can fit a constant background, but this is not recommended by the developers may not be possible in the GUI implementations.</td>
+  </tr>
+  <tr>
+	<td colspan="6">The solvent density can be set manually, before fitting, in most of the programs, e.g. if the buffer contains a lot of salt or glucose, and thus has a higher electron density, default value is often 334 electrons/nm$^3$, corresponding to pure H$_2$O.</td>
   </tr>
 </table></a>
 
-	Overall, the fits look great, but there are some "oscillations" in the residuals at low-q, indicating systematic errors in that area, e.g. from PDB2SAS fit in RAW or CRYSOL in PRIMUS (ATSAS): <br>
+	Overall, the fits look great, but there are some "oscillations" in the residuals at low-q, indicating systematic errors in that area, e.g. from PDB2SAS fit in RAW or CRYSOL in PRIMUS (part of ATSAS): <br>
 	<img src="xyl_fit_pdb2sas.png" style="width:700px"/> <img src="xyl_fit_crysol.png" style="width:500px"/><br> <br>
 
 <h4>Challenges</h4>
