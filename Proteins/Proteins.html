@@ -50,19 +50,22 @@
 
 <h4>Part I: Check the oligomeric state of a protein</h4>
 	In this exercise, you have measured a <a href="part1/X4_Xyl-SS-Gt.dat" target="_blank">SAXS dataset</a> of the protein Xylanase and wish to find out if it is in its monomeric state. You know its molecular mass is approximately 21 kDa, as calculated from the chemical composition. <br>
-	You can test this by estimating the molecular weight from the data. There are <a href="https://bioxtas-raw.readthedocs.io/en/v2.1.0/saxs/saxs_mw.html" target="_blank">several ways to do this</a>), some of which require a reference sample and/or a good concentration estimate.<br>
+	You can test this by estimating the molecular weight (Mw) from the data. There are <a href="https://bioxtas-raw.readthedocs.io/en/v2.1.0/saxs/saxs_mw.html" target="_blank">several ways to do this</a>, some of which require a reference sample and/or a good concentration estimate.<br>
 	Here, we will use the scattering invariant combined with the SAXSMoW empirical method (<a href=" https://doi.org/10.1002/pro.3528" target="_blank">Piiadov et al, 2018</a>) as implemented in <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>. 
 	<ul>
 		<li>Go to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> and upload the structure</li>
 		<li>Check the "Kratky Plot" box and select "Calculate Mw from the Kratky plot"</li>
 		<li>Press Submit</li>
 	</ul>
+	<p>
 	Under the Kratky plot you see that Mw is estimated to 26$\pm$3, so close, but slightly higher than the expected value of 21 kDa. This indicates that the protein is in its monomeric state, but may have a small contribution of higher oligomers, e.g. dimers. <br>
 
-	Looking at the pair distribution distribution (see also the tutorials: <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Primary Data Analysis</a> and <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution</a>), there is a shape characteristic for globular (near-spherical particle), and a small "tail", extending the dmax to approximately 50 Å, which is a sign of minor dimer contribution.
+	Looking at the pair distance distribution (see also the tutorials: <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Primary Data Analysis</a> and <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution</a>), there is a shape characteristic for globular (near-spherical particle), and a small "tail", extending the dmax to approximately 50 Å, which is a sign of minor dimer contribution.
+	</p>
+
 	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" ><b>Background matters!</b><br>
-	Note that Mw estimation using this method is sensitive to background subtraction. BayesApp attempts to estimate the background level, and therefore reach a reasonable value. <br>
-	But try the <a href="http://saxs.ifsc.usp.br/" target="_blank">SAXSMoW</a> web application, which trust the background subtraction without adjustments, gives a Mw of 15 kDa, which is similar to what you get in BayesApp, if the background is not fitted (try that, under Advanced options). So do always check the background subtraction carefully when estimating Mw using the scattering invariant.<br>
+	Note that Mw estimation using this method is sensitive to background subtraction. BayesApp attempts to estimate the background level, and therefore reaches a reasonable value. <br>
+	Now, try the <a href="http://saxs.ifsc.usp.br/" target="_blank">SAXSMoW</a> web application, and trust the background subtraction without adjustments. This should give a Mw of 15 kDa, which is similar to what you get in BayesApp, if the background is not fitted (try that, under Advanced options). So do always check the background subtraction carefully when estimating Mw using the scattering invariant.<br>
 	<!-- The Porod plot can sometimes be a help, as it should converge to a constant value at high values of $q$, but for this data, the highest $q$ -->
 	</p>
 
@@ -78,30 +81,30 @@
 		<li><a href="https://github.com/AUSAXS/AUSAXS/wiki/SAXS-fitter" target="_blank">SAXS fitter</a>, which can be installed through the <a href="https://github.com/AUSAXS/AUSAXS?tab=readme-ov-file" target="_blank">AUSAXS software</a>.</li>
 		<li><a href="https://waxsis.uni-saarland.de/" target="_blank">WAXSiS</a>, which can be run through the <a href="https://waxsis.uni-saarland.de/" target="_blank">WAXSiS</a> (accurate but slow! - could take 20 minutes or more).</li>
 	</ul>
-	<sup>*</sup>The sister programs <a href="https://team.inria.fr/nano-d/software/pepsi-sans/" target="_blank">Pepsi-SANS</a> and <a href="https://www.embl-hamburg.de/biosaxs/cryson.html" target="https://www.embl-hamburg.de/biosaxs/cryson.html">CRYSON</a> calculates the SANS curves from an atomic protein structures. <br>
+	<sup>*</sup>The sister programs <a href="https://team.inria.fr/nano-d/software/pepsi-sans/" target="_blank">Pepsi-SANS</a> and <a href="https://www.embl-hamburg.de/biosaxs/cryson.html" target="https://www.embl-hamburg.de/biosaxs/cryson.html">CRYSON</a> calculates the SANS curves from an atomic protein structure. <br>
 	
-	They all calculate the scattering from the PDB file, using different strategies, and can all fit this calculated scattering with a user-provided SAXS curve. <br>
+	They all calculate the scattering from the Protein Data Bank (PDB) file, using different strategies, and can all fit this calculated scattering with a user-provided SAXS curve. <br>
 	Try one or more of these programs to calculate the scattering from the PDB file and compare it (fit to) your SAXS data. <br>
 	Does the atomic structure fit the data?<br><br>
 
 <h4>Part III: Assess your fit quality</h4>
 	To assess whether your fit is good, you should consider several aspects: 
 	<ul>
-		<li>does you fit look good, visually?</li>
+		<li>does your fit look good, visually?</li>
 		<li>Some programs also display the residuals, i.e., the difference between data and fit, usually normalized by the experimental errors, $\Delta I/\sigma$. The residuals highlight differences - do you see any systematic differences?</li>
 		<li>Is the <a href="../reduced_chi2.html" target="_blank" >$\chi^2$</a> close to 1?</li>
 		<li>Are the parameters reasonable (see parameter overview and table below). Should you opt for fitting more parameters, or maybe fix or limit some?</li>
 	</ul>
 
 	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Parameters fitted in programs for calculating SAXS from protein structures:</b>
-		<li><b>Scaling of I(0):</b> Depends on concentration, and oligomeric state. If the data is on absolute scale this could be disabled, but in practice, it is always fitted in these programs.</li>
+		<li><b>Scaling of I(0):</b> Depends on concentration and oligomeric state. If the data is on absolute scale this could be disabled, but in practice, it is always fitted in these programs.</li>
 		<li><b>Constant background:</b> This accounts for small inaccuracies in background subtraction and a small incoherent self-term scattering contribution. Generally it is recommended to fit this parameter. In SANS, this effect is much larger due to incoherent scattering.</li>
-		<li><b>Hydration layer density:</b> The water closest the protein (the hydration shell) is more ordered than bulk water, and therefore more compact (higher electron density). This effect vary with the protein type due to factors like surface charge and foldednes, and is accounted for in all programs, but in different ways. It is usually adjusted by a fitting parameter, which is often denoted $\delta\rho$ (see, e.g., <a href="http://dx.doi.org/10.1016/j.bpj.2014.06.006" target="_blank">Chen and Hub 2014</a> or <a href="https://doi.org/10.1107/S205225252400486X " target="_blank">Trewhella, Vachette and Larsen 2024</a> or <a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen 2025</a> or <a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">Chamberlain, Moore and Grant 2023</a>).</li>
+		<li><b>Hydration layer density:</b> The water closest to the protein (the hydration shell) is more ordered than bulk water, and therefore more compact (higher electron density). This effect varies with the protein type due to factors like surface charge and foldedness, and is accounted for in all programs, but in different ways. It is usually adjusted by a fitting parameter, which is often denoted $\delta\rho$ (see, e.g., <a href="http://dx.doi.org/10.1016/j.bpj.2014.06.006" target="_blank">Chen and Hub 2014</a> or <a href="https://doi.org/10.1107/S205225252400486X " target="_blank">Trewhella, Vachette and Larsen 2024</a> or <a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen 2025</a> or <a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">Chamberlain, Moore and Grant 2023</a>).</li>
 		<li><b>Excluded volume</b>: The protein and its hydration shell take up some space that would otherwise be occupied by bulk water. This excluded volume is always accounted for and sometimes adjusted by a fitting parameters (see, e.g., <a href="https://doi.org/10.1107/S160057672500562X" target="_blank">Lytje and Pedersen 2025</a> or <a href="https://www.cell.com/biophysj/abstract/S0006-3495(23)00670-7" target="_blank">Chamberlain, Moore and Grant 2023</a>).</li>
-		<li><b>Solvent density:</b> The electron density of the solvent vary with salt and sucrose content. This can be manually adjusted or fitted  and affects the scattering.</li>
+		<li><b>Solvent density:</b> The electron density of the solvent varies with salt and sucrose content. This can be manually adjusted or fitted  and affects the scattering.</li>
 	</ol>
 	Different programs fit different parameters. Generally, it is favorable to fit as few parameters as possible, but this makes it more demanding that the model is accurate, which can make the program slower (although this is not always the case).
-	It vary from program to program how much each parameter is allowed to vary. Be especially cautious with CRYSOL, that gives (too?) much freedom to the fitting parameters (with risk of overfitting).
+	It varies from program to program how much each parameter is allowed to vary. Be especially cautious with CRYSOL, that gives (too?) much freedom to the fitting parameters (with risk of overfitting).
 	<table>
   <tr>
     <th>Program</th>
@@ -177,10 +180,10 @@
 	<img src="xyl_fit_pdb2sas.png" style="width:700px"/> <img src="xyl_fit_crysol.png" style="width:500px"/><br> <br>
 
 <h4>Challenges</h4>
-	<ol>
-		<li>Challenge 1: You have measured a sample of <a href="SASDA32.dat" target="_blank">Bovine Serum Albumin (BSA)</a> with SAXS. You know its Mw is approximately 66.5 kDA, and you have tried to purify the monomer - did you succeed? You may compare with the <a href="challenge2/3v03_monomer.pdb" target="_blank">monomer</a> and <a href="challenge2/3v03_dimer.pdb" target="_blank">dimer</a> structures.</li>
-		<li>Challenge 2: You have measured the protein Cupredoxin Plastocyanin (Pc) in SAXS in a <a href="challenge1/SASDND2_Pc_NaCl.dat" target="_blank">buffer with NaCl</a> and a buffer with <a href="challenge1/SASDNE2_Pc_ZnAcetate.dat" target="_blank">ZnAcetate</a> and suspect that the ion type affects Pc's oligomeric state. Use the following structures to test the hypothesis: <a href="challenge1/3cvc_monomer.pdb" target="_blank">monomer crystal structure</a>, <a href="challenge1/3cvc_dimer_side.pdb">side-by-side dimer</a>, <a href="challenge1/3cvc_dimer_top.pdb">top-by-top dimer</a>, <a href="challenge1/AF_trimer.cif">trimer</a> generated with the <a href="https://alphafoldserver.com/" target="_blank">AlphaFold server</a>.</li>
-	</ol>
+	<ul>
+		<li><b>Challenge 1:</b> You have measured a sample of <a href="challenge1/SASDA32.dat" target="_blank">Bovine Serum Albumin (BSA)</a> with SAXS. You know its Mw is approximately 66.5 kDA, and you have tried to purify the monomer - did you succeed? You may compare with the <a href="challenge1/3v03_monomer.pdb" target="_blank">monomer</a> and <a href="challenge1/3v03_dimer.pdb" target="_blank">dimer</a> structures.</li>
+		<li><b>Challenge 2:</b> You have measured the protein Cupredoxin Plastocyanin (Pc) in SAXS in a <a href="challenge2/SASDND2_Pc_NaCl.dat" target="_blank">buffer with NaCl</a> and a buffer with <a href="challenge2/SASDNE2_Pc_ZnAcetate.dat" target="_blank">ZnAcetate</a> and suspect that the ion type affects Pc's oligomeric state. Use the following structures to test the hypothesis: <a href="challenge2/3cvc_monomer.pdb" target="_blank">monomer crystal structure</a>, <a href="challenge2/3cvc_dimer_side.pdb">side-by-side dimer</a>, <a href="challenge2/3cvc_dimer_top.pdb">top-by-top dimer</a>, <a href="challenge2/AF_trimer.cif">trimer</a> generated with the <a href="https://alphafoldserver.com/" target="_blank">AlphaFold server</a>.</li>
+	</ul>
 
 <h4>Perspectives</h4>
 	<ul>
