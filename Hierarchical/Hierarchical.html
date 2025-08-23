@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<title>Tutorial Hierarchical Structures</title>
+<link rel="icon" href="../favicon.png" type="image/x-icon" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+</head>
+
+<body class="is-preload">
+	
+<div id="wrapper">
+<div id="main">
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Tutorial: Tutorial Hierarchical Structures</h1>
+<p>Contributors: Andreas Haahr Larsen</p>
+<p>
+<img src="Hierarchical.png" style="width:400px"/><br> 
+<em>Sketch of nanoparticles aggregating into a branches network. This is an example of a hierarchical structure, as is has characteristic dimensions at different length scales, including the nanoparticle diameter, the overall size of the aggregate, and the dimensionality of the branched network. Figure reproduced from (<a href=" https://doi.org/10.3390/nano9040648" target="_blank">Anitas, 2019</a>).</em>
+</p>
+
+<h4>Before you start</h4>
+	<ul>
+	<li>Download and install <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first)</li>
+	<li>Knowledge of Guinier and radius of gyration, $R_g$. See the <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Primary data analysis tutorial</a>.</li>
+	<li>Knowledge of the general Porod limit, $I(q)\propto q^{-4}$ for high values of $q$.</li>
+	<li>You should also be familiar with basic fitting in SasView. See the <a href="../Spheres/Spheres.html" target="_blank">Spheres tutorial</a>.</li>
+	<li>You should be able to plot data and adjust the scales (in a program of your own choice).</li>
+	<li>You should be familiar with Shape2SAS. See the <a href="../Spheres/Spheres.html" target="_blank">Spheres</a> or the <a href="../Shapes/Shapes.html" target="_blank">Shapes tutorial</a>.</li>
+	</ul>
+	
+<h4>Learning outcomes</h4>
+	Learn to model SAXS or SANS data from hierarchical structures using shape-independent models. After the tutorial you should be able to:
+	<ul>
+		<li>Explain how to determine different structural levels from SAXS or SANS data.</li>
+		<li>Fit data with the unified model.</li>
+		<li>Fit data with a combination of exponential functions and other Guiner regions.</li>
+		<li>Understand what structural information about the sample that can be derived from the fits.</li>
+	</ul>
+
+<h4>Introductory remarks</h4>
+<p>
+	SAXS and SANS is unique in being able to probe both the outer structure and internal structure of gels, powders, colloids or particles in solution. Different structural levels can be probed at different angles, or $q$-values. 
+	In some cases, an exact model may be generated to model the data, using a combination of form factors and structure factors, even for complex models. But if knowledge is limited or a detailed model is not necessary, one may use <emp>shape-independent models</emp>. This can be highly effective, for example for studying changes upon external perturbations such as temperature change, pH adjustments, addition of enzymes, or increased pressure.<br>
+	Examples of hierarchical structures include dietary proteins (<a href="https://doi.org/10.1016/j.foodhyd.2024.110639" target="_blank">Tiong et al., 2025</a>), and casein micelles from milk (<a href="https://doi.org/10.1039/D2SM00724J" target="_blank">Pedersen et al.,2022</a>). The nanoparticles in the illustration in the top of the page is another example. They form a branches structure, that growth like a <a href="https://fractalfoundation.org/resources/what-are-fractals/" target="_blank">mass fractal</a>. 
+</p>
+
+<h4>Part I: Slopes and dimension</h4>
+	In this exercise, you learn to think in terms of dimensions and structural hierarchies (rather than shapes). Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> and simulate an cylinder with semiaxes a,b=10 Å,20 Å and length c=300 Å. Give it a polydispersity of 0.2 (or use <a href="part1/cyl_10_20_300_pd0.2.dat" target="_blank">this simulated data</a>). <br>
+	You could fit it with a form factor. But instead, consider it a hierarchical structure. Plot the data on a log-log plot, and consider the regions, starting from the lowest $q$ values, marking the structural levels:
+	<ol>
+		<li>Flat region (slope close to zero), indicating that the largest dimension (300 Å) can be retrieved from data. </li>
+		<li>level 1: The end of the flat region (change to another slope) is indicative for largest dimension (cylinder length). The data now has a slope of -1, which is characteristic for 1-dimensional structures such as rods. </li>
+		<li>level 2: The end of the slope -1 region marks another dimension, namely cylinder cross section. Next slope is approximately -4, which is the Porod limit. </li>
+		<li>Background: At this stage, the data reach a constant background level. </li>
+	</ol>
+	Open the data in SasView, and fit the first and last part respectively with a Guinier region and a slope, using the <a href="https://www.sasview.org/docs/user/models/guinier_porod.html" target="_blank">guinier_porod model</a> (Category: Shape Independent). <br>
+	<img src="part1/low-q.png" style="width:900px"/><br>
+	<img src="part1/high-q.png" style="width:900px"/><br> 
+	you may fit of fix the slopes in this case, as they are known <br><br>
+
+<h4>Part II: Fit data using the unified model</h4>
+	The features found in Part I are general for SAXS and SANS data, leading to the idea of a <a href="https://www.sasview.org/docs/user/models/unified_power_Rg.html" target="_blank">unified fit model</a> (<a href=" https://doi.org/10.1107/S0021889895005292" target="_blank">Beaucage, 1995</a>). <br>
+	Use the unified model (Category: Shape Independent) with 2 structural levels to fit the simulated data. The model has many parameters, so use a stepwise approach, as outlined below. <br><br>
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Fitting with unified fit model:</b>
+		<li><b>Levels:</b> Determine the number of structural levels.</li>
+		<li><b>Estimate slopes:</b> Estimate the slopes (power1, power2,...), e.g by fitting a <a href="https://www.sasview.org/docs/user/models/power_law.html" target="_blank">power law</a> to each region.</li>
+		<li><b>Estimate radius of gyration:</b> Radii of gyration can be determined (e.g. as done in Part I).</li>
+		<li><b>Estimate background:</b> Provide a good estimate of the constant background level.</li>
+		<li><b>Estimate G's one level at the time</b>: Set all scalings (G1,G2,...) and (B1,B2,...) to zero, except G for the highest level (largest $q$). Adjust G to fit the Guinier region. continue with next level(s).</li>
+		<li><b>Estimate B's:</b> Adjust B's, one at a time until the model is close to the data.</li>
+		<li><b>Fit(!):</b> Fit the parameters. Remember not to fit the overall scale, as it is correlated to the G's and Bs.</li>
+		<li><b>Note 1:</b> If you do not see a flat region followed by a change in slope, the largest dimension is not resolved. You may still use the unified model, but cannot determine the $R_g$ for the first structural level (largest dimension), but may still determine its dimensionality from the slope.</li>
+	</ol>
+	Do the fitting. It may require a few attempts to get a reasonable fit. Your fit may look similar to <a href="part1/unified.png" target="_blank">this</a>. <br>
+	For more complex samples, the <a href="../reduced_chi2.html" target="_blank">$\chi^2$</a> may be relatively high, as the model is approximate and only describes overall structural features (no shape, only size and dimensionality).<br><br>
+
+<h4>Part III: Mixture</h4>
+	In the following exercise, we will look at a <a href="part3/YP_IEP_PBS_Sol" target="_blank">combined USANS/SANS dataset</a> of Pea protein (plant-based protein with potential to replace animal protein). The protein is in solution. Determine structural characteristics and fit the data. You may use the following step-by-step guide.<br>
+	<ul>
+	<li><b>Step 1: visual inspection.</b> From visual inspection (remember: log-log plot), determine any slopes or Guinier regions. Identify any Guinier regions (to estimate $R_g$) or slopes.</li>
+	<em>Data seems to contain a slope at low-$q$, followed by a Guinier region and ending in a background level.</em>
+	<li><b>Step 2: estimate values</b> Estimate slope(s), $R_g$ value(s), and the background level. In this step, you may do some simple fitting of specific q-ranges, as in Part I</li>
+	<li><b>Step 3: choose model</b> In this case, the initial slope is high, meaning that it may be a mix of structures, with the high slope representing large aggregates, and the Guinier representing smaller particles in solution. A mix of structures (as opposed to one hierarchical structure) can be fitted with a sum - one model for each structure.<br>
+	<em>Here, you can combine a power law (for the low-q slope) and guinier_porod. In SasView: Fitting > Add/Multiply models. Select the two models to combine, give the model a name and a description (could be the same as the name, or a space, if you are lazy).</em></li>
+	<li><b>Step 4: guess parameters.</b> Plug in the values from step 2 and adjust until you have reasonable consistency with data. <br>
+	<em>Set the parameter $s$ to zero, as the proteins are expected to be globular.</em></li>
+	<li><b>Step 5: fit(!):</b> Refine the parameters. You may fix some parameters (besides from <em>s</em> and the <em>scale</em>, or restrain parameters to a reasonable interval using <em>min</em> and <em>max</em> columns).<br>
+	<em>You may get something similar to <a href="part3/pea_protein_exp_GP.png" target="_blank">this</a>. The "ripples" at $q\sim0.004$ comes from SANS resolution effects at overlapping setting that are merged into a single datafile.</em></li>
+	</ul>
+<h4>Challenges</h4>
+	<ul>
+		<li><b>Challenge 1:</b> You have measured a sample of <a href="challenge1/dataset_4.dat" target="_blank">nanodiamond powder</a> with SAXS. Fit the data, and describe the structural levels in terms of size and dimensionality (you may ignore the Bragg peak at high $q$).</li>
+		<li><b>Challenge 2:</b> The pea protein from Part III was also measured in the gel phase (as opposed to in solution). Describe the structural differences between the solution and gel states. Download the <a href="challenge2/YP_IEP_PBS_Gel.dat" target="_blank">SAXS data of pea protein in the gel state here</a>.</li>
+	</ul>
+
+<!--
+<h4>Perspectives</h4>
+	<ul>
+		<li></li>
+	</ul>
+-->
+<br>
+
+<h4>Help and feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
