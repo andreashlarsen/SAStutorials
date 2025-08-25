@@ -64,7 +64,7 @@ After completing this tutorial, you will be able to perform primary data reducti
 		To get log-log plot, click on the "Plot" section and select "Double Logarithmic Scale".
 		Try to identify the outliers by visual inspection. It will probably not be easy.<br>
 		To identify the outliers, click the "Processing" section, and then the "Compare" button. 
-		This will open a new window like the one below.<br><br>
+		This will open a new window like the one below (after tabbing the bottom tab "Statistics").<br><br>
 
 		<img src="PrimusDataCompare.png" style="width:500px"/><br>
 
@@ -80,7 +80,7 @@ After completing this tutorial, you will be able to perform primary data reducti
 
 <h4>Part II: Background subtraction</h4>
 	<p>
-		The <a href="PRIMUS-tutorial-data.zip"  target="_blank">zip-file</a> from Part I contains two series of buffer measurements (files starting with "img_0222_" and "img_0224_"), measure before and after the sample measurement.
+		The <a href="PRIMUS-tutorial-data.zip"  target="_blank">zip-file</a> from Part I contains two series of buffer measurements (files starting with "img_0222_" and "img_0224_"), measured before and after the sample measurement.
 		Load these files (both sets of buffer measurements) into Primus and remove the outliers (if there are any?) as described in Part I. Next, merge them just like before. 
 		Now you can go to "file" and "close all". The merged file is saved in the data folder.<br><br>
 
@@ -90,7 +90,6 @@ After completing this tutorial, you will be able to perform primary data reducti
 		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
 			<b>Inspecting the subtracted data</b>
 			<li>Deselect averaged data and buffer files, and select only the "sub_001.dat" file.</li>
-			<li>Navigate to the "Plot" section and select "Absolute scale" if it's not already selected.</li>
 			<li>Zoom in on the region with close to zero intensity. The data points should not systematically be below 0 intensity.</li>
 			<li>If you accidentally subtracted the sample from the buffer, it should also be apparent here.</li>
 		</ul>
@@ -101,7 +100,7 @@ After completing this tutorial, you will be able to perform primary data reducti
 		
 	
 	<h4>Part III: Reducing data with instrumental artifacts</h4>
-	Download this <a href="silver_nanoparticles.zip"  target="_blank">SAXS data form silver nanoparticles</a>. Data files are labeled as <em>data</em> and buffer files are labeled as <em>bg</em>. Open the sample files as before and ensure that y-axis is logarithmic under Plot > (Double) Logarithmic Scale.<br>
+	Download this <a href="silver_nanoparticles.zip"  target="_blank">SAXS data from silver nanoparticles</a>. Data files are labeled as <em>data</em> and buffer files are labeled as <em>bg</em>. Open the sample files as before and ensure that y-axis is logarithmic under Plot > (Double) Logarithmic Scale.<br>
 	You can visually see that the data are not identical, so the two datasets should not be merged. Now, load in the two background measurements, which are also non-identical. <br>
 	
 	<img src="SilverNP_primus.png" style="width:1000px"/><br><br>
