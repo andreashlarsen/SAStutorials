@@ -32,7 +32,7 @@
 	<ul>
 	<li>No requirements, but for some of the tutorial parts you can opt for using: <br>
 		(1) Python (including numpy, scipy and matplotlib) or similar for importing and plotting data (free and open source software, installation required), or<br>
-		(2) <a href="https://www.embl-hamburg.de/biosaxs/download.html" target="_blank">ATSAS</a> (free software for academic users, installation required).<br>
+		(2) <a href="https://biosaxs.com/software.html" target="_blank">ATSAS</a> (free software for academic users, installation required).<br>
 		(3) <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> (free and no installation required, but requires internet connection).<br>
 	</li>
 	</ul>
@@ -61,7 +61,7 @@ Be able to retrieve structural information from a SAXS or SANS dataset by primar
 	Your estimation of $R_g$ should be consistent with the reported value in the <a href="https://www.sasbdb.org/data/SASDMF2/" target="_blank">SASBDB entry</a> (within +/- 1-2 Å). However, sometimes $R_g$ is larger than expected.<br>
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Large $R_g$ values may be a sign of:</b>
 		<li>Aggregation.</li>
-		<li> <a href="https://en.wikipedia.org/wiki/Oligomer" traget="_blank">Oligomerization</a> </li>
+		<li> <a href="https://en.wikipedia.org/wiki/Oligomer" target="_blank">Oligomerization</a> </li>
 		<li>Change of shape (more elongated particles have larger $R_g$ than compact particles).</li>
 		Finally, interparticle interaction may leads to <em>lower</em> values of $R_g$.
 	</ul>
@@ -119,7 +119,7 @@ Be able to retrieve structural information from a SAXS or SANS dataset by primar
 	</p>
 	<p> For non-homogeneous particles, you may get negative contributions to $p(r)$. In that case, it is necessary to allow negative values in $p(r)$:
 		<ul>
-			<li>To see the effect of NOT doing this, try to run <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> on the simulated micelle data from <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, which had negative contrast in the core (<a href="core_shell_negative_positive.dat" target="_blank">Shape2SAS>or download this simulated dataset</a>). You may help the algorithm by providing an approximative value for the maximum distance, $d_\mathrm{max}$.</li>
+			<li>To see the effect of NOT doing this, try to run <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> on the simulated micelle data from <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, which had negative contrast in the core (<a href="core_shell_negative_positive.dat" target="_blank">or download this simulated dataset</a>). You may help the algorithm by providing an approximative value for the maximum distance, $d_\mathrm{max}$.</li>
 			<li>You will notice that the $p(r)$ does not resemble the one you generated in Shape2SAS.</li>
 			<li>Now, allow BayesApp to use negative values in $p(r)$ by setting Transformation/Regularization to "Negative", and rerun.</li>
 		</ul>
