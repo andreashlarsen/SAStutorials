@@ -57,10 +57,10 @@
 	In this exercise, you learn to think in terms of dimensions and structural hierarchies (rather than shapes). Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> and simulate an cylinder with semiaxes a,b=10 Å,20 Å and length c=300 Å. Give the sample a relative polydispersity of 0.2 (or use <a href="part1/cyl_10_20_300_pd0.2.dat" target="_blank">this simulated data</a>). <br>
 	You could fit it with a form factor for a cylinder, but instead, you should consider it a hierarchical structure. Plot the data on a log-log plot, and consider the regions, starting from the lowest $q$ values, marking the structural levels:
 	<ol>
-		<li>Flat region (low q values), indicating that the largest dimension (300 Å) can be retrieved from data. </li>
-		<li>Structural level 1: the q-value at which the flat region ends (change to another slope) reveals the largest dimensions in the sample (here: cylinder length). The data now has a slope of -1, which is characteristic for 1-dimensional structures such as rods or cylinders. </li>
-		<li>Structual level 2:tThe end of the slope -1 region marks another dimension, namely the cylinder cross section. Next slope is approximately -4, which is the Porod limit (for smooth surfaces). </li>
-		<li>Background: At the highest values of q, the data reaches a constant background level. </li>
+		<li><b>Flat region (low q values)</b>, indicating that the largest dimension (300 Å) can be retrieved from data. </li>
+		<li><b>Structural level 1:</b> the q-value at which the flat region ends (change to another slope) reveals the largest dimensions in the sample (here: cylinder length). The data now has a slope of -1, which is characteristic for 1-dimensional structures such as rods or cylinders. </li>
+		<li><b>Structual level 2:</b> the end of the slope -1 region marks another dimension, namely the cylinder cross section. Next slope is approximately -4, which is the Porod limit (for smooth surfaces). </li>
+		<li><b>Background:</b> at the highest values of <em>q</em>, the data reaches a constant background level. </li>
 	</ol>
 	Open the data in SasView, and fit the first and last part respectively with a Guinier region and a slope, using the <a href="https://www.sasview.org/docs/user/models/guinier_porod.html" target="_blank">guinier_porod model</a> (Category: Shape Independent). Set <em>s</em> = 0. <br>
 	<img src="part1/low-q.png" style="width:900px"/><br>
