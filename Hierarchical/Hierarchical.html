@@ -79,25 +79,25 @@
 		<li><b>Fit(!):</b> Fit the parameters. Remember not to fit the overall scale, as it is correlated to the <em>G</em>'s and <em>B</em>'s.</li>
 		<li><b>Note:</b> If you do not see a flat region followed by a change in slope, the largest dimension is not resolved. You may still use the unified model, but cannot determine the $R_g$ for the first structural level (largest dimension), but may still determine its dimensionality from the slope.</li>
 	</ol>
-	Do the fitting. It may require a few attempts to get a reasonable fit. Your fit may look similar to <a href="part1/unified.png" target="_blank">this</a>. <br>
-	For more complex samples, the <a href="../reduced_chi2.html" target="_blank">$\chi^2$</a> may be relatively high, as the model is approximate and only describes overall structural features (no shape, only size and dimensionality).<br><br>
+	It may require a few attempts to get a reasonable fit. Your fit may look similar to <a href="part1/unified.png" target="_blank">this</a>. <br>
+	For more complex samples, the <a href="../reduced_chi2.html" target="_blank">$\chi^2$</a> may be relatively high, as the model is approximate and only describes overall structural features (no shape, only sizse and dimensionality).<br><br>
 
 <h4>Part III: Mixture</h4>
-	In the following exercise, we will look at a <a href="part3/YP_IEP_PBS_Sol" target="_blank">combined USANS/SANS dataset</a> of Pea protein (plant-based protein with potential to replace animal protein). The protein is in solution. Determine structural characteristics and fit the data. You may use the following step-by-step guide.<br>
+	In the following exercise, we will look at a <a href="part3/YP_IEP_PBS_Sol.dat" target="_blank">combined USANS/SANS dataset</a> of Pea protein (plant-based protein with potential to replace animal protein). The protein is in solution. Determine structural characteristics and fit the data. You may use the following step-by-step guide:<br>
 	<ul>
 	<li><b>Step 1: visual inspection.</b> From visual inspection (remember: log-log plot), determine any slopes or Guinier regions. Identify any Guinier regions (to estimate $R_g$) or slopes.</li>
-	<em>Data seems to contain a slope at low-$q$, followed by a Guinier region and ending in a background level.</em>
+	<em>Data seems to contain a slope at low-$q$, followed by a Guinier region and end in a background level.</em>
 	<li><b>Step 2: estimate values</b> Estimate slope(s), $R_g$ value(s), and the background level. In this step, you may do some simple fitting of specific q-ranges, as in Part I</li>
-	<li><b>Step 3: choose model</b> In this case, the initial slope is high, meaning that it may be a mix of structures, with the high slope representing large aggregates, and the Guinier representing smaller particles in solution. A mix of structures (as opposed to one hierarchical structure) can be fitted with a sum - one model for each structure.<br>
+	<li><b>Step 3: choose model</b> The initial slope is high, meaning that it may be a mix of structures, with the high slope representing large aggregates, and the Guinier representing smaller particles in solution. A mix of structures (as opposed to one hierarchical structure) can be fitted with a sum - one model for each structure.<br>
 	<em>Here, you can combine a power law (for the low-q slope) and guinier_porod. In SasView: Fitting > Add/Multiply models. Select the two models to combine, give the model a name and a description (could be the same as the name, or a space, if you are lazy).</em></li>
-	<li><b>Step 4: guess parameters.</b> Plug in the values from step 2 and adjust until you have reasonable consistency with data. <br>
+	<li><b>Step 4: guess parameters.</b> Insert values from step 2 and adjust (compote, no fitting yet) until you have reasonable consistency with data. <br>
 	<em>Set the parameter $s$ to zero, as the proteins are expected to be globular.</em></li>
 	<li><b>Step 5: fit(!):</b> Refine the parameters. You may fix some parameters (besides from <em>s</em> and the <em>scale</em>, or restrain parameters to a reasonable interval using <em>min</em> and <em>max</em> columns).<br>
 	<em>You may get something similar to <a href="part3/pea_protein_exp_GP.png" target="_blank">this</a>. The "ripples" at $q\sim0.004$ comes from SANS resolution effects at overlapping setting that are merged into a single datafile.</em></li>
 	</ul>
 <h4>Challenges</h4>
 	<ul>
-		<li><b>Challenge 1:</b> You have measured a sample of <a href="challenge1/dataset_4.dat" target="_blank">nanodiamond powder</a> with SAXS. Fit the data, and describe the structural levels in terms of size and dimensionality (you may ignore the Bragg peak at high $q$).</li>
+		<li><b>Challenge 1:</b> You have measured a sample of <a href="challenge1/dataset_4.dat" target="_blank">nanodiamond powder</a> with SAXS. Fit the data, and describe the structural levels in terms of size and dimensionality (you may ignore the Bragg peak at high $q$, or you can include it in your fit, e.g. by adding a <a href="https://www.sasview.org/docs/user/models/gaussian_peak.html" target="_blank">Gaussian peak</a>).</li>
 		<li><b>Challenge 2:</b> The pea protein from Part III was also measured in the gel phase (as opposed to in solution). Describe the structural differences between the solution and gel states. Download the <a href="challenge2/YP_IEP_PBS_Gel.dat" target="_blank">SAXS data of pea protein in the gel state here</a>.</li>
 	</ul>
 
