@@ -25,20 +25,21 @@
 <h1>Tutorial: Rigid Body Refinement</h1>
 <p>Contributors: Jan Skov Pedersen, Kristian Lytje, Andreas Haahr Larsen, Jeppe Breum Jacobsen.</p>
 <p>
-<img src="Template.png" style="width:400px"/><br> 
-<em>Insert an illustration that also goes here and to the front page. Square format. Please ensure that there are no copyright issues. This caption in italic.</em></a>
+<img src="rigidbody.jpg" style="width:600px"/><br> 
+<em>SAXS data on the PA2 protein in solution with a fitted hydration layer.</em>
 </p>
 <h4>Before you start</h4>
 	<ul>
-	<li>For an introduction to SAXS experiments on proteins, we recommend the <a href="../Proteins/Proteins.html">Proteins tutorial</a>.</li>
-	<li>This tutorial uses the rigidbody_optimizer from AUSAXS, which can be downloaded from <a href="https://github.com/AUSAXS/AUSAXS/releases" target="_blank">GitHub</a>.</li>
-	<li>To visualize molecular structures, a program such as <a href="https://www.pymol.org/" target="_blank">PyMOL</a> can be used, which has a free 30-day trial.</li>
+	<li>For an introduction to analysis of SAXS data on proteins in solution, we recommend the <a href="../Proteins/Proteins.html">Proteins tutorial</a>.</li>
+	<li>This tutorial uses the rigidbody_optimizer from AUSAXS, which can be downloaded from <a href="https://github.com/AUSAXS/AUSAXS/releases" target="_blank">GitHub</a>. Other programs, such as <a href="https://www.embl-hamburg.de/biosaxs/sasref.html", target="_blank">SASREF, which is part of the ATSAS pacakage</a>, can also perform rigid body refinements.</li>
+	<li>To visualize molecular structures, a program such as <a href="https://www.pymol.org/" target="_blank">PyMOL</a> can be used, which has a free 30-day trial. 
+	Alternatively the RCSB protein data bank has an <a href="https://www.rcsb.org/3d-view" target="_blank">online 3D viewer</a>.</li>
 	</ul>
 	
 <h4>Learning outcomes</h4>
 After completing this tutorial you will
 <ul>	
-	<li>Understand what a rigid body model is</li>
+	<li>What rigid body modeling is</li>
 	<li>Be able to use SAXS data to optimize a rigid body model with AUSAXS</li>
 	<li>Be able to visualize your structures with PyMOL</li>
 	<li>Optionally, be able to use AlphaFold to generate a structural hypothesis</li>
@@ -51,9 +52,9 @@ After completing this tutorial you will
 		we will look at how SAXS data can be used to optimize a rigid body model of PA2.
 	</p>
 
-<h4>Part I (OPTIONAL): Use Alphafold to generate hypothetical structure</h4>
+<h4>Part I (OPTIONAL): Use AlphaFold to generate hypothetical structure</h4>
 	<p>	
-		Alphafold is a machine learning algorithm that can, among other things, predict the structure of a protein based on its amino acid sequence. 
+		AlphaFold is a machine learning algorithm that can, among other things, predict the structure of a protein based on its amino acid sequence. 
 		It can be run by anyone with a Google account on <a href="https://alphafoldserver.com/welcome" target="_blank">the AlphaFold Server</a>.
 		Later in this tutorial, we will use these structures for fitting our SAXS data. If you are not interested in using AlphaFold, you can skip to the next part of the tutorial, where the structures will be provided.
 	</p>
@@ -68,34 +69,39 @@ After completing this tutorial you will
 		<li>With the sequences of PA1 and PA2, go to <a href="https://alphafoldserver.com/welcome" target="_blank">the AlphaFold Server</a> and login with a Google account.</li>
 		<li>For PA1, paste the sequence in the input box, and click "Continue and preview job". Remember to not include the signal peptide!</li>
 		<li>For PA2, paste the sequence in the input box and click "Continue and preview job". (The dimer-structure is added by the rigid body modeling later.)</li>
-		<li>Once AlphaFold has finished the folded proteins can be viewed, and you can download a zip-file. The zipfile contains a number of files, but we are interested in the .cif files, which contain the 3D coordinates of the protein structure. Give the structures meaningful names.</li>
+		<li>Once AlphaFold has finished, the folded proteins can be viewed, and you can download a zip-file. The zipfile contains a number of files, but we are interested in the .cif files, which contain the 3D coordinates of the protein structure. Give the structures meaningful names.</li>
 		</ul>
 	<p>If the AlphaFold preview of the structure does not work, you can open the .cif files in PyMOL to visualize the structures.</p>
 <h4>Part II (Optional): PA1 warmup</h4>
-	<p>To familiarize ourselves with the AUSAXS package, we will first look at the PA1 protein, which is a monomer. Download the AUSAXS package from 
+	<p>To familiarize ourselves with the AUSAXS package, we will first look at the PA1 protein, which is a monomer. If you have already completed <a href="../Proteins/Proteins.html" target="_blank">the Proteins tutorial</a> and used the SAXS fitter from AUSAXS, you can skip this part.
+		 Download the AUSAXS package from
 		<a href="https://github.com/AUSAXS/AUSAXS/releases" target="_blank">GitHub</a>, and unzip it in a desired location. In this part of the tutorial, we will use the
 		<code>saxs_fitter.exe</code> program to test the agreement between the SAXS data and the AlphaFold structure of PA1. 
 		The program calculates the scattering from the provided structure and fits a hydration layer. The program provides a graph showing the fit and the data as well as the <a href="../reduced_chi2.html" target="_blank">reduced chi square ($\chi^2_{red}$)</a>.
+		<b>Important for MACOS users: The instructions for running the program on MACOS are identical, except that you don't need to write .exe after the name of the program.</b>
 	</p>
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
 		<b>Fit a SAXS dataset to a protein structure</b>
 		<li>Download the <a href="Datafiles/PA1.dat" target="_blank">SAXS data file for PA1</a>.
 			 If you did not generate a structure for PA1 with AlphaFold, you can <a href="Structures/PA1_no_signal_peptide.cif" target="_blank">download the .cif file</a>.</li>
 		<li>If you don't already have the AUSAXS software, download it from <a href="https://github.com/AUSAXS/AUSAXS/releases" target="_blank">GitHub</a>, and unzip it.</li>
-		<li>If your system allows it, you can use the <code>saxs_fitter_gui.exe</code> program, which has a graphical user interface for easier use. In this case, simply open the .cif structure and the SAXS data file and press "Start"</li>
-		<li>If you cannot use the GUI, place the .cif and SAXS data file in the same folder as <code>saxs_fitter.exe</code>, and open a command window.</li>
+		<li>If you are using Windows, you can use the <code>saxs_fitter_gui.exe</code> program, which has a graphical user interface for easier use. In this case, simply open the .cif structure and the SAXS data file and press "Start"</li>
+		<li>If can not use the GUI, place the .cif and SAXS data file in the same folder as <code>saxs_fitter.exe</code>, and open a command window (Terminal on MACOS).</li>
 		<li>In the command window, type <code>saxs_fitter.exe PA1_no_signal_peptide.cif PA1.dat</code> and press Enter.</li>
-		<li>The program will now perform the fitting procedure. When it is done, you should find find a folder <code>output\saxs_fitter\PA1</code>, with a number of graphs. (If you do not see the graphs, run <code>plot.exe</code> from the same folder as <code>saxs_fitter.exe</code>)</li>
+		<li>The program will now perform the fitting procedure. When it is done, you should find find a folder <code>output\saxs_fitter\PA1</code>, with a number of graphs. (If you do not see the graphs, run <code>plot.exe</code> or <code>python plot.py</code> on MACOS from the same folder as <code>saxs_fitter.exe</code>)</li>
 		<li>Among other things, the plotting-program provides the usual log- and loglog-plots, which show the $\chi^2_{red}$. The program also provides a a <code>model.pdb</code> file, which can be opened in PyMOL. Opening this alongside <code>PA1_no_signal_peptide.cif</code> allows you to see the hydration layer added by the fitting procedure.</li>
-		<img src="Figures/PA1loglog.png" style="width:32%; height:auto;"/>
-		<img src="Figures/PA1_no_signal_peptide_structure.png" style="width:32%; height:auto;"/>
-		<img src="Figures/PA1_no_signal_peptide_fit_structure.png" style="width:32%; height:auto;"/><br>
-		<em>Loglog plot of the fit of the AlphaFold structure to the SAXS data (left), the AlphaFold structure (middle) and the structure with a fitted hydration layer (right).</em>
+		<div style="display:flex; justify-content:center; gap:20px; margin-top:1em;">
+			<img src="Figures/PA1loglog.png" style="width:32%; height:auto;"/>
+			<img src="Figures/PA1_structure.png" style="width:62%; height:auto;"/>
+		</div>
+		
+		<em style="display:block; text-align:center;">Loglog plot of the fit of the AlphaFold structure to the SAXS data (left) and the AlphaFold structure with the fitted hydration layer (right).</em>
 	</ul>
 
 <h4>Part III: Rigid body refinement of PA2</h4>
-	<p>In this part, we will look at the PA2 dimer. PA2 is known to form dimers in solution. It is possible for Alphafold to generate a dimer structure, but 
-		instead we will use the monomer structure from AlphaFold and find the dimer structure by rigid body refinement against the SAXS data.
+	<p>In this part, we will look at the PA2 dimer. PA2 is known to form dimers in solution. It is possible for AlphaFold to generate a dimer structure, but 
+		instead we will use the monomer structure from AlphaFold and find the dimer structure by rigid body refinement against the SAXS data. Rigid body refinement is a method where two or more structures are treated as rigid bodies, and their relative positions and orientations are optimized, but not the internal structure of the bodies.
+		<b>Important for MACOS users: The instructions for running the program on MACOS are identical, except that you don't need to write .exe after the name of the program.</b>
 		
 	</p>
 
@@ -106,16 +112,15 @@ After completing this tutorial you will
 		<li>To run the optimizer, we need to create a config file that tells the program what to do. You can <a href="Structures/config.conf" target="_blank">download this config file</a> and place in the same directory as the <code>rigidbody_optimizer.exe</code> program.</li>
 		<li>Open the <code>config.conf</code> file with a text editor and edit the paths to your SAXS data file and structure file.</li>
 		<li>Before saving and closing the config file, look at its contents. It tells the optimizer to create a dimer structure with P2 symmetry, and try to optimize it 500 times. For more information, see the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization" target="_blank">wiki page on GitHub</a>.</li>
-		<li>To run the program open a command window, and navigate to the directory where the <code>rigidbody_optimizer.exe</code> program is located, and type <code>rigidbody_optimizer.exe config.conf</code>. You can confirm that the data and structure 
+		<li>To run the program, open a command window and navigate to the directory where the <code>rigidbody_optimizer.exe</code> program is located, and type <code>rigidbody_optimizer.exe config.conf</code>. In the command window, you can confirm that the data and structure 
 		are loaded correctly. Each time the program finds a new dimer structure that improves the $\chi^2$ value, it prints it in the command window.</li>
 		<li>When the program is finished, it prints a fit report that tells you the final $\chi^2$ value and other relevant information.</li>
-		<li>In the directory where you ran the program, you should find the unoptimized dimer structure <code>initial_state0.pdb</code> and the optimized structure <code>final_state1.pdb</code>. To see how your final structure compares to the SAXS data, run the <code>plot.exe</code> program, and find the log.png and loglog.png graphs in the output folder.</li>
+		<li>In the directory where you ran the program, you should find the unoptimized dimer structure <code>initial_state0.pdb</code> and the optimized structure <code>final_state1.pdb</code>. To see how your final structure compares to the SAXS data, run the <code>plot.exe</code> program or <code>python plot.py</code> on MACOS, and find the log.png and loglog.png graphs in the output folder.</li>
 		<li>Finally, open PyMOL and load <code>initial_state0.pdb</code> and <code>final_state1.pdb</code> to visualize the change made by the program.</li>
 		<div style="display:flex; justify-content:center; gap:20px; margin-top:1em;">
-  			<img src="Figures/PA2_initial_state.png" style="width:32%; height:auto;" />
-  			<img src="Figures/PA2_final_state.png" style="width:32%; height:auto;" />
+  			<img src="Figures/pa2both.png" style="width:85%; height:auto;" />
 		</div>
-		<em>Initial dimer structure (left) and optimized dimer structure (right).</em>
+		<em style="display:block; text-align:center;">Initial dimer structure (left) and optimized dimer structure (right).</em>
 	</ul>
 
 	<h4>Exercise</h4>
