@@ -57,7 +57,7 @@ Learn to analyse polydisperse samples with SAXS, including normal distributions,
 	Now, try to fit the data. Load your data <a href="Isim_poly.dat" target="_blank">(or this example data)</a> into SasView and model the polydispersity. You need some extra steps, besides those you did in Part I</p>
 	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b>Adding polydispersity in SasView</b>
 		<li>Load the data as described in the <a href="../Spheres/Spheres.html" target="_blank" >Spheres tutorial</a> and choose the sphere model. Try to fit the data with a monodisperse sphere model first.</li>
-		<li>Click the "Polydispersity" option in the lower left corner of the Fit panel.</li>
+		<li>In SasView, go to File, Preferences and uncheck the "Disable Polydispersity Plot Display" box. Click the "Polydispersity" option in the lower left corner of the Fit panel.</li>
 		<li>Click the (now active) "polydispersity" tab in the Fit Panel. Check the box "Distribution of radius". Give a non-zero number as default for the polydispersity (PD).</li>
 		<li>Choose distribution on the right side. Default is Gaussian (a normal distribution), which is fine for this example, but other distributions can be chosen. The size distributions in SasView are <a href="https://www.sasview.org/docs/user/qtgui/Perspectives/Fitting/pd/polydispersity.html" target="_blank">number-weighted</a> - as opposed to e.g. volume-weighted distributions, which will give different results (<a href="https://doi.org/10.1107/S1600576723008324" target="_blank">Pauw et al., 2023</a>).</li>
 		<li>Press fit</li>
@@ -142,3 +142,4 @@ Learn to analyse polydisperse samples with SAXS, including normal distributions,
 
 </body>	
 </html>
+
