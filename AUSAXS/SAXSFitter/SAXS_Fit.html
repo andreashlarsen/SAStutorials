@@ -33,32 +33,36 @@
 	<li> Make sure you have the following free software installed: <br>
 		(1) The <a href="https://github.com/AUSAXS/AUSAXS" target="_blank">AUSAXS</a> software.<br>
 		(2) Python (including numpy, scipy, and matplotlib) to visualize the results.<br>
-		(3) A qualitative understanding of SAXS data is advantageous, but not required. See for example <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank"> Tutorial: Primary Data analysis.</a>
+		(3) A qualitative understanding of SAXS data is advantageous, but not required. See, for example, <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank"> Tutorial: Primary Data analysis.</a>
 	</li>
 </ul>
 <h4>Learning outcomes</h4>
-In this tutorial you will learn how to use the structural validation program of the AUSAXS software to compare SAXS data with atomic-resolution structures.
+In this tutorial you will learn how to use the structural validation program of the AUSAXS software to compare measured SAXS data with predictions from atomic-resolution structures.
 <ul>
 	<li>Be familiar with the AUSAXS software. </li>
-	<li>Be able to validate an electron microscopy map against SAXS data.</li>
+	<li>Be able to perform structural validation based on measured SAXS data.</li>
 </ul>
 <h4>Introductory remarks</h4>
 	<p> 
-		<a href="https://en.wikipedia.org/wiki/Electron_microscope" target="_blank">Electron microscopy</a> has in recent years become a popular and powerful technique for studying the structure of biological macromolecules.
-		A primary issue with the technique is that it is not performed under native conditions, and the resulting maps may therefore not be representative of the solution structure.
-		Many validation techniques have therefore been developed to assess the quality of the maps, typically by comparing bond angles, bond lengths, and other geometric properties 
-		with known structures. AUSAXS is a new software package that can be validate the maps by comparing them against small-angle X-ray scattering (SAXS) data. <br><br>
+		While measured SAXS data by itself does not provide high-resolution information, when combined with atomic-resolution structures it can be a powerful tool for structural validation.
+		Such validations have routinely been performed throughout the history of SAXS, for example by comparing measured data with predictions from crystal structures, NMR models, or, more recently, 
+		AlphaFold models. <br><br>
 
-		In this tutorial, we will explain how to use AUSAXS to compare small-angle X-ray scattering data with EM data. 
-		Note that these are very different techniques, with the former probing the electron density of the sample, and the latter probing the charge density. 
-		We are therefore not expecting perfect quantitative agreement, but will rather focus on comparing the data qualitatively.
+		While we will in this tutorial use <code>AUSAXS</code> for the SAXS predictions, many other software packages, such as CRYSOL, Pepsi-SAXS, and FoXS offers the same functionality. 
+		The primary difference in these softwares are the excluded volume models, which will not be discussed in detail here. 
+		Be aware that none of these tools are suitable for wide-angle analyses. In such cases, molecular dynamics-based programs (such as WAXSiS) should be used. <br><br>
 
-		For more information on how the comparison is practically performed, please refer to the <a href="https://doi.org/10.1107/S2059798324005497" target="_blank">AUSAXS paper</a>.
+		For more information on the theory behind SAXS predictions from atomic-resolution structures, please refer to the references provided at the end of this tutorial.
 	</p>
 
 <h4>Part I: Performing a basic validation</h4>
 
+
 <h4>Part II: Analyzing the output</h4>
+
+<h5>Part III: Using AUSAXS in Python scripts</h5>
+We have recently released <code>pyAUSAXS</code>, a Python interface to the AUSAXS software. This allows you to easily integrate SAXS predictions into your own Python scripts.
+We will in this section demonstrate how to use <code>pyAUSAXS</code> to perform the same analyses as in Part I & II. For more information, see the <a href="https://github.com/AUSAXS/pyAUSAXS" target="_blank">online documentation</a>.
 
 <h4>Continuing the analysis</h4>
 
