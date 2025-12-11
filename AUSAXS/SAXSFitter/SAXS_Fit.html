@@ -56,11 +56,61 @@ In this tutorial you will learn how to use the structural validation program of 
 	</p>
 
 <h4>Part I: Performing a basic validation</h4>
+	Before we start, download the following lysozyme files:
+	<ul>
+		<li>The <a href="https://files.rcsb.org/download/2EPE.cif" target="_blank">lysozyme <code>CIF</code> structure file</a> from RCSB. </li>
+		<li>The measured in-house <a href="2epe.dat" target="_blank">SAXS data</a>.</li>
+	</ul>
 
+	You can perform the validation using either the graphical or the command-line interface. 
+	If you encounter issues running the software, please refer to the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Troubleshooting" target="_blank">AUSAXS troubleshooting guide</a>.
+	<ul>
+		<li>Graphical interface: <br>
+			If you have moved the program from the downloaded folder, make sure to also move the plotting script to the same destination.<br>
+			Open the AUSAXS program <code>saxs_fitter_gui</code> and load both the structure file and SAXS data. Then click the "start" button. <br>
+			You may also have to run the <code>plot</code> program (or script) to generate the plots.
+		</li>
+		<li>Command-line interface: <br> 
+			Move all files to the same directory, and launch a terminal from there. <br>
+			Then run the command: <code>saxs_fitter 2epe.cif 2epe.dat</code></li>
+			<ul> When the program is done, run the following plotting command:
+				<li><i>Windows</i>: <code>./plot.exe</code></li>
+				<li><i>Mac or Linux</i>: <code>python scripts/plot.py</code></li>
+			</ul>
+		</li>
+		<li>Python interface: <br>
+			Make sure you have installed the <code>pyAUSAXS</code> package: <code>pip install pyausaxs</code>. Then run the following script:
+			<code>
+				import matplotlib.pyplot as plt  
+				import pyausaxs as ausaxs  
+				  
+				mol = ausaxs.create_molecule("2epe.cif")  
+				fit = pdb.fit("2epe.dat")  
+				fit.plot()  
+				plt.show()
+			</code>
+		</li>
 
 <h4>Part II: Analyzing the output</h4>
+	<i>GUI or command-line</i><br>
+	You should now have the following output files:
+	<ol>
+		<li>A model.pdb file.</li> : The structure used for the SAXS prediction. This will typically include the generated explicit hydration shell.</li>
+		<li>A 2epe.scat file. </li>: The (potentially truncated) data actually used for the fit. This can be opened and viewed as a standard text file.</li>
+		<li>A ausaxs.fit file.</li>: A combined file including both the measurement and fitted curve. This file follows the same format as CRYSOL, and may be viewed using e.g. PRIMUS.</li>
+		<li>A report.txt file.</li>: A summary of the fit, including the command used to perform it.</li>
+		<li>Various .plot files.</li> (if you don't see any plots, run the <code>plot</code> program or script.)</li>
+	</ol>
+	<p>We will discuss each of these files in more detail below.</p>
 
-<h5>Part III: Using AUSAXS in Python scripts</h5>
+	<h6>The model </h6>
+
+
+	<h6>Understanding the plots</h6>
+
+<h4>Part III: Dealing with difficult structures</h4>
+
+<h4>Part III: Using AUSAXS in Python scripts</h5>
 We have recently released <code>pyAUSAXS</code>, a Python interface to the AUSAXS software. This allows you to easily integrate SAXS predictions into your own Python scripts.
 We will in this section demonstrate how to use <code>pyAUSAXS</code> to perform the same analyses as in Part I & II. For more information, see the <a href="https://github.com/AUSAXS/pyAUSAXS" target="_blank">online documentation</a>.
 
