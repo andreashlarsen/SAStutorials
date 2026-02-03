@@ -64,13 +64,15 @@
 <h4>Part II: Pair distance distribution</h4>
     <p>
 	A measured SAXS signal is a Fourier transformation of the sample. Therefore, one can try to Fourier tranform the data back, to get structural information, without having to do any fitting (for more information, see the tutorial <a href="../PairDistanceDistribution/PairDistanceDistribution.html" target="_blank">Pair distance distribution</a>).<br>
-	Go to: <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>, which is a web application for doing <a href="https://en.wikipedia.org/wiki/Indirect_Fourier_transform" target="_blank">indirect Fourier transformation</a> of small-angle scattering data. Upload the Sample2.dat datafile to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>, choose <em>Transformation: Negative</em> to allow for negative values of the pair distance distribution. Give an estimate for the maximum distance, e.g. 500 Å, set <em>qmax</em> to 0.5 Å<sup>-1</sup>, and press <em>Submit</em><br>
+	Go to: <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>, which is a web application for doing <a href="https://en.wikipedia.org/wiki/Indirect_Fourier_transform" target="_blank">indirect Fourier transformation</a> of small-angle scattering data. Upload the Sample2.dat datafile to <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a>, and press <em>Submit</em><br>
+	<!--choose <em>Transformation: Negative</em> to allow for negative values of the pair distance distribution. Give an estimate for the maximum distance, e.g. 500 Å, set <em>qmax</em> to 0.5 Å<sup>-1</sup>-->
 	<img src="BayesApp_Sample2.png" style="width:1000px"/><br>
-	The $p(r)$ display negative and positive parts. This is a sign of oscillations in electron density of the sample. That stems from the low density (relative to water) of the lipid tail groups and the high density (again, relative to water) of the lipid head
+	The $p(r)$ display negative and positive parts. This is a sign of oscillations in electron density of the sample. That stems from the low density (relative to the solvent) of the lipid tail groups and the high density (again, relative to the solvent) of the lipid head
 	groups. The first part of the $p(r)$, from 0 to ca 50 Å, corresponds to a bilayer, and the larger distances corresponds to the rest of the vesicle. <br>
-	For Sample1.dat, you need to increase the number of points in $p(r)$ from the default 70 to, e.g., 200 (under Advanced options), to resolve the structural features. This makes BayesApp slower, but is necessary when $d_\mathrm{max}$ (the maximal distance in the sample) is large. Also, provide a larger estimate of the maximum distance, e.g. 800 Å. Press <em>Submit</em><br>
+	<!--For Sample1.dat, you need to increase the number of points in $p(r)$ from the default 70 to, e.g., 200 (under Advanced options), to resolve the structural features. This makes BayesApp slower, but is necessary when $d_\mathrm{max}$ (the maximal distance in the sample) is large. Also, provide a larger estimate of the maximum distance, e.g. 800 Å.--> 
+	Next, upload Sample1.dat and press <em>Submit</em> (it may be slow, be patient).<br>
 	<img src="BayesApp_Sample1.png" style="width:1000px"/><br>
-	For Sample1.dat you will get a lot of oscillations in the $p(r)$. This corresponds to the many layers with positive and negative SLDs (positive: higher electron density than water, negative: lower electron density than water). 
+	For Sample1.dat you will get a lot of oscillations in the $p(r)$. This corresponds to the many layers with positive and negative SLDs (positive: higher electron density than the solvent, negative: lower electron density than the solvent). 
 	</p>
 
 <h4>Part III: Fit the data with an analytical model</h4>
