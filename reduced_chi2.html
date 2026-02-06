@@ -24,7 +24,9 @@
 <h1>Reduced $\chi^2$</h1>
 <p>
 $\chi^2$ is the sum of the normalized and squared residuals:
-$$\chi^2 = \sum_i{\left(\frac{I_\mathrm{model,i}-I_\mathrm{experiment,i}}{\sigma_i}\right)^2}$$
+$$\chi^2 = \sum_i^N{\left(\frac{I_\mathrm{model,i}-I_\mathrm{experiment,i}}{\sigma_i}\right)^2}$$
+The residuals are the difference between the measured and calculated scattering in each value of q, and they are normalized by the experimental uncertainty. 
+
 The <em>reduced</em> $\chi^2$ is calculated by dividing $\chi^2$ by the number of degrees of freedom ($DoF$). In most cases, $DoF = N-K$, where $N$ is the number of data points and $K$ is the number of fitted parameters in the model:
 $$\chi^2_\mathrm{reduced}  = \chi^2/(N-K).$$
 Fitting programs always report the reduced $\chi^2$, donoting it simply as $\chi^2$ ("reduced" is implicitely assumed). This is also the case in SasView. So when you see $\chi^2$, it is usually the <em>reduced</em> $\chi^2$.
