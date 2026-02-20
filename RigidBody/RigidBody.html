@@ -148,15 +148,26 @@ After completing this tutorial you will:
 
 <h4>Challenges</h4>
 	<p>
-		As another example of what can be done with rigid body refinement, refine the structure of the highly flexible protein, LAR1-2. 
-		You will need to define the flexible points in the structure by inspecting it in PyMOL, and use the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#load" target="_blank">relevant loading function</a> in the config file. 
+		As another example of what can be done with rigid body refinement, refine the structure of the <a href="https://journals.iucr.org/paper?S2059798320003885" target="_blank">flexible human leucocyte common antigen-related protein</a>. 
+		Download the files <a href="Datafiles/LAR.pdb" target="_blank">LAR.pdb</a> and <a href="Datafiles/LAR.dat" target="_blank">LAR.dat</a>, and use the rigid body optimizer to refine the structure.<br>
+		To get started, inspect the structure in PyMOL. Mark (click) all points in the structure you think look flexible; these will later be used to define the rigid bodies. 
+		To obtain the sequence numbers of these points, open the "Display" menu and select "Sequence". This will show the sequence of the protein, with your previous selections highlighted.
+		With this, you have all the information you need. Define your configuration file, and run the optimizer.
 	</p>
 
-
+	<p style="margin-bottom:0;"><em>Hints:</em>
+		<ul style="margin-top:0; margin-bottom:1em;">
+			<li> You will need to use the "split" option in the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#load" target="_blank"><code>load element</code></a>.</li>
+			<li> Remember to define constraints between each pair of bodies. For this, the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#autoconstrain" target="_blank"><code>autoconstrain linear</code></a> may prove useful. </li>
+			<li> You will need a few thousand iterations in total to properly converge. You can also experiment with <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#transform" target="_blank">mixed transformation modes</a>.</li>
+			<li> The article mentions discarding data points smaller than $q=0.0125$ due to aggregation issues. You should follow this suggestion for best results. </li>
+		</ul>
+		The authors state they ran an optimization 10 times, finding $\chi^2$ values between 3.7-4.3. Does this match your results? <br>
+		They also mention that the final structure has an "L"-shape. Does your final structure have the same shape?
+	</p>
 
 <h4>Perspectives</h4>
 <p>
-	For another example of rigid body refinement with SAXS data, see <a href="https://journals.iucr.org/paper?S2059798320003885" target="_blank">this paper by J. Vilstrup et al. (2020)</a>.<br>
 	For more information on the interplay between AlphaFold and SAXS data, see <a href="../SAXSAFOLD/saxsafold.html" target="_blank">the tutorial on the SAXSAFOLD website</a>.
 </p>
 
