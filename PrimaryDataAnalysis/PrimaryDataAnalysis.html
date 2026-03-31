@@ -33,7 +33,7 @@
 	<li>No requirements, but for some of the tutorial parts you can opt for using: <br>
 		(1) Python (including numpy, scipy and matplotlib) or similar for importing and plotting data (free and open source software, installation required), or<br>
 		(2) <a href="https://biosaxs.com/software.html" target="_blank">ATSAS</a> (free software for academic users, installation required).<br>
-		(3) <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> (free and no installation required, but requires internet connection).<br>
+		(3) <a href="https://sastools.org/BayesApp/webapp.html" target="_blank">BayesApp</a> (free and no installation required, but requires internet connection).<br>
 	</li>
 	</ul>
 	
@@ -73,7 +73,7 @@ Be able to retrieve structural information from a SAXS or SANS dataset by primar
 	The Kratky plot ($q^2I$ vs $q$) carries information about the structural flexibility of a particle. This is, e.g., used for studies of the foldedness of proteins:<br>
 	<img src="Kratky.jpg" style="width:600px"/><br>
 	This interpretation assumes that the particle is homogeneous, meaning the <a href="http://gisaxs.com/index.php/Scattering_Length_Density" target="_blank">scattering length density</a> (SLD) is approximately the same throughout the particle. Proteins are an example of approximately homogeneous particles. Detergent micelles or block copolymer micelles are examples of particles that are not homogeneous.<br>
-	Make a Kratky plot for the SAXS lysozyme data. You may use <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> (enable Kratky plot by clicking the box) or <a href="Kratky_plot_lyz.py" target="_blank">this python script</a>. Either way, you may need to adjust the background level. In BayesApp this is done by clicking Advanced options -> Subtract constant before...<br>
+	Make a Kratky plot for the SAXS lysozyme data. You may use <a href="https://sastools.org/BayesApp/webapp.html" target="_blank">BayesApp</a> (enable Kratky plot by clicking the box) or <a href="Kratky_plot_lyz.py" target="_blank">this python script</a>. Either way, you may need to adjust the background level. In BayesApp this is done by clicking Advanced options -> Subtract constant before...<br>
 	Lysozyme measured under these conditions is (predominantly) folded - you can see that from the Kratky plot by comparing with the idealized Kratky plots. 
 	</p>
 
@@ -91,26 +91,26 @@ Be able to retrieve structural information from a SAXS or SANS dataset by primar
 		This representation is called the pair distance distribution and is written $p(r)$. It is informally called the "p-of-r-function". For a homogeneous particle, it is simply a histogram of how many pairs of scatterers that have a specific distance, $r$, between them. This pair distance distribution is characteristic for specific shapes:<br>
 		<img src="pr.png" style="width:800px"/><br>
 		Thus, without any modelling, you may get an idea of the structure of your particle of interest.<br>
-		To see an example of this, go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> and press the green "Submit" button with the default values. Then you will see the $p(r)$ for a 50 Å sphere, along with the calculated scattering. A couple of observations<br>
+		To see an example of this, go to <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a> and press the green "Submit" button with the default values. Then you will see the $p(r)$ for a 50 Å sphere, along with the calculated scattering. A couple of observations<br>
 		<ul>
 			<li>The pair distance distribution is symmetric, as a sphere is symmetric in all directions.</li>
 			<li>$p(r)$ starts in zero and goes to zero at some value of $r$. The latter is the maximum distance between any pair in the particle and is denoted $d_\mathrm{max}$. For a sphere, $d_\mathrm{max}$ equals the diameter.</li>
 			<li>The most common distance between pairs of scatterers in a sphere is equal to its radius.</li>
 		</ul>
-		If you Fourier transform $p(r)$, you get the calculated scattering. This is what the <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> program does.<br>
-		To see and compare the $p(r)$ from various particles, go back to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a> and click the box "Calculate scattering for Model 2" to choose another shape (e.g. a cylinder) or a larger/smaller sphere as Model 2. Press "Submit" <br>
+		If you Fourier transform $p(r)$, you get the calculated scattering. This is what the <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a> program does.<br>
+		To see and compare the $p(r)$ from various particles, go back to <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a> and click the box "Calculate scattering for Model 2" to choose another shape (e.g. a cylinder) or a larger/smaller sphere as Model 2. Press "Submit" <br>
 	</p>
 	<p>
 		<b>$p(r)$ for non-homogeneous particles.</b><br>
 		If the particle is not homogeneous (the contrast is not approximately the same in the whole particle), then the $p(r)$ is harder to interpret.<br>
 		This is because $p(r)$ is a distance distribution weighted with the product of the excess scattering length (or contrast or $\Delta\mathrm{SLD}$), i.e. the difference between the scattering length of a given scatterer and the scattering length of the solvent. This product is negative if one has negative and one has positive contrast. 
-		This often leads to bumps or oscillations in the $p(r)$. In <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, simulate a spherical core-shell particle with negative core contrast ($\Delta\mathrm{SLD}=-1$) and and positive shell contrast ($\Delta\mathrm{SLD}=1$)<br>
+		This often leads to bumps or oscillations in the $p(r)$. In <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a>, simulate a spherical core-shell particle with negative core contrast ($\Delta\mathrm{SLD}=-1$) and and positive shell contrast ($\Delta\mathrm{SLD}=1$)<br>
 		<img src="Shape2SAS_CoreShell.png" style="width:900px"/><br>
 		In this case, you will get oscillations, and you may even get negative parts in the $p(r)$. The negative parts come if, at a given distance, there are most pairs having contrasts with opposing signs (i.e. one has positive and one has negative contrast.)
 	</p>
 	<p>
 		<b>Generate a $p(r)$</b><br>
-		Try to do an indirect Fourier transformation of the <a href="SASDMF2.dat" target="_blank">lysozome data</a>. This can be done in <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> (no installation required) or in many software packages, including ATSAS (<a href="pr_primus.html" target="_blank">guide for generating $p(r)$ in ATSAS</a>).
+		Try to do an indirect Fourier transformation of the <a href="SASDMF2.dat" target="_blank">lysozome data</a>. This can be done in <a href="https://sastools.org/BayesApp/webapp.html" target="_blank">BayesApp</a> (no installation required) or in many software packages, including ATSAS (<a href="pr_primus.html" target="_blank">guide for generating $p(r)$ in ATSAS</a>).
 		You may give an estimate of the $d_\mathrm{max}$ (ca 50 Å, note that $d_\mathrm{max}$ is called "Rmax" in ATSAS). This may help the algorithms find a better solution faster. <br>
 		By comparing with the $p(r)$ from a sphere, you can see that lysozyme is globular (i.e., roughly spherical), but not fully symmetric. More like an almost-spherical ellipsoid.</p>
 		The radius of gyration can also be determined from $p(r)$, as $R_g$ is defined as:<br>
@@ -119,7 +119,7 @@ Be able to retrieve structural information from a SAXS or SANS dataset by primar
 	</p>
 	<p> For non-homogeneous particles, you may get negative contributions to $p(r)$. In that case, it is necessary to allow negative values in $p(r)$:
 		<ul>
-			<li>To see the effect of NOT doing this, try to run <a href="https://somo.chem.utk.edu/bayesapp/" target="_blank">BayesApp</a> on the simulated micelle data from <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, which had negative contrast in the core (<a href="core_shell_negative_positive.dat" target="_blank">or download this simulated dataset</a>). You may help the algorithm by providing an approximative value for the maximum distance, $d_\mathrm{max}$.</li>
+			<li>To see the effect of NOT doing this, try to run <a href="https://sastools.org/BayesApp/webapp.html" target="_blank">BayesApp</a> on the simulated micelle data from <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a>, which had negative contrast in the core (<a href="core_shell_negative_positive.dat" target="_blank">or download this simulated dataset</a>). You may help the algorithm by providing an approximative value for the maximum distance, $d_\mathrm{max}$.</li>
 			<li>You will notice that the $p(r)$ does not resemble the one you generated in Shape2SAS.</li>
 			<li>Now, allow BayesApp to use negative values in $p(r)$ by setting Transformation/Regularization to "Negative", and rerun.</li>
 		</ul>

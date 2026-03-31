@@ -3,7 +3,7 @@
 <html>
 	
 <head>
-<title>Tutorial Contrast Variation</title>
+<title>Tutorial Cores Shell</title>
 <link rel="icon" href="../favicon.png" type="image/x-icon" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -45,7 +45,7 @@
 	</ul>
 	
 <h4>Part I: Simulate data from spherical core-shell particles </h4>
-	Go to <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a spherical core-shell particle with inner radius of 30 Å and core $\Delta\mathrm{SLD}=-1$, and outer radius of 50 Å and shell $\Delta\mathrm{SLD}=1$. This can be done by combining two spheres as Model 1 
+	Go to <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a>, and simulate a spherical core-shell particle with inner radius of 30 Å and core $\Delta\mathrm{SLD}=-1$, and outer radius of 50 Å and shell $\Delta\mathrm{SLD}=1$. This can be done by combining two spheres as Model 1 
 	<p style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px"> <b> Note on order of subunites in Shape2SAS </b><br>
 		Overlapping points from different subunits are removed (by default). <br>
 		The points from the subunits that are lowest in the list are removed, whereas points from subunits higher in the list remain. <br>
@@ -60,7 +60,7 @@
 
 <h4>Part III: Simulate and fit ellipsoidal core-shell particle</h4>
 Many core-shell particles are not perfectly round. This is often the case for micelles. Therefore, you may use core-shell ellipsoids as model instead. <br>
-In <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, simulate an elliptical core-shell particle (<a href="Elliptical_coreshell.dat">or you can use this data</a>). <br>
+In <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a>, simulate an elliptical core-shell particle (<a href="Elliptical_coreshell.dat">or you can use this data</a>). <br>
 For an ellipsoid in Shape2SAS, parameters a, b and c are the semi-axes (radii). Set a anb b to the same number, and c to a larger value. Smaller numbers should be used for the core, e.g.: <br>
 <img src="Shape2SAS_ellipsoid.png" style="width:800px"/><br> 
 Now, fit these data in SasView using the <a href="https://www.sasview.org/docs/user/models/core_shell_ellipsoid.html" target="_blank">core_shell_ellipsoid</a> model. You can find this model under the Ellipsoid category. (<a href="../fit_tips_and_tricks.html" target ="_blank">Fitting tips and tricks</a>). <br>

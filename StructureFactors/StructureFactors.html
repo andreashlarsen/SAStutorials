@@ -51,7 +51,7 @@ Learn to model interparticle interactions in small-angle scattering using struct
 	The additional scattering can (for some samples) be described by a so-called hard-sphere structure factor.
 	<img src="hard_sphere_illustration.png" style="width:800px"/><br>
 	<em>Illustration of a hard-sphere structure factor for a highly concentrated sample of spheres, giving rise to a characteristic distance. The scattering is the product of the form factor, $P(q)$), and the structure factor, $S(q)$.</em><br><br>
-	To see the effect of interparticle interactions, go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius of 50 Å and hard sphere structure factor with volume fraction 0.2 and hard-sphere interaction radius of 50 Å as Model 2.
+	To see the effect of interparticle interactions, go to: <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius of 50 Å and hard sphere structure factor with volume fraction 0.2 and hard-sphere interaction radius of 50 Å as Model 2.
 	<img src="Shape2SAS_HardSphere.png" style="width:1000px"/><br>	
 	You will notice a "dip" at low $q$, which is characteristic for the hard-sphere structure factor. If an experimentalist is not interested in this effect, it may be removed by lowering the sample concentration. Try to simulate this by decreasing the volume fraction in the simulations (i.e the concentration), to see the structure factor effect gradually disappearing. <br>
 	Try also to fit the data is SasView.
@@ -67,7 +67,7 @@ Learn to model interparticle interactions in small-angle scattering using struct
 <h4>Part II: Structure factors for aggregates</h4>
     <p>Some particles have a tendency to aggregate (be "sticky"). This may be proteins or nanoparticles. If a part of the sample aggregates (sticks together), the scattering (i.e. $I(q)$) will be the sum of scattering from the aggregate and from the non-aggregated particles.<br>
 	Aggregates may also be described by structure factors (although very different from the hard-sphere structure factor), and as we shall see, having the opposite effect.<br>
-	Go to: <a href="https://somo.chem.utk.edu/shape2sas/" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius 50 Å and aggregate structure factor with fraction of 0.01 (i.e. 1% of the particles are in an aggregate), effective radius of 50 Å, and 80 particles per aggregate as Model 2.<br>
+	Go to: <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a>, and simulate a sphere with a radius of 50 Å as Model 1 and a sphere with radius 50 Å and aggregate structure factor with fraction of 0.01 (i.e. 1% of the particles are in an aggregate), effective radius of 50 Å, and 80 particles per aggregate as Model 2.<br>
 	Model 1 corresponds to a sample without aggregation, and Model 2 corresponds to a sample, where 1% of the spheres are in aggregated form, with 80 spheres per aggregate. The resulting scattering may look like this (note: the aggregation is not included in the $p(r)$):
 	<img src="Shape2SAS_Fractal.png" style="width:1000px"/>	<br>
 	Comment the results. Try varying the fraction (i.e. degree of aggregation) and the number of particles per aggregate (the size of the aggregates). Notice how this results in an upturn at low-$q$ - i.e. opposite the dip at low-$q$ for the hard-sphere structure factor. <br>
