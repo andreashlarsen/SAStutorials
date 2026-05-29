@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+
+<html>
+	
+<head>
+<title>Tutorial Template</title> 
+<link rel="icon" href="../favicon.png" type="image/x-icon" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="../assets/css/main.css" />
+<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+
+<style>
+    #quiz-setup input[type="checkbox"] {
+  all: revert !important;
+  display: inline-block !important;
+}
+
+#quiz-container input[type="radio"] {
+  all: revert !important;
+  display: inline-block !important;
+}
+
+.quiz-box {
+  border-width: 3px;
+  border-style: solid;
+  border-color: #697698;
+  padding: 1em;
+  padding-left: 40px;
+  background-color: #f9f9f9;
+}
+
+.quiz-question img {
+  width: 100px;
+  max-width: 100%;
+  display: block;
+  margin: 10px auto;
+}
+
+  </style>
+
+</head>
+
+<body class="is-preload">
+
+<div id="wrapper">
+
+<div id="main">
+
+<div class="inner">
+
+<h4><a href="../index.html">Home</a></h4>
+<h1>Quiz</h1>
+<!--
+<p>Contributors: INSERT YOUR NAME(S).</p>
+
+<p>
+<img src="Template.png" style="width:400px"/><br> 
+<em>Insert an illustration that also goes here and to the front page. Square format. Please ensure that there are no copyright issues. This caption in italic.</em></a>
+</p>
+
+<h4>Before you start</h4>
+Each tutorial contains some paragraphs, the first being "Before you start", where you can list prerequisites, e.g.:
+	<ul>
+	<li>Programs that should be installed (if any).</li>
+	<li>Tuturials that are recommended to complete first.</li>
+	<li>Mandatory or recommended reading material/videos.</li>
+	</ul>
+	
+<h4>Learning outcomes</h4>
+The next section in "Learning outcomes". Start by stating a 1-sentence learning outcome for the tutorial, E.g.: <br>
+In this tutorial you will learn to make a new tutorial for the website SAStutorials.org. 
+<ul>
+	Also, list 3-5 specific learning outcomes for the tutorial, e.g.:	
+	<li>Get an overview of the structure and different sections in a tutorial on SAStutorials.org. </li>
+	<li>Be familiar with sufficiently html code to make a new totorial, including math and links.</li>
+	<li>Be able to design challenges, where the acquired skills are used.</li>
+</ul>
+-->
+
+<section id="quiz-setup">
+
+  <h2>Select subjects</h2>
+
+  <div id="subject-list"></div>
+
+  <label for="numQuestions">Number of questions:</label>
+  <input type="number" id="numQuestions" min="1" max="50" value="5">
+
+  <button id="startBtn">Continue</button>
+
+  <div id="message"></div>
+
+  <div id="output"></div>
+
+</section>
+
+<div id="quiz-container" class="quiz-box"></div>
+
+  <script src="quizscript.js"></script>
+
+
+<h4>Help and feedback</h4>
+	Help us improve the tutorials by 
+	<ul>
+		<li>Reporting issues and bugs via our <a href="https://github.com/andreashlarsen/SAStutorials/issues" target="_blank" >GitHub page</a>. This could be typos, dead links etc., but also insufficient information or unclear instructions.</li>
+		<li>Suggesting new tutorials/additions/improvements in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+		<li>Posting or answering questions in the <a href="https://github.com/andreashlarsen/SAStutorials/discussions" target="_blank" >SAStutorials forum</a>.</li>
+	</ul>
+<br>
+	
+<h4><a href="../index.html">Home</a></h4>
+
+<!-- end inner -->
+</div>
+	
+<!-- end main -->
+</div>
+
+<!-- end wrapper -->
+</div>
+	
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}};</script> 
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+</body>	
+</html>
