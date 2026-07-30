@@ -24,7 +24,7 @@
 <p>Contributors: Andreas Haahr Larsen, Jeppe Breum Jacobsen</p>
 <p>
 <img src="Hierarchical.png" style="width:400px"/><br> 
-<em>Sketch of nanoparticles aggregating into a branched network. This is an example of a hierarchical structure, as it has characteristic dimensions at different length scales, including the nanoparticle diameter, the overall size of the aggregate, and the dimensionality of the branched network. Figure reproduced from (<a href=" https://doi.org/10.3390/nano9040648" target="_blank">Anitas, 2019</a>).</em>
+<em>Sketch of nanoparticles aggregating into a branched network. This is an example of a hierarchical structure, as it has characteristic dimensions at different length scales. From smallest to largest we have the nanoparticle diameter, the typical nanoparticle-nanoparticle distance, the dimensionality of the branched network, and finally, the overall size of the aggregate. Figure reproduced from (<a href=" https://doi.org/10.3390/nano9040648" target="_blank">Anitas, 2019</a>).</em>
 </p>
 
 <h4>Before you start</h4>
@@ -32,7 +32,7 @@
 	<li>Download and install the latest version of <a href="https://www.sasview.org" target="_blank">SasView</a> (on MacOS: you need to install Xcode first)</li>
 	<li>Knowledge of Guinier regions and radius of gyration, $R_g$ is necessary. See, e.g., the <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Primary data analysis tutorial</a>.</li>
 	<li>You should also be familiar with basic fitting in SasView. See the <a href="../Spheres/Spheres.html" target="_blank">Spheres tutorial</a>.</li>
-	<li>You should be able to plot SAS data and adjust the scales (in a program of your own choice).</li>
+	<li>You should be able to plot SAS data (in a program of your own choice, for example SasView, ATSAS or python).</li>
 	<li>You should be familiar with Shape2SAS. See the <a href="../Spheres/Spheres.html" target="_blank">Spheres</a> or the <a href="../Shapes/Shapes.html" target="_blank">Shapes tutorial</a>.</li>
 	</ul>
 	
@@ -47,24 +47,24 @@
 
 <h4>Introductory remarks</h4>
 <p>
-	SAXS and SANS are unique in being able to probe both the outer structure and internal structure of gels, powders, colloids or particles in solution. Different structural levels can be probed at different angles, or $q$-values. 
+	SAXS and SANS are unique in being able to simultaneously probe both the outer and internal structure of gels, powders, colloids or particles in solution. Different structural levels are seen as features at different scattering angles or $q$-values. 
 	In some cases, an exact model may be generated to model the data, using a combination of form factors and structure factors, even for complex models. But if knowledge is limited or a detailed model is not necessary, one may use <emp>shape-independent models</emp>. This can be highly effective, for example for studying changes upon external perturbations such as temperature change, pH adjustments, addition of enzymes, or increased pressure.<br>
-	Examples of hierarchical structures include dietary proteins (<a href="https://doi.org/10.1016/j.foodhyd.2024.110639" target="_blank">Tiong et al., 2025</a>), and casein micelles from milk (<a href="https://doi.org/10.1039/D2SM00724J" target="_blank">Pedersen et al., 2022</a>). The nanoparticles in the illustration in the top of the page is another example. They form a branched structure, that grows like a <a href="https://fractalfoundation.org/resources/what-are-fractals/" target="_blank">mass fractal</a>. <br>
+	Examples of hierarchical structures include dietary proteins (<a href="https://doi.org/10.1016/j.foodhyd.2024.110639" target="_blank">Tiong et al., 2025</a>), and casein micelles from milk (<a href="https://doi.org/10.1039/D2SM00724J" target="_blank">Pedersen et al., 2022</a>). The nanoparticles in the illustration in the top of the page is another example. They form a branched <a href="https://fractalfoundation.org/resources/what-are-fractals/" target="_blank"> fractal</a> structure. <br>
 	Before starting, recall that distances in real space are inversely proportional to $q$-values in reciprocal space, i.e. $d \sim 1/q$. This relation is especially important in this tutorial.
 </p>
 
 <h4>Part I: Slopes and dimension</h4>
 	In this exercise, you will learn how to think in terms of dimensions and structural hierarchies (rather than shapes). Go to <a href="https://sastools.org/Shape2SAS/webapp.html" target="_blank">Shape2SAS</a> and simulate an elliptical cylinder with semiaxes a=10 Å, b=20 Å and length c=300 Å. Give the sample a relative <a href="../Polydispersity/Polydispersity.html" target="_blank">polydispersity</a> of 0.2 and extend the minimum $q$ to 0.0001 $\text{Å}^{-1}$ (or use <a href="part1/cyl_10_20_300_pd0.2.dat" target="_blank">this simulated data</a>). <br>
-	You could fit the data using the form factor of a cylinder, but instead, we will consider it as a hierarchical structure. Plot the data on a log-log plot and consider each region of the data seperately, starting from the lowest values of $q$.
+	You could fit the data using a form factor, but instead, we will consider it as a hierarchical structure. Plot the data on a log-log plot and consider each region of the data separately, starting from the lowest values of $q$.
 	<ol>
 		
-		<li><b>Low-q region and change of slope</b>: this region represents the largest dimension in data (here: cylinder length). The $q$-value at which the flat region ends relates approximately to the radius of gyration, $R_g\sim 1/q$. A more exact value can be estimated by <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Guinier analysis</a>. As the data are simulated, we know that $R_g\approx 105$ Å from Shape2SAS.</li>
-		<li><b> Mid-q region:</b> the next section of data has a slope of -1, which is characteristic for 1-dimensional structures. On this scale, our cylinder appears infinitely long, and hence approximately 1-dimensional. </li>
-		<li><b>Change of slope:</b> the end of the region with the slope of -1 marks another dimension, namely the cylinder cross section. This corresponds approximately to a disc with the semiaxes a=10 Å, b=20 Å but a very short length c=5 Å, which has an $R_g$ of approximately 14 Å, again $R_g\sim 1/q$. (simulate in Shape2SAS to see this). </li>
-		<li><b>High-q region:</b> the slope at high q is approximately -4. On this scale, the scattering is only sensitive to the surface of the cylinder. Since our cylinder is smooth, <a href="https://en.wikipedia.org/wiki/Porod%27s_law" target="_blank">Porod's law</a> predicts a slope of -4. <a href="part1/Rough.pdf" target="_blank">Rough surfaces give steeper slopes</a>.</li>
+		<li><b>Low-q region and change of slope</b>: this region represents the largest dimension in data (here: cylinder length). The $q$-value at which the flat region ends relates approximately to the radius of gyration by $R_g\sim 1/q$. What is $R_g$? A more exact value can be estimated by <a href="../PrimaryDataAnalysis/PrimaryDataAnalysis.html" target="_blank">Guinier analysis</a>. As the data are simulated, we know that $R_g\approx 105$ Å from Shape2SAS.</li>
+		<li><b>Mid-q region:</b> the next section of data has a slope of -1, which is characteristic for 1-dimensional structures. On this scale, our cylinder appears infinitely long, and hence approximately 1-dimensional. </li>
+		<li><b>Change of slope:</b> the end of the region with the slope of -1 marks another dimension, namely the cylinder cross section. What is the (approximate) cross sectional $R_g$ estimated by $R_g\sim 1/q$? </li>
+		<li><b>High-q region:</b> the slope at high q is approximately -4. On this scale, the scattering is only sensitive to the surface of the cylinder. Since our cylinder is smooth, <a href="https://en.wikipedia.org/wiki/Porod%27s_law" target="_blank">Porod's law</a> predicts a slope of -4, but <a href="part1/Rough.pdf" target="_blank">rough surfaces give steeper slopes</a>.</li>
 		<li><b>Background:</b> at the highest values of <em>q</em>, the data reaches a constant background level. </li>
 	</ol>
-	To replicate these features, try fitting each region separately. <br> 
+	To replicate these features, try fitting each region separately: <br> 
 	Open the data in SasView and fit the Guinier region using the <a href="https://www.sasview.org/docs/user/models/guinier.html" target="_blank">guinier model</a> (category: Shape Independent). 
 	Restrict the fit to the low-q region, just as the curve stops being flat. If too many points from the mid-q region are included, the value of $R_g$ will be underestimated. 
 	Notice how the fit value of $R_g$ is quite sensitive to the chosen fitting range. What happens if you include the background parameter in the fit?<br>
@@ -72,14 +72,13 @@
 	<img src="part1/low-q.png" style="width:900px"/><br>
 	</div>
 	To fit the mid-q and high-q regions, restrict the fit to the respective q-ranges and use the <a href="https://www.sasview.org/docs/user/models/power_law.html" target="_blank">power law model</a> (category: Shape Independent). You should find slopes of approximately -1 and -4, respectively.
-	Is it possible to fit the low-q, mid-q and high-q regions simultaneously by adding a Guinier model and two power law models? (why not?)<br>
-		<!-- <img src="part1/high-q.png" style="width:900px"/><br> -->
+	Is it possible to fit the low-q, mid-q and high-q regions simultaneously by simply <em>adding</em> a Guinier model and two power law models? (why not?)<br>
 	<br>
 
 <h4>Part II: Fit data using the unified model</h4>
 	The features found in Part I are general for SAXS and SANS data, leading to the idea of a <a href="https://www.sasview.org/docs/user/models/unified_power_Rg.html" target="_blank">unified fit model</a> (<a href=" https://doi.org/10.1107/S0021889895005292" target="_blank">Beaucage, 1995</a>). 
 	This model describes scattering from hierarchical structures using a combination of Guinier regimes (associated with characteristic sizes, $R_g$) and power law regimes (associated with dimensionality).
-	The model can include up to 4 structural levels, which each contribute a Guinier region and a power law region. Below $R_g$, the Guinier term dominates, and above $R_g$, the power law term dominates. 
+	The SasView implementation of the model can include up to 4 structural levels, which each contribute a Guinier region and a power law region. Below $R_g$, the Guinier term dominates, and above $R_g$, the power law term dominates. 
 	A smooth transition between these regions is achieved by an exponential damping factor in the power-law term. <br>
 	
 	Use the unified model (Category: Shape Independent) with 2 structural levels to fit the simulated data from part I. The model has many parameters, so consider using a stepwise approach as outlined below. <br>
@@ -89,7 +88,7 @@
 	where
 	$$q^*_i = q \left[ \text{erf} \left( \dfrac{qR_{g,i}}{\sqrt{6}} \right) \right]^{-3}.$$
 	The erf-function is the <a href="https://en.wikipedia.org/wiki/Error_function" target="_blank">error function</a>. The $R_g$s are the radii of gyration for the different structural levels, and the <em>G</em>s are the scaling factors for the Guinier regions. The $P_i$ are the power law exponents (slopes on the log-log plot)
-	and are denoted "power1" and "power2" in SasView. The <em>B</em>s set the scaling for the power law regions. The $R_g$s should always be positive. The scaling factors <em>G</em> and <em>B</em> should also be positive (or 0), since we are never subtracting intensities. With this definition for $I(q)$, we should also make sure that the $P_i$s are positive for a negative slope on the log-log plot.<br>
+	and are denoted "power1" and "power2" in SasView. The <em>B</em>s set the scaling for the power law regions. The $R_g$s should always be positive. The scaling factors <em>G</em> and <em>B</em> should also be positive (or 0) and the $P_i$s should be positive.<br>
 	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Fitting with unified fit model:</b>
 		<li><b>Structural Levels:</b> Determine the number of structural levels.</li>
 		<li><b>Slopes:</b> Estimate the slopes (power1, power2,...), e.g by fitting a <a href="https://www.sasview.org/docs/user/models/power_law.html" target="_blank">power law</a> to each region.</li>
@@ -100,11 +99,11 @@
 		<li><b>Fit(!):</b> Fit the parameters. Remember not to fit the overall scale, as it is correlated to the <em>G</em>s and <em>B</em>s.</li>
 		<li><b>Note:</b> If you do not see a flat region followed by a change in slope, the largest dimension is not resolved. You may still use the unified model, but it is not possible to determine $R_g$ for the first structural level (largest dimension), although it might still be possible to determine its dimensionality from the slope.</li>
 	</ol>
-	It may require a few attempts to get a reasonable fit. Your fit may look similar to <a href="part1/unified.png" target="_blank">this</a>. In that example, G2 is zero, reflecting that there is no clear Guinier region at high $q\sim0.1$, but merely a change of slope.<br>
+	It may require a few attempts to get a reasonable fit. Your fit may look similar to <a href="part2/unified.png" target="_blank">this</a>. In that example, G2 is zero, reflecting that there is no clear Guinier region at high $q\sim0.1$, but merely a change of slope.<br>
 	For more complex samples, the <a href="../reduced_chi2.html" target="_blank">$\chi^2$</a> may be relatively high, as the model is approximate and only describes overall structural features (no shape, only size and dimensionality).<br><br>
 
 <h4>Part III: Mixture</h4>
-	In the following exercise, we will look at a <a href="part3/YP_IEP_PBS_Sol.dat" target="_blank">combined USANS/SANS dataset</a> (USANS is <a href="https://doi.org/10.1016/j.cossms.2004.01.012" target="_blank">Ultra-small-angle neutron scattering</a>) of Pea protein (plant-based protein with potential to replace animal protein). The protein is suspended in a solution. Determine structural characteristics and fit the data. You may use the following step-by-step guide:<br>
+	In the following exercise, we will look at a <a href="part3/YP_IEP_PBS_Sol.dat" target="_blank">combined USANS/SANS dataset</a> (USANS is <a href="https://doi.org/10.1016/j.cossms.2004.01.012" target="_blank">ultra-small-angle neutron scattering</a>) of pea protein (plant-based protein with potential to replace animal protein). The protein is suspended in a solution. Determine structural characteristics and fit the data. You may use the following step-by-step guide:<br>
 	<ul>
 	<li><b>Step 1: visual inspection</b> From visual inspection (remember: log-log plot), determine any slopes or Guinier regions. Identify any Guinier regions (to estimate $R_g$) or slopes.<br>
 	<img src="part1/Pea.png" style="width:500px"/></li>
