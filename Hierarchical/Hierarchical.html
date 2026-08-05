@@ -76,33 +76,37 @@
 	<br>
 
 <h4>Part II: Fit data using the unified model</h4>
-	The features found in Part I are general for SAXS and SANS data, leading to the idea of a <a href="https://www.sasview.org/docs/user/models/unified_power_Rg.html" target="_blank">unified fit model</a> (<a href=" https://doi.org/10.1107/S0021889895005292" target="_blank">Beaucage, 1995</a>). 
-	This model describes scattering from hierarchical structures using a combination of Guinier regimes (associated with characteristic sizes, $R_g$) and power law regimes (associated with dimensionality).
-	The SasView implementation of the model can include up to 4 structural levels, which each contribute a Guinier region and a power law region. Below $R_g$, the Guinier term dominates, and above $R_g$, the power law term dominates. 
-	A smooth transition between these regions is achieved by an exponential damping factor in the power-law term. <br>
+	The features found for the <a href="part1/cyl_10_20_300_pd0.2.dat" target="_blank">SAXS data</a> of cylinders in Part I are general, leading to the idea of a <a href="https://www.sasview.org/docs/user/models/unified_power_Rg.html" target="_blank">unified fit model</a> (<a href=" https://doi.org/10.1107/S0021889895005292" target="_blank">Beaucage, 1995</a>). 
+	The unified model combines Guinier regions (associated with characteristic sizes, $R_g$) and power laws (associated with dimensionalities) to model hierarchical structure. Smooth transitions between regions is achieved by an exponential damping factor of the power-law term. <br>
 	
-	Use the unified model (Category: Shape Independent) with 2 structural levels to fit the simulated data from part I. The model has many parameters, so consider using a stepwise approach as outlined below. <br>
-
 	For a system with $N$ structural levels, the unified model fits the following expression to the data:<br>
 	$$I(q) = \text{background} + \sum_{i=1}^N \left[ G_i \exp{\left(-\dfrac{q^2 R_{g,i}^2}{3}\right)} + B_i \exp{\left(-\dfrac{q^2 R_{g,i+1}^2}{3}\right)} \left( \dfrac{1}{q^*_i} \right)^{P_i} \right],$$
 	where
 	$$q^*_i = q \left[ \text{erf} \left( \dfrac{qR_{g,i}}{\sqrt{6}} \right) \right]^{-3}.$$
-	The erf-function is the <a href="https://en.wikipedia.org/wiki/Error_function" target="_blank">error function</a>. The $R_g$s are the radii of gyration for the different structural levels, and the <em>G</em>s are the scaling factors for the Guinier regions. The $P_i$ are the power law exponents (slopes on the log-log plot)
-	and are denoted "power1" and "power2" in SasView. The <em>B</em>s set the scaling for the power law regions. The $R_g$s should always be positive. The scaling factors <em>G</em> and <em>B</em> should also be positive (or 0) and the $P_i$s should be positive.<br>
+	The erf-function is the <a href="https://en.wikipedia.org/wiki/Error_function" target="_blank">error function</a>. The $R_g$s are the radii of gyration for the different structural levels, and the <em>G</em>s are the scaling factors for the Guinier regions. The <em>P</em>s are the power law exponents (slopes on the log-log plot)
+	and are denoted "power1" and "power2" in SasView. The <em>B</em>s set the scaling for the power law regions. All factors should be positive. 
+	
+	Use the unified model in SasView (Category: Shape Independent) with 2 structural levels to fit the simulated data from Part I. The model has many parameters, so consider using a stepwise approach as outlined below. <br>
+
 	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Fitting with unified fit model:</b>
 		<li><b>Structural Levels:</b> Determine the number of structural levels.</li>
 		<li><b>Slopes:</b> Estimate the slopes (power1, power2,...), e.g by fitting a <a href="https://www.sasview.org/docs/user/models/power_law.html" target="_blank">power law</a> to each region.</li>
 		<li><b>Radii of gyration:</b> Radii of gyration can be determined (e.g. as done in Part I).</li>
 		<li><b>Background:</b> Provide a good estimate of the constant background level.</li>
-		<li><b>Scaling parameters for Guinier (<em>G</em>)</b>: Set all scalings (<em>G1,G2,...</em>) and (<em>B1,B2,...</em>) to zero, except <em>G</em> for the highest level (largest $q$). Adjust <em>G</em> to fit the Guinier region. continue with next level(s).</li>
+		<li><b>Scaling parameters for Guinier (<em>G</em>)</b>: Set all scalings (<em>G1,G2,...</em>) and (<em>B1,B2,...</em>) to zero, except <em>G</em> for the highest level (largest $q$). Adjust <em>G</em> to fit the Guinier region and continue with next level(s).</li>
 		<li><b>Scaling parameters for slopes (<em>B</em>):</b> Adjust <em>B</em>s one at a time until the model is close to the data.</li>
 		<li><b>Fit(!):</b> Fit the parameters. Remember not to fit the overall scale, as it is correlated to the <em>G</em>s and <em>B</em>s.</li>
-		<li><b>Note:</b> If you do not see a flat region followed by a change in slope, the largest dimension is not resolved. You may still use the unified model, but it is not possible to determine $R_g$ for the first structural level (largest dimension), although it might still be possible to determine its dimensionality from the slope.</li>
 	</ol>
-	It may require a few attempts to get a reasonable fit. Your fit may look similar to <a href="part2/unified.png" target="_blank">this</a>. In that example, G2 is zero, reflecting that there is no clear Guinier region at high $q\sim0.1$, but merely a change of slope.<br>
-	For more complex samples, the <a href="../reduced_chi2.html" target="_blank">$\chi^2$</a> may be relatively high, as the model is approximate and only describes overall structural features (no shape, only size and dimensionality).<br><br>
-
-<h4>Part III: Mixture</h4>
+	It may require a few attempts to get a reasonable fit. Your fit may look similar to <a href="part2/unified.png" target="_blank">this</a>. In that example, <em>G2</em> is zero since there is no clear Guinier region at high $q\sim0.1$, but just a change of slope.<br>
+	.
+	<ol style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px" > <b>Notes on using the unified model:</b>
+		<li> <b>First $R_g$ may not be resolved.</b> If you do not see a flat region followed by a change in slope, the largest dimension is not resolved. You may still use the unified model, but it is not possible to determine $R_g$ for the first structural level (largest dimension), although it might still be possible to determine its dimensionality from the slope.</li>
+		<li> <b>An approximate model.</b> For more complex samples, the <a href="../reduced_chi2.html" target="_blank">$\chi^2$</a> may be relatively high, as the model is approximate and only describes overall structural features (no shape, only size and dimensionality).</li>
+		<li> <b>Be critical.</b> The estimated $R_g$ and slopes does not necessarily correspond to real structural features of the particle - do not overinterpret the data, and consult what you know about your sample.</li>
+		<li> <b>Improved model.</b> Hammouda improved the unified model, but the <a href="https://www.sasview.org/docs/user/models/guinier_porod.html#guinier-porod" target="_blank">SasView implementation of Hammouda's model</a> currently only includes one structural level.</li>
+	</ol>
+	
+<h4>Part III: Mixtures</h4>
 	In the following exercise, we will look at a <a href="part3/YP_IEP_PBS_Sol.dat" target="_blank">combined USANS/SANS dataset</a> (USANS is <a href="https://doi.org/10.1016/j.cossms.2004.01.012" target="_blank">ultra-small-angle neutron scattering</a>) of pea protein (plant-based protein with potential to replace animal protein). The protein is suspended in a solution. Determine structural characteristics and fit the data. You may use the following step-by-step guide:<br>
 	<ul>
 	<li><b>Step 1: visual inspection</b> From visual inspection (remember: log-log plot), determine any slopes or Guinier regions. Identify any Guinier regions (to estimate $R_g$) or slopes.<br>
