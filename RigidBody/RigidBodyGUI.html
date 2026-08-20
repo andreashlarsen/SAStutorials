@@ -534,13 +534,61 @@ end</code></pre>
 		</li>
 	</ul>
 
-<h4>Challenge: Refining alpha-2-macroglobulin</h4>
+<h4>Challenge: alpha-2-macroglobulin</h4>
+	<p>
+		&alpha;-2-macroglobulin (A2M) is a protease inhibitor that circulates as a homotetramer with $D_2$ symmetry: four identical chains of around 1400 residues, 
+		each chain a string of domains joined by flexible linkers. When it activates and traps a protease, it undergoes a large conformational change by collapsing around its target.
+	</p>
+
+	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
+		<b>The task</b>
+		<li>Refine <a href="Structures/A2M_native.cif" target="_blank">the native crystal structure</a> against
+			<a href="Datafiles/A2M_native.dat" target="_blank">the native SAXS data</a>.</li>
+		<li>Get the $\chi^2$ as low as you can, and be able to say <em>where</em> the improvement came from.</li>
+	</ul>
+
+	<h5>Tips</h5>
+	<ul>
+		<li>
+			Splitting by chain gives more bodies than you expect. Only the first four are protein &mdash; the rest are glycans, and you should
+			<b>delete</b> them from the <b>Bodies</b> list before going further.
+		</li>
+		<li>
+			When you decompose into $D_2$, read the residual RMSD. Expect a couple of &Aring;ngstr&ouml;m &mdash; this is a large, only approximately symmetric crystal
+			structure, not an idealised one. A much larger number means you picked the wrong four bodies.
+		</li>
+		<li>Turn off <b>Symmetry copies</b> while you hunt for linkers. Four superimposed chains of 1400 residues is unreadable.</li>
+		<li>
+			There are seven or eight clean boundaries to be found. Look for the points where the chain leaves one domain and enters another &mdash; A2M is built from a
+			chain of compact domains, so they are there once you know to look for them. Coloring by residue number can be helpful here.
+		</li>
+		<li>Every split you add is six more degrees of freedom, and the $\chi^2$ will improve whether or not the split is real. Splitting at a point that is <em>not</em> a
+			boundary buys you a better fit and a worse model.</li>
+		<li>As a starting point for the amplitudes: <code>translate 0.5</code>, <code>rotate 0.02</code>, <code>sym_translate 1</code>, <code>sym_rotate 0.02</code>.</li>
+		<li>This structure is a long way from the data &mdash; unlike Part IV you are searching, not polishing, so improvements arrive from the very first iterations.
+			Around 60 iterations already shows most of the drop, and you should be able to more than halve the starting $\chi^2$. Each iteration is expensive at this
+			size, so start small and only scale up once the script does what you want.</li>
+	</ul>
+
+	<p>
+		A2M also has an <a href="Structures/A2M_activated.cif" target="_blank">activated structure</a>, in which the molecule has collapsed
+		around a trapped protease (not included in the model). Refine <em>that</em> against the <em>native</em> data. It starts off far worse, and 
+		rigid-body refinement will happily improve it &mdash; it always does. Does it get anywhere near what you reached from the correct starting model? What does that tell 
+		you about how much a good $\chi^2$ is worth on its own?
+	</p>
 
 <h4>Perspectives</h4>
 <p>
-	The script in the middle panel is the whole interface &mdash; the GUI only ever writes into it, and you can save it with the disk icon and re-run it later with
-	<code>ausaxs rigidbody myscript.conf</code>, on a cluster or in a loop over many datasets. The full set of elements is documented on the
-	<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization" target="_blank">AUSAXS wiki</a>.
+	The script in the middle panel is the whole interface &mdash; the GUI only ever writes into it, and you can save it with the disk icon and re-run it later, either by
+	loading it back into the GUI or by running it directly from the command line with <code>ausaxs rigidbody myscript.conf</code>. 
+	The full set of elements is documented on the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization" target="_blank">AUSAXS wiki</a>.
+</p>
+<p>
+	All $\chi^2$ values quoted here are from AUSAXS. Other programs may report different numbers and generate different structures. 
+</p>
+<p>
+	We have intentionally kept the iteration count low to keep the runs short for this tutorial. In a real refinement, thousands of iterations are required
+	for each run, and multiple runs are required to get a sense of the variance.
 </p>
 <p>
 	For more on the interplay between AlphaFold and SAXS data, see <a href="../SAXSAFOLD/saxsafold.html" target="_blank">the SAXSAFOLD tutorial</a>.
