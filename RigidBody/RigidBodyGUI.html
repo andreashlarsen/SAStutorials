@@ -11,6 +11,29 @@
 <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1J6V1SM060"></script>
 <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1J6V1SM060');</script>
+<style>
+	details.solution summary {
+		color: inherit;
+		text-decoration: underline;
+		cursor: pointer;
+		font-weight: bold;
+		list-style: none;
+	}
+	details.solution summary::-webkit-details-marker {
+		display: none;
+	}
+	details.solution summary:hover {
+		color: #f2849e;
+	}
+	details.solution summary::before {
+		content: "▶ ";
+		display: inline-block;
+		transition: transform 0.15s ease;
+	}
+	details.solution[open] summary::before {
+		transform: rotate(90deg);
+	}
+</style>
 </head>
 
 <body class="is-preload">
@@ -168,7 +191,7 @@ After completing this tutorial you will:
 			histogram per symmetry-equivalent pair of copies instead of all of them. We return to this in Part IV, where it matters a great deal.</li>
 	</ul>
 
-	<p>The symmetry groups available in AUSAXS are:</p>
+	<p id="symmetries">The symmetry groups available in AUSAXS are:</p>
 	<table>
 		<thead><tr><th>Name</th><th>Copies generated</th><th>Description</th></tr></thead>
 		<tbody>
@@ -217,7 +240,7 @@ After completing this tutorial you will:
 	<p>
 		<b>Units.</b> <code>translate</code> and <code>sym_translate</code> are in Ångström; <em>rotate</em> and <em>sym_rotate</em> are in radians. A
 		<code>sym_rotate</code> of 1.5 is a large move &mdash; nearly 90&deg; &mdash; which is what you want at the start of a search. The amplitudes decay over the course
-		of the run (exponentially by default, see the <code>decay</code> argument), so the run begins with a coarse global search and finishes with fine adjustments.
+		of the run (linearly by default, see the <code>decay</code> argument), so the run begins with a coarse global search and finishes with fine adjustments.
 	</p>
 
 	<h5>Exercises</h5>
@@ -364,186 +387,154 @@ save final_state.pdb</code></pre>
 		</li>
 	</ul>
 
-<h4>Part IV: A large symmetric assembly &mdash; A2M</h4>
+<h4>Part IV: Flexible symmetries: the PaaZ hexamer</h4>
 	<p>
-		&alpha;-2-macroglobulin (A2M) is a protease inhibitor that circulates as a homotetramer with $D_2$ symmetry: four identical chains of ~1440 residues, related by
-		three mutually perpendicular 2-fold axes. Each chain is a chain of domains joined by flexible linkers, so this problem has both of the features we have handled
-		separately &mdash; symmetry, and internal flexibility &mdash; at a scale where doing it naively is genuinely expensive.
+		Parts II and III each dealt with one complication: a symmetric assembly of rigid copies, and a single chain that bends. Many real problems have both. PaaZ 
+		(<a href="https://www.sasbdb.org/data/SASDGL2/" target="_blank">SASDGL2</a>) is a
+		bifunctional enzyme from the <em>E. coli</em> phenylacetate degradation pathway, and it has both in an unusually clean form: it assembles into a hexamer with $D_3$
+		symmetry, and each of its six chains is itself two domains connected by a flexible linker. 
 	</p>
 	<p>
-		Consider what "naively" would mean. Eight linkers per chain gives nine bodies per chain, so 36 bodies in total, and 36 &times; 6 = 216 degrees of freedom. Nothing
-		would keep the four chains identical, so the refinement would be free to produce a tetramer that is not a tetramer. And the scattering calculation would need a
-		partial distance histogram for every pair of bodies: 36 &times; 37 / 2 = 666 of them, recomputed every accepted step.
-	</p>
-	<p>
-		Declaring the $D_2$ symmetry instead: nine bodies of one chain, 54 degrees of freedom, plus 6 parameters describing the symmetry itself &mdash; a factor of four
-		fewer, with the tetramer exact by construction. The scattering calculation shrinks too. For a single body under $D_2$ there are four copies, and so ten pairs; but the
-		distance distribution between copies $i$ and $j$ depends only on the group element relating them, and the four-element $D_2$ group has only three distinct non-identity
-		elements. So four distinct histograms are evaluated instead of ten, each scaled by its multiplicity. The same reuse applies to every pair of bodies.
+		Download the <a href="Datafiles/SASDGL2.pdb" target="_blank">PaaZ crystal structure</a> and <a href="Datafiles/SASDGL2.dat" target="_blank">SAXS data</a>, and verify it 
+		yields $\chi^2_{red} \approx 19$.
 	</p>
 
-	<h5>Step 1: load and decompose</h5>
+	<h5>Step 1: declare the symmetry you already have</h5>
+	<p>
+		In Part II we <em>added</em> a symmetry to a single body. Here the file already contains all six chains, so the situation is reversed: we want to load them, then
+		collapse them back into one body plus a symmetry that regenerates the other five. 
+	</p>
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
-		<li>Load <a href="Datafiles/A2M_native.pdb" target="_blank">A2M_native.pdb</a> and <a href="Datafiles/A2M_native.dat" target="_blank">A2M_native.dat</a> into the
-			<b>Rigidbody</b> tab.</li>
-		<li>The file contains all four chains, A&ndash;D. In the structure pane, type <code>chain</code> into <em>Split at residues</em> and press <b>Apply</b> to load them as
-			four separate bodies. The <b>Bodies</b> list should show <code>b1</code> through <code>b4</code>.</li>
-		<li>Expand <b>Symmetry</b> and use the second row, <em>Decompose bodies into a symmetry</em>: enter <code>b1 b2 b3 b4 d2</code> and press <b>Convert</b>.</li>
-		<li>Three of the four bodies disappear from the list. What is left is <code>b1</code> plus a fitted $D_2$ symmetry that regenerates the other three, shown in the
-			preview as <code>b1s1r1</code>, <code>b1s1r2</code> and <code>b1s1r3</code>. The log reports the residual RMSD of the fit &mdash; for this structure it is
-			essentially zero, because A2M really is exactly $D_2$.</li>
+		<b>Decompose the hexamer</b>
+		<li>Load <a href="Datafiles/SASDGL2.pdb" target="_blank">SASDGL2.pdb</a> and <a href="Datafiles/SASDGL2.dat" target="_blank">SASDGL2.dat</a>.</li>
+		<li>
+			In the structure pane, type <code>chain</code> into <em>Split at residues</em> and press <b>Apply</b>. The <b>Bodies</b> list should show <code>b1</code> through
+			<code>b6</code>, one per chain.
+		</li>
+		<li>
+			Mark all of the bodies (hold <kbd>Shift</kbd> or <kbd>Ctrl</kbd> while clicking), and expand the <b>Symmetry</b> section. 
+			Enter <code>d3</code> into the second row, <em>Decompose bodies into a symmetry</em>, and press <b>Convert</b>.
+		</li>
+		<li>
+			Five bodies disappear from the list. What remains is <code>b1</code> plus a fitted $D_3$ symmetry that regenerates the rest, as can be seen by expanding the chevron (&#9656;)
+			next to <code>b1</code> in the body list. 
+		</li>
+		<li>
+			Send the changes to the script, and click <b>Validate</b>. Read the residual RMSD in the log &mdash; about 0.8 &Aring;. That is the number to pay attention to: 
+			it is how far the real chains are from the symmetry you just claimed. If the difference is too high, the decomposition will get rejected.
+		</li>
+		<li>
+			Remove the generated <em>convert_to_symmetry</em> element from your script, and reopen the structure pane. Verify that using other symmetries (e.g. <code>c6</code>) gives a higher RMSD
+			and get rejected (though there are actually two <a href="#symmetries" target="_self"><em>composite</em></a> symmetries that do work &mdash; can you figure out which?).
+			Make sure to put <code>d3</code> back before continuing.
+		</li>
 	</ul>
 	<p>
-		That last number is a check, not a formality. <code>convert_to_symmetry</code> asserts a symmetry you have claimed, fits its parameters to the copies you gave it, and
-		<em>refuses</em> the conversion if the residual exceeds a tolerance (5 Å by default, adjustable in the <em>advanced</em> field). If you try <code>c4</code> here it will
-		fail, and that failure is informative: the four chains are not related by a single rotation axis.
-	</p>
-	<p>
-		If your own assembly is only approximately symmetric, the looser composite <code>p2-p2</code> is worth trying &mdash; it is a dimer of dimers with the inner and outer
-		relations optimized independently, so 12 parameters rather than 6.
+		Here, the benefit of using symmetries is even more obvious than in Part II.
+		<div style="display:flex; justify-content:center; gap:20px; margin-top:1em;">
+			<img src="Figures/hexamer_symmetry_table.png" style="width:85%; height:auto;" />
+		</div>
+		<em style="display:block; text-align:center;">The pair distance calculations needed for Paaz. Figure adapted from <a href="https://doi.org/10.1038/s41467-019-11931-1" target="_blank">Sathyanarayanan, N. et al., Nat Commun 10, 4127 (2019)</a>.</em>
+		AUSAXS uses the Debye formula to calculate scattering, which requires the distance between every pair of scatterers. Since we have six chains, that is 36 chain pairs
+		to evaluate. The symmetry-aware calculator recognizes that many of those pairs are equivalent (e.g. AB = CD = EF), and only evaluates one representative of each equivalence class.
+		For the Paaz hexamer, the 21 unique pairs then reduce to just 5.
 	</p>
 
-	<h5>Step 2: split into domains</h5>
+	<h5>Step 2: split a body that already carries a symmetry</h5>
+	<p>
+		As can be seen on the figure, each chain has a large outer domain and a smaller inner domain, connected by a flexible linker. We now want to optimize their relative positions
+		under the constraint of the $D_3$ symmetry. 
+	</p>
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
-		<li>You now want to split <code>b1</code> at its linkers &mdash; but <em>not</em> with the <em>Split at residues</em> field, which re-reads the file and would undo the
-			decomposition. Click the chevron (&#9656;) beside it to reveal <em>Additional splits (an existing body)</em>. This row emits a <code>split</code> element, which
-			partitions a body already in the setup and ties the fragments into the symmetry it already carries.</li>
-		<li>Find the linkers as in Part III: rotate the preview, hover to read residue numbers, click at each domain boundary. With the symmetry copies displayed this is
-			cluttered &mdash; turn off <b>Symmetry copies</b> under <b>Display</b> while you work.</li>
-		<li>With the residues selected, type <code>b1</code> in the field and press <b>Add</b>.</li>
-		<li>Expand <b>Constraints</b> and press <b>Generate</b> with <code>backbone</code> to link the fragments.</li>
+		<b>Split the chain at its domain boundary</b>
+		<li>Open the structure pane. Start by turning off the symmetric copies under <b>Display</b> to make the preview easier to work with.</li>
+		<li>To more easily identify the flexible point, change the coloring to <em>Residue</em>. </li>
+		<li>Rotate the preview until you can see the smaller lobe and the backbone leading into it, and mark it for splitting.</li>
+		<li>
+			The main <em>Split at residues</em> only acts when the structure is first loaded, and we already used it to split by chain. To perform an additional split, 
+			click the chevron (&#9656;) beside <em>Split at residues</em> to reveal <em>Additional splits (an existing body)</em>. Highlight the body in the body list,
+			and press <b>Add</b>. 
+		</li>
+		<li>Expand <b>Constraints</b> and press <b>Generate</b> with <code>backbone</code>. Two fragments give exactly one constraint.</li>
 		<li><b>Send to script&hellip;</b> and confirm.</li>
 	</ul>
 
+	<h5>Step 3: refine the two in alternating phases</h5>
 	<p>
-		A2M has eight reasonably clear domain boundaries per chain. If you want a reference set, the residues below work &mdash; they were located by looking for points where
-		the chain moves between spatially separate lobes:
+		This time, we want to try something different. Instead of optimizing all parameters at once, we will alternate between two phases: <br>
+		1. A real-space move that optimizes the flexible linker, and <br>
+		2. A symmetry move that optimizes the hexamer geometry. <br>
+		To do this, note that the <em>parameter_generator</em> takes effect whenever it appears in the script, even inside a loop.
 	</p>
-<pre><code>split b1 123 225 347 453 616 697 907 1330</code></pre>
-	<p>
-		Residue 697 sits in the bait region, the exposed loop that proteases cleave to trigger A2M's conformational change &mdash; a genuinely flexible part of the molecule
-		rather than an artefact of the heuristic.
-	</p>
-
-	<h5>Step 3: refine</h5>
-	<p>Your script should now be close to:</p>
-<pre><code>output output/rigidbody/a2m
-load {
-	pdb A2M_native.pdb
-	saxs A2M_native.dat
-	split chain
-}
-convert_to_symmetry d2
-split b1 123 225 347 453 616 697 907 1330
-autoconstrain backbone
-
-save initial_state.pdb
-parameter {
-	iterations 2000
-	translate 0.5
-	rotate 0.02
-	sym_translate 2
-	sym_rotate 0.03
-}
-select random_constraint
-transform rigid_transform
-
-print "Initial chi2: {chi2_no_penalty}"
-loop
-	optimize_once
-		on_improvement
-			print "{iteration}/{iterations_total}: chi2 {chi2_no_penalty}"
-			update structure
-			save trajectory.xyz
-		end
-	end
-end
-save final_state.pdb</code></pre>
-
-	<p>
-		All four amplitude components are in play here, and their relative sizes encode a modeling decision: the domains are nudged (<code>translate</code>,
-		<code>rotate</code>), while the overall $D_2$ arrangement &mdash; the thing most likely to differ between crystal and solution &mdash; is given a little more room
-		(<code>sym_translate</code>, <code>sym_rotate</code>). Setting <code>translate</code> and <code>rotate</code> to 0 refines <em>only</em> the tetramer geometry with
-		each chain held rigid, which is a perfectly reasonable first experiment and much faster.
-	</p>
-	<p>
-		Note how small all four are compared to Parts II and III. The A2M crystal structure already fits at $\chi^2_{red} \approx 8.5$, so we are polishing rather than
-		searching, and large moves are simply rejected. Amplitudes decay over the run, so an over-large starting amplitude does not break the refinement &mdash; it just wastes
-		the early iterations until the decay brings the moves down to a size that gets accepted. With the values above the first improvements arrive within the first tens of
-		iterations; with amplitudes a few times larger, nothing is accepted for the first hundred. Expect a modest improvement here, not the dramatic drop you saw for PA2:
-		this structure is close to right already, and the exercise is the setup.
-	</p>
-
-	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
-		<b>Run and compare</b>
-		<li>Run the refinement. This is a large structure, so expect it to take considerably longer per iteration than the earlier parts.</li>
-		<li>Run it again with <code>translate 0</code> and <code>rotate 0</code>, refining only the symmetry. How much of the improvement came from the tetramer geometry
-			alone, and how much needed the domains to move?</li>
-		<li>Try refining without the symmetry at all: delete the <code>convert_to_symmetry</code> line, split each of <code>b1</code>&ndash;<code>b4</code> separately, and
-			compare both the wall-clock time per iteration and whether the result still looks like a tetramer.</li>
-	</ul>
-
-<h4>Challenge: staged refinement</h4>
-	<p>
-		Everything so far has used a single flat loop, which is not what the script language is for. It is a real language rather than a configuration format: loops nest
-		to any depth, and <code>parameter</code>, <code>select</code> and <code>transform</code> are ordinary elements that take effect where they appear. You can therefore
-		change the refinement strategy <em>during</em> a run, as often as you like.
-	</p>
-	<p>
-		A2M is a good case for this. We have been moving the domains and the $D_2$ symmetry in the same step, which means a proposal is accepted only if <em>both</em>
-		happen to be improvements &mdash; so most proposals are rejected for the wrong reason. Refining them in alternating phases is the better strategy: settle the domains
-		for a while with the tetramer held fixed, then settle the tetramer with the domains held fixed, and repeat.
-	</p>
-	<p>
-		The construction is a nested loop, where the inner block is given a name and then re-run under different parameters:
-	</p>
-<pre><code>loop 100
-	# phase 1: move the domains, tetramer geometry held fixed
-	parameter {
-		iterations 2000
-		translate 0.5
-		rotate 0.02
+	<h5>Exercise</h5>
+	<ul>
+		<li>
+			Try to write the script yourself before continuing. You will need i) an outer loop, ii) two <em>parameter_generator</em> blocks, and iii) two inner loops. 
+			Tip: you can name the first loop using the syntax <code>loop &lt;name&gt;</code>, and then repeat it for the second loop using <code>loop copy &lt;name&gt;</code> 
+			(no <code>end</code> is required after copying a loop).
+		</li>
+		<details class="solution">
+	<summary>Show solution</summary>
+	<pre><code>loop 2
+	# phase 1: optimize the flexible linker, keeping the hexamer fixed
+	parameter_generator {
+		iterations 30
+		translate 0.1
+		rotate 0.1
 	}
-	loop refine 20
+	loop refine
 		optimize_once
 			on_improvement
-				print "{iteration}/{iterations_total}: chi2 {chi2_no_penalty}"
-				update structure
-				save trajectory.xyz
+				[...]
 			end
 		end
 	end
 
-	# phase 2: the same block again, now moving only the tetramer
-	parameter {
-		iterations 2000
-		sym_translate 2
-		sym_rotate 0.03
+	# phase 2: optimize the hexamer, keeping the flexible linker fixed
+	parameter_generator {
+		iterations 30
+		sym_translate 0.1
+		sym_rotate 0.1
 	}
 	loop copy refine
 end</code></pre>
-	<p>
-		<code>loop refine 20</code> names the loop; <code>loop copy refine</code> runs that same block a second time. Note that the copy takes no <code>end</code> &mdash; it
-		does not open a scope of its own. This matters more than it might look: the inner block is where all your reporting lives, and it can grow as elaborate as you like
-		(nested <code>every</code> blocks, saves, conditional prints) without ever being duplicated. Write it once, re-run it under as many parameter sets as you want.
-	</p>
-	<p>
-		One detail to get right: <code>iterations</code> in each <code>parameter</code> block is the decay timescale of <em>that</em> generator, not the length of the run.
-		The two phases keep independent decay schedules, so each should be set to the number of steps that generator will actually be used for &mdash; here
-		$100 \times 20 = 2000$ each.
-	</p>
+</details>
+	</ul>
 
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
-		<b>Build a staged refinement</b>
-		<li>Run the two-phase script above and compare its $\chi^2$ against the flat version from earlier, at equal total step count. Does separating the phases help?</li>
-		<li>Add a third phase that refines one domain at a time. The <code>select</code> element accepts a body name, not just a strategy &mdash; <code>select b5</code>
-			restricts the following steps to that body, and this is exactly what naming individual bodies is for. A loop over each body in turn is a very different
-			search from picking one at random.</li>
-		<li>Make the phases uneven. Early on, the tetramer geometry is what matters most; near the end, the domains. Try giving phase 2 more iterations at the start and
-			fewer later, by using two differently-sized outer loops in sequence.</li>
-		<li>Use <code>every</code> inside the inner block to report progress on a schedule of your choosing, rather than only on improvement &mdash; useful when a phase
-			is rejecting everything and you want to know it is still alive.</li>
+		<b>Run it</b>
+		<li>
+			Since the structure is already quite good ($\chi^2_{red} \approx 19$), only modest parameter amplitudes are needed &mdash; large proposals are likely to be rejected. 
+			You should therefore make sure to use small amplitudes and not to run too many iterations, as the structure is quite large and each proposal may take a few seconds to evaluate. 
+			The values listed in the solution above are a good starting point, but feel free to experiment with them.
+		</li>
+		<li>Press <b>Validate</b>, then <b>Run refinement</b>. </li>
+		<li>
+			You should land around $\chi^2_{red} \approx 5$, from a starting value near 19. Most of the improvement arrives in the first few tens of iterations;
+			watch the accepted-$\chi^2$ messages thin out as the run goes on.
+		</li>
+		<li>Open <code>trajectory.xyz</code> in PyMOL and run the animation. What region changes the most?</li>
 	</ul>
+
+	<h5>Exercises</h5>
+	<ul>
+		<li>
+			Run it again, twice, changing nothing. The result moves around &mdash; this is a stochastic search, and one run is a single draw from a distribution rather than
+			<em>the</em> answer. How wide is the spread? This is why refinements are usually quoted as a range over repeated runs.
+		</li>
+		<li>
+			The two phases keep the two kinds of move strictly apart. Try the opposite: delete the second phase and put all four amplitudes into one generator running for the 
+			full 120 iterations. Which does better? Do you think this will change with more iterations, or is it a fundamental difference in the search?
+			<details class="solution">
+				<summary>Answer</summary>
+				The two-phase approach usually performs better initially, as the symmetry and flexible moves are not competing with each other. With the single-phase approach,
+				both move types would have to improve on the structure simultaneously, which is less likely to happen. However, this also means that the single-phase approach 
+				can explore the parameter space more freely and may find a better overall fit given enough iterations.
+			</details>
+		</li>
+	</ul>
+
+<h4>Challenge: Refining alpha-2-macroglobulin</h4>
 
 <h4>Perspectives</h4>
 <p>
