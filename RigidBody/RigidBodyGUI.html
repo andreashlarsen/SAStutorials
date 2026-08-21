@@ -33,6 +33,9 @@
 	details.solution[open] summary::before {
 		transform: rotate(90deg);
 	}
+	p:has(+ ul.tight), p:has(+ ol.tight) {
+		margin-bottom: 0;
+	}
 </style>
 </head>
 
@@ -66,20 +69,21 @@ After completing this tutorial you will:
 	<li>Know what rigid body modeling is, and when it is the right tool.</li>
 	<li>Be able to identify flexible linkers in a structure and refine the resulting rigid bodies against SAXS data.</li>
 	<li>Be able to understand and use structural symmetries in rigid body refinements. </li>
+	<li>Understand why a good fit is not by itself evidence that a model is correct.</li>
 </ul>
 
 <h4>Introductory remarks</h4>
 	<p>
 		Rigid body refinement is for the case where you trust the individual domains of a structure, e.g. from crystallography or AlphaFold, but not
-		the way they are arranged relative to each other. This tutorial explores how they work, and how to use them in practice. We will work through
-		four cases of increasing size, from a single fixed structure to a 36-body symmetric assembly.
+		the way they are arranged relative to each other. This tutorial explores how rigid body refinement works, and how to use it in practice. 
+		We will work through four cases of increasing size, from a single fixed structure to a 36-body symmetric assembly in the final Challenge.
 	</p>
 
 <h4>Part 0: Installation</h4>
 	<p>
 		AUSAXS is installed with a single command. Open a command window (Terminal on macOS) and type:
 	</p>
-	<pre><code>python -m pip install pyausaxs[all]</code></pre>
+	<pre><code>python -m pip install "pyausaxs[all]"</code></pre>
 	<p>
 		The <code>[all]</code> suffix pulls in the optional plotting and GUI dependencies. This installs a new command, <code>ausaxs</code>, which is the entry point for all the tools.
 		Start the GUI by running the command:
@@ -88,7 +92,7 @@ After completing this tutorial you will:
 	<p>
 		The window has three tabs across the top:
 	</p>
-	<ul>
+	<ul class="tight">
 		<li><b>SAXS fitter</b> &mdash; calculate the scattering from a fixed structure and fit it to data. This is Part I.</li>
 		<li><b>EM fitter</b> &mdash; the same, for electron microscopy maps. See the <a href="../SAXS_EM/SAXS_EM.html">Comparing with Electron Microscopy tutorial</a> if you are interested.</li>
 		<li><b>Rigidbody</b> &mdash; the refinement engine. This is Parts II&ndash;IV.</li>
@@ -113,7 +117,7 @@ After completing this tutorial you will:
 		Only <em>variations</em> in density produce measurable scattering. What a SAXS curve reports is therefore not the absolute density of your sample, but how
 		much it deviates from the surrounding buffer, and this is what a calculation from an atomic structure has to reproduce. This leads to three contributions:
 	</p>
-	<ul>
+	<ul class="tight">
 		<li><b>The protein.</b> Its density follows directly from the atoms in the structure file.</li>
 		<li>
 			<b>The excluded volume.</b> A uniform buffer density, filling the entire region we model: the protein together with the hydration shell around it.
@@ -141,9 +145,11 @@ After completing this tutorial you will:
 		<li>Open the <b>SAXS fitter</b> tab and load the two files (you can also try dragging them into the window, though this is somewhat unreliable on Linux).
 		<li>Leave the settings at their defaults for now: hydration model <code>radial</code>, excluded volume model <code>simple</code>.</li>
 		<li>Press <b>Run fit</b>. The log pane reports progress, and when it finishes a set of result tabs appears next to it.</li>
-		<li>Look at the <b>log</b> and <b>loglog</b> tabs, and at the fit report. Note the value of $\chi^2_{red}$ and of the hydration contrast <code>cw</code>.</li>
-		<li>Run the fit a second time without changing anything. The $\chi^2_{red}$ will move slightly: the hydration layer is placed by a stochastic procedure, so repeated
-			fits of the same structure differ a little. Take this as your noise floor: a difference of a percent or two between two models is not enough to judge which is best.</li>
+		<li>Look at the <b>log</b> and <b>loglog</b> tabs, and at the fit report. Note the value of $\chi^2_{red}$; you should get ~1.7.</li>
+		<li>
+			Run the fit a second time without changing anything. The $\chi^2_{red}$ will move slightly: the hydration layer is placed by a stochastic procedure, so repeated
+			fits of the same structure differ a little. Take this as your noise floor: a difference of a percent or two between two models is not enough to judge which is best.
+		</li>
 	</ul>
 	<p>
 		Evidently, the PA1 structure fits the data reasonably well. The $\chi^2_{red}$ is not too far from 1, the fit looks decent, and there are no obvious systematic deviations in the residuals. 
@@ -151,10 +157,27 @@ After completing this tutorial you will:
 	</p>
 
 	<p>
-		Finally, a case where the agreement is bad, and the whole point of the rest of the tutorial. Download <a href="Datafiles/LAR1-4.pdb" target="_blank">LAR1-4.pdb</a> and
+		Both the hydration shell and the excluded volume can be modeled <em>explicitly</em>, as real particles placed in space, or <em>implicitly</em>, as a mathematical correction 
+		to the scattering. AUSAXS writes the explicit ones to the output folder so you can look at them.
+	</p>
+	<ul class="tight">
+		<li>
+			<em>Hydration shell</em>: Open the generated <code>model.pdb</code> in PyMOL: the shell AUSAXS placed around the protein is there as dummy atoms. 
+		</li>
+		<li>
+			<em>Excluded volume</em>: Change the excluded volume model to <code>grid</code>, re-run, and open the new <code>exv.pdb</code>. Enter <code>hide everything, 
+			exv</code> and <code>show spheres, exv</code> in the PyMOL command line, then load the PA1 structure alongside it to see the grid filling the molecular volume. 
+			The <code>simple</code> and <code>fraser</code> models are implicit alternatives, differing mainly at wide angles, so expect a similar $\chi^2$. The grid is far 
+			slower to evaluate, which is why <code>simple</code> is the default &mdash; and the one used in rigid body refinement. 
+		</li>
+	</ul>
+
+	<p>
+		PA1 was the easy case. Now a structure where the agreement is bad, which is the whole point of the rest of the tutorial. Download <a href="Datafiles/LAR1-4.pdb" target="_blank">LAR1-4.pdb</a> and
 		<a href="Datafiles/LAR1-4.dat" target="_blank">LAR1-4.dat</a>, the first four domains of the 
 		<a href="https://journals.iucr.org/paper?S2059798320003885" target="_blank">flexible human leucocyte common antigen-related protein</a>, and fit them as above. 
-		You should get $\chi^2_{red} \approx 50$. The domains are almost certainly right; their arrangement is not. Fixing that is a rigid body problem.
+		You should get $\chi^2_{red} \approx 50$. These are the crystallographic domains, so they are almost certainly right; what the crystal cannot tell us is how they 
+		sit relative to each other in solution. Fixing that is a rigid body problem.
 	</p>
 
 <h5>What the refinement does with this</h5>
@@ -178,15 +201,19 @@ After completing this tutorial you will:
 		The task is to find how the two copies sit relative to each other.
 	</p>
 	<p>
-		The naive approach is to load two copies of the monomer and refine them as two independent bodies. AUSAXS instead lets you <em>declare a symmetry</em>: you load one
+		The direct approach is to load two copies of the monomer and refine them as two independent bodies. AUSAXS also lets you <em>declare a symmetry</em>: you load one
 		copy, and state that the assembly has $p2$ symmetry. The second copy is then not a body at all: it is generated on demand from the first by a transformation
 		whose parameters are what gets optimized. This matters for three reasons:
 	</p>
-	<ul>
-		<li><b>Fewer parameters.</b> Two free bodies have 12 degrees of freedom, of which 6 are the global placement that SAXS cannot see, leaving 6 meaningful ones. A $p2$
-			symmetry has exactly those 6 (a translation and a rotation), and no redundant ones. The optimizer never wastes a step on a global move.</li>
-		<li><b>The symmetry is enforced.</b> For more complex systems, two independently refined copies may drift into an asymmetric arrangement, because nothing stops them.
-			A declared symmetry is exact by construction.</li>
+	<ul class="tight">
+		<li><b>Fewer parameters.</b> Two free bodies have 12 degrees of freedom, of which 6 are the global placement that SAXS cannot see. A $p2$ symmetry has exactly the 
+			6 meaningful ones (a translation and a rotation) and no redundant ones. The saving grows with the size of the assembly: an icosahedral symmetry regenerates all 60 
+			copies from a single body and a single set of symmetry parameters, where the equivalent free-body refinement would carry 360.
+		</li>
+		<li><b>The symmetry is exact.</b> It holds by construction, at every step, with no room to drift. This is a constraint you are imposing rather than a free result: 
+			for a $p2$ you give up nothing, since a single freely-oriented copy has the same freedom as a second independent body, but for larger groups you are ruling out 
+			every asymmetric arrangement, including any that might fit better. In exchange you get a far smaller parameter space and correspondingly less room to overfit.
+		</li>
 		<li><b>It is cheaper to evaluate.</b> Declaring a symmetry switches AUSAXS to a symmetry-aware distance calculator, which computes one representative distance
 			histogram per symmetry-equivalent pair of copies instead of all of them. We return to this in Part IV, where it matters a great deal.</li>
 	</ul>
@@ -195,8 +222,8 @@ After completing this tutorial you will:
 	<table>
 		<thead><tr><th>Name</th><th>Copies generated</th><th>Description</th></tr></thead>
 		<tbody>
-		<tr><td><code>p2</code></td><td>1</td><td>A single freely-oriented copy. The natural choice for a dimer.</td></tr>
-		<tr><td><code>c2</code>&ndash;<code>c12</code></td><td>1&ndash;11</td><td>Cyclic: copies are generated by repeated rotation about a common axis.</td></tr>
+		<tr><td><code>p2</code></td><td>1</td><td>A single freely-oriented copy. The symmetry to use for a dimer.</td></tr>
+		<tr><td><code>c3</code>&ndash;<code>c12</code></td><td>2&ndash;11</td><td>Cyclic: copies are generated by repeated rotation about a common axis.</td></tr>
 		<tr><td><code>d2</code>&ndash;<code>d12</code></td><td>3&ndash;23</td><td>Dihedral: a cyclic axis plus perpendicular 2-fold axes.</td></tr>
 		<tr><td><code>dp2</code>&ndash;<code>dp12</code></td><td>3&ndash;23</td><td>Planar dihedral, where all copies are coplanar.</td></tr>
 		<tr><td><code>tetrahedral</code>, <code>octahedral</code>, <code>icosahedral</code></td><td>11, 23, 59</td><td>The chiral polyhedral rotation groups.</td></tr>
@@ -204,7 +231,7 @@ After completing this tutorial you will:
 	</table>
 	<p>
 		These can also be composed: <code>p2-p2</code> is a dimer of dimers, in which the inner and outer relations are optimized independently. This is the looser cousin of
-		<code>d2</code>, which we will meet in Part IV.
+		<code>d2</code>, which we will meet in the final Challenge.
 	</p>
 
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
@@ -215,8 +242,8 @@ After completing this tutorial you will:
 			Expand the <b>Symmetry</b> section, type <code>p2</code> into the <em>Add symmetry to a body</em> field, and press <b>Apply</b>.<br>
 			The generated copy appears in the preview immediately, and <code>symmetry p2</code> is listed under <b>Applied elements</b>.</li>
 		<li>Press <b>Send to script&hellip;</b>, review the change, and confirm. You are now back at the script, with the symmetry declaration inserted.</li>
-		<li>Edit the <code>parameter</code> block to read:
-<pre><code>parameter {
+		<li>Edit the <em>parameter_generator</em> block to read:
+<pre><code>parameter_generator {
 	iterations 500
 	sym_translate 20
 	sym_rotate 1.5
@@ -228,45 +255,66 @@ After completing this tutorial you will:
 	</ul>
 
 	<p>
-		Two things in that script are worth dwelling on.
+		Two things in that script are worth explaining.
 	</p>
-	<p>
-		<b>Why only <code>sym_</code> amplitudes?</b> The <code>parameter</code> element sets the maximum size of the moves attempted each iteration, and it has four
-		independent components: <code>translate</code> and <code>rotate</code> move the bodies themselves, while <code>sym_translate</code> and <code>sym_rotate</code> move
-		the symmetry parameters. Here the symmetric partner is generated from the base body's <em>current</em> position, so translating or rotating the base body moves the 
-		whole dimer rigidly and changes nothing about the scattering (except for minor differences due to the stochastic hydration shell). Setting those to zero by simply 
-		not naming them means the optimizer spends every step on something that can actually help.
-	</p>
-	<p>
-		<b>Units.</b> <code>translate</code> and <code>sym_translate</code> are in Ångström; <em>rotate</em> and <em>sym_rotate</em> are in radians. A
-		<code>sym_rotate</code> of 1.5 is a large move &mdash; nearly 90&deg; &mdash; which is what you want at the start of a search. The amplitudes decay over the course
-		of the run (linearly by default, see the <code>decay</code> argument), so the run begins with a coarse global search and finishes with fine adjustments.
-	</p>
+	<ul class="tight">
+		<li>
+			<em>Why only <code>sym_</code> amplitudes?</em> The <em>parameter_generator</em> element sets the maximum size of the moves attempted each iteration. 
+			<code>translate</code> and <code>rotate</code> move the bodies themselves; <code>sym_translate</code> and <code>sym_rotate</code> move the symmetry parameters. 
+			Since the partner is generated from the base body's <em>current</em> position, moving the base body just moves the whole dimer rigidly and changes nothing about the scattering. 
+			Leaving those two out sets them to zero, so every step goes into something that can help.
+		</li>
+		<li>
+			<em>Units.</em> <code>translate</code> and <code>sym_translate</code> are in Ångström, <code>rotate</code> and <code>sym_rotate</code> in radians. 
+			The 1.5 above is nearly 90&deg;, which is what you want at the start of a search; amplitudes then decay over the run (linearly by default, see 
+			<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#parameter" target="_blank"><em>decay</em></a>), so it begins coarse and finishes fine.
+		</li>
+	</ul>
 
 	<h5>Exercises</h5>
 	<ul>
 		<li>
 			Look through the script and locate the output folder on your disk. What files are present, and why? <br>
+		</li>
+		<li>
 			Open the <code>initial_state.pdb</code> and <code>final_state.pdb</code> files in PyMOL and compare the two. What is different? <br>
-			Finally, open the <code>trajectory.xyz</code> file in PyMOL. This is a multi-frame coordinate file, and PyMOL will animate it if you click the "start" button in the bottom-right corner. 
-			How does the dimer move during the refinement?
+		</li>
+		<li>
+			Hide or delete the two entries in PyMOL, and open instead the <code>trajectory.xyz</code> file. This is a multi-frame coordinate file, 
+			and PyMOL will animate it if you click the "start" button (&#9656;) in the bottom-right corner. How does the dimer move during the refinement?
 		</li>
 		<li>
 			Look at the rest of the script. What is the purpose of the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#loop" target="_blank"><em>loop</em></a> 
 			and <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#optimize_once" target="_blank"><em>optimize_once</em></a> elements? Where is the loop counter?
 		</li>
 		<li>
-			Validate that using real-space transformations (<em>translate</em>, <em>rotate</em>) does not change the structure of the dimer. <br>
-			To do this, you will need to move the <code>update structure</code> outside the <em>on_improvement</em> block (but still inside the 
-			<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#optimize_once" target="_blank"><em>optimize_once</em></a> block &mdash; why?), 
-			so that the structure preview is updated every iteration. 
-		</li>
-		<li>
-			Repeat the fit, but using the <a href="Datafiles/PA2_alphafold_dimer.cif" target="_blank">dimer generated by AlphaFold</a>. Since this is already a
-			dimer, you should no longer declare this symmetry. Instead, you can <em>decompose</em> it into one, via the <em>Decompose bodies into a symmetry</em> 
-			field in the structure pane. 
+			Verify the claim above: real-space moves (<code>translate</code>, <code>rotate</code>) do not change the dimer. Set those two amplitudes to nonzero, drop the 
+			<code>sym_</code> ones, and re-run. To watch it happen, move <code>update structure</code> out of the 
+			<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#on_improvement" target="_blank"><em>on_improvement</em></a> block so the preview refreshes every iteration, 
+			not only on accepted moves. Keep it inside <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#optimize_once" target="_blank"><em>optimize_once</em></a> 
+			&mdash; why does it have to stay there?
 		</li>
 	</ul>
+
+<h5>Decomposing an existing assembly</h5>
+<p> 
+	So far we have <em>added</em> a symmetry to a single body. The reverse is also possible: given a structure that already contains all of its copies, AUSAXS can collapse them back 
+	into one body plus a symmetry that regenerates the rest. This <em>decomposition</em> is only exact if the copies really are related by the symmetry you claim, so the fit reports 
+	a residual RMSD telling you how far off they are, and rejects the conversion if it is too large. We use this again in Part IV.
+</p> 
+<ul class="tight"> 
+	<li> 
+		Repeat the refinement with the <a href="Datafiles/PA2_alphafold_dimer.cif" target="_blank">dimer generated by AlphaFold</a>. Since the file already contains both chains, 
+		do not declare a symmetry &mdash; use the <em>Decompose bodies into a symmetry</em> field in the structure pane instead. What residual RMSD do you get, and what does it 
+		tell you about AlphaFold's dimer? You need to send the changes to the script and click <b>Validate</b> to see the RMSD in the log. 
+	</li>
+	<li> 
+		Now refine the same file without any symmetry, as two independent bodies. For a $p2$ this is the same problem: a single freely-oriented copy has exactly the freedom of a 
+		second free body. Do the two runs reach the same $\chi^2$? The same structure? And how do either compare to what you found starting from the monomer? <br> 
+		Note that nothing here holds the two chains together &mdash; there are no constraints, and no symmetry in the second case. They stay in contact because separating them 
+		would change the scattering, not because anything forbids it. 
+	</li>
+</ul>
 
 <h4>Part III: Flexible linkers: the LAR1-4 structure</h4>
 	<p>
@@ -275,40 +323,44 @@ After completing this tutorial you will:
 		instead in deciding where the structure is allowed to bend.
 	</p>
 
+	<p>
+		A rigid body refinement returns a single conformation. For a molecule that genuinely samples many states in solution, that conformation is the one whose scattering 
+		best resembles the ensemble average, and it need not be a state the molecule actually adopts. The authors of this study found the flexibility of LAR1-4 to be limited, 
+		which is what justifies treating it this way. When that is not the case, ensemble modeling methods are the appropriate tool instead.
+	</p>
+
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
 		<b>Split a structure into rigid bodies</b>
 		<li>In the <b>Rigidbody</b> tab, load <a href="Datafiles/LAR1-4.pdb" target="_blank">LAR1-4.pdb</a> and <a href="Datafiles/LAR1-4.dat" target="_blank">LAR1-4.dat</a>.</li>
 		<li>Start by checking how well it fits the data by using the SAXS fitter. You can do this quickly by clicking the <em>Send to SAXS fitter</em> button.</li>
 		<li>
-			Open the structure pane. You get a rotatable C&alpha; trace. Rotate it until you can see the domain organisation:
-			the compact globular regions are the rigid bodies, the extended stretches between them are the linkers.
+			Open the structure pane. You get a rotatable C&alpha; trace. Set the colouring under <b>Display</b> to <em>Residue</em> first: sequential domains then take clearly 
+			different colours, while a linker shows up as a single smooth gradient running from one to the next.
 		</li>
+		<li><b>Click</b> on each linker you have identified; the residue is marked with a coloured sphere.</li>
 		<li>
-			Hover over the trace &mdash; the readout above the plot names the residue under the cursor. <b>Click</b> on each linker you have identified; the residue is marked
-			with a coloured sphere.
-		</li>
-		<li>With your residues selected, press <b>Apply</b> next to <em>Split at residues</em>. The structure is re-partitioned and each body is drawn in its own colour.
+			With your residues selected, press <b>Apply</b> next to <em>Split at residues</em>. The structure is re-partitioned and each body is drawn in its own colour.
 			Check in the <b>Bodies</b> list that you got the number of bodies you expected.</li>
 		<li>
 			Bodies that are not tied together will fly apart, since nothing in the SAXS data holds a broken backbone together. Expand <b>Constraints</b>, and with
-			<code>backbone</code> already filled in, press <b>Generate</b>. This finds the C&alpha; atoms at the body endpoints and links each neighbouring pair. 
-			The connected bodies will be joined by a dashed line in the preview. 
+			<code>backbone</code> already filled in, press <b>Generate</b>; this generates a <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#autoconstrain" target="_blank"><em>autoconstrain</em></a> element. 
+			This finds the C&alpha; atoms at the body endpoints and links each neighbouring pair. The connected bodies will be joined by a dashed line in the preview. 
 		</li>
 		<li>Press <b>Send to script&hellip;</b> and confirm.</li>
 	</ul>
 
-	<p>Your script should now look roughly like this. Set the <em>parameter</em> block, and add the <em>select</em> and <em>transform</em> lines:</p>
+	<p>Your script should now look roughly like this. Set the <em>parameter_generator</em> block, and add the <em>select</em> and <em>transform</em> lines:</p>
 <pre><code>output output/rigidbody/
 load {
-	pdb LAR.pdb
-	saxs LAR.dat
-	split 7 99 199 292
+	pdb LAR1-4.pdb
+	saxs LAR1-4.dat
+	split &lt;your residues&gt;
 }
 autoconstrain backbone
 
 save initial_state.pdb
 save trajectory.xyz
-parameter {
+parameter_generator {
 	iterations 200
 	translate 1
 	rotate 0.2
@@ -330,48 +382,60 @@ loop
 	end
 end
 save final_state.pdb</code></pre>
+<details><summary>You can validate your splits against these; minor differences are fine.</summary>
+<pre><code>split 7 99 199 292</code></pre></details><br>
 
 	The three elements that control <em>how</em> a step is taken are:
 	<ul>
 		<li>
-			<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#parameter" target="_blank"><em>parameter</em></a>: 
+			<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#parameter" target="_blank"><em>parameter_generator</em></a>: 
 			how large a move to generate.
 		</li>
 		<li>
 			<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#select" target="_blank"><em>select</em></a>: 
-			which body to move via a constraint, since AUSAXS uses the constraints themselves as pivots for moves. The default option is <code>random_body</code>
-			which first selects a random body, then a random constraint attached to it. Here, we instead use <code>random_constraint</code>, 
-			which just selects a constraint randomly, without selecting a body first. The difference is subtle but important: 
-			if a body has many constraints, <code>random_constraint</code> will pick it more often than a body with few, while
-			<code>random_body</code> would bias the sampling towards bodies with few constraints. The other options are
-			<code>sequential_body</code> and <code>sequential_constraint</code>, which cycle through the bodies or constraints in order, and finally you can also name
-			a specific body (or symmetry) to move. 
+			which constraint to move around, since AUSAXS uses the constraints themselves as pivots. We use <code>random_constraint</code>, 
+			which picks one at random each step; the wiki lists the alternatives. 
 		</li>
 		<li>
 			<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#transform" target="_blank"><em>transform</em></a>: 
-			how the move propagates. <code>rigid_transform</code> carries everything connected to the selected body along with it, so the
-			chain stays intact; <code>single_transform</code> moves only the selected body, which will strain its constraints unless the amplitudes are small.
+			how the move propagates. <code>rigid_transform</code> carries everything connected to the selected body along with it, so the chain stays intact.
 		</li>
 	</ul>
 	<p>
-		Note also <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#update" target="_blank"><em>update</em></a> inside the loop: this is what feeds the live preview. And the article this data comes from discards points below
-		$q = 0.0125$ Å$^{-1}$ because of aggregation &mdash; do that with the $q$-slider in the dataset tab before running.
+		Note also the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#update" target="_blank"><em>update</em></a> inside the loop: this is what feeds the live preview.
 	</p>
 
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
 		<b>Run it</b>
-		<li>Press <b>Run refinement</b>. At least 500 iterations are needed for convergence; watch the preview and the accepted-$\chi^2$ messages in the log.</li>
 		<li>
-			The authors of the paper ran the optimization 10 times and found $\chi^2$ between 3.7 and 4.3. Does your result land in that range? A single 500-iteration run
+			Before running: the article this data comes from discards points below $q = 0.0125$ Å$^{-1}$ because of aggregation. Apply that cut with the
+			$q$-slider in the dataset tab, or your numbers will not be comparable to theirs.
+		</li>
+		<li>Press <b>Run refinement</b>. 200 iterations will get you most of the way; watch the preview and the accepted-$\chi^2$ messages in the log.</li>
+		<li>
+			The authors of the paper ran the optimization 10 times and found $\chi^2$ between 3.7 and 4.3. Does your result land in that range? A single 200-iteration run
 			will typically get you to around 5, so if you want to match the paper you may need more iterations or several runs.
 		</li>
-		<li>They also report that the final structure is "L"-shaped. Open <code>initial_state.pdb</code> and <code>final_state.pdb</code> in PyMOL and compare. Is yours?</li>
+		<li>
+			The crystal structure is already "L"-shaped; what the refinement changes is the angle between the two arms, which the authors find closes relative to the crystal. 
+			Open <code>initial_state.pdb</code> and <code>final_state.pdb</code> in PyMOL and compare that angle. Does yours close too?
+		</li>
 	</ul>
 
 	<h5>Exercises</h5>
 	<ul>
+		<b>Variations in $\chi^2$.</b>
 		<li>
-			During the 500-iteration run, you may have encountered a few steps where $\chi^2$ <em>increased</em>. Why would the optimizer accept a worse conformation? <br>
+			Run it twice more, changing nothing. The result moves around &mdash; this is a stochastic search, and one run is a single draw from a distribution rather than 
+			<em>the</em> answer. How wide is your spread compared to the 3.7&ndash;4.3 the authors report over 10 runs? This is why refinements are quoted as a range rather than a number. 
+		</li>
+		<li>
+			The $\chi^2$ is the easy thing to compare. Load the three <code>final_state.pdb</code> files into PyMOL (remember to rename them between runs). Are they identical? 
+			If they are, the data determined the arrangement. If they are not, and all three gave a comparable $\chi^2$, then the data could not distinguish between them.
+		</li>
+		<b>Constraints.</b>
+		<li>
+			During the 200-iteration run, you may have encountered a few steps where $\chi^2$ <em>increased</em>. Why would the optimizer accept a worse conformation? <br>
 			To examine this, look at the <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#print" target="_blank"><em>print</em></a> element and what
 			options it has for formatting the message. Change the message to something more informative, e.g. 
 			<code>"{iteration}/{iterations_total}: {chi2} ({chi2_no_penalty} + {chi2_penalty})"</code>, and re-run the optimization.
@@ -383,7 +447,13 @@ save final_state.pdb</code></pre>
 		<li>
 			To completely remove the penalty term, you can also add the undocumented <code>overlap_strength 0</code> element to the script. The overlap (excluded volume) penalty is 
 			what keeps the bodies from moving through each other, and setting its strength to zero removes that. What happens to the printed $\chi^2$ values and the structure?
-			Note: this element is only for demonstration purposes, and should not be used in a real refinement.
+			Note: this element is only for demonstration purposes, and should not be used in a real refinement. Make sure you remove it before continuing. 
+		</li>
+		<b>Avoiding meaningless results.</b>
+		<li>
+			Remove the splits, and reopen the structure pane. This time, pick one of the domains and choose a few points <em>inside</em> of it. Apply the split, and re-run. 
+			The domain unravels, and your $\chi^2$ improves. More freedom usually buys some improvement, whether or not the split corresponds to anything real, 
+			and nothing in the fit statistic tells you which case you are in. Only your knowledge of the structure does.
 		</li>
 	</ul>
 
@@ -391,18 +461,18 @@ save final_state.pdb</code></pre>
 	<p>
 		Parts II and III each dealt with one complication: a symmetric assembly of rigid copies, and a single chain that bends. Many real problems have both. PaaZ 
 		(<a href="https://www.sasbdb.org/data/SASDGL2/" target="_blank">SASDGL2</a>) is a
-		bifunctional enzyme from the <em>E. coli</em> phenylacetate degradation pathway, and it has both in an unusually clean form: it assembles into a hexamer with $D_3$
-		symmetry, and each of its six chains is itself two domains connected by a flexible linker. 
+		<a href="https://doi.org/10.1038/s41467-019-11931-1" target="_blank">bifunctional enzyme from the <em>E. coli</em> phenylacetate degradation pathway</a>, and 
+		it has both in an unusually clean form: it assembles into a hexamer with $D_3$ symmetry, and each of its six chains is itself two domains connected by a flexible linker. 
 	</p>
 	<p>
 		Download the <a href="Datafiles/SASDGL2.pdb" target="_blank">PaaZ crystal structure</a> and <a href="Datafiles/SASDGL2.dat" target="_blank">SAXS data</a>, and verify it 
 		yields $\chi^2_{red} \approx 19$.
 	</p>
 
-	<h5>Step 1: declare the symmetry you already have</h5>
+	<h5>Step 1: recover the symmetry you already have</h5>
 	<p>
-		In Part II we <em>added</em> a symmetry to a single body. Here the file already contains all six chains, so the situation is reversed: we want to load them, then
-		collapse them back into one body plus a symmetry that regenerates the other five. 
+		You met decomposition in Part II, on a two-chain file. Here the same operation has more to do: 
+		six chains collapse into one body plus a $D_3$ symmetry that regenerates the other five.
 	</p>
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
 		<b>Decompose the hexamer</b>
@@ -417,28 +487,28 @@ save final_state.pdb</code></pre>
 		</li>
 		<li>
 			Five bodies disappear from the list. What remains is <code>b1</code> plus a fitted $D_3$ symmetry that regenerates the rest, as can be seen by expanding the chevron (&#9656;)
-			next to <code>b1</code> in the body list. 
+			next to <code>b1</code> in the body list. The decomposition is not exact, as can be seen from the ~0.8 &Aring; RMSD, but well within tolerance. 
 		</li>
 		<li>
-			Send the changes to the script, and click <b>Validate</b>. Read the residual RMSD in the log &mdash; about 0.8 &Aring;. That is the number to pay attention to: 
-			it is how far the real chains are from the symmetry you just claimed. If the difference is too high, the decomposition will get rejected.
-		</li>
-		<li>
-			Remove the generated <em>convert_to_symmetry</em> element from your script, and reopen the structure pane. Verify that using other symmetries (e.g. <code>c6</code>) gives a higher RMSD
-			and get rejected (though there are actually two <a href="#symmetries" target="_self"><em>composite</em></a> symmetries that do work &mdash; can you figure out which?).
+			Remove the generated <a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#convert_to_symmetry" target="_blank"><em>convert_to_symmetry</em></a> 
+			element from your script, and reopen the structure pane. Verify that using other symmetries (e.g. <code>c6</code>) 
+			gets rejected (though there is actually a single <a href="#symmetries" target="_self"><em>composite</em></a> symmetry that does work &mdash; can you figure out which?).
 			Make sure to put <code>d3</code> back before continuing.
+			<details><summary>Show solution</summary>
+				<code>p2-c3</code>. $D_3$ is by definition a three-fold axis with a perpendicular two-fold, so composing the two reproduces exactly the same six copies. 
+				Under optimization they are not equivalent, though: a composite carries two independent sets of symmetry parameters where $D_3$ has one, so it can relax 
+				into arrangements $D_3$ cannot reach. Here we know the assembly is $D_3$, so the tighter description is the right one.
+			</details>
 		</li>
 	</ul>
-	<p>
-		Here, the benefit of using symmetries is even more obvious than in Part II.
-		<div style="display:flex; justify-content:center; gap:20px; margin-top:1em;">
-			<img src="Figures/hexamer_symmetry_table.png" style="width:85%; height:auto;" />
-		</div>
-		<em style="display:block; text-align:center;">The pair distance calculations needed for Paaz. Figure adapted from <a href="https://doi.org/10.1038/s41467-019-11931-1" target="_blank">Sathyanarayanan, N. et al., Nat Commun 10, 4127 (2019)</a>.</em>
-		AUSAXS uses the Debye formula to calculate scattering, which requires the distance between every pair of scatterers. Since we have six chains, that is 36 chain pairs
-		to evaluate. The symmetry-aware calculator recognizes that many of those pairs are equivalent (e.g. AB = CD = EF), and only evaluates one representative of each equivalence class.
-		For the Paaz hexamer, the 21 unique pairs then reduce to just 5.
-	</p>
+	Here, the benefit of using symmetries is more obvious than in Part II.
+	<div style="display:flex; justify-content:center; gap:20px; margin-top:1em;">
+		<img src="Figures/hexamer_symmetry_table.png" style="width:85%; height:auto;" />
+	</div>
+	<em style="display:block; text-align:center;">The pair distance calculations needed for Paaz. Figure adapted from <a href="https://doi.org/10.1038/s41467-019-11931-1" target="_blank">Sathyanarayanan, N. et al., Nat Commun 10, 4127 (2019)</a>.</em>
+	AUSAXS uses the Debye formula to calculate scattering, which requires the distance between every pair of scatterers. Since we have six chains, that is 36 chain pairs, of which
+	21 are unique and must be evaluated. The symmetry-aware calculator recognizes that many of those pairs are equivalent (e.g. AB = CD = EF), and only evaluates one representative of each equivalence class.
+	For the Paaz hexamer, the 21 unique pairs then reduce to just 5.
 
 	<h5>Step 2: split a body that already carries a symmetry</h5>
 	<p>
@@ -461,7 +531,8 @@ save final_state.pdb</code></pre>
 
 	<h5>Step 3: refine the two in alternating phases</h5>
 	<p>
-		This time, we want to try something different. Instead of optimizing all parameters at once, we will alternate between two phases: <br>
+		Everything the GUI writes is an ordinary script, and you can edit it directly. To show what that buys you, we will do something the GUI has no button for: 
+		instead of optimizing all parameters at once, we alternate between two phases:<br>
 		1. A real-space move that optimizes the flexible linker, and <br>
 		2. A symmetry move that optimizes the hexamer geometry. <br>
 		To do this, note that the <em>parameter_generator</em> takes effect whenever it appears in the script, even inside a loop.
@@ -469,14 +540,19 @@ save final_state.pdb</code></pre>
 	<h5>Exercise</h5>
 	<ul>
 		<li>
-			Try to write the script yourself before continuing. You will need i) an outer loop, ii) two <em>parameter_generator</em> blocks, and iii) two inner loops. 
-			Tip: you can name the first loop using the syntax <code>loop &lt;name&gt;</code>, and then repeat it for the second loop using <code>loop copy &lt;name&gt;</code> 
-			(no <code>end</code> is required after copying a loop).
+			Try to write the script yourself before continuing. You will need (i) an outer loop, (ii) two <em>parameter_generator</em> blocks, and (iii) two inner loops. 
+			Tip: you can name the first <em>loop</em> using the syntax <code>loop &lt;name&gt;</code>, and then repeat it for the second 
+			<a href="https://github.com/AUSAXS/AUSAXS/wiki/Rigidbody-optimization#copy_loop" target="_blank"><code>loop copy &lt;name&gt;</code></a> 
+			using <code>loop copy &lt;name&gt;</code> (no <code>end</code> is required after copying a loop).
 		</li>
 		<details class="solution">
 	<summary>Show solution</summary>
 	<pre><code>loop 2
 	# phase 1: optimize the flexible linker, keeping the hexamer fixed
+	print {
+		msg "Phase 1: optimizing the flexible linker"
+		color blue
+	}
 	parameter_generator {
 		iterations 30
 		translate 0.1
@@ -491,6 +567,10 @@ save final_state.pdb</code></pre>
 	end
 
 	# phase 2: optimize the hexamer, keeping the flexible linker fixed
+	print {
+		msg "Phase 2: optimizing the hexamer"
+		color blue
+	}
 	parameter_generator {
 		iterations 30
 		sym_translate 0.1
@@ -516,12 +596,8 @@ end</code></pre>
 		<li>Open <code>trajectory.xyz</code> in PyMOL and run the animation. What region changes the most?</li>
 	</ul>
 
-	<h5>Exercises</h5>
+	<h5>Exercise</h5>
 	<ul>
-		<li>
-			Run it again, twice, changing nothing. The result moves around &mdash; this is a stochastic search, and one run is a single draw from a distribution rather than
-			<em>the</em> answer. How wide is the spread? This is why refinements are usually quoted as a range over repeated runs.
-		</li>
 		<li>
 			The two phases keep the two kinds of move strictly apart. Try the opposite: delete the second phase and put all four amplitudes into one generator running for the 
 			full 120 iterations. Which does better? Do you think this will change with more iterations, or is it a fundamental difference in the search?
@@ -562,19 +638,17 @@ end</code></pre>
 			There are seven or eight clean boundaries to be found. Look for the points where the chain leaves one domain and enters another &mdash; A2M is built from a
 			chain of compact domains, so they are there once you know to look for them. Coloring by residue number can be helpful here.
 		</li>
-		<li>Every split you add is six more degrees of freedom, and the $\chi^2$ will improve whether or not the split is real. Splitting at a point that is <em>not</em> a
-			boundary buys you a better fit and a worse model.</li>
 		<li>As a starting point for the amplitudes: <code>translate 0.5</code>, <code>rotate 0.02</code>, <code>sym_translate 1</code>, <code>sym_rotate 0.02</code>.</li>
 		<li>This structure is a long way from the data &mdash; unlike Part IV you are searching, not polishing, so improvements arrive from the very first iterations.
-			Around 60 iterations already shows most of the drop, and you should be able to more than halve the starting $\chi^2$. Each iteration is expensive at this
+			Around 60 iterations already shows most of the drop, and you should be able to roughly halve the starting $\chi^2$. Each iteration is expensive at this
 			size, so start small and only scale up once the script does what you want.</li>
 	</ul>
 
 	<p>
-		A2M also has an <a href="Structures/A2M_activated.cif" target="_blank">activated structure</a>, in which the molecule has collapsed
-		around a trapped protease (not included in the model). Refine <em>that</em> against the <em>native</em> data. It starts off far worse, and 
-		rigid-body refinement will happily improve it &mdash; it always does. Does it get anywhere near what you reached from the correct starting model? What does that tell 
-		you about how much a good $\chi^2$ is worth on its own?
+		A2M also has an <a href="Structures/A2M_activated.cif" target="_blank">activated structure</a>, in which the molecule has collapsed around a trapped protease 
+		(not included in the model). Prepare it the same way and refine <em>that</em> against the <em>native</em> data. It starts off far worse, and it will improve, 
+		though the enforced symmetry and the linker constraints are strong enough that it does not deform into nonsense. How close does it get to what you reached from 
+		the correct starting model? If you had only ever seen this run, what in the output would have told you something was wrong?
 	</p>
 
 <h4>Perspectives</h4>
