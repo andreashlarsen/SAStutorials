@@ -59,7 +59,7 @@
 	<ul>
 	<li>For an introduction to analysis of SAXS data on proteins in solution, we recommend the <a href="../Proteins/Proteins.html">proteins tutorial</a>.</li>
 	<li>This tutorial uses the graphical interface of <a href="https://github.com/AUSAXS/AUSAXS" target="_blank">AUSAXS</a> (see Part 0 for installation instructions). </li>
-	<li>To easily visualize molecular structures, we will use <a href="https://www.pymol.org/" target="_blank">PyMOL</a> (see Part 0 for installation instructions).
+	<li>To easily visualize molecular structures, we will use <a href="https://www.pymol.org/" target="_blank">PyMOL</a> (see Part 0 for installation instructions).</li>
 	</ul>
 
 <h4>Learning outcomes</h4>
@@ -142,7 +142,7 @@ After completing this tutorial you will:
 		<b>Fit a SAXS dataset to a protein structure</b>
 		<li>Download the <a href="Datafiles/PA1.dat" target="_blank">SAXS data for PA1</a> and the <a href="Structures/PA1_no_signal_peptide.cif" target="_blank">PA1 structure</a>.
 			PA1 is a monomeric pea albumin; the structure is an AlphaFold prediction with the signal peptide removed.</li>
-		<li>Open the <b>SAXS fitter</b> tab and load the two files (you can also try dragging them into the window, though this is somewhat unreliable on Linux).
+		<li>Open the <b>SAXS fitter</b> tab and load the two files (you can also try dragging them into the window, though this is somewhat unreliable on Linux).</li>
 		<li>Leave the settings at their defaults for now: hydration model <code>radial</code>, excluded volume model <code>simple</code>.</li>
 		<li>Press <b>Run fit</b>. The log pane reports progress, and when it finishes a set of result tabs appears next to it.</li>
 		<li>Look at the <b>log</b> and <b>loglog</b> tabs, and at the fit report. Note the value of $\chi^2_{red}$; you should get ~1.7.</li>
@@ -414,7 +414,7 @@ save final_state.pdb</code></pre>
 		<li>Press <b>Run refinement</b>. 200 iterations will get you most of the way; watch the preview and the accepted-$\chi^2$ messages in the log.</li>
 		<li>
 			The authors of the paper ran the optimization 10 times and found $\chi^2$ between 3.7 and 4.3. Does your result land in that range? A single 200-iteration run
-			will typically get you to around 5, so if you want to match the paper you may need more iterations or several runs.
+			will typically get you to around 7, so if you want to match the paper you may need more iterations or several runs.
 		</li>
 		<li>
 			The crystal structure is already "L"-shaped; what the refinement changes is the angle between the two arms, which the authors find closes relative to the crystal. 
@@ -618,8 +618,8 @@ end</code></pre>
 
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
 		<b>The task</b>
-		<li>Refine <a href="Structures/A2M_native.cif" target="_blank">the native crystal structure</a> against
-			<a href="Datafiles/A2M_native.dat" target="_blank">the native SAXS data</a>.</li>
+		<li>Refine <a href="Datafiles/A2M_native.cif" target="_blank">the native crystal structure</a> against
+			<a href="Datafiles/A2M_native.rsr" target="_blank">the native SAXS data</a>.</li>
 		<li>Get the $\chi^2$ as low as you can, and be able to say <em>where</em> the improvement came from.</li>
 	</ul>
 
@@ -637,6 +637,11 @@ end</code></pre>
 		<li>
 			There are seven or eight clean boundaries to be found. Look for the points where the chain leaves one domain and enters another &mdash; A2M is built from a
 			chain of compact domains, so they are there once you know to look for them. Coloring by residue number can be helpful here.
+			<details><summary>Important note after you've identified your points</summary>
+				The structure is large, and for the purpose of this tutorial, we do not want to run too many iterations. 
+				For that reason, you should <em>remove</em> all your splits in the residue range 346&ndash;908 &mdash; these act like a trap for the optimizer, bringing minor
+				improvements at the cost of making the global minimum <em>much</em> harder to reach. 
+			</details>
 		</li>
 		<li>As a starting point for the amplitudes: <code>translate 0.5</code>, <code>rotate 0.02</code>, <code>sym_translate 1</code>, <code>sym_rotate 0.02</code>.</li>
 		<li>This structure is a long way from the data &mdash; unlike Part IV you are searching, not polishing, so improvements arrive from the very first iterations.
@@ -645,7 +650,7 @@ end</code></pre>
 	</ul>
 
 	<p>
-		A2M also has an <a href="Structures/A2M_activated.cif" target="_blank">activated structure</a>, in which the molecule has collapsed around a trapped protease 
+		A2M also has an <a href="Datafiles/A2M_activated.cif" target="_blank">activated structure</a>, in which the molecule has collapsed around a trapped protease 
 		(not included in the model). Prepare it the same way and refine <em>that</em> against the <em>native</em> data. It starts off far worse, and it will improve, 
 		though the enforced symmetry and the linker constraints are strong enough that it does not deform into nonsense. How close does it get to what you reached from 
 		the correct starting model? If you had only ever seen this run, what in the output would have told you something was wrong?
