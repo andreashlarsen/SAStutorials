@@ -535,7 +535,9 @@ save final_state.pdb</code></pre>
 		instead of optimizing all parameters at once, we alternate between two phases:<br>
 		1. A real-space move that optimizes the flexible linker, and <br>
 		2. A symmetry move that optimizes the hexamer geometry. <br>
-		To do this, note that the <em>parameter_generator</em> takes effect whenever it appears in the script, even inside a loop.
+		To do this, note that the <em>parameter_generator</em> takes effect whenever it appears in the script, even inside a loop. The same is true of
+		<em>select</em>, which each phase uses to declare what it moves: a constraint in the real-space phase, and the symmetry itself via
+		<code>random_symmetry</code> in the symmetry phase.
 	</p>
 	<h5>Exercise</h5>
 	<ul>
@@ -558,6 +560,7 @@ save final_state.pdb</code></pre>
 		translate 0.1
 		rotate 0.1
 	}
+	select random_constraint
 	loop refine
 		optimize_once
 			on_improvement
@@ -576,10 +579,17 @@ save final_state.pdb</code></pre>
 		sym_translate 0.1
 		sym_rotate 0.1
 	}
+	select random_symmetry
 	loop copy refine
 end</code></pre>
 </details>
 	</ul>
+<details class="solution"><summary>Bug alert!</summary>
+	Due to a bug in the sampler, the <code>random_symmetry</code> selector <em>must</em> be used when optimizing a symmetry shared by multiple
+	bodies (as here, where it is shared between the inner and outer domain). Only one of them owns the "real" symmetry, and if the other is
+	selected, nothing happens. This is much more important in the later challenge, where 8 bodies share a symmetry and <code>random_body</code> would
+	only hit the real one 1/8 of the time.
+</details>
 
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
 		<b>Run it</b>
