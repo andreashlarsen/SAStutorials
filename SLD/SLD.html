@@ -142,30 +142,36 @@ In this exercise we will calculate the scattering length densities for the two m
 		$$
 		The intensity of scattering from the sample is proportional to $\Delta \text{SLD}^2$, which we call <i>contrast</i>. <br><br>
 
-		<h4>Part II: Contrast matching</h4>
-		Sometimes, we want to match the SLD of the sample to the solvent, to make the sample or a part of the sample <i>invisible</i>.
-		This technique is called <i>contrast variation</i>. In the exercise below, you will learn how to match out a protein.<br><br>
+<h4>Part II: Contrast matching</h4>
+Sometimes, we want to match the SLD of the sample to the solvent, to make the sample or a part of the sample <i>invisible</i>.
+This technique is called <i>contrast variation</i>. In the exercise below, you will learn how to match out a protein.<br><br>
 
-		<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
-			<b>Exercise: Match out a protein in SANS</b>
-			<li>Since there is only a difference in SLD between H$_2$O and D$_2$O for neutrons, this exercise only relates to SANS.</li>
-			<li>Assume that the SLD of a protein is $1.3 \times 10^{-6} \text{ Å}^{-2}$.</li>
-			<li>Calculate the fraction of H$_2$O and D$_2$O in your solvent in order to match out the protein ($\Delta \text{SLD}=0$). You can use the numbers you calculated in the previous exercise</li>
-			<li>
-				<span class="link-text" onclick="document.getElementById('hiddenText').style.display='block'">
-					Display hint
-				</span>
-			
-				<p id="hiddenText">To do this, you have to isolate x in the following equation
-					\begin{equation}
-						\Delta \text{SLD} =\text{SLD}_{\text{protein}} - x \times \text{SLD}_{\text{H}_2\text{O}} - (1-x) \times \text{SLD}_{\text{D}_2\text{O}} = 0,
-					\end{equation}
-					where $x$ is the fraction of H$_2$O in the solvent.
-				</p>
-			</li>
-			
-		</ul>
-	</p>
+<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+	<b>Exercise: Match out a protein in SANS</b>
+	<li>Since there is only a difference in SLD between H$_2$O and D$_2$O for neutrons, this exercise only relates to SANS.</li>
+	<li>Assume that the SLD of a protein is $2.0 \times 10^{-6} \text{ Å}^{-2}$.</li>
+	<li>Calculate the fraction of H$_2$O and D$_2$O in your solvent in order to match out the protein ($\Delta \text{SLD}=0$). You can use the numbers you calculated in the previous exercise</li>
+	<li>
+		<span class="link-text" onclick="document.getElementById('hiddenText').style.display='block'">
+			Display hint
+		</span>
+	
+		<p id="hiddenText">To do this, you have to isolate x in the following equation
+			\begin{equation}
+				\Delta \text{SLD} =\text{SLD}_{\text{protein}} - x \times \text{SLD}_{\text{H}_2\text{O}} - (1-x) \times \text{SLD}_{\text{D}_2\text{O}} = 0,
+			\end{equation}
+			where $x$ is the volume fraction of H$_2$O in the solvent.
+		</p>
+	</li>
+</ul>
+</p>
+<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9"> 
+	<b>Exchange of hydrogens:</b> To get the accurate result, one must consider that some hydrogens on the protein can exchange with deuterium in the solvent. This means that the SLD of the protein increases with the solvent deuterium content:</br>
+	<img src="match-point.png" style="width:400px"/></br>
+	<em>Image from <a href="https://doi.org/10.3390/molecules28217414" target="_blank">Golub and Pieper (2023)</a></em>.</br>
+	The actual protein match point will be at around 40% D2O (where the red line crosses the black). Other molecules have no exchangeable hydrogens, like lipid tail groups (CH2, the cyan line). </br>
+	See also Part III of the <a href="../InvisibleDetergents/InvisibleDetergents.html" target="_blank">Invisible Detergents tutorial.</a> 
+</ul>
 
 <h4>Part III: Sodium dodecyl sulfate</h4>
 	<p>
