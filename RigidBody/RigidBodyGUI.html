@@ -237,15 +237,19 @@ After completing this tutorial you will:
 	<ul style="border-width:3px; border-style:solid;border-color:#697698; padding: 1em; padding-left: 40px; background-color: #f9f9f9">
 		<b>Refine the PA2 dimer</b>
 		<li>Download the <a href="Datafiles/PA2.dat" target="_blank">PA2 SAXS data</a> and the <a href="Datafiles/PA2.cif" target="_blank">PA2 monomer structure</a>.</li>
-		<li>Open the <b>Rigidbody</b> tab and open both files. The script in the middle panel updates its <code>load</code> block to match.</li>
+		<li>Open the <b>Rigidbody</b> tab and open both files. The script in the middle panel updates its <code>load</code> block to match.</li>		
 		<li>Click the "View" button next to the <b>Structure</b> field to open the structure pane. This is where all setup work is done. <br>
+			<div style="display:flex; justify-content:center; gap:20px; margin-top:1em;">
+				<img src="Figures/structure_and_data_panes.png" style="width:20%; height:auto;" />
+			</div>
+			<em style="display:block; text-align:center;">How to access the structure (red) and data (blue) panes.</em>
 			Expand the <b>Symmetry</b> section, type <code>p2</code> into the <em>Add symmetry to a body</em> field, and press <b>Apply</b>.<br>
 			The generated copy appears in the preview immediately, and <code>symmetry p2</code> is listed under <b>Applied elements</b>.</li>
 		<li>Press <b>Send to script&hellip;</b>, review the change, and confirm. You are now back at the script, with the symmetry declaration inserted.</li>
 		<li>Edit the <em>parameter_generator</em> block to read:
 <pre><code>parameter_generator {
-	iterations 500
-	sym_translate 20
+	iterations 300
+	sym_translate 5
 	sym_rotate 1.5
 }</code></pre>
 		</li>
