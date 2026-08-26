@@ -85,7 +85,7 @@ After completing this tutorial you will:
 	</p>
 	<pre><code>python -m pip install "pyausaxs[all]"</code></pre>
 	<p>
-		The <code>[all]</code> suffix pulls in the optional plotting and GUI dependencies. This installs a new command, <code>ausaxs</code>, which is the entry point for all the tools.
+		The <code>[all]</code> suffix pulls in the optional plotting and GUI dependencies. This installs a new module, <code>pyausaxs</code>, which is the entry point for all the tools.
 		Start the GUI by running the command:
 	</p>
 	<pre><code>python -m pyausaxs gui</code></pre>
@@ -105,7 +105,7 @@ After completing this tutorial you will:
 	</p>
 	<pre><code>python -m pip install pymol-open-source</code></pre>
 	<p>
-		This installs another command, <code>pymol</code>, which opens the PyMOL window. You can also download the paid version from <a href="https://pymol.org" target="_blank">pymol.org</a>.
+		This installs another command, <code>python -m pymol</code>, which opens the PyMOL window. You can also download the paid version from <a href="https://pymol.org" target="_blank">pymol.org</a>.
 	</p>
 
 <h4>Part I: Does the structure already fit?</h4>
@@ -118,7 +118,7 @@ After completing this tutorial you will:
 		much it deviates from the surrounding buffer, and this is what a calculation from an atomic structure has to reproduce. This leads to three contributions:
 	</p>
 	<ul class="tight">
-		<li><b>The protein.</b> Its density follows directly from the atoms in the structure file.</li>
+		<li><b>The protein.</b> Its density follows directly from the atoms in the structure file, which you can see directly by opening it in PyMOL.</li>
 		<li>
 			<b>The excluded volume.</b> A uniform buffer density, filling the entire region we model: the protein together with the hydration shell around it.
 			Subtracting it converts the absolute density above into the <em>excess</em> density that is actually measured.
@@ -142,7 +142,7 @@ After completing this tutorial you will:
 		<b>Fit a SAXS dataset to a protein structure</b>
 		<li>Download the <a href="Datafiles/PA1.dat" target="_blank">SAXS data for PA1</a> and the <a href="Datafiles/PA1_no_signal_peptide.cif" target="_blank">PA1 structure</a>.
 			PA1 is a monomeric pea albumin; the structure is an AlphaFold prediction with the signal peptide removed.</li>
-		<li>Open the <b>SAXS fitter</b> tab and load the two files (you can also try dragging them into the window, though this is somewhat unreliable on Linux).</li>
+		<li>Open the <b>SAXS fitter</b> tab and load the two files (you can also try dragging them into the window, though this may be somewhat unreliable).</li>
 		<li>Leave the settings at their defaults for now: hydration model <code>radial</code>, excluded volume model <code>simple</code>.</li>
 		<li>Press <b>Run fit</b>. The log pane reports progress, and when it finishes a set of result tabs appears next to it.</li>
 		<li>Look at the <b>log</b> and <b>loglog</b> tabs, and at the fit report. Note the value of $\chi^2_{red}$; you should get ~1.7.</li>
@@ -313,7 +313,8 @@ After completing this tutorial you will:
 		tell you about AlphaFold's dimer? You need to send the changes to the script and click <b>Validate</b> to see the RMSD in the log. 
 	</li>
 	<li> 
-		Now refine the same file without any symmetry, as two independent bodies. For a $p2$ this is the same problem: a single freely-oriented copy has exactly the freedom of a 
+		Now refine the same file without any symmetry, as two independent bodies. To do this, write <code>chain</code> into the <em>Splits</em> field to split the structure by
+		chain. For a $p2$, optimizing these two real bodies is the same problem as before: a single freely-oriented copy has exactly the freedom of a 
 		second free body. Do the two runs reach the same $\chi^2$? The same structure? And how do either compare to what you found starting from the monomer? <br> 
 		Note that nothing here holds the two chains together &mdash; there are no constraints, and no symmetry in the second case. They stay in contact because separating them 
 		would change the scattering, not because anything forbids it. 
@@ -604,7 +605,7 @@ end</code></pre>
 		</li>
 		<li>Press <b>Validate</b>, then <b>Run refinement</b>. </li>
 		<li>
-			You should land around $\chi^2_{red} \approx 5$, from a starting value near 19. Most of the improvement arrives in the first few tens of iterations;
+			You should land around $\chi^2_{red} \approx 10$, from a starting value near 19. Most of the improvement arrives in the first few tens of iterations;
 			watch the accepted-$\chi^2$ messages thin out as the run goes on.
 		</li>
 		<li>Open <code>trajectory.xyz</code> in PyMOL and run the animation. What region changes the most?</li>
@@ -649,17 +650,12 @@ end</code></pre>
 		</li>
 		<li>Turn off <b>Symmetry copies</b> while you hunt for linkers. Four superimposed chains of 1400 residues is unreadable.</li>
 		<li>
-			There are seven or eight clean boundaries to be found. Look for the points where the chain leaves one domain and enters another &mdash; A2M is built from a
+			There are six to eight clean boundaries to be found. Look for the points where the chain leaves one domain and enters another &mdash; A2M is built from a
 			chain of compact domains, so they are there once you know to look for them. Coloring by residue number can be helpful here.
-			<details><summary>Important note after you've identified your points</summary>
-				The structure is large, and for the purpose of this tutorial, we do not want to run too many iterations. 
-				For that reason, you should <em>remove</em> all your splits in the residue range 346&ndash;908 &mdash; these act like a trap for the optimizer, bringing minor
-				improvements at the cost of making the global minimum <em>much</em> harder to reach. 
-			</details>
 		</li>
 		<li>As a starting point for the amplitudes: <code>translate 0.5</code>, <code>rotate 0.02</code>, <code>sym_translate 1</code>, <code>sym_rotate 0.02</code>.</li>
 		<li>This structure is a long way from the data &mdash; unlike Part IV you are searching, not polishing, so improvements arrive from the very first iterations.
-			Around 60 iterations already shows most of the drop, and you should be able to roughly halve the starting $\chi^2$. Each iteration is expensive at this
+			Around 60 iterations already shows most of the drop, and you should be able to reduce the starting $\chi^2$ by roughly a third. Each iteration is expensive at this
 			size, so start small and only scale up once the script does what you want.</li>
 	</ul>
 
